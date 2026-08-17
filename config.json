@@ -1,0 +1,32 @@
+{
+  "_comment": "Chip-Backed Finance Observatory - monitoring configuration. Edit keywords, feeds and publication mode here; never edit watch.py.",
+
+  "auto_publish_mode": "direct",
+  "_auto_publish_mode_options": "off = candidates only (human copies manually) | pr = GitHub pull request, one human click to publish | direct = auto-merge into observatory-data.json with PENDING REVIEW badge",
+  "auto_publish_tiers": [1, 2],
+  "observatory_json_path": "observatory-data.json",
+
+  "tech_terms": ["gpu", "chip", "chips", "nvidia", "h100", "b200", "gb200", "blackwell", "rubin", "accelerator", "compute", "data center", "data-center", "datacenter", "neocloud"],
+  "finance_terms": ["collateral", "collateralized", "lease", "leasing", "spv", "securitization", "securitisation", "asset-backed", "abs", "loan", "debt", "notes", "financing", "credit", "syndicat", "vendor financing", "residual value", "haircut"],
+  "strong_phrases": ["gpu-backed", "chip-backed", "gpu collateral", "chip collateral", "chip lease", "gpu lease", "compute infrastructure financing", "gpu securitization", "ai infrastructure debt"],
+
+  "tier1_edgar_queries": ["\"GPU\" \"collateral\"", "\"graphics processing units\" \"lease\"", "\"compute infrastructure\" \"securitization\""],
+  "tier1_press_release_feeds": [
+    "https://www.globenewswire.com/RssFeed/subjectcode/12-Financing%20Agreements/feedTitle/GlobeNewswire%20-%20Financing%20Agreements"
+  ],
+  "tier2_ft_feeds": [
+    "https://www.ft.com/markets?format=rss",
+    "https://www.ft.com/technology?format=rss"
+  ],
+  "tier2_google_news_queries": [
+    "\"GPU-backed\" loan OR securitization",
+    "\"chip-backed\" debt OR lease",
+    "Nvidia SPV lease financing",
+    "GPU collateral lending",
+    "neocloud debt GPU"
+  ],
+  "tier3_extra_rss": [],
+
+  "max_age_days": 10,
+  "user_agent": "AITransparencyInstitute-Observatory-Watch/1.0 (contact@aitransparencyinstitute.com)"
+}

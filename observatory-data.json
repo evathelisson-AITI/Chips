@@ -1,0 +1,173 @@
+{
+  "updated": "17 August 2026 · release v1.0",
+  "deals": [
+    {
+      "date": "2024-06",
+      "name": "Lambda Labs GPU-backed ABS (via Macquarie)",
+      "type": "Securitization",
+      "amount": "~500 M",
+      "terms": "Early GPU-backed ABS; residual values of ~50% after 3 years reportedly assumed",
+      "status": "Outstanding",
+      "ver": "REPORTED",
+      "src": "Press reports, 2024–2026"
+    },
+    {
+      "date": "2025-06",
+      "name": "xAI senior secured notes + term loans (Morgan Stanley-led)",
+      "type": "Bond / Loan",
+      "amount": "5,000 M",
+      "terms": "USD 3bn 5y senior secured notes at 12.5% + 2×1bn loans; price talk widened on lukewarm demand",
+      "status": "Notes redeemed early 03/2026",
+      "ver": "VERIFIED",
+      "src": "Reuters; PitchBook LCD, 06/2025"
+    },
+    {
+      "date": "2025-09",
+      "name": "Nvidia — announced intent to invest in OpenAI",
+      "type": "Vendor commitment",
+      "amount": "up to 100,000 M",
+      "terms": "Non-binding letter of intent tied to deployment of Nvidia systems",
+      "status": "Announced (LOI)",
+      "ver": "VERIFIED",
+      "src": "Nvidia announcement, 22/09/2025"
+    },
+    {
+      "date": "2026-01",
+      "name": "Apollo capital solution — Valor Compute Infrastructure (VCI) / xAI",
+      "type": "Chip-lease SPV",
+      "amount": "3,500 M",
+      "terms": "Part of USD 5.4bn acquisition & triple-net lease of compute (incl. GB200) to xAI subsidiary; Nvidia anchor LP in VCI",
+      "status": "Closed",
+      "ver": "VERIFIED",
+      "src": "Apollo press release, 07/01/2026"
+    },
+    {
+      "date": "2026-02",
+      "name": "Apollo loan #2 — Valor-arranged chip-lease vehicle / xAI",
+      "type": "Chip-lease SPV",
+      "amount": "~3,400 M",
+      "terms": "Reported pricing near 9.5%; syndication expected",
+      "status": "Reported near close",
+      "ver": "REPORTED",
+      "src": "The Information; Reuters, 09/02/2026"
+    }
+  ],
+  "resale": [
+    [
+      "2023-Q1",
+      30000
+    ],
+    [
+      "2023-Q4",
+      28000
+    ],
+    [
+      "2024-Q2",
+      26000
+    ],
+    [
+      "2024-Q4",
+      20000
+    ],
+    [
+      "2025-Q2",
+      15000
+    ],
+    [
+      "2025-Q4",
+      11000
+    ],
+    [
+      "2026-Q2",
+      8000
+    ]
+  ],
+  "rental": [
+    [
+      "2024-Q1",
+      8
+    ],
+    [
+      "2024-Q3",
+      6
+    ],
+    [
+      "2025-Q1",
+      4
+    ],
+    [
+      "2025-Q3",
+      2
+    ],
+    [
+      "2025-Q4",
+      1.5
+    ],
+    [
+      "2026-Q1",
+      2.35
+    ]
+  ],
+  "events": [
+    {
+      "d": "2022-10",
+      "t": "Nvidia H100 (Hopper) volume availability",
+      "x": "The reference collateral generation of the first deal vintages.",
+      "k": "vendor"
+    },
+    {
+      "d": "2024-03",
+      "t": "Nvidia announces Blackwell (GTC 2024)",
+      "x": "First scheduled repricing signal for the Hopper installed base.",
+      "k": "vendor"
+    },
+    {
+      "d": "2024-06",
+      "t": "Early GPU-backed ABS issuance",
+      "x": "Securitization channel opens (reported).",
+      "k": "fin"
+    },
+    {
+      "d": "2025-H1",
+      "t": "Blackwell (B200) volume shipments",
+      "x": "Generation step realized; H100 secondary values and rental rates decline through the year.",
+      "k": "vendor"
+    },
+    {
+      "d": "2025-06",
+      "t": "xAI USD 5bn secured notes and loans priced at 12.5%",
+      "x": "Market pricing of borrower risk observable for the first time.",
+      "k": "fin"
+    },
+    {
+      "d": "2025-09",
+      "t": "Nvidia announces intent to invest up to USD 100bn in OpenAI",
+      "x": "Vendor circularity at ecosystem scale (non-binding LOI).",
+      "k": "fin"
+    },
+    {
+      "d": "2026-01",
+      "t": "Apollo USD 3.5bn capital solution for VCI (Nvidia anchor LP)",
+      "x": "Chip-lease SPV structure at scale; triple-net lease to xAI subsidiary.",
+      "k": "fin"
+    },
+    {
+      "d": "2026-02",
+      "t": "Apollo ~USD 3.4bn second chip-lease loan (reported)",
+      "x": "Total commitment ≈ USD 7bn; syndication expected.",
+      "k": "fin"
+    },
+    {
+      "d": "2026-27",
+      "t": "Rubin generation (announced cadence)",
+      "x": "Next scheduled repricing step for the installed base, expected on the vendor's announced annual rhythm.",
+      "k": "vendor future"
+    },
+    {
+      "d": "2027",
+      "t": "2025–26 vintage seasoning",
+      "x": "Lease renewals and realized collateral marks first confront underwriting assumptions at scale.",
+      "k": "fin future"
+    }
+  ]
+}
