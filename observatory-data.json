@@ -51,11 +51,11 @@
       "ver": "REPORTED",
       "src": "The Information; Reuters, 09/02/2026"
     },
-    {{"date":"2023-08","name":"CoreWeave — first GPU-collateralized debt facility (Magnetar, Blackstone)","type":"GPU-backed loan","amount":"2,300 M","terms":"First use of Nvidia H100 hardware as loan collateral; template for the neocloud financing model","status":"Closed","ver":"REPORTED","src":"Reuters, 08/2023"},
+    {"date":"2023-08","name":"CoreWeave — first GPU-collateralized debt facility (Magnetar, Blackstone)","type":"GPU-backed loan","amount":"2,300 M","terms":"First use of Nvidia H100 hardware as loan collateral; template for the neocloud financing model","status":"Closed","ver":"REPORTED","src":"Reuters, 08/2023"},
 {"date":"2026-03","name":"CoreWeave DDTL 4.0 — first investment-grade GPU-backed financing","type":"GPU-backed loan","amount":"8,500 M","terms":"Delayed draw term loan; A3 (Moody's), non-recourse; first HPC infrastructure DDTL to reach investment grade","status":"Closed","ver":"VERIFIED","src":"CoreWeave press release, 03/2026"},
 {"date":"2026-05","name":"CoreWeave DDTL 5.0 — first publicly syndicated GPU-backed financing","type":"GPU-backed loan","amount":"3,100 M","terms":"First publicly syndicated HPC infrastructure-backed vehicle, enabling secondary market trading","status":"Closed","ver":"VERIFIED","src":"CoreWeave press release, 05/2026"},
 {"date":"2026-08","name":"CoreWeave DDTL 5.5 — GPU loan with renewal risk underwritten by lenders","type":"GPU-backed loan","amount":"2,600 M","terms":"SOFR+5.50%, ~5y maturity vs ~3y average customer contracts: lenders underwrite GPU residual and re-leasing risk; Ba2/BB+; JPMorgan & MUFG; oversubscribed","status":"Closed 10/08/2026","ver":"VERIFIED","src":"CoreWeave press release / Business Wire, 10/08/2026"},
-{"date":"2026-08","name":"Nvidia — reported support for up to USD 500bn of AI data-centre financing","type":"Vendor commitment","amount":"up to 500,000 M","terms":"Press-reported vendor backing of GPU collateral in large-scale AI infrastructure financing; unconfirmed by primary source","status":"Reported","ver":"REPORTED","src":"Press reports, 08/2026"}
+{"date":"2026-08","name":"Nvidia — reported support for up to USD 500bn of AI data-centre financing","type":"Vendor commitment","amount":"up to 500,000 M","terms":"Press-reported vendor backing of GPU collateral in large-scale AI infrastructure financing; unconfirmed by primary source","status":"Reported","ver":"REPORTED","src":"Press reports, 08/2026"
     }
   ],
   "resale": [
