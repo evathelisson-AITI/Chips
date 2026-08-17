@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chip-Backed Finance Observatory — AI Transparency Institute</title>
+<meta name="description" content="The first open research database of chip-backed finance: deal terms, GPU collateral price index, announcement-event calendar, and holdings map.">
+<style>
+:root{
+  --navy:#12263A; --navy-2:#1B3A57; --paper:#F7F8F7; --card:#FFFFFF;
+  --ink:#1C2530; --muted:#5C6B7A; --line:#E1E6EA;
+  --teal:#177E89; --amber:#C97B1D; --amber-soft:#FBF1E3; --teal-soft:#E7F2F3;
+  --serif:Georgia,'Times New Roman',serif; --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  --mono:'SF Mono',Consolas,'Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6}
+a{color:var(--teal)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* Header */
+header{background:var(--navy);color:#fff}
+.head-in{max-width:1100px;margin:0 auto;padding:34px 20px 26px}
+.inst{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9FB3C4;margin-bottom:10px}
+h1{font-family:var(--serif);font-size:34px;font-weight:400;line-height:1.15;letter-spacing:-.01em}
+.tagline{color:#C7D3DD;margin-top:10px;max-width:70ch;font-size:15.5px}
+.beta{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber);border:1px solid var(--amber);border-radius:3px;padding:3px 9px}
+
+/* Nav */
+nav{background:var(--navy-2);position:sticky;top:0;z-index:10}
+.nav-in{max-width:1100px;margin:0 auto;padding:0 12px;display:flex;flex-wrap:wrap}
+.tab{background:none;border:0;color:#B9C8D4;font-family:var(--sans);font-size:13.5px;padding:13px 14px;cursor:pointer;border-bottom:3px solid transparent}
+.tab:hover{color:#fff}
+.tab.on{color:#fff;border-bottom-color:var(--amber);font-weight:600}
+
+section{display:none;padding:34px 0 20px}
+section.on{display:block}
+h2{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:6px}
+.sub{color:var(--muted);margin-bottom:22px;max-width:80ch}
+h3{font-size:15px;font-weight:700;margin:22px 0 8px}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.stat b{display:block;font-family:var(--serif);font-size:26px;font-weight:400;color:var(--navy)}
+.stat span{font-size:12.5px;color:var(--muted)}
+.stat .src{display:block;font-family:var(--mono);font-size:10.5px;color:#8A97A3;margin-top:6px}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:13.5px}
+th{background:#F0F3F5;text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line)}
+td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;border-radius:3px;padding:2px 7px;white-space:nowrap}
+.tag.ver{color:#1E7F4F;background:#EAF5EF;border:1px solid #BFE0CE}
+.tag.rep{color:var(--amber);background:var(--amber-soft);border:1px solid #E8CD9F}
+.tag.type{color:var(--teal);background:var(--teal-soft);border:1px solid #BBD9DC}
+.tag.pend{color:#B3261E;background:#FCEBE9;border:1px solid #F1B3AD}
+.pending-banner{display:none;background:#FCEBE9;border:1px solid #F1B3AD;border-radius:6px;padding:12px 16px;font-size:13px;color:#7A1C15;margin-bottom:14px}
+.amount{font-family:var(--mono);white-space:nowrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.fbtn{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-size:12.5px;color:var(--muted);cursor:pointer;font-family:var(--sans)}
+.fbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+
+/* Charts */
+.chart-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 18px 8px;margin-bottom:18px}
+.chart-title{font-size:14px;font-weight:700}
+.chart-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
+svg text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);padding:6px 0 8px}
+.dotl{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+/* Timeline */
+.tl{border-left:2px solid var(--line);margin-left:8px;padding-left:22px}
+.ev{position:relative;padding-bottom:20px}
+.ev::before{content:"";position:absolute;left:-28.5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--card);border:2.5px solid var(--teal)}
+.ev.vendor::before{border-color:var(--amber)}
+.ev.future::before{border-style:dashed;border-color:#98A6B3}
+.ev-date{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+.ev-t{font-weight:600;font-size:14px}
+.ev-x{font-size:13px;color:var(--muted);max-width:75ch}
+
+.note{background:var(--amber-soft);border:1px solid #E8CD9F;border-radius:6px;padding:12px 16px;font-size:13px;color:#6B5313;margin-bottom:18px}
+.cta{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;border-radius:5px;padding:10px 18px;font-size:14px;font-weight:600;margin-top:8px}
+.cta:hover{background:var(--navy-2)}
+
+footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
+.foot-in{max-width:1100px;margin:0 auto;padding:20px;font-size:12px;color:var(--muted);line-height:1.7}
+@media(max-width:640px){h1{font-size:26px}.tab{padding:12px 10px;font-size:12.5px}}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="head-in">
+    <div class="inst">AI Transparency Institute · Research Tools</div>
+    <h1>Chip-Backed Finance Observatory</h1>
+    <p class="tagline">The first open research database of debt secured by AI chips: hand-collected deal terms, a GPU collateral price index, the vendor announcement-event calendar, and a map of who ultimately holds the risk.</p>
+    <span class="beta">BETA · v1.0 · Data compiled from public sources</span>
+    <span class="beta" id="updated" style="border-color:#5C7A93;color:#9FB3C4">Data as of: loading…</span>
+    <button class="beta" id="refresh-btn" style="cursor:pointer;background:none;border-color:#5C7A93;color:#C7D3DD" onclick="loadData(true)">↻ Check for updates</button>
+  </div>
+</header>
+
+<nav><div class="nav-in">
+  <button class="tab on" data-s="overview">Overview</button>
+  <button class="tab" data-s="deals">Deal Tracker</button>
+  <button class="tab" data-s="index">Price Index</button>
+  <button class="tab" data-s="events">Event Calendar</button>
+  <button class="tab" data-s="holdings">Holdings Map</button>
+  <button class="tab" data-s="method">Methodology &amp; Contribute</button>
+</div></nav>
+
+<div class="wrap">
+
+<!-- OVERVIEW -->
+<section id="overview" class="on">
+  <h2>Why this observatory exists</h2>
+  <p class="sub">A new collateral class is forming: loans secured by GPUs, leased to AI companies, syndicated, securitized, and resold to insurers and pension funds. Its defining feature has no precedent: the collateral's depreciation clock is controlled by the vendor that sells the chips and invests in the financing vehicles. No systematic public dataset existed. This observatory builds it, openly, before the asset class is first tested.</p>
+  <div class="grid">
+    <div class="stat"><b id="st-deals">–</b><span>Transactions tracked in the deal registry</span><span class="src" id="st-vol"></span></div>
+    <div class="stat"><b>≈ −73%</b><span>H100 resale value decline, 2023 → mid-2026</span><span class="src">USD ~30,000 → ~8,000 · press-compiled</span></div>
+    <div class="stat"><b>~50%</b><span>Residual value after 3 years reportedly assumed in early GPU-backed securitizations</span><span class="src">as reported, 2024–2026</span></div>
+    <div class="stat"><b id="st-events">–</b><span>Dated events in the announcement calendar</span><span class="src">vendor product cycle + deals</span></div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3 style="margin-top:0">The four components</h3>
+    <p><b>1 · Deal Tracker.</b> Hand-collected terms of chip-backed loans, leases, bonds and securitizations, each entry carrying its source and a verification flag.</p>
+    <p><b>2 · GPU Collateral Price Index.</b> Resale and rental-rate series for major accelerator generations: the observable value of the collateral behind the loans.</p>
+    <p><b>3 · Announcement-Event Calendar.</b> Dated vendor architecture events, past and announced. These scheduled, public events are what reprice the entire collateral base, and the backbone of event-study research.</p>
+    <p><b>4 · Holdings Map.</b> Who ultimately holds the risk, mapped from insurance statutory filings and fund disclosures. In active collection.</p>
+    <p style="margin-top:10px;color:var(--muted);font-size:13px">Companion research: <i>Silicon as Collateral: Vendor-Supported Chip-Backed Debt and the Financing of the AI Buildout</i> (Thelisson, working paper, 2026).</p>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section id="deals">
+  <h2>Deal Tracker</h2>
+  <p class="sub">Every entry lists its public source. <span class="tag ver">VERIFIED</span> = confirmed by a primary source (e.g., issuer press release). <span class="tag rep">REPORTED</span> = financial-press reporting, not independently verifiable. Amounts in USD.</p>
+  <div class="pending-banner" id="pending-banner"><b>&#9888; Human review pending.</b> Entries marked <span class="tag pend">PENDING REVIEW</span> were added automatically by our source watch and have <b>not yet been verified by a human curator</b>. Treat them as unconfirmed alerts, not as documented facts. They are verified, corrected or removed at the next curation pass.</div>
+  <div class="filters" id="deal-filters"></div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th>Date</th><th>Transaction</th><th>Type</th><th>Amount</th><th>Key terms</th><th>Status</th><th>Source</th></tr></thead>
+    <tbody id="deal-rows"></tbody>
+  </table></div>
+</section>
+
+<!-- INDEX -->
+<section id="index">
+  <h2>GPU Collateral Price Index</h2>
+  <p class="sub">Indicative series for the Nvidia H100, the reference collateral of the first deal vintages. Points are compiled from published trackers and press analyses; a formally constructed, citable index is the observatory's next release.</p>
+  <div class="chart-card">
+    <div class="chart-title">H100 resale value (USD per unit, secondary market)</div>
+    <div class="chart-sub">Peak scarcity to mid-2026. Note the step behavior around new-generation availability, not smooth drift.</div>
+    <div id="chart-resale"></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-title">H100 rental rate (USD per GPU-hour, market range midpoint)</div>
+    <div class="chart-sub">Rental rates are the collateral's cash-flow engine: they service the leases that service the debt.</div>
+    <div id="chart-rental"></div>
+  </div>
+  <div class="note">Reading the two charts together: early securitizations reportedly assumed ~50% residual value after three years. The observed resale path fell to ~27% in that window, while the rental rates underpinning lease payments fell by 70–80% from peak before partially recovering.</div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <h2>Announcement-Event Calendar</h2>
+  <p class="sub"><span class="dotl" style="background:var(--amber)"></span>Vendor product-cycle events reprice the collateral base. <span class="dotl" style="background:var(--teal)"></span>Financing events build the exposure. Dashed = announced or expected. This calendar is the backbone for event-study research: the dates are scheduled and public before they move prices.</p>
+  <div class="tl" id="timeline"></div>
+</section>
+
+<!-- HOLDINGS -->
+<section id="holdings">
+  <h2>Holdings Map</h2>
+  <p class="sub">Who ultimately holds chip-backed risk? Once loans are syndicated and securitized, the exposure migrates to regulated balance sheets. No one currently publishes this aggregate. We are building it.</p>
+  <div class="card">
+    <h3 style="margin-top:0">Status: in active collection</h3>
+    <p><b>Source 1 — U.S. insurance statutory filings.</b> Schedule D and Schedule BA disclosures identify structured securities and fund interests held by insurers, the first regulated window on distribution. Collection of 2025–26 filings in progress.</p>
+    <p><b>Source 2 — Fund disclosures.</b> Private credit fund reports and listed-fund holdings referencing chip-lease and GPU-backed exposures.</p>
+    <p><b>Source 3 — Syndication reporting.</b> Press-documented participations in the tracked deals.</p>
+    <p style="margin-top:10px">First release target: an aggregate exposure estimate and a concentration measure on the single-vendor obsolescence factor, the one number no market participant can compute alone.</p>
+    <a class="cta" href="mailto:contact@aitransparencyinstitute.com?subject=Chip-Backed%20Finance%20Observatory%20—%20holdings%20data">Hold relevant data? Contact us</a>
+  </div>
+</section>
+
+<!-- METHOD -->
+<section id="method">
+  <h2>Methodology &amp; Contribute</h2>
+  <div class="card">
+    <h3 style="margin-top:0">Method</h3>
+    <p>Entries are compiled exclusively from public sources: issuer press releases, offering materials, regulatory filings, published market trackers, and the financial press. Every entry carries its source. Primary-source confirmation earns a <span class="tag ver">VERIFIED</span> flag; press-only items remain <span class="tag rep">REPORTED</span>. Entries surfaced by our automated source watch enter as <span class="tag pend">PENDING REVIEW</span> and are clearly bannered until a human curator verifies the source and assigns a definitive badge, or removes them. The machine never assigns VERIFIED or REPORTED. Nothing on this page is investment advice, and inclusion of a transaction implies no judgment about any named party. Corrections are welcome and acknowledged.</p>
+    <h3>How the data are updated</h3>
+    <p>The observatory is curated by hand, entry by entry, from public sources. There is no automated feed, and that is deliberate: verification is the product. Technically, the page loads its data at every visit from a separate file (observatory-data.json) published alongside it, so updates appear to all visitors the moment the file is replaced, and the "Data as of" date in the header shows the release you are viewing. You can also press "Check for updates" at any time.</p>
+    <h3>Openness</h3>
+    <p>The database is released under CC BY 4.0. Quarterly snapshots will be archived with a citable reference. Researchers may reuse the data with attribution to the AI Transparency Institute.</p>
+    <h3>Contribute</h3>
+    <p>We welcome: deal terms and documents we have missed, secondary-market price observations, holdings disclosures, and corrections. Submissions are reviewed before inclusion and flagged by verification status.</p>
+    <a class="cta" href="mailto:contact@aitransparencyinstitute.com?subject=Chip-Backed%20Finance%20Observatory%20—%20submission">Submit data or a correction</a>
+  </div>
+</section>
+
+</div>
+
+<footer><div class="foot-in">
+  <b>Disclaimer.</b> The Chip-Backed Finance Observatory is a research tool of the AI Transparency Institute, a non-profit organization. All data are compiled from public sources as dated; figures flagged REPORTED originate from financial-press reporting and are not independently verified. This page provides no investment, legal or accounting advice. The Institute takes no positions in, and accepts no funding from, the firms whose transactions are documented here. © AI Transparency Institute · contact@aitransparencyinstitute.com
+</div></footer>
+
+<script>
+/* ═══════════ DATA — edit these arrays to update the observatory ═══════════ */
+const SEED_DEALS = [
+ {date:"2024-06", name:"Lambda Labs GPU-backed ABS (via Macquarie)", type:"Securitization", amount:"~500 M", terms:"Early GPU-backed ABS; residual values of ~50% after 3 years reportedly assumed", status:"Outstanding", ver:"REPORTED", src:"Press reports, 2024–2026"},
+ {date:"2025-06", name:"xAI senior secured notes + term loans (Morgan Stanley-led)", type:"Bond / Loan", amount:"5,000 M", terms:"USD 3bn 5y senior secured notes at 12.5% + 2×1bn loans; price talk widened on lukewarm demand", status:"Notes redeemed early 03/2026", ver:"VERIFIED", src:"Reuters; PitchBook LCD, 06/2025"},
+ {date:"2025-09", name:"Nvidia — announced intent to invest in OpenAI", type:"Vendor commitment", amount:"up to 100,000 M", terms:"Non-binding letter of intent tied to deployment of Nvidia systems", status:"Announced (LOI)", ver:"VERIFIED", src:"Nvidia announcement, 22/09/2025"},
+ {date:"2026-01", name:"Apollo capital solution — Valor Compute Infrastructure (VCI) / xAI", type:"Chip-lease SPV", amount:"3,500 M", terms:"Part of USD 5.4bn acquisition & triple-net lease of compute (incl. GB200) to xAI subsidiary; Nvidia anchor LP in VCI", status:"Closed", ver:"VERIFIED", src:"Apollo press release, 07/01/2026"},
+ {date:"2026-02", name:"Apollo loan #2 — Valor-arranged chip-lease vehicle / xAI", type:"Chip-lease SPV", amount:"~3,400 M", terms:"Reported pricing near 9.5%; syndication expected", status:"Reported near close", ver:"REPORTED", src:"The Information; Reuters, 09/02/2026"},
+];
+const SEED_RESALE = [ ["2023-Q1",30000],["2023-Q4",28000],["2024-Q2",26000],["2024-Q4",20000],["2025-Q2",15000],["2025-Q4",11000],["2026-Q2",8000] ];
+const SEED_RENTAL = [ ["2024-Q1",8.0],["2024-Q3",6.0],["2025-Q1",4.0],["2025-Q3",2.0],["2025-Q4",1.5],["2026-Q1",2.35] ];
+const SEED_EVENTS = [
+ {d:"2022-10", t:"Nvidia H100 (Hopper) volume availability", x:"The reference collateral generation of the first deal vintages.", k:"vendor"},
+ {d:"2024-03", t:"Nvidia announces Blackwell (GTC 2024)", x:"First scheduled repricing signal for the Hopper installed base.", k:"vendor"},
+ {d:"2024-06", t:"Early GPU-backed ABS issuance", x:"Securitization channel opens (reported).", k:"fin"},
+ {d:"2025-H1", t:"Blackwell (B200) volume shipments", x:"Generation step realized; H100 secondary values and rental rates decline through the year.", k:"vendor"},
+ {d:"2025-06", t:"xAI USD 5bn secured notes and loans priced at 12.5%", x:"Market pricing of borrower risk observable for the first time.", k:"fin"},
+ {d:"2025-09", t:"Nvidia announces intent to invest up to USD 100bn in OpenAI", x:"Vendor circularity at ecosystem scale (non-binding LOI).", k:"fin"},
+ {d:"2026-01", t:"Apollo USD 3.5bn capital solution for VCI (Nvidia anchor LP)", x:"Chip-lease SPV structure at scale; triple-net lease to xAI subsidiary.", k:"fin"},
+ {d:"2026-02", t:"Apollo ~USD 3.4bn second chip-lease loan (reported)", x:"Total commitment ≈ USD 7bn; syndication expected.", k:"fin"},
+ {d:"2026-27", t:"Rubin generation (announced cadence)", x:"Next scheduled repricing step for the installed base, expected on the vendor's announced annual rhythm.", k:"vendor future"},
+ {d:"2027", t:"2025–26 vintage seasoning", x:"Lease renewals and realized collateral marks first confront underwriting assumptions at scale.", k:"fin future"},
+];
+
+let DEALS = SEED_DEALS, RESALE = SEED_RESALE, RENTAL = SEED_RENTAL, EVENTS = SEED_EVENTS;
+let META = { updated: "August 2026 (embedded seed data)" };
+
+/* ═══════════ LIVE DATA LOADING ═══════════
+   At every visit, the page fetches observatory-data.json from the same
+   folder (cache disabled). To update the observatory: edit that JSON file
+   and re-upload it. The HTML never needs to change. If the JSON is missing
+   or unreachable, the embedded seed data above are shown instead.        */
+const DATA_URL = 'observatory-data.json';
+async function loadData(manual){
+  const btn = document.getElementById('refresh-btn');
+  if (manual && btn) btn.textContent = '↻ Checking…';
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 6000);   // never hang: fall back after 6s
+    const r = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store', signal: ctrl.signal });
+    clearTimeout(timer);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const d = await r.json();
+    if (d.deals)  DEALS  = d.deals;
+    if (d.resale) RESALE = d.resale;
+    if (d.rental) RENTAL = d.rental;
+    if (d.events) EVENTS = d.events;
+    if (d.updated) META.updated = d.updated;
+    renderAll();
+    if (manual && btn) btn.textContent = '✓ Up to date';
+  } catch (e) {
+    // Seed data remain displayed; note it in the badge.
+    try { renderAll(); } catch (e2) {}
+    META.updated += ' — live data file unreachable';
+    if (manual && btn) btn.textContent = '↻ Check for updates';
+  }
+  const u = document.getElementById('updated');
+  if (u) u.textContent = 'Data as of: ' + META.updated;
+  if (manual && btn) setTimeout(() => btn.textContent = '↻ Check for updates', 2500);
+}
+
+/* ═══════════ RENDERING ═══════════ */
+const $ = id => document.getElementById(id);
+document.querySelectorAll('.tab').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+  document.querySelectorAll('section').forEach(x => x.classList.remove('on'));
+  b.classList.add('on'); $(b.dataset.s).classList.add('on');
+  window.scrollTo({top:0});
+});
+
+/* Deals */
+let filter = "All";
+function renderDeals(){
+  const types = ["All", ...new Set(DEALS.map(d => d.type))];
+  $('deal-filters').innerHTML = types.map(t => `<button class="fbtn ${t===filter?'on':''}" onclick="filter='${t}';renderDeals()">${t}</button>`).join('');
+  const rows = DEALS.filter(d => filter==="All" || d.type===filter).map(d => `
+    <tr><td class="amount">${d.date}</td><td><b>${d.name}</b></td>
+    <td><span class="tag type">${d.type}</span></td>
+    <td class="amount">${d.amount}</td><td>${d.terms}</td><td>${d.status}</td>
+    <td><span class="tag ${d.ver==='VERIFIED'?'ver':(d.ver==='REPORTED'?'rep':'pend')}">${d.ver}</span><br><span style="font-size:11.5px;color:var(--muted)">${d.src}</span></td></tr>`).join('');
+  $('deal-rows').innerHTML = rows;
+  $('st-deals').textContent = DEALS.length;
+  $('st-vol').textContent = "incl. ≈ USD 7bn Apollo–xAI chip-lease commitments";
+  $('st-events').textContent = EVENTS.length;
+  const nPend = DEALS.filter(d => d.ver === 'PENDING REVIEW').length;
+  const pb = $('pending-banner');
+  if (pb) pb.style.display = nPend ? 'block' : 'none';
+}
+
+/* Charts (plain SVG) */
+function lineChart(el, data, opts){
+  const W=760,H=250,P={l:56,r:16,t:14,b:30};
+  const xs=data.map((_,i)=>i), ys=data.map(d=>d[1]);
+  const ymax=opts.ymax||Math.max(...ys)*1.1, ymin=0;
+  const X=i=>P.l+(W-P.l-P.r)*i/(data.length-1);
+  const Y=v=>P.t+(H-P.t-P.b)*(1-(v-ymin)/(ymax-ymin));
+  let g='';
+  const steps=opts.gridSteps||5;
+  for(let s=0;s<=steps;s++){const v=ymin+(ymax-ymin)*s/steps,y=Y(v);
+    g+=`<line x1="${P.l}" y1="${y}" x2="${W-P.r}" y2="${y}" stroke="#EDF0F2"/>`+
+       `<text x="${P.l-8}" y="${y+3}" text-anchor="end">${opts.fmt(v)}</text>`;}
+  let path='';
+  data.forEach((d,i)=>{path+=(i?'L':'M')+X(i)+' '+Y(d[1])+' ';});
+  let dots='',labels='';
+  data.forEach((d,i)=>{dots+=`<circle cx="${X(i)}" cy="${Y(d[1])}" r="3.5" fill="${opts.color}"/>`;
+    labels+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle">${d[0]}</text>`;});
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" role="img" aria-label="${opts.aria}">
+    ${g}<path d="${path}" fill="none" stroke="${opts.color}" stroke-width="2.5"/>${dots}${labels}</svg>`;
+}
+function renderAll(){
+  renderDeals();
+  lineChart($('chart-resale'), RESALE, {color:'#177E89', ymax:32000, fmt:v=>(v/1000)+'k', gridSteps:4, aria:'H100 resale value series'});
+  lineChart($('chart-rental'), RENTAL, {color:'#C97B1D', ymax:9, fmt:v=>'$'+v.toFixed(0), gridSteps:3, aria:'H100 rental rate series'});
+  $('timeline').innerHTML = EVENTS.map(e => `
+  <div class="ev ${e.k.includes('vendor')?'vendor':''} ${e.k.includes('future')?'future':''}">
+    <div class="ev-date">${e.d}${e.k.includes('future')?' · announced / expected':''}</div>
+    <div class="ev-t">${e.t}</div>
+    <div class="ev-x">${e.x}</div>
+  </div>`).join('');
+}
+loadData(false);
+</script>
+</body>
+</html>
