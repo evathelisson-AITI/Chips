@@ -1,0 +1,566 @@
+# Observatory source watch - UNIFIED workflow (single file).
+# Contains: the patched watch.py, prevalidate.py and a seed primary_hints.json, embedded
+# below and written to $RUNNER_TEMP at run time (not committed to your repo).
+# Still required in the repo: config.json, requirements-watch.txt.
+# Your existing watch.py in the repo is NOT used by this workflow.
+# Optional: commit your own primary_hints.json at the repo root; it overrides the seed.
+# The machine never sets ver to VERIFIED or REPORTED; the curator does.
+name: Observatory source watch
+on:
+  schedule:
+    - cron: "0 7 * * 1,4"   # Monday and Thursday 07:00 UTC. Use "0 7 * * 1" for weekly.
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: observatory-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    env:
+      FTP_HOST: ${{ secrets.FTP_HOST }}   # job level, so the deploy step's `if` can see it
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements-watch.txt
+
+      - name: Install observatory tools (embedded scripts)
+        run: |
+          mkdir -p "$RUNNER_TEMP/obs"
+          cat > "$RUNNER_TEMP/obs/watch.py" <<'WATCH_PY_EOF'
+          #!/usr/bin/env python3
+          """
+          Chip-Backed Finance Observatory - source watch with supervised auto-publication.
+          AI Transparency Institute - contact@aitransparencyinstitute.com
+
+          What it does, every run:
+            1. Scans three tiers of sources (EDGAR / press-release wires / FT + Google News).
+            2. Writes new findings to candidates.json and DIGEST.md.
+            3. Depending on config "auto_publish_mode":
+                 off    -> stops there (human copies entries manually)
+                 pr     -> the workflow opens a Pull Request; one human click publishes
+                 direct -> merges entries into observatory-data.json NOW, but every
+                           auto-added entry carries ver = "PENDING REVIEW", which the
+                           website displays as a red badge plus a warning banner.
+          The badge is the human-supervision warning: a curator must later open the
+          source, verify, and change the badge to VERIFIED or REPORTED, or delete the
+          entry. The machine NEVER assigns VERIFIED or REPORTED itself.
+
+          Changes vs. previous version:
+            - EDGAR: each filing now gets its own URL (before, all hits of one query
+              shared one URL and collapsed into a single candidate).
+            - Optional "blocked_sources" in config.json (default: vinanet) drops SEO spam.
+            - A "Source health" section in DIGEST.md shows fetched/new counts and errors
+              per feed, so a dead or empty source is visible.
+          """
+
+          import json, re, sys, html, hashlib, datetime, urllib.parse
+          import requests, feedparser
+
+          CONFIG = json.load(open("config.json", encoding="utf-8"))
+          UA = {"User-Agent": CONFIG["user_agent"]}
+          TODAY = datetime.date.today()
+          MAX_AGE = datetime.timedelta(days=CONFIG.get("max_age_days", 10))
+
+          TECH = [t.lower() for t in CONFIG["tech_terms"]]
+          FIN = [t.lower() for t in CONFIG["finance_terms"]]
+          STRONG = [t.lower() for t in CONFIG["strong_phrases"]]
+          BLOCK = [b.lower() for b in CONFIG.get("blocked_sources", ["vinanet"])]
+
+          STATS = {}  # source -> [fetched, new, error]
+
+
+          def relevant(text):
+              t = text.lower()
+              if any(p in t for p in STRONG):
+                  return "strong"
+              if any(a in t for a in TECH) and any(b in t for b in FIN):
+                  return "combo"
+              return None
+
+
+          try:
+              SEEN = set(json.load(open("state/seen.json", encoding="utf-8")))
+          except Exception:
+              SEEN = set()
+
+
+          def key(url, title):
+              return hashlib.sha1((url or title).encode()).hexdigest()[:16]
+
+
+          candidates = []
+
+
+          def add(tier, title, url, source, date, note=""):
+              k = key(url, title)
+              if k in SEEN:
+                  return False
+              SEEN.add(k)
+              candidates.append({
+                  "_tier": tier,
+                  "date": (date or str(TODAY))[:10],
+                  "name": html.unescape(title)[:180],
+                  "type": "To classify",
+                  "amount": "-",
+                  "terms": (note or "Auto-detected; details to be completed after reading the source")[:280],
+                  "status": "Auto-added - awaiting human verification",
+                  "ver": "PENDING REVIEW",
+                  "src": f"{source}, {(date or str(TODAY))[:10]}",
+                  "url": url,
+              })
+              return True
+
+
+          def recent(entry):
+              for f in ("published_parsed", "updated_parsed"):
+                  tm = entry.get(f)
+                  if tm:
+                      d = datetime.date(tm.tm_year, tm.tm_mon, tm.tm_mday)
+                      return (TODAY - d) <= MAX_AGE, str(d)
+              return True, None
+
+
+          def scan_feed(url, tier, source_label=None):
+              try:
+                  raw = requests.get(url, headers=UA, timeout=30)
+                  feed = feedparser.parse(raw.content)
+              except Exception as e:
+                  print(f"[warn] feed unreachable: {url} ({e})", file=sys.stderr)
+                  STATS[url] = [0, 0, str(e)[:80]]
+                  return
+              new = 0
+              for e in feed.entries[:60]:
+                  title = e.get("title", "")
+                  if any(b in title.lower() for b in BLOCK):
+                      continue
+                  summary = re.sub(r"<[^>]+>", " ", e.get("summary", ""))
+                  if not relevant(title + " " + summary):
+                      continue
+                  ok, d = recent(e)
+                  if not ok:
+                      continue
+                  src = source_label or feed.feed.get("title", urllib.parse.urlparse(url).netloc)
+                  if add(tier, title, e.get("link", ""), src, d, summary.strip()[:260]):
+                      new += 1
+              STATS[url] = [min(len(feed.entries), 60), new, None]
+
+
+          def scan_edgar():
+              for q in CONFIG["tier1_edgar_queries"]:
+                  label = "EDGAR: " + q
+                  try:
+                      r = requests.get("https://efts.sec.gov/LATEST/search-index",
+                                       params={"q": q, "dateRange": "custom",
+                                               "startdt": str(TODAY - MAX_AGE), "enddt": str(TODAY)},
+                                       headers=UA, timeout=30)
+                      hits = r.json().get("hits", {}).get("hits", [])
+                  except Exception as e:
+                      print(f"[warn] EDGAR query failed: {q} ({e})", file=sys.stderr)
+                      STATS[label] = [0, 0, str(e)[:80]]
+                      continue
+                  new = 0
+                  for h in hits[:20]:
+                      s = h.get("_source", {})
+                      adsh = s.get("adsh", "")
+                      ciks = s.get("ciks") or [""]
+                      cik = str(ciks[0]).lstrip("0")
+                      fname = h.get("_id", "").split(":")[-1]
+                      if adsh and cik and fname:
+                          url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{fname}"
+                      else:  # fallback: still unique per hit, so hits no longer collapse
+                          url = "https://www.sec.gov/edgar/search/#/q=" + urllib.parse.quote(q) + "&hit=" + h.get("_id", "")
+                      name = f"{(s.get('display_names') or ['Unknown filer'])[0]} - {s.get('form', '')} filing matching {q}"
+                      if add(1, name, url, "SEC EDGAR", s.get("file_date"), f"EDGAR full-text match on {q}"):
+                          new += 1
+                  STATS[label] = [min(len(hits), 20), new, None]
+
+
+          # ---- run tiers ----
+          scan_edgar()
+          for u in CONFIG["tier1_press_release_feeds"]:
+              scan_feed(u, 1)
+          for u in CONFIG["tier2_ft_feeds"]:
+              scan_feed(u, 2, "Financial Times")
+          for q in CONFIG["tier2_google_news_queries"]:
+              g = "https://news.google.com/rss/search?q=" + urllib.parse.quote(q) + "&hl=en-US&gl=US&ceid=US:en"
+              scan_feed(g, 2)
+          for u in CONFIG["tier3_extra_rss"]:
+              scan_feed(u, 3)
+
+          candidates.sort(key=lambda c: (c["_tier"], c["date"]))
+
+          # ---- outputs: state, candidates, digest ----
+          json.dump(sorted(SEEN), open("state/seen.json", "w"), indent=0)
+          json.dump(candidates, open("candidates.json", "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+
+          lines = [f"# Observatory watch digest - {TODAY}",
+                   f"{len(candidates)} new candidate(s).", ""]
+          names = {1: "Tier 1 - primary sources", 2: "Tier 2 - quality press", 3: "Tier 3 - alerts"}
+          cur = None
+          for c in candidates:
+              if c["_tier"] != cur:
+                  cur = c["_tier"]
+                  lines += [f"## {names[cur]}", ""]
+              lines += [f"- **{c['date']}** [{c['name']}]({c['url']}) - {c['src']}"]
+          if not candidates:
+              lines += ["_No new candidates this run._"]
+
+          # ---- supervised auto-publication ----
+          mode = CONFIG.get("auto_publish_mode", "off")
+          tiers = set(CONFIG.get("auto_publish_tiers", [1]))
+          published = 0
+          if mode in ("direct", "pr") and candidates:
+              path = CONFIG["observatory_json_path"]
+              try:
+                  db = json.load(open(path, encoding="utf-8"))
+              except Exception as e:
+                  print(f"[error] cannot read {path}: {e}", file=sys.stderr)
+                  db = None
+              if db is not None:
+                  existing = {(d.get("name"), d.get("date")) for d in db.get("deals", [])}
+                  for c in candidates:
+                      if c["_tier"] not in tiers:
+                          continue
+                      entry = {k: v for k, v in c.items() if not k.startswith("_") and k != "url"}
+                      entry["terms"] += f" [source link: {c['url']}]"
+                      if (entry["name"], entry["date"]) not in existing:
+                          db["deals"].append(entry)
+                          published += 1
+                  if published:
+                      db["deals"].sort(key=lambda d: d["date"])
+                      pending_total = sum(1 for d in db["deals"] if d.get("ver") == "PENDING REVIEW")
+                      db["updated"] = (f"{TODAY} - auto-update by source watch - "
+                                       f"{pending_total} entr{'y' if pending_total == 1 else 'ies'} PENDING human review")
+                      json.dump(db, open(path, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+                      lines += ["", f"**Auto-publication ({mode} mode): {published} entry(ies) merged into {path} "
+                                    f"with badge PENDING REVIEW. Human curation required: verify each source, "
+                                    f"then change the badge to VERIFIED or REPORTED, or delete the entry.**"]
+
+          # ---- source health ----
+          lines += ["", "## Source health (fetched / new / error)"]
+          for u, (n_fetched, n_new, err) in STATS.items():
+              lines += [f"- {u[:90]}: {n_fetched} / {n_new}" + (f" / ERROR: {err}" if err else "")]
+
+          open("DIGEST.md", "w", encoding="utf-8").write("\n".join(lines) + "\n")
+          print(f"{len(candidates)} candidate(s); {published} auto-published as PENDING REVIEW (mode={mode})")
+          WATCH_PY_EOF
+          cat > "$RUNNER_TEMP/obs/prevalidate.py" <<'PREVALIDATE_PY_EOF'
+          #!/usr/bin/env python3
+          """
+          Observatory pre-validation (assistive). Reads observatory-data.json, never modifies it.
+          For every entry with ver == "PENDING REVIEW" it:
+            - rejects obvious noise (spam outlets, tokenized-stock lending, macro/earnings news)
+            - extracts entity and USD amount from the title
+            - clusters duplicates (same entity + same amount) into ONE deal candidate
+            - grades the best source per cluster (primary / rating / press1 / press2 / other)
+            - matches clusters against existing deals and a seed list of known primary sources
+            - writes SUGGESTIONS only: prevalidation.json + PREVALIDATION.md
+          The machine never writes ver / VERIFIED / REPORTED. The curator decides.
+
+          Usage: python prevalidate.py [--db observatory-data.json] [--hints primary_hints.json] [--online]
+          """
+          import json, re, hashlib, argparse, datetime, urllib.parse, sys
+
+          # Order matters: specific names first, generic "Nvidia" last.
+          ENTITIES = [
+              ("IREN", r"\biren\b"), ("Lambda", r"\blambda\b"), ("CoreWeave", r"coreweave"),
+              ("Nebius", r"nebius"), ("Bullish/USD.AI", r"usd\.ai|bullish"),
+              ("Kamino/sUSDai", r"kamino|susdai"), ("Goldman/GSAM", r"gsam|goldman"),
+              ("Blue Owl", r"blue owl"), ("Broadcom", r"broadcom"), ("xAI", r"\bxai\b"),
+              ("Apollo", r"apollo"), ("Sharon AI", r"sharon ai"), ("Tencent/Oracle", r"tencent"),
+              ("Nvidia", r"nvidia"),
+          ]
+          LINKS = {"Kamino/sUSDai": "Bullish/USD.AI"}       # derivative markets point to the parent deal
+          CRYPTO = {"Bullish/USD.AI", "Kamino/sUSDai"}
+
+          SPAM = ["vinanet"]
+          PRIMARY = ["sec.gov", "sec edgar", "prnewswire", "pr newswire", "businesswire", "business wire",
+                     "globenewswire", "nvidianews", "blueowl.com", "coreweave.com", "apollo.com", "iren.com"]
+          RATING = ["moody", "s&p global", "fitch"]
+          PRESS1 = ["reuters", "bloomberg", "financial times", "ft.com", "wsj", "wall street journal"]
+          PRESS2 = ["techcrunch", "datacenterdynamics", "dcd", "the information", "9fin", "nikkei",
+                    "the register", "afr", "cnbc", "forbes"]
+          RANK = {"primary": 0, "rating": 0, "press1": 1, "press2": 2, "other": 3, "spam": 9}
+
+          NOT_GPU = re.compile(r"tokenized|\baave\b|morpho", re.I)
+          MACRO = re.compile(r"chip stocks slide|borrowing costs|bond sell-?off|sales growth|forecasts \d+%", re.I)
+          COMMENT = re.compile(r"explained|gamble|blind spots|won.t age|reality check|can a leasing model|"
+                               r"central bank of ai|ai harvest|wall street decided|top .{0,20}stocks|faces .{0,40}risk", re.I)
+          DEAL = re.compile(r"\b(secur\w*|raises?|inks?|leads?|led|provides?|commits?|closes?|closed|backs?|"
+                            r"financing|facility|loan|debt|notes|lease)\b", re.I)
+          CHIP = re.compile(r"gpu|chip|nvidia|compute", re.I)
+
+
+          def amount_musd(text):
+              if re.search(r"\bwon\b", text, re.I):
+                  return None  # non-USD, don't guess
+              mult = {"trillion": 1e6, "t": 1e6, "billion": 1e3, "bn": 1e3, "b": 1e3,
+                      "million": 1, "mm": 1, "mn": 1, "m": 1}
+              vals = [float(m.group(1).replace(",", "")) * mult[m.group(2).lower()]
+                      for m in re.finditer(r"\$\s?(\d[\d,]*\.?\d*)\s?(trillion|billion|million|bn|mm|mn|b|m|t)\b",
+                                           text, re.I)]
+              return max(vals) if vals else None
+
+
+          def existing_amount(s):
+              m = re.search(r"([\d,]+\.?\d*)\s*M", s or "")
+              return float(m.group(1).replace(",", "")) if m else None
+
+
+          def entity_of(text):
+              t = text.lower()
+              for name, rx in ENTITIES:
+                  if re.search(rx, t):
+                      return name
+              return None
+
+
+          def url_of(d):
+              m = re.search(r"\[source link: (\S+?)\]", d.get("terms", ""))
+              return m.group(1) if m else d.get("url", "")
+
+
+          def outlet_of(d):
+              url, src, name = url_of(d), d.get("src", ""), d.get("name", "")
+              if "ft.com" in url or src.lower().startswith("financial times"):
+                  return "Financial Times"
+              if src.startswith("SEC EDGAR"):
+                  return "sec.gov"
+              if "news.google.com" in url or not url:
+                  return name.rsplit(" - ", 1)[-1].strip() if " - " in name else src.split(",")[0]
+              return urllib.parse.urlparse(url).netloc.replace("www.", "")
+
+
+          def tier_of(outlet):
+              o = outlet.lower()
+              for tier, names in (("spam", SPAM), ("primary", PRIMARY), ("rating", RATING),
+                                  ("press1", PRESS1), ("press2", PRESS2)):
+                  if any(n in o for n in names):
+                      return tier
+              return "other"
+
+
+          def uid(d):
+              return hashlib.sha1(f"{d.get('date')}|{d.get('name')}".encode()).hexdigest()[:12]
+
+
+          def classify(d):
+              name = d["name"]
+              outlet = outlet_of(d)
+              tier = tier_of(outlet)
+              info = {"id": uid(d), "date": d.get("date"), "name": name, "outlet": outlet, "tier": tier,
+                      "entity": entity_of(name), "amount_musd": amount_musd(name)}
+              if tier == "spam":
+                  info.update(kind="reject", reason="templated SEO outlet")
+              elif NOT_GPU.search(name):
+                  info.update(kind="reject", reason="crypto lending against equities, not chip collateral")
+              elif MACRO.search(name):
+                  info.update(kind="reject", reason="macro / earnings news, not a financing")
+              elif COMMENT.search(name):
+                  info.update(kind="commentary")
+              elif info["amount_musd"] and DEAL.search(name) and CHIP.search(name):
+                  info.update(kind="deal-signal")
+              else:
+                  info.update(kind="other")
+              return info
+
+
+          def close(a, b, tol=0.05):
+              return a and b and abs(a - b) / max(a, b) <= tol
+
+
+          def main():
+              ap = argparse.ArgumentParser()
+              ap.add_argument("--db", default="observatory-data.json")
+              ap.add_argument("--hints", default="primary_hints.json")
+              ap.add_argument("--candidates", default="candidates.json", help="this run's new finds (optional)")
+              ap.add_argument("--out", default="prevalidation.json")
+              ap.add_argument("--md", default="PREVALIDATION.md")
+              ap.add_argument("--online", action="store_true", help="try fetching non-Google URLs to confirm outlet/amount")
+              a = ap.parse_args()
+
+              db = json.load(open(a.db, encoding="utf-8"))
+              try:
+                  hints = json.load(open(a.hints, encoding="utf-8"))
+              except Exception:
+                  hints = []
+              deals = db["deals"]
+              try:
+                  extra = json.load(open(a.candidates, encoding="utf-8"))
+              except Exception:
+                  extra = []
+              seen_ids = {uid(d) for d in deals}
+              pend_src = [d for d in deals if d.get("ver") == "PENDING REVIEW"] + \
+                         [dict(c, ver="PENDING REVIEW") for c in extra if uid(c) not in seen_ids]
+              pending = [classify(d) | {"_raw": d} for d in pend_src]
+              known = [d for d in deals if d.get("ver") != "PENDING REVIEW"]
+
+              clusters, rejects, unclassified = {}, [], []
+              for it in pending:
+                  if it["kind"] == "reject":
+                      rejects.append(it)
+                  elif it["entity"] and it["amount_musd"]:
+                      key = (it["entity"], round(it["amount_musd"]))
+                      clusters.setdefault(key, []).append(it)
+                  else:
+                      unclassified.append(it)
+
+              out_clusters = []
+              for (ent, amt), items in sorted(clusters.items()):
+                  best = min(items, key=lambda i: RANK[i["tier"]])
+                  tier = best["tier"]
+                  matched = [h for h in hints if h["entity"] == ent and (not h.get("amount_musd") or close(h["amount_musd"], amt))]
+                  if matched and min(RANK[h["tier"]] for h in matched) < RANK[tier]:
+                      tier = min((h["tier"] for h in matched), key=lambda t: RANK[t])
+                  dup = [k["name"] for k in known if re.search(dict(ENTITIES)[ent], k["name"].lower())
+                         and close(existing_amount(k.get("amount")), amt)]
+                  is_deal = any(i["kind"] == "deal-signal" for i in items) or bool(matched)
+                  if not is_deal:
+                      sugg = "COMMENTARY-ONLY (no deal evidence; attach as context)"
+                  elif tier in ("primary", "rating"):
+                      sugg = "VERIFIED-candidate (curator confirms issuer/filing in the source)"
+                  elif tier == "press1":
+                      sugg = "REPORTED-candidate (Reuters/Bloomberg/FT)"
+                  else:
+                      sugg = "NEEDS-PRIMARY-SOURCE (press/aggregator tier only)"
+                  q = urllib.parse.quote(f"{ent.replace('/', ' ')} {amt/1000:g} billion GPU financing" if amt >= 1000 else f"{ent.replace('/', ' ')} {amt:g} million GPU financing")
+                  c = {"entity": ent, "amount_musd": amt, "members": len(items), "best_tier": tier,
+                       "suggestion": sugg, "tags": (["crypto-funded"] if ent in CRYPTO else []),
+                       "possible_duplicate_of": dup, "known_primary": [h["url"] for h in matched],
+                       "member_ids": [i["id"] for i in items],
+                       "find_primary": ["https://www.sec.gov/edgar/search/#/q=" + urllib.parse.quote(f'"{ent}"'),
+                                        "https://www.google.com/search?q=" + q + "+site:prnewswire.com+OR+site:businesswire.com"],
+                       "outlets": sorted({i["outlet"] for i in items})}
+                  out_clusters.append(c)
+
+              items_out = {}
+              for it in pending:
+                  it = {k: v for k, v in it.items() if k != "_raw"}
+                  if it["kind"] == "reject":
+                      it["suggestion"] = f"REJECT-suggested ({it['reason']})"
+                  elif it["entity"] in LINKS and not it["amount_musd"]:
+                      it["suggestion"] = f"LINK-TO {LINKS[it['entity']]} (derivative, not a primary financing)"
+                  elif it["entity"] and it["amount_musd"]:
+                      it["suggestion"] = "SEE-CLUSTER"
+                  else:
+                      it["suggestion"] = "REVIEW-manually"
+                  items_out[it["id"]] = it
+
+              if a.online:
+                  import requests
+                  for it in pending:
+                      u = url_of(it["_raw"])
+                      if not u or "news.google.com" in u:
+                          continue
+                      try:
+                          r = requests.get(u, timeout=20, headers={"User-Agent": "observatory-prevalidate"})
+                          items_out[it["id"]]["online"] = {"status": r.status_code,
+                                                           "final_domain": urllib.parse.urlparse(r.url).netloc}
+                      except Exception as e:
+                          items_out[it["id"]]["online"] = {"error": str(e)[:80]}
+
+              json.dump({"generated": str(datetime.date.today()), "note": "suggestions only; ver is never modified",
+                         "clusters": out_clusters, "items": items_out},
+                        open(a.out, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
+
+              L = [f"# Pre-validation - {datetime.date.today()}",
+                   f"{len(pending)} pending -> {len(out_clusters)} deal/commentary clusters, "
+                   f"{len(rejects)} suggested rejects, {len(unclassified)} for manual review.", "",
+                   "_Suggestions only. The curator assigns VERIFIED / REPORTED._", "", "## Clusters (review these)"]
+              for c in sorted(out_clusters, key=lambda c: RANK[c["best_tier"]]):
+                  L.append(f"- **{c['entity']} ~${c['amount_musd']:,.0f}M** x{c['members']} - {c['suggestion']}"
+                           + (f" - possible duplicate of: {'; '.join(c['possible_duplicate_of'])}" if c["possible_duplicate_of"] else "")
+                           + (f" - known source: {c['known_primary'][0]}" if c["known_primary"] else f" - find: {c['find_primary'][1]}")
+                           + (f" [{', '.join(c['tags'])}]" if c["tags"] else ""))
+              L += ["", "## Manual review"] + [f"- {i['date']} {i['name'][:110]} ({i['outlet']}) -> "
+                                               f"{items_out[i['id']]['suggestion']}" for i in unclassified]
+              L += ["", f"## Suggested rejects ({len(rejects)})"]
+              by = {}
+              for r in rejects:
+                  by.setdefault(r["reason"], []).append(r)
+              L += [f"- {reason}: {len(v)}" for reason, v in by.items()]
+              open(a.md, "w", encoding="utf-8").write("\n".join(L) + "\n")
+              print(f"{len(pending)} pending, {len(out_clusters)} clusters, {len(rejects)} rejects, {len(unclassified)} manual")
+
+
+          if __name__ == "__main__":
+              sys.exit(main())
+          PREVALIDATE_PY_EOF
+          cat > "$RUNNER_TEMP/obs/primary_hints.seed.json" <<'HINTS_JSON_EOF'
+          [
+            {"entity": "IREN", "amount_musd": 2400, "tier": "primary",
+             "url": "https://www.prnewswire.com/news-releases/blue-owl-managed-funds-lead-2-4-billion-ai-factory-financing-for-iren-302863057.html",
+             "note": "Blue Owl press release, 2026-08-28"},
+            {"entity": "IREN", "amount_musd": 3650, "tier": "primary",
+             "url": "https://www.sec.gov/Archives/edgar/data/0001878848/000187884826000052/iren-20260630.htm",
+             "note": "IREN 10-K FY2026: ~$3.6bn GPU Financing via SPV (DDTL + USPP notes)"},
+            {"entity": "Nvidia", "amount_musd": 500000, "tier": "primary",
+             "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+             "note": "Nvidia press release 2026-08-10: MOUs for platforms mobilizing >$500bn of third-party capital (not Nvidia's own money)"},
+            {"entity": "Nvidia", "amount_musd": 500000, "tier": "press1",
+             "url": "https://www.bloomberg.com/news/articles/2026-08-11/nvidia-s-show-of-financial-force-soothes-jittery-credit-markets",
+             "note": "Bloomberg 2026-08-11"},
+            {"entity": "Lambda", "amount_musd": 1000, "tier": "press1",
+             "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backed-lambda-inks-1-163700160.html",
+             "note": "Bloomberg via Yahoo syndication; store the original bloomberg.com URL. Collateral NOT confirmed"},
+            {"entity": "Lambda", "amount_musd": 500, "tier": "press2",
+             "url": "https://www.theregister.com/2024/04/05/lambda_500m_loan/",
+             "note": "The Register, Apr 2024: Macquarie/IDF loan, GPUs as collateral (a loan, not an ABS)"},
+            {"entity": "Goldman/GSAM", "amount_musd": 6600, "tier": "press2",
+             "url": "https://www.9fin.com/insights/gsam-eyes-gpu-backed",
+             "note": "9fin only; deal in preparation, not closed"}
+          ]
+          HINTS_JSON_EOF
+
+      - name: Run source watch
+        run: |
+          mkdir -p state
+          python "$RUNNER_TEMP/obs/watch.py"
+
+      - name: Pre-validate (suggestions only, never touches ver)
+        run: |
+          HINTS=primary_hints.json
+          [ -f "$HINTS" ] || HINTS="$RUNNER_TEMP/obs/primary_hints.seed.json"
+          python "$RUNNER_TEMP/obs/prevalidate.py" --hints "$HINTS"
+
+      # Issue BEFORE commit and WITHOUT "|| true": if the issue fails, the job fails
+      # and state/seen.json is not committed, so the items come back next run.
+      - name: Warn the human curator (GitHub issue)
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          COUNT=$(python -c "import json;print(len(json.load(open('candidates.json'))))")
+          echo "candidates=$COUNT prevalidation_chars=$(wc -c < PREVALIDATION.md)"
+          if [ "$COUNT" -gt 0 ]; then
+            head -c 60000 PREVALIDATION.md > "$RUNNER_TEMP/ISSUE_BODY.md"
+            echo "" >> "$RUNNER_TEMP/ISSUE_BODY.md"
+            echo "Full digest: DIGEST.md in the repository. Suggestions file: prevalidation.json." >> "$RUNNER_TEMP/ISSUE_BODY.md"
+            gh issue create \
+              --title "PENDING REVIEW: $COUNT new observatory entr(ies) ($(date -u +%F))" \
+              --body-file "$RUNNER_TEMP/ISSUE_BODY.md"
+          fi
+
+      - name: Commit results
+        run: |
+          git config user.name "observatory-watch"
+          git config user.email "contact@aitransparencyinstitute.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "watch: $(date -u +%F)"
+          git push
+
+      - name: Deploy observatory-data.json to the website
+        if: ${{ env.FTP_HOST != '' }}
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_DIR:  ${{ secrets.FTP_DIR }}
+        run: |
+          sudo apt-get install -y -qq lftp
+          lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" \
+            -e "set ssl:verify-certificate no; cd $FTP_DIR; put observatory-data.json; bye"
