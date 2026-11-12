@@ -1,0 +1,74 @@
+# Observatory source watch.
+# Runs watch.py and prevalidate.py from the repo (no embedded copies), opens a
+# GitHub issue for the curator when there are new candidates, and commits the
+# watch outputs. With auto_publish_mode "off" (config.json) it never touches
+# observatory-data.json. The machine never sets ver to VERIFIED or REPORTED.
+# The site deploys from git on Vercel; there is no separate upload step.
+name: Observatory source watch
+on:
+  schedule:
+    - cron: "0 7 * * 1,4"   # Monday and Thursday 07:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write   # commit state/seen.json and the digest
+  issues: write     # open the review issue
+
+concurrency:
+  group: observatory-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements-watch.txt
+
+      # Keep the page's fallback snapshot in step with curator edits to the data.
+      - name: Refresh the embedded seed snapshot
+        run: python update_seed.py
+
+      - name: Offline tests
+        run: |
+          python -m unittest discover tests
+          node tests/test_render.mjs
+
+      - name: Run source watch
+        run: python watch.py
+
+      - name: Pre-validate (suggestions only, never touches ver)
+        run: python prevalidate.py --hints primary_hints.json
+
+      # Issue BEFORE commit and without "|| true": if the issue fails, the job fails
+      # and state/seen.json is not committed, so the items come back next run.
+      - name: Open a review issue for the curator
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          COUNT=$(python -c "import json;print(len(json.load(open('candidates.json'))))")
+          echo "candidates=$COUNT"
+          if [ "$COUNT" -gt 0 ]; then
+            {
+              head -c 30000 DIGEST.md
+              echo
+              echo "---"
+              head -c 30000 PREVALIDATION.md
+              echo
+              echo "Full files in the repository: DIGEST.md, candidates.json (includes feed excerpts), prevalidation.json."
+              echo "To publish a deal, add it to observatory-data.json by hand with ver VERIFIED or REPORTED."
+            } > "$RUNNER_TEMP/ISSUE_BODY.md"
+            gh issue create \
+              --title "Observatory watch: $COUNT new candidate(s) to review ($(date -u +%F))" \
+              --body-file "$RUNNER_TEMP/ISSUE_BODY.md"
+          fi
+
+      - name: Commit results
+        run: |
+          git config user.name "observatory-watch"
+          git config user.email "contact@aitransparencyinstitute.com"
+          git add state/seen.json state/stories.json candidates.json DIGEST.md prevalidation.json PREVALIDATION.md observatory-data.json app.js
+          git diff --cached --quiet || git commit -m "watch: $(date -u +%F)"
+          git push

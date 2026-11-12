@@ -1,18 +1,29 @@
 {
-  "_comment": "Chip-Backed Finance Observatory - monitoring configuration. Edit keywords, feeds and publication mode here; never edit watch.py.",
+  "_comment": "Chip-Backed Finance Observatory - monitoring configuration. Edit keywords, feeds and publication mode here; never edit watch.py. After changing terms, run: python3 -m unittest discover tests",
 
-  "auto_publish_mode": "direct",
-  "_auto_publish_mode_options": "off = candidates only (human copies manually) | pr = GitHub pull request, one human click to publish | direct = auto-merge into observatory-data.json with PENDING REVIEW badge",
-  "auto_publish_tiers": [1, 2],
+  "auto_publish_mode": "off",
+  "_auto_publish_mode_options": "off = candidates only; the workflow opens a GitHub issue and the curator adds real deals by hand (recommended) | direct = also append entries to observatory-data.json as PENDING REVIEW (listed apart on the site, never counted). Any other value is treated as off.",
+  "auto_publish_tiers": [1],
   "observatory_json_path": "observatory-data.json",
 
-  "tech_terms": ["gpu", "chip", "chips", "nvidia", "h100", "b200", "gb200", "blackwell", "rubin", "accelerator", "compute", "data center", "data-center", "datacenter", "neocloud"],
-  "finance_terms": ["collateral", "collateralized", "lease", "leasing", "spv", "securitization", "securitisation", "asset-backed", "abs", "loan", "debt", "notes", "financing", "credit", "syndicat", "vendor financing", "residual value", "haircut"],
-  "strong_phrases": ["gpu-backed", "chip-backed", "gpu collateral", "chip collateral", "chip lease", "gpu lease", "compute infrastructure financing", "gpu securitization", "ai infrastructure debt"],
+  "_terms_comment": "Matching is whole-word and case-insensitive; a plural s/es is allowed automatically; a trailing * makes a prefix. strong_phrases match in title or summary. The other rules look at the TITLE only: tech_terms + finance_terms, or context_terms + strong_finance_terms. exclude_terms in the title always reject.",
+  "strong_phrases": ["gpu-backed", "chip-backed", "gpu collateral", "chip collateral", "gpus as collateral", "chips as collateral", "chip lease", "gpu lease", "compute infrastructure financing", "gpu securitization", "gpu financing", "gpu-collateralized", "ai infrastructure debt"],
+  "tech_terms": ["gpu", "chip", "ai chip", "h100", "h200", "b200", "gb200", "gb300", "blackwell", "hopper", "rubin", "accelerator", "neocloud"],
+  "context_terms": ["nvidia", "compute", "data center", "data-center", "datacenter", "ai infrastructure"],
+  "finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "loan", "debt", "financing", "credit facility", "debt facility", "term loan", "secured notes", "bond", "syndicat*", "private credit", "vendor financing", "residual value", "haircut"],
+  "strong_finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "vendor financing", "residual value"],
+  "exclude_terms": ["tokenized", "tokenised", "blue-chip", "blue chip"],
+  "blocked_sources": ["vinanet"],
 
-  "tier1_edgar_queries": ["\"GPU\" \"collateral\"", "\"graphics processing units\" \"lease\"", "\"compute infrastructure\" \"securitization\""],
-  "tier1_press_release_feeds": [
-    "https://www.globenewswire.com/RssFeed/subjectcode/12-Financing%20Agreements/feedTitle/GlobeNewswire%20-%20Financing%20Agreements"
+  "tier1_edgar_queries": ["\"GPU\" \"collateral\"", "\"GPU-backed\"", "\"GPU financing\"", "\"compute infrastructure\" \"securitization\""],
+  "_edgar_comment": "One candidate per filing. Forms below are skipped (fund prospectuses, proxy and merger filings, ownership reports). edgar_max_hits caps paging per query; the digest says TRUNCATED when it is reached.",
+  "edgar_exclude_forms": ["485BPOS", "485APOS", "497", "497K", "N-CSR", "N-CSRS", "NPORT-P", "N-2", "425", "ARS", "DEF 14A", "DEFA14A", "PRE 14A", "SC 13D", "SC 13G", "S-8", "11-K"],
+  "edgar_max_hits": 200,
+  "_press_release_comment": "GlobeNewswire's RSS refuses automated clients (HTTP 403), so press-release wires are searched through Google News instead.",
+  "tier1_press_release_feeds": [],
+  "tier1_google_news_queries": [
+    "GPU financing site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com",
+    "GPU-backed OR \"secured by GPUs\" site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com"
   ],
   "tier2_ft_feeds": [
     "https://www.ft.com/markets?format=rss",
