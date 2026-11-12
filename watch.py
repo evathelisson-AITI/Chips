@@ -28,6 +28,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 
 import stories
@@ -38,6 +39,11 @@ with open(CONFIG_PATH, encoding="utf-8") as _f:
 TODAY = datetime.date.today()
 MAX_AGE = datetime.timedelta(days=CONFIG.get("max_age_days", 10))
 STORY_MEMORY_DAYS = 60
+# Feeds are untrusted: cap what one response may cost (bytes after decompression,
+# and total seconds; requests' own timeout applies per read, not per response).
+MAX_RESPONSE_BYTES = CONFIG.get("max_response_bytes", 5_000_000)
+MAX_RESPONSE_SECONDS = 60
+EDGAR_ADSH = re.compile(r"^\d{1,10}-\d{2}-\d{1,6}$")
 
 
 # ---------------------------------------------------------------- relevance
@@ -110,6 +116,26 @@ def entry_date(entry):
 
 
 # ---------------------------------------------------------------- collection
+def http_get(url, params=None):
+    """GET with the watcher's User-Agent, refusing responses larger than
+    MAX_RESPONSE_BYTES or slower than MAX_RESPONSE_SECONDS. Returns bytes."""
+    import requests
+    deadline = time.monotonic() + MAX_RESPONSE_SECONDS
+    with requests.get(url, params=params, headers={"User-Agent": CONFIG["user_agent"]},
+                      timeout=30, stream=True) as r:
+        r.raise_for_status()
+        if int(r.headers.get("Content-Length") or 0) > MAX_RESPONSE_BYTES:
+            raise ValueError("response too large")
+        buf = bytearray()
+        for chunk in r.iter_content(64 * 1024):
+            buf += chunk
+            if len(buf) > MAX_RESPONSE_BYTES:
+                raise ValueError("response too large")
+            if time.monotonic() > deadline:
+                raise TimeoutError("response too slow")
+        return bytes(buf)
+
+
 def key(url, title):
     return hashlib.sha1((url or title).encode()).hexdigest()[:16]
 
@@ -121,6 +147,7 @@ class Watch:
         self.stats = {}  # source -> [fetched, new, error]
 
     def add(self, tier, title, url, source, date, summary="", outlet=None):
+        url = stories.safe_http_url(url)   # feed links are untrusted
         k = key(url, title)
         if k in self.seen:
             return False
@@ -166,11 +193,8 @@ class Watch:
 
     def scan_feed(self, url, tier, source_label=None):
         import feedparser
-        import requests
         try:
-            raw = requests.get(url, headers={"User-Agent": CONFIG["user_agent"]}, timeout=30)
-            raw.raise_for_status()
-            feed = feedparser.parse(raw.content)
+            feed = feedparser.parse(http_get(url))
         except Exception as e:
             print(f"[warn] feed unreachable: {url} ({e})", file=sys.stderr)
             self.stats[url] = [0, 0, str(e)[:80]]
@@ -190,8 +214,8 @@ class Watch:
                 forms = {str(f).upper() for f in [s.get("form", "")] + list(s.get("root_forms") or [])}
                 if forms & exclude:
                     continue
-                adsh = s.get("adsh", "")
-                if not adsh:
+                adsh = str(s.get("adsh", ""))
+                if not EDGAR_ADSH.match(adsh):   # it becomes part of a URL
                     continue
                 f = filings.setdefault(adsh, {"s": s, "queries": []})
                 if q not in f["queries"]:
@@ -200,6 +224,7 @@ class Watch:
         for adsh, f in sorted(filings.items(), key=lambda kv: kv[1]["s"].get("file_date", "")):
             s = f["s"]
             cik = str((s.get("ciks") or [""])[0]).lstrip("0")
+            cik = cik if cik.isdigit() else ""
             url = (f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{adsh}-index.htm"
                    if cik else "https://www.sec.gov/edgar/search/#/q=" + urllib.parse.quote(adsh))
             filer = (s.get("display_names") or ["Unknown filer"])[0]
@@ -210,7 +235,6 @@ class Watch:
         self.stats["EDGAR filings (after form filter, one per filing)"] = [len(filings), new, None]
 
     def scan_edgar(self):
-        import requests
         max_hits = CONFIG.get("edgar_max_hits", 200)
         results = {}
         for q in CONFIG.get("tier1_edgar_queries", []):
@@ -218,12 +242,10 @@ class Watch:
             hits, total = [], 0
             try:
                 while len(hits) < max_hits:
-                    r = requests.get("https://efts.sec.gov/LATEST/search-index",
-                                     params={"q": q, "dateRange": "custom", "from": len(hits),
-                                             "startdt": str(TODAY - MAX_AGE), "enddt": str(TODAY)},
-                                     headers={"User-Agent": CONFIG["user_agent"]}, timeout=30)
-                    r.raise_for_status()
-                    page = r.json().get("hits", {})
+                    r = http_get("https://efts.sec.gov/LATEST/search-index",
+                                 params={"q": q, "dateRange": "custom", "from": len(hits),
+                                         "startdt": str(TODAY - MAX_AGE), "enddt": str(TODAY)})
+                    page = json.loads(r).get("hits", {})
                     total = (page.get("total") or {}).get("value", 0)
                     batch = page.get("hits", [])
                     hits += batch
@@ -289,7 +311,9 @@ def mark_followups(candidates, memory):
 # ---------------------------------------------------------------- outputs
 def _line(c):
     md = stories.md_safe
-    s = f"- **{c['date']}** [{md(c['name'])}]({c['url']}) - {md(c['outlet'])}"
+    url = stories.md_url(c.get("url"))
+    title = f"[{md(c['name'])}]({url})" if url else md(c["name"])
+    s = f"- **{md(c['date'])}** {title} - {md(c['outlet'])}"
     more = c.get("sources") or []
     if more:
         outlets = ", ".join(md(r["outlet"]) for r in more[:6]) + (" …" if len(more) > 6 else "")
@@ -397,7 +421,7 @@ def main():
 
     lines += ["", "## Source health (fetched / new / note)"]
     for u, (n_fetched, n_new, err) in w.stats.items():
-        lines += [f"- {stories.md_safe(u[:90])}: {n_fetched} / {n_new}" + (f" / {err}" if err else "")]
+        lines += [f"- {stories.md_safe(u[:90])}: {n_fetched} / {n_new}" + (f" / {stories.md_safe(err)}" if err else "")]
     with open("DIGEST.md", "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
     print(f"{len(candidates)} stor(ies) from {len(w.candidates)} article(s); "

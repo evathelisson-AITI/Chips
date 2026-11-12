@@ -41,9 +41,10 @@ Live site: https://chips-sigma.vercel.app/
 ## Files
 | File | Purpose |
 |---|---|
-| `index.html`, `app.js` | the site; `app.js` escapes all data and holds the fallback snapshot |
+| `index.html`, `app.js`, `styles.css` | the site; `app.js` escapes all data and holds the fallback snapshot |
 | `observatory-data.json` | the data: `updated`, `deals`, `resale`, `rental`, `events` |
-| `vercel.json` | security headers (CSP allows only same-origin scripts) |
+| `vercel.json` | security headers (CSP allows only same-origin scripts and styles, HSTS, COOP/CORP) |
+| `requirements-watch.in`, `requirements-watch.txt` | watcher dependencies; `.txt` is the hash-pinned lock |
 | `watch.py` | source watch |
 | `stories.py` | shared helpers: outlet, source tier, story grouping |
 | `prevalidate.py`, `primary_hints.json` | suggestions for the curator (never changes data) |
@@ -55,7 +56,7 @@ Live site: https://chips-sigma.vercel.app/
 ## Run locally
 ```
 python3 -m http.server 8000            # http://localhost:8000
-pip install -r requirements-watch.txt
+pip install --require-hashes -r requirements-watch.txt
 python3 watch.py                       # network; updates state/ and the digest
 ```
 Running `watch.py` locally marks articles as seen, so the scheduled run won't report them again. To experiment, run it in a copy of the repo.

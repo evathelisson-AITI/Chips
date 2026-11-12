@@ -15,6 +15,13 @@ Reviewed and reprioritized on 2026-11-12. Everything that code can do was implem
 - **Resolving Google News links to publisher URLs.** Following the redirect lands on Google's consent page. Decoding the links would need Google's undocumented internal API. Instead, the publisher name is taken from each item's `<source>` element and stored as `outlet`, which is enough for source ranking and duplicate grouping. Links still go through Google News.
 - **GlobeNewswire RSS.** It refuses automated clients (HTTP 403) and we don't spoof a browser. The feed is replaced by Google News searches limited to prnewswire, businesswire and globenewswire.
 
+## Done (2026-11-12, security pass)
+- [x] CSP without `'unsafe-inline'`: CSS moved to `styles.css`, inline `style=` replaced by classes. `default-src 'none'`, `upgrade-insecure-requests`. Added HSTS, COOP, CORP; Permissions-Policy uses `browsing-topics` instead of the obsolete `interest-cohort`. Checked in a browser under the headers.
+- [x] `app.js` ignores malformed parts of the data file (non-array lists, non-object rows, non-numeric series) instead of failing.
+- [x] Review issue: feed text is escaped for markdown/HTML, `#` references neutralised like `@` mentions, link targets http(s) only and percent-encoded. Non-http(s) feed links are dropped at collection.
+- [x] Feed and EDGAR downloads capped at 5 MB and 60 s. EDGAR accession numbers and CIKs validated before they go into URLs. `prevalidate.py --online` only follows http(s) links and does not download bodies.
+- [x] Workflow split into `watch` (read-only) and `publish` (write) jobs; `persist-credentials: false`; push with hooks disabled; actions pinned to SHAs; dependencies hash-pinned (`requirements-watch.in` → `.txt`); `.github/dependabot.yml`.
+
 ## Done (2026-11-12)
 Site
 - [x] Registry table and stats show curated deals only. Pending leads are listed apart and not counted. Removed the hardcoded "≈ USD 7bn" stat.

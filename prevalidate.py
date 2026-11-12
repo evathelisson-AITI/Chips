@@ -16,7 +16,7 @@ Usage: python prevalidate.py [--db observatory-data.json] [--hints primary_hints
 import json, re, hashlib, argparse, datetime, urllib.parse, sys
 
 from stories import (ENTITIES, ENTITY_RX, RANK, amount_musd, entity_of,  # noqa: F401
-                     outlet_of, tier_of, url_of, md_safe)
+                     outlet_of, tier_of, url_of, md_safe, safe_http_url)
 
 LINKS = {"Kamino/sUSDai": "Bullish/USD.AI"}       # derivative markets point to the parent deal
 CRYPTO = {"Bullish/USD.AI", "Kamino/sUSDai"}
@@ -144,13 +144,15 @@ def main():
     if a.online:
         import requests
         for it in pending:
-            u = url_of(it["_raw"])
+            u = safe_http_url(url_of(it["_raw"]))   # feed links are untrusted: http(s) only
             if not u or "news.google.com" in u:
                 continue
             try:
-                r = requests.get(u, timeout=20, headers={"User-Agent": "observatory-prevalidate"})
-                items_out[it["id"]]["online"] = {"status": r.status_code,
-                                                 "final_domain": urllib.parse.urlparse(r.url).netloc}
+                # Only the status and final domain are needed: never download the body.
+                with requests.get(u, timeout=20, stream=True,
+                                  headers={"User-Agent": "observatory-prevalidate"}) as r:
+                    items_out[it["id"]]["online"] = {"status": r.status_code,
+                                                     "final_domain": urllib.parse.urlparse(r.url).netloc}
             except Exception as e:
                 items_out[it["id"]]["online"] = {"error": str(e)[:80]}
 
