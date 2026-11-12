@@ -1,0 +1,23 @@
+[
+  {"entity": "IREN", "amount_musd": 2400, "tier": "primary",
+   "url": "https://www.prnewswire.com/news-releases/blue-owl-managed-funds-lead-2-4-billion-ai-factory-financing-for-iren-302863057.html",
+   "note": "Blue Owl press release, 2026-08-28"},
+  {"entity": "IREN", "amount_musd": 3650, "tier": "primary",
+   "url": "https://www.sec.gov/Archives/edgar/data/0001878848/000187884826000052/iren-20260630.htm",
+   "note": "IREN 10-K FY2026: ~$3.6bn GPU Financing via SPV (DDTL + USPP notes)"},
+  {"entity": "Nvidia", "amount_musd": 500000, "tier": "primary",
+   "url": "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
+   "note": "Nvidia press release 2026-08-10: MOUs for platforms mobilizing >$500bn of third-party capital (not Nvidia's own money)"},
+  {"entity": "Nvidia", "amount_musd": 500000, "tier": "press1",
+   "url": "https://www.bloomberg.com/news/articles/2026-08-11/nvidia-s-show-of-financial-force-soothes-jittery-credit-markets",
+   "note": "Bloomberg 2026-08-11"},
+  {"entity": "Lambda", "amount_musd": 1000, "tier": "press1",
+   "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-backed-lambda-inks-1-163700160.html",
+   "note": "Bloomberg via Yahoo syndication; store the original bloomberg.com URL. Collateral NOT confirmed"},
+  {"entity": "Lambda", "amount_musd": 500, "tier": "press2",
+   "url": "https://www.theregister.com/2024/04/05/lambda_500m_loan/",
+   "note": "The Register, Apr 2024: Macquarie/IDF loan, GPUs as collateral (a loan, not an ABS)"},
+  {"entity": "Goldman/GSAM", "amount_musd": 6600, "tier": "press2",
+   "url": "https://www.9fin.com/insights/gsam-eyes-gpu-backed",
+   "note": "9fin only; deal in preparation, not closed"}
+]

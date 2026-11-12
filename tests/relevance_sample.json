@@ -1,0 +1,452 @@
+{
+ "_comment": "Labelled headlines for testing the relevance filter. Labels: deal (a financing; must pass), commentary (relevant analysis; may pass), noise (unrelated; should be rejected), spam (blocked outlet; must be rejected). Labels on real headlines are a first draft: curator, please correct. \"story\" marks headlines about the same story (duplicates); items without it are distinct stories.",
+ "items": [
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk as Chip Depreciation Questions Mount - Post-Earnings Drift - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-11",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Financing Plan Faces China-Led Depreciation Risk - EPS Consistency Score - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces a Key Test: China's Impact on Chip Values - Revenue Per Share - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk as Chip Depreciation Questions Mount - Revenue Guidance Range - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk and Depreciation Concerns - Earnings Revision Upgrade - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU-Backed Financing Plan Faces China Risk as Chip Depreciation Questions Mount - EPS Surprise History - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU-Backed Financing Plan Faces China Exposure and Depreciation Risk - EPS Guidance Update - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan: China Exposure Could Accelerate Chip Depreciation Risk - Earnings Yield Analysis - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China's Semiconductor Push - Dividend Earnings Report - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia’s $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China Tensions - Quarterly Financial Update - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China Export Curbs - Adjusted Earnings Analysis - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces China-Led Depreciation Risk - Peak Earnings Alert - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia CEO Pitches GPUs as Collateral for $500 Billion AI Fund — China Looms as Depreciation Risk - Diluted EPS Report - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-12",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Financing Plan Faces China-Driven Depreciation Risks - Guidance Update - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-13",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation and China Headwinds - Return On Capital - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-13",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation and China Headwinds - Earnings Growth Forecast - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-14",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Faces China Uncertainty as Chip Depreciation Looms - Balance Sheet Strength - vinanet.vn",
+   "label": "spam",
+   "from": "pending entry 2026-08-14",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia AI Financing Is The $500 Billion Risk Investors Aren’t Watching - Forbes",
+   "label": "commentary",
+   "from": "pending entry 2026-08-16",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Nvidia's $500 Billion GPU Collateral Plan Hinges on Chip Values Amid China Uncertainty - Product Revenue Analysis - Vinanet",
+   "label": "spam",
+   "from": "pending entry 2026-08-16",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "The AI Harvest: When Compute Becomes Collateral | by The Long Game ♟️ | Aug, 2026 - DataDrivenInvestor",
+   "label": "commentary",
+   "from": "pending entry 2026-08-17"
+  },
+  {
+   "title": "AI chip financing: can a leasing model solve the GPU supply problem? - Pinsent Masons",
+   "label": "commentary",
+   "from": "pending entry 2026-08-17"
+  },
+  {
+   "title": "US chip stocks slide as government borrowing costs hit multiyear highs",
+   "label": "noise",
+   "from": "pending entry 2026-08-18"
+  },
+  {
+   "title": "When GPUs Become Collateral: The Reality and Blind Spots of the AI Capital Cycle Built by Nvidia and Wall Street - finance.biggo.com",
+   "label": "commentary",
+   "from": "pending entry 2026-08-20"
+  },
+  {
+   "title": "Nebius Increases Debt Raise Plan To $5B: Neocloud Operator Reportedly Bids For Decart AI Buyout Eyed by Anthropic - TradingView",
+   "label": "deal",
+   "from": "pending entry 2026-08-20"
+  },
+  {
+   "title": "Wall Street decided that GPUs can be used as collateral | by Austin Liu | Aug, 2026 - Medium",
+   "label": "commentary",
+   "from": "pending entry 2026-08-20"
+  },
+  {
+   "title": "4 Top Neocloud Stocks: How CoreWeave, Nebius, TeraWulf, and IREN Are Financing the AI Boom - MarketWise",
+   "label": "commentary",
+   "from": "pending entry 2026-08-20"
+  },
+  {
+   "title": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Play - StartupHub.ai",
+   "label": "commentary",
+   "from": "pending entry 2026-08-21",
+   "story": "broadcom-60bn"
+  },
+  {
+   "title": "Billionaire David Tepper Piled Into a Debt-Laden Artificial Intelligence (AI) Neocloud Stock in Q2 While Also Increasing His Stake in Its Newest Rival - The Globe and Mail",
+   "label": "noise",
+   "from": "pending entry 2026-08-21",
+   "story": "tepper-neocloud-stock"
+  },
+  {
+   "title": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Pl… - StartupHub.ai",
+   "label": "commentary",
+   "from": "pending entry 2026-08-21",
+   "story": "broadcom-60bn"
+  },
+  {
+   "title": "GPU Infrastructure Financing reshapes AI data centers - AI CERTs",
+   "label": "commentary",
+   "from": "pending entry 2026-08-22"
+  },
+  {
+   "title": "\"I'll Back the Debt for AI\" ... NVIDIA's Big Promise Sends Korean Retail Investors to Bet 100 Billion Won on DRAM - 매일경제",
+   "label": "noise",
+   "from": "pending entry 2026-08-22"
+  },
+  {
+   "title": "Billionaire David Tepper piled into a debt-laden artificial intelligence (AI) Neocloud stock in Q2 while also increasing his stake in its newest rival - MSN",
+   "label": "noise",
+   "from": "pending entry 2026-08-22",
+   "story": "tepper-neocloud-stock"
+  },
+  {
+   "title": "GSAM eyes $6.6bn GPU-backed private financing for OpenAI - 9fin",
+   "label": "deal",
+   "from": "pending entry 2026-08-25"
+  },
+  {
+   "title": "Nvidia forecasts 70% sales growth fuelled by relentless AI boom",
+   "label": "noise",
+   "from": "pending entry 2026-08-27"
+  },
+  {
+   "title": "NVIDIA's $500B AI Financing Gamble Explained - Memeburn",
+   "label": "commentary",
+   "from": "pending entry 2026-08-27",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Bullish Provides USD.AI $100 Million Facility for GPU-Backed Loans - The Defiant",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish provides USD.AI $100M stablecoin facility for GPU-backed lending - TradingView",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish backs USD.AI with $100M in GPU-backed loan financing - Crypto Briefing",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish provides USD.AI with $100 million for AI chip-backed loans - Traders Union",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Wall Street backs Nvidia-led GPU loans to reshape global AI finance - CHOSUNBIZ - Chosunbiz",
+   "label": "commentary",
+   "from": "pending entry 2026-08-28"
+  },
+  {
+   "title": "Lambda raises $1B in private debt for Nvidia chip collaboration with Microsoft - Crypto Briefing",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "Bullish backs USD.AI with $100M loan financing using NVIDIA GPUs as collateral - Pluang",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish Commits $100M To USD.AI For GPU-Backed Lending In AI Infrastructure Push - Bitcoin World",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Neocloud Lambda secures $1B in debt to buy more chips - TechCrunch",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "Lambda inks $1B private debt for Nvidia chip deal - The Next Web",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "Lambda Raises $1B In Private Debt To Fund Nvidia Chips For Microsoft - Bitcoin World",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "Lambda raises $1B debt to buy Nvidia AI chips f... - Pluang",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "Bullish provides USD.AI $100M facility for GPU loans - Cryptonews.net",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish provides USD.AI $100M facility for GPU loans - crypto.news",
+   "label": "deal",
+   "from": "pending entry 2026-08-28",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish Backs USD.AI With $100M GPU Financing - CryptoRank",
+   "label": "deal",
+   "from": "pending entry 2026-08-29",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Bullish Is Backing $100M in Stablecoin Loans Collateralized by GPUs. That’s a New Kind of RWA. - forkast.news",
+   "label": "deal",
+   "from": "pending entry 2026-08-29",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Lambda Raises $1 Billion in Private Debt to Fund Nvidia Chips for Microsoft Deal - finance.biggo.com",
+   "label": "deal",
+   "from": "pending entry 2026-08-29",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "Bullish Makes $100M AI Credit Bet With GPUs Serving as Collateral - Cryptonews.net",
+   "label": "deal",
+   "from": "pending entry 2026-08-30",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Jeff Gundlach Says Nvidia’s $500 Billion AI Financing Plan Won’t Age Well - thewealthadvisor.com",
+   "label": "commentary",
+   "from": "pending entry 2026-08-30",
+   "story": "nvidia-500bn-plan"
+  },
+  {
+   "title": "Bullish Commits $100 Million To GPU-Backed AI Loans Via USD.AI - Crowdfund Insider",
+   "label": "deal",
+   "from": "pending entry 2026-09-01",
+   "story": "bullish-usdai-100m"
+  },
+  {
+   "title": "Lambda secures $1bn private debt to purchase Nvidia GPUs - report - datacenterdynamics.com",
+   "label": "deal",
+   "from": "pending entry 2026-09-01",
+   "story": "lambda-1bn-debt"
+  },
+  {
+   "title": "IREN Climbs 4% on $2.4B Blue Owl-Led GPU Financing; Cipher Digital Gains 2% - 24/7 Wall St.",
+   "label": "deal",
+   "from": "pending entry 2026-09-04"
+  },
+  {
+   "title": "Nvidia is the central bank of AI. But will its loans prove sound? - AFR",
+   "label": "commentary",
+   "from": "pending entry 2026-09-07"
+  },
+  {
+   "title": "Rising rates spotlight debt risks as CoreWeave and Nebius race to expand GPU capacity. - Pluang",
+   "label": "commentary",
+   "from": "pending entry 2026-09-10"
+  },
+  {
+   "title": "Nvidia B200’s 58% Premium Fuels GPU Loan Boom [2026] - tech-insider.org",
+   "label": "commentary",
+   "from": "pending entry 2026-09-18"
+  },
+  {
+   "title": "Morpho Turns Tokenized Apple and Nvidia Stock Into DeFi Loan Collateral - Startup Fortune",
+   "label": "noise",
+   "from": "pending entry 2026-09-20"
+  },
+  {
+   "title": "Kamino Opens GPU-loan-linked sUSDai Collateral Market on Solana - The Defiant",
+   "label": "commentary",
+   "from": "pending entry 2026-09-24",
+   "story": "kamino-susdai"
+  },
+  {
+   "title": "Kamino Opens GPU-Loan-Linked sUSDai Market on Solana - tokenpost.com",
+   "label": "commentary",
+   "from": "pending entry 2026-09-24",
+   "story": "kamino-susdai"
+  },
+  {
+   "title": "AI data centers increasingly built on GPU collateral, other novel financing - Nikkei Asia",
+   "label": "commentary",
+   "from": "pending entry 2026-09-25"
+  },
+  {
+   "title": "Kamino opens USDC Borrowing against GPU loan Yields on Solana - Altcoin Buzz",
+   "label": "commentary",
+   "from": "pending entry 2026-09-25",
+   "story": "kamino-susdai"
+  },
+  {
+   "title": "Aave Just Turned Tokenized Apple, Nvidia and Tesla Stocks Into USDC Loan Collateral - finance.yahoo.com",
+   "label": "noise",
+   "from": "pending entry 2026-09-28"
+  },
+  {
+   "title": "Nvidia Reportedly Turns To Insurers To De-Risk AI Chip Loans As Jensen Huang Pushes Beyond Big Tech — Could This Unlock Billions For Smaller Cloud Players? - TradingView",
+   "label": "commentary",
+   "from": "pending entry 2026-09-29"
+  },
+  {
+   "title": "Tencent leases 100,000 chips from Oracle to accelerate AI push",
+   "label": "deal",
+   "from": "pending entry 2026-10-01"
+  },
+  {
+   "title": "Sharon AI Enters Into GPU-Backed Debt Facility, Expanding Funding Flexibility for AI Factory Deployments - The Malaysian Reserve",
+   "label": "deal",
+   "from": "pending entry 2026-10-01"
+  },
+  {
+   "title": "Chipotle raises prices as credit card fees climb",
+   "label": "noise",
+   "from": "synthetic"
+  },
+  {
+   "title": "Meta Labs posts absolute record; see footnotes",
+   "label": "noise",
+   "from": "synthetic"
+  },
+  {
+   "title": "Nvidia shares hit record on data center demand",
+   "label": "noise",
+   "from": "synthetic"
+  },
+  {
+   "title": "Nvidia unveils Rubin GPU at GTC",
+   "label": "noise",
+   "from": "synthetic"
+  },
+  {
+   "title": "Blue-chip stocks rally as Treasury notes and bond yields fall",
+   "label": "noise",
+   "from": "synthetic"
+  },
+  {
+   "title": "Nvidia CEO says demand is strong, rules out new debt",
+   "label": "noise",
+   "from": "synthetic"
+  },
+  {
+   "title": "Fluidstack secures $10bn GPU-backed loan",
+   "label": "deal",
+   "from": "synthetic"
+  },
+  {
+   "title": "CoreWeave closes $2.6bn delayed draw term loan secured by GPUs",
+   "label": "deal",
+   "from": "synthetic"
+  },
+  {
+   "title": "Crusoe raises $750m credit facility to finance Nvidia GB200 clusters",
+   "label": "deal",
+   "from": "synthetic"
+  },
+  {
+   "title": "Data center developer prices $1.2bn asset-backed securitization",
+   "label": "deal",
+   "from": "synthetic"
+  },
+  {
+   "title": "Nvidia anchors SPV that leases chips to xAI",
+   "label": "deal",
+   "from": "synthetic"
+  }
+ ]
+}

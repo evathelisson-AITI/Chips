@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01 - auto-update by source watch - 69 entries PENDING human review",
+  "updated": "2026-10-01 - auto-update by source watch - 28 entries PENDING human review",
   "deals": [
     {
       "date": "2023-08",
@@ -9,7 +9,8 @@
       "terms": "First use of Nvidia H100 hardware as loan collateral; template for the neocloud financing model",
       "status": "Closed",
       "ver": "REPORTED",
-      "src": "Reuters, 08/2023"
+      "src": "Reuters, 08/2023",
+      "id": "d211406c9c5"
     },
     {
       "date": "2024-06",
@@ -19,7 +20,8 @@
       "terms": "Early GPU-backed ABS; residual values of ~50% after 3 years reportedly assumed",
       "status": "Outstanding",
       "ver": "REPORTED",
-      "src": "Press reports, 2024–2026"
+      "src": "Press reports, 2024–2026",
+      "id": "dd03bc3c133"
     },
     {
       "date": "2025-06",
@@ -29,7 +31,8 @@
       "terms": "USD 3bn 5y senior secured notes at 12.5% + 2×1bn loans; price talk widened on lukewarm demand",
       "status": "Notes redeemed early 03/2026",
       "ver": "VERIFIED",
-      "src": "Reuters; PitchBook LCD, 06/2025"
+      "src": "Reuters; PitchBook LCD, 06/2025",
+      "id": "deacf461abf"
     },
     {
       "date": "2025-09",
@@ -39,7 +42,8 @@
       "terms": "Non-binding letter of intent tied to deployment of Nvidia systems",
       "status": "Announced (LOI)",
       "ver": "VERIFIED",
-      "src": "Nvidia announcement, 22/09/2025"
+      "src": "Nvidia announcement, 22/09/2025",
+      "id": "dd464c70856"
     },
     {
       "date": "2026-01",
@@ -49,7 +53,8 @@
       "terms": "Part of USD 5.4bn acquisition & triple-net lease of compute (incl. GB200) to xAI subsidiary; Nvidia anchor LP in VCI",
       "status": "Closed",
       "ver": "VERIFIED",
-      "src": "Apollo press release, 07/01/2026"
+      "src": "Apollo press release, 07/01/2026",
+      "id": "d86783e0f42"
     },
     {
       "date": "2026-02",
@@ -59,7 +64,8 @@
       "terms": "Reported pricing near 9.5%; syndication expected",
       "status": "Reported near close",
       "ver": "REPORTED",
-      "src": "The Information; Reuters, 09/02/2026"
+      "src": "The Information; Reuters, 09/02/2026",
+      "id": "da6b1232933"
     },
     {
       "date": "2026-03",
@@ -69,7 +75,8 @@
       "terms": "Delayed draw term loan; A3 (Moody's), non-recourse; first HPC infrastructure DDTL to reach investment grade",
       "status": "Closed",
       "ver": "VERIFIED",
-      "src": "CoreWeave press release, 03/2026"
+      "src": "CoreWeave press release, 03/2026",
+      "id": "dd336f40b33"
     },
     {
       "date": "2026-05",
@@ -79,7 +86,8 @@
       "terms": "First publicly syndicated HPC infrastructure-backed vehicle, enabling secondary market trading",
       "status": "Closed",
       "ver": "VERIFIED",
-      "src": "CoreWeave press release, 05/2026"
+      "src": "CoreWeave press release, 05/2026",
+      "id": "ddf3423f471"
     },
     {
       "date": "2026-08",
@@ -89,7 +97,8 @@
       "terms": "SOFR+5.50%, ~5y maturity vs ~3y average customer contracts: lenders underwrite GPU residual and re-leasing risk; Ba2/BB+; JPMorgan & MUFG; oversubscribed",
       "status": "Closed 10/08/2026",
       "ver": "VERIFIED",
-      "src": "CoreWeave press release / Business Wire, 10/08/2026"
+      "src": "CoreWeave press release / Business Wire, 10/08/2026",
+      "id": "db6c25b44e2"
     },
     {
       "date": "2026-08",
@@ -99,697 +108,522 @@
       "terms": "Press-reported vendor backing of GPU collateral in large-scale AI infrastructure financing; unconfirmed by primary source",
       "status": "Reported",
       "ver": "REPORTED",
-      "src": "Press reports, 08/2026"
-    },
-    {
-      "date": "2026-08-11",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk as Chip Depreciation Questions Mount - Post-Earnings Drift - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk as Chip Depreciation Questions Mount - Post-Earnings Drift &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMi0AFBVV95cUxNalN2T0ZBOXh1QUYwUVJ4NzFidU9VaDhZM1U5Q1lMNnd2bHFIMUd4UmotckpvY2U5T1Bic1ZTeUxfRUlCcmdJVjhEeXZxNEtubGxNbWd2eXFYWnVOVjgxT084dm5JVmFRNnZ4bWNQbHF4b3pYeXlxT0wzTWVDQVJmdm45amxtVHh1VmRrRlBzeXhkWlV1UVV0OE14WFlzQWxYLU5FR3Q2UE5mU2h6OFpzNnRSZEd4YzUwQU9kQWs1dkRUaUtubDdqUFJyZy1pR1hG?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-11"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Financing Plan Faces China-Led Depreciation Risk - EPS Consistency Score - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Financing Plan Faces China-Led Depreciation Risk - EPS Consistency Score &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMiwgFBVV95cUxQa01VQ3lGSXgzNF9CYlllQXNqdFpxRFlKeWFHNUV3Q0ZXbFZhdFlNSnlmbDhoVGh5SmlVc1RMYTl0UURWMW8zcnpSNEdMZTlWV3oxWDZ6VVdOSTVzX1EwaUhxTVJiYVY0eWVFaHR2eFpHbjZ3eGx3VGdJdFlNUk4wcEVMVmR5ZjdPcmJjUFVDWWswNUVwYzVRN1J3TU03eEk4VU96MVFSa1M3bzhHNDY2QWNIUEhYNFVOdmVIczQ4bUVKUQ?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces a Key Test: China's Impact on Chip Values - Revenue Per Share - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces a Key Test: China's Impact on Chip Values - Revenue Per Share &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMixgFBVV95cUxQUVd1QUd4RFcwVV82eHVvMjZRU25FWkhtUF9GSURqdVZoOXh4MlFKZjZfeGFaTmtUUWdGYVplQUpoWUo5cHpwSWx3U0lmY21sQWVJRktETEdaamhjMVhTbFRWV1RzVzVUX0UzNWIxMVpQajZhYXNoc2pjZk9mSmp1TGR6VmtsODcxaWJQOGR3a2RaOFVscER1djFXWVlGRDZXekZuVUhTV2xSQUl1cDFrejAycGRVVXFuME9HTTRpNDZBUFpGMmc?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk as Chip Depreciation Questions Mount - Revenue Guidance Range - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk as Chip Depreciation Questions Mount - Revenue Guidance Range &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMi0AFBVV95cUxNSHpvSi1fVDE2Y0c2UW9nbnhUNEhfc01XbVFpUk8xWUFVLVR3azgySzcwUlZuRDNzVUZOam03dFlqOTI4T3JXdlcySVJsTkNDd3pjaXZZRC1GU05TOVpuem5YREpCZEp0UjJjcnFWTHZWeWsweTA1V0J2UDNSeDVfc2liTldFR090VWhGSDA0VloySDJSWk1NUjVodFY0a0RuZjVqMUhFVE8ta25lS0hORWNDVWlzNHZkd3EwakJjS0xuenQ3NGRjWDBuTVpfd0RT?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk and Depreciation Concerns - Earnings Revision Upgrade - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces China Risk and Depreciation Concerns - Earnings Revision Upgrade &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMiwgFBVV95cUxQaUh0ZHU3bVpVdmI2Y3ZrYXhKdk9oLV9SdWZ2OVhMaWtTNW93Q0dTbFlDajNaaVVjSkRjVktiVzdFVEhiM1dnUVh4WVFrdW1fZnYyakxDNVNPTjVsN3oyamFIS1haalpRN2JhZm42RW9hSWNVbzVDS2hGSXhQNTVvTjVCaFpfRl9kaHJEQW1lTFVlczlWVGJqZnByYW5pTklQTkgzRTVXQmdibjZta2Q5VUxfVmdfeXZNX2Q5RlFyQzU4dw?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU-Backed Financing Plan Faces China Risk as Chip Depreciation Questions Mount - EPS Surprise History - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU-Backed Financing Plan Faces China Risk as Chip Depreciation Questions Mount - EPS Surprise History &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMi1wFBVV95cUxNR3YxM3MyQi1tUk01M0wzX1dOci13M3gyV18yalZLSVBKNGhoN1gzNnlKZDBFU1VIOVVESUdoSGFpRlM2d0JlVHNzcGVMSnhKU2puYkZkblQ0LUF0UklxeThHMkRFMi0teDdUUm1KSk05dXJzTS1GclVhaGJUcS1Jb1FiUWp2NGhhcTRFbjdCZnc0SGxNMzMyeVdSak5RZkNvQ2dnVlQ5WTZOV1BCLUIwUDZNTmpNME1IZEp2VTl5QUQ2R3RiVEV1Skg1YmpwRFVMc0RGeF9ZVQ?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU-Backed Financing Plan Faces China Exposure and Depreciation Risk - EPS Guidance Update - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU-Backed Financing Plan Faces China Exposure and Depreciation Risk - EPS Guidance Update &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMiyAFBVV95cUxQM3R5aVYyRERNRE9BVE80LVdYQm15U1h1bkhQWDJkblljbUswTXB3UHR3cGZOcHVOci05QjBiZi1hVE9KYTNjX1FVbGNmM2JLakJIV0F5NHY4SzVOdUFMZHFlTFFPckNmZmNLc2tQRzZUUEJUOWVtYXltdjB6QjZ5N0RrZnBkcEtXeDhFNk40cXliakx1VkcxUmRhUTY1LUxPS2VJT19xTkRDbllFTWNXUVlYdnFtdlFOckRZZ2x1UllKMDZiMVhSRg?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan: China Exposure Could Accelerate Chip Depreciation Risk - Earnings Yield Analysis - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan: China Exposure Could Accelerate Chip Depreciation Risk - Earnings Yield Analysis &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMi0gFBVV95cUxOTTE1akc4N05yS1ZWblJhRm5BU2o4QlJHQ3A5RFlrbTIzZG0zTEc1SHlPdzhyVzI3azY3Vl83eTI2Y0RHWWtJdXI2eW9oNVhFZktzZ0tUQ2d2aTg3S0wzTURkLS1QMkFNN2MyYmhWRE1xU181MXlVbGVGX19ydTZYcjJaeTVCcEhvN0t4WjdJZEdaSF8xbG9yRTQtbzR6VWNDV3Y3el9TaFNBT09TQm9iNUV1UGRSdWRXXzhGX0g3MjZNMElocVpzRFF3ZE42WFNkVnc?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China's Semiconductor Push - Dividend Earnings Report - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China's Semiconductor Push - Dividend Earnings Report &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMi0gFBVV95cUxPbnhTNkhPa1VRM0ZXSGFjUUgxQlZ1UWwwUjVHTHVYZlpSTHdrbDdyVnV2QXlrT09KQThJVHlpd3pFYmFWMXkwOGh2dkRiRzNnX2RaeEpjTUF0VE5yY3FCekhLTUxjU0x0M0ZTVXZvb3o3OFFJVkRkQ0FDNnNYZ0w3Y3BOSHZ3NVlpZ1pZR0JBWkJwbVFmM3ZrNVFrTW94V19FZmppWTBXUmxnQXNzQThTV0ZLSkE4SXFFSXpUSjdRYjhmY2k1TVlCb01lSHdjVUdMamc?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia’s $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China Tensions - Quarterly Financial Update - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia’s $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China Tensions - Quarterly Financial Update &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMiwwFBVV95cUxPYkg0V09PRFZNU2VXZGJQX2d3ZXU5djNSYVVBNmZocXFkdExGRlg4OVJzd0tZT0RIUTlsLW1mS0lLaHpXS3NGM1hrWndvTmFsa0dfUWJEUzUwWU1TUHRYOV9BMnY0M3IzRXhNWk8yS01DcEtfTlJoSk1YSGE4a21HQ3R5R2U4STJaV3pSM3doSW9SNm9LLTlLcVFmYzcxa2dCdUlObFFuTjFON0ptTlpHQjNDMHlxR3Q1ODkyWXNWa0oza0U?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China Export Curbs - Adjusted Earnings Analysis - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation Risk Amid China Export Curbs - Adjusted Earnings Analysis &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMiyAFBVV95cUxOanF4cDhuTm1ZN3RqazA3M1lEWHlUVFpDWmlnMGZSQnRnWDFYb0lpRlJ2LUtFWlJ2MFd3SzlCRWZ6ZWNwT1VySmVPN1MwZ2xXV1BSbTBmdkNrc2JKWUtvaGd2Y1ZSMVBaallHY2hBQ0pLazBQQU44b21ZWnEtWGZRSXRoS3Z6MmhPSEtNdHRJRGpPdkFBWDJUcUFZOEVkeWRBcC02QU1tZ2pveHV5bkhhdnRfZFk1UzZOaUNnaGl4cF9jSjdZYWtoTA?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces China-Led Depreciation Risk - Peak Earnings Alert - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces China-Led Depreciation Risk - Peak Earnings Alert &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMitAFBVV95cUxQelVOV3BNX2diVU9hMllsV0xtMldnbk93N0pFX3FPb2thdmtsVDVyUjRNd2Rkc0VFVVE5ZXl5UmYwRmcwVXJUeGU2WG1IYmdNMjB4eGhKN1liNTNDRnN6Zi1ZYkM5N2VOWS0wMlhKV01vMWMycDV0b05DUTlEY0JQSGdTMUdyY04xcnJJOXViZjRKdk5fV1Fyb3dSdFFKNTAtYWdNYlZzbVprTm9NZjZhZXlIeGQ?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-12",
-      "name": "Nvidia CEO Pitches GPUs as Collateral for $500 Billion AI Fund — China Looms as Depreciation Risk - Diluted EPS Report - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia CEO Pitches GPUs as Collateral for $500 Billion AI Fund — China Looms as Depreciation Risk - Diluted EPS Report &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMi0gFBVV95cUxQSS1mbUdlcEREVVJqQzNrR2V1WDQwS3ZkT19ZX2NPMlFtVWVlQUxqZEtaWGpzdUlIemhWSG5BRDIxamZ5OUFxNkkzZ3RKUkhrN2tTQnVCNTJCQm5vSjFwSGtxQVFmOVJQWWNWT3Fjd0NvbW1JTkFtYzJUMXlpVUdXTkUxLVZ3bjB6clBiaWdtY090T0hjQUhFanFYQkdlOWVLTThSSVBNT1E5WHlCdTNTNHNRZjhPNGtlR0dqSmNxdDhoWS01SV9mUVpxZU95UkNwT0E?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-12"
-    },
-    {
-      "date": "2026-08-13",
-      "name": "Nvidia's $500 Billion GPU Collateral Financing Plan Faces China-Driven Depreciation Risks - Guidance Update - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Financing Plan Faces China-Driven Depreciation Risks - Guidance Update &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMixwFBVV95cUxPXzJXcVJmMFlEdGVXTGRHU081TXpOVUxRNUhkbFhQMHdRbW5JM0RNTmJ4bHNFOTN4aVJvZldQUHZpODd5T2tSSlVIYWpWS0pNSjBwNURuYlBQWGZkTWhrYlFRS0pHYkNwbk5mQVptcGEzMTd5VkJ2LUpnUDdRTTk5LWxzNDhMWnlzSjdjX3BjNGlhLVNaZGNlcTZpYTVzZjNINThpckhKa05DUmM0SDVvcXE5YkF4TTc3SGY3b3pWTVpXY3k5ZFpV?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-13"
-    },
-    {
-      "date": "2026-08-13",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation and China Headwinds - Return On Capital - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation and China Headwinds - Return On Capital &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMivAFBVV95cUxQNUFGaHBSZUx6NEpUUTdWblZmLU9lRU9aTE0zb1dYejJZSGUtQmFmd3BIb24xM0dkRXhjS29Zb1k0MU5zXzZHd1Q0dUVISmN0bzFqVERSYUN3UmQ3cXV5b25PRUE3M0VQMk13TnAydFZVcG1GRjBZNVphUTBjdWFMcFFYd3I3LXdjOHgzQTA5Z1p3VTFWdHVHdmpRelFTRTZ1SXpOZVRoNmVwaktpUGxvbjMtQUN2eGNVaVpzZQ?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-13"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation and China Headwinds - Earnings Growth Forecast - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces Depreciation and China Headwinds - Earnings Growth Forecast &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMivAFBVV95cUxQWUFWYlBVOTd5d2JEWWFBbmtTOXRaRUlvOGxIQ1FjSUVwWFd5dmlJYTAyLXNTQWpsSG51Vm1hX3FoMXhNTi1ad2d0bHlVVjZrdUxwWlNaeG5VVXZPSFZ4a2kyeV8wX1czMG9ZVmwxM24zYm9YM20zckpQbzd5MzJiM3UzSWdWNy1GRWRvU3VQdXFlNnlBeHJra2lkcDY2LWVrd2hkSjdJV2pkUEVFUzhFdktPeW90N3JrYmhVSg?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-14"
-    },
-    {
-      "date": "2026-08-14",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Faces China Uncertainty as Chip Depreciation Looms - Balance Sheet Strength - vinanet.vn",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Faces China Uncertainty as Chip Depreciation Looms - Balance Sheet Strength &nbsp;&nbsp; vinanet.vn [source link: https://news.google.com/rss/articles/CBMizAFBVV95cUxOZEJyMlBKTldTZzlPNFdTNDA2QzRFdWJoSHFKb3NDU0JDZnBlLUNYbnZJTVFyaUNXTmx6NXM0U00tUUFFUXctVnc5NTdFSm1Za01iMHE0eS01cTBrVmVpa0Jxb0lpVGlPTnUzbnZvWTBnU0F4VUszTnJ6QjlTR1Ztd1FuazY1Sy1laWF0ZFd6aUwzU1JyQkMxcFdjaWdDQ3FUZXZMV3JtRHF5VXUyNkh2ZFI5cXNvZGNXZTIzNWlOLVMxUkNKVmNjdW05ME4?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-14"
+      "src": "Press reports, 08/2026",
+      "id": "d28fc43191d"
     },
     {
       "date": "2026-08-16",
       "name": "Nvidia AI Financing Is The $500 Billion Risk Investors Aren’t Watching - Forbes",
       "type": "To classify",
       "amount": "-",
-      "terms": "Nvidia AI Financing Is The $500 Billion Risk Investors Aren’t Watching &nbsp;&nbsp; Forbes [source link: https://news.google.com/rss/articles/CBMiugFBVV95cUxNU2dvU0F2QV9PLVBGbndSY3BvcHBkR0h2VHYtMEQ5R0o2b0xrQjRqeTlWRU1OWG9YNDg3bGppRWRiSFZkOUNNQXFlX241Qy1FMjg2cU9YU2hzc2dwLTZEUEZsaXk4emFhUUFhS3VSdnJFLThvRlFES1lQWjZFZVJFS1U2Q3B1VDdfeGR5WHFlSndqeFpKbjBobUFMcVBSTEtvWk5tUHJsYk85ZldNbVZITnRKLS11NVhkc0E?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-16"
-    },
-    {
-      "date": "2026-08-16",
-      "name": "Nvidia's $500 Billion GPU Collateral Plan Hinges on Chip Values Amid China Uncertainty - Product Revenue Analysis - Vinanet",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Nvidia's $500 Billion GPU Collateral Plan Hinges on Chip Values Amid China Uncertainty - Product Revenue Analysis &nbsp;&nbsp; Vinanet [source link: https://news.google.com/rss/articles/CBMixgFBVV95cUxPYng1ZmpLS1ZLU3EyZ0ExTHBPLXFFMENtM0U2aVRIdnl4eFNEUmNuQVo3b1doX2tKN2tTR1FjaFZIUkF4NU9FUlI2RzAxdDY1bGFEV1hDSlB0X2Y4VUxkN1FoNnptblVZVGtRX3ZqZ1RVbWp2V2FtMEpGZUJBNFg1bXEtcTVFVVZiaEZKVV9MU3FOR290SjNNamtnQW1vV2JKVmJaUm9wdTFHNVJhNDBfMVp2WWhiS0psdFNneUE1dTMzZTVMR3c?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-16"
+      "src": "\"GPU collateral lending\" - Google News, 2026-08-16",
+      "id": "dd61e0e586b",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNU2dvU0F2QV9PLVBGbndSY3BvcHBkR0h2VHYtMEQ5R0o2b0xrQjRqeTlWRU1OWG9YNDg3bGppRWRiSFZkOUNNQXFlX241Qy1FMjg2cU9YU2hzc2dwLTZEUEZsaXk4emFhUUFhS3VSdnJFLThvRlFES1lQWjZFZVJFS1U2Q3B1VDdfeGR5WHFlSndqeFpKbjBobUFMcVBSTEtvWk5tUHJsYk85ZldNbVZITnRKLS11NVhkc0E?oc=5",
+      "outlet": "Forbes",
+      "sources": [
+        {
+          "outlet": "Memeburn",
+          "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1iWllRa0pVT1FFck0wR2U1eU9jWFhHeVdRT2NkSFIzUXNyNjlZeFk2bDNvSzFwWlF1REVGVUlheTF5WFpKeUpfM3NvV2szNjJWOW5DNTRmOFJNVlJpTkZPbm5XdXJ5T3RyOGc?oc=5",
+          "date": "2026-08-27",
+          "title": "NVIDIA's $500B AI Financing Gamble Explained"
+        },
+        {
+          "outlet": "thewealthadvisor.com",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxORHVkTERBOWNCZTlyak1STW5nQU42ZnFDdGg5Zm1kc3dpRHoyRnhMaUZndkdVXzAxVzg1X0lJejR6M2NNcWtyT3dzOFp2eG5WX0w3WkdDLWpKRmdQT0g5bFRYS282UGl0cjRBYVQ1SDZCUGpveU96QWxCcl9LOXBPb0VWNjRYT3ZBRGJVNEx3VG9vNHozRnctNUt4bDAyaU81XzJQRHEtMGpaWTl0RFVRYQ?oc=5",
+          "date": "2026-08-30",
+          "title": "Jeff Gundlach Says Nvidia’s $500 Billion AI Financing Plan Won’t Age Well"
+        }
+      ]
     },
     {
       "date": "2026-08-17",
       "name": "The AI Harvest: When Compute Becomes Collateral | by The Long Game ♟️ | Aug, 2026 - DataDrivenInvestor",
       "type": "To classify",
       "amount": "-",
-      "terms": "The AI Harvest: When Compute Becomes Collateral | by The Long Game ♟️ | Aug, 2026 &nbsp;&nbsp; DataDrivenInvestor [source link: https://news.google.com/rss/articles/CBMingFBVV95cUxPa21qaFJhM1ZkNmpUdFh0dmNMeW5QRy0zRGRCV0w0ampiZEk0UDlyUGxSdFU2VGJoQVZVTGJLemctZGw2bnFJZGJrVTVoR3dRZDI2Q0FMWHRDTlZiNDJZXzVUelMxQnpqVFVCZC1va3J0MEw5azAxWGs3TDg2YWQzUlNHR0kzeDl3TzEwR2xWNUdtYzJtM2ZxNm9fNDN3QQ?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-17"
+      "src": "\"GPU collateral lending\" - Google News, 2026-08-17",
+      "id": "dc6c8d76f3f",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPa21qaFJhM1ZkNmpUdFh0dmNMeW5QRy0zRGRCV0w0ampiZEk0UDlyUGxSdFU2VGJoQVZVTGJLemctZGw2bnFJZGJrVTVoR3dRZDI2Q0FMWHRDTlZiNDJZXzVUelMxQnpqVFVCZC1va3J0MEw5azAxWGs3TDg2YWQzUlNHR0kzeDl3TzEwR2xWNUdtYzJtM2ZxNm9fNDN3QQ?oc=5",
+      "outlet": "DataDrivenInvestor"
     },
     {
       "date": "2026-08-17",
       "name": "AI chip financing: can a leasing model solve the GPU supply problem? - Pinsent Masons",
       "type": "To classify",
       "amount": "-",
-      "terms": "AI chip financing: can a leasing model solve the GPU supply problem? &nbsp;&nbsp; Pinsent Masons [source link: https://news.google.com/rss/articles/CBMiswFBVV95cUxPRkppOGZ4U2ladUxMRFlkb3NuZ3VfcG5jVFNiTkhjU0ZxdUIxMmFJam9PeGR3MEJmVkowOW5qLVgzVTNaMzM1ZktrWjVwanBwd2NCdGQtT0pWTjdCbkJsdlIyTGlUQm1XalRYUHZaRlFZd2s2aWZFVFZEdmt0aER3aEVFWVVfWmE2YjZDOENocHd0Y3NzMjEwNFBwUUVjTzN4aEdyaGkwMUdKeHJDVjZvak44QQ?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"\"chip-backed\" debt OR lease\" - Google News, 2026-08-17"
+      "src": "\"\"chip-backed\" debt OR lease\" - Google News, 2026-08-17",
+      "id": "dca205c714b",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPRkppOGZ4U2ladUxMRFlkb3NuZ3VfcG5jVFNiTkhjU0ZxdUIxMmFJam9PeGR3MEJmVkowOW5qLVgzVTNaMzM1ZktrWjVwanBwd2NCdGQtT0pWTjdCbkJsdlIyTGlUQm1XalRYUHZaRlFZd2s2aWZFVFZEdmt0aER3aEVFWVVfWmE2YjZDOENocHd0Y3NzMjEwNFBwUUVjTzN4aEdyaGkwMUdKeHJDVjZvak44QQ?oc=5",
+      "outlet": "Pinsent Masons"
     },
     {
       "date": "2026-08-18",
       "name": "US chip stocks slide as government borrowing costs hit multiyear highs",
       "type": "To classify",
       "amount": "-",
-      "terms": "Fears over inflation and mounting public debt ignite bond sell-off [source link: https://www.ft.com/content/61354e68-c4ba-4716-b849-b332608c8c65?syn-25a6b1a6=1]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "Financial Times, 2026-08-18"
+      "src": "Financial Times, 2026-08-18",
+      "id": "dcd4f1cd262",
+      "url": "https://www.ft.com/content/61354e68-c4ba-4716-b849-b332608c8c65?syn-25a6b1a6=1",
+      "outlet": "Financial Times"
     },
     {
       "date": "2026-08-20",
       "name": "When GPUs Become Collateral: The Reality and Blind Spots of the AI Capital Cycle Built by Nvidia and Wall Street - finance.biggo.com",
       "type": "To classify",
       "amount": "-",
-      "terms": "When GPUs Become Collateral: The Reality and Blind Spots of the AI Capital Cycle Built by Nvidia and Wall Street &nbsp;&nbsp; finance.biggo.com [source link: https://news.google.com/rss/articles/CBMidkFVX3lxTE1LcksycDRCenZkV3ZqazNqdkY2Y2lhX2JUM0p0TDZvUHZMb21tSEFfS3lNRjhibDloMFo0eVNhR2ZWNFBvaUxPS3JQVGZCWl9GSzRrMVhZZnZiM3BZc2F6NGJYVUh2NGFUSkFGWF9LTHdKdnRSTlE?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-20"
+      "src": "\"GPU collateral lending\" - Google News, 2026-08-20",
+      "id": "da6f0f931ed",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1LcksycDRCenZkV3ZqazNqdkY2Y2lhX2JUM0p0TDZvUHZMb21tSEFfS3lNRjhibDloMFo0eVNhR2ZWNFBvaUxPS3JQVGZCWl9GSzRrMVhZZnZiM3BZc2F6NGJYVUh2NGFUSkFGWF9LTHdKdnRSTlE?oc=5",
+      "outlet": "finance.biggo.com"
     },
     {
       "date": "2026-08-20",
       "name": "Nebius Increases Debt Raise Plan To $5B: Neocloud Operator Reportedly Bids For Decart AI Buyout Eyed by Anthropic - TradingView",
       "type": "To classify",
       "amount": "-",
-      "terms": "Nebius Increases Debt Raise Plan To $5B: Neocloud Operator Reportedly Bids For Decart AI Buyout Eyed by Anthropic &nbsp;&nbsp; TradingView [source link: https://news.google.com/rss/articles/CBMiggJBVV95cUxPcXR5VThLNW5hX2tlRS1INDhZbDI0Rm1qTXptci1HR1N6Y1JoQzN1LWh3UUhZRzdxSVFoeWdUR25KdE12OEM0ZXE0YjBqaDNlejdDdHNNVllxNHhHQi14cWpOX01aU3VURUNIYnY1WDdXaDd2YWF0SVRQekVESF9HaWNmbktnWGNncW4yVUVnczJYYVJfNjlwS3VHNWU2UG9hUEJfd3pxYWVKc3FGcVpTSlR6d3VmMFh4aEdIYkNJdlFfWFQ3MjBEUllVbVNabVp0SjJuRVI5RWJVbGxzQXhfZUhzY3g3TThLRFlTY3lVUnNOR2U5WVBhQlRFX0xQYnU3VEE?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-20"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-08-20",
+      "id": "d97c6bede7c",
+      "url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxPcXR5VThLNW5hX2tlRS1INDhZbDI0Rm1qTXptci1HR1N6Y1JoQzN1LWh3UUhZRzdxSVFoeWdUR25KdE12OEM0ZXE0YjBqaDNlejdDdHNNVllxNHhHQi14cWpOX01aU3VURUNIYnY1WDdXaDd2YWF0SVRQekVESF9HaWNmbktnWGNncW4yVUVnczJYYVJfNjlwS3VHNWU2UG9hUEJfd3pxYWVKc3FGcVpTSlR6d3VmMFh4aEdIYkNJdlFfWFQ3MjBEUllVbVNabVp0SjJuRVI5RWJVbGxzQXhfZUhzY3g3TThLRFlTY3lVUnNOR2U5WVBhQlRFX0xQYnU3VEE?oc=5",
+      "outlet": "TradingView"
     },
     {
       "date": "2026-08-20",
       "name": "Wall Street decided that GPUs can be used as collateral | by Austin Liu | Aug, 2026 - Medium",
       "type": "To classify",
       "amount": "-",
-      "terms": "Wall Street decided that GPUs can be used as collateral | by Austin Liu | Aug, 2026 &nbsp;&nbsp; Medium [source link: https://news.google.com/rss/articles/CBMioAFBVV95cUxPWXFxay1PWUFObVFkM3FOcjRWdTJEUm9RVm5Qbi1KemV0ZWFFdjFHUnhPSTBwYXlNSkxjczlJOGZxV2xmM3JBTEtCSnhDbkg2V1pfS1BlU0otVGVqTjU1U19RZFBrWEIyeUlWc2VIaHRFNWJEZ1djMlJ3RlhWZHpjZTZnaGpnV21salBVOVJnWVhQWmRqZ04zdkYwODRHRGhx?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-20"
+      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-20",
+      "id": "d948468a6c4",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPWXFxay1PWUFObVFkM3FOcjRWdTJEUm9RVm5Qbi1KemV0ZWFFdjFHUnhPSTBwYXlNSkxjczlJOGZxV2xmM3JBTEtCSnhDbkg2V1pfS1BlU0otVGVqTjU1U19RZFBrWEIyeUlWc2VIaHRFNWJEZ1djMlJ3RlhWZHpjZTZnaGpnV21salBVOVJnWVhQWmRqZ04zdkYwODRHRGhx?oc=5",
+      "outlet": "Medium"
     },
     {
       "date": "2026-08-20",
       "name": "4 Top Neocloud Stocks: How CoreWeave, Nebius, TeraWulf, and IREN Are Financing the AI Boom - MarketWise",
       "type": "To classify",
       "amount": "-",
-      "terms": "4 Top Neocloud Stocks: How CoreWeave, Nebius, TeraWulf, and IREN Are Financing the AI Boom &nbsp;&nbsp; MarketWise [source link: https://news.google.com/rss/articles/CBMikgFBVV95cUxNaDNyWlNLWks5X0NVd0tUTFl4bWNpOEJRVHplbzR3bWU0d3NIRnF6b18yUTFadEFsY25QRE1fc3BUbUl6UEp6azIzREM2Si02b0ZjWjdxTlh0OUF1cG5DdW1xSjFNQ0EweG1jcU5EU1FkdVhmMmJPN1g1UXk3bXA4SWtMdDUzUzRDMHRxUTltQUJOUQ?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-20"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-08-20",
+      "id": "d9ade030a5b",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNaDNyWlNLWks5X0NVd0tUTFl4bWNpOEJRVHplbzR3bWU0d3NIRnF6b18yUTFadEFsY25QRE1fc3BUbUl6UEp6azIzREM2Si02b0ZjWjdxTlh0OUF1cG5DdW1xSjFNQ0EweG1jcU5EU1FkdVhmMmJPN1g1UXk3bXA4SWtMdDUzUzRDMHRxUTltQUJOUQ?oc=5",
+      "outlet": "MarketWise"
     },
     {
       "date": "2026-08-21",
       "name": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Play - StartupHub.ai",
       "type": "To classify",
       "amount": "-",
-      "terms": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Play &nbsp;&nbsp; StartupHub.ai [source link: https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQUFWMUFOS3dxVnJmOFcwMlowYm55Zi1xZzF0R0h1M2hBZ3gwMDh4MnB6OEVGQ1FKdDdvZlVtd25LWVI5OVhOYVpTS0RBbmJEaHVwNVFfYTVYSllGLTAyRkJDb0h1RXF3YVl1a2F2MGJQeTUwMjEtWERPSkJtZ21COTlVYldYX0Z5amt5cmFzMnpUN3g2T0xqYUJ5RHZiako1WU0ydVZ4Tmk?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"Nvidia SPV lease financing\" - Google News, 2026-08-21"
+      "src": "\"Nvidia SPV lease financing\" - Google News, 2026-08-21",
+      "id": "dd2adcb4b68",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPQUFWMUFOS3dxVnJmOFcwMlowYm55Zi1xZzF0R0h1M2hBZ3gwMDh4MnB6OEVGQ1FKdDdvZlVtd25LWVI5OVhOYVpTS0RBbmJEaHVwNVFfYTVYSllGLTAyRkJDb0h1RXF3YVl1a2F2MGJQeTUwMjEtWERPSkJtZ21COTlVYldYX0Z5amt5cmFzMnpUN3g2T0xqYUJ5RHZiako1WU0ydVZ4Tmk?oc=5",
+      "outlet": "StartupHub.ai",
+      "sources": [
+        {
+          "outlet": "StartupHub.ai",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNaHU4WWdPLWxCdzZ2bmphU0pvN2NLLTBlOTF5SjBFRHhhU2pKRnFxVlhlWmljRVBKT2RDM2M4dG42eTVBc1RkbjBFYnBTSnAwX2tCYzBvTF9CY01MQTN4T09qUDY3dFBqaDhKNEJrNzhWN0prN1h1SUZLdDdTWXJXV1NyQzRJVkU1cDZqV3RZdTZsSy14RkE?oc=5",
+          "date": "2026-08-21",
+          "title": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Pl…"
+        }
+      ]
     },
     {
       "date": "2026-08-21",
       "name": "Billionaire David Tepper Piled Into a Debt-Laden Artificial Intelligence (AI) Neocloud Stock in Q2 While Also Increasing His Stake in Its Newest Rival - The Globe and Mail",
       "type": "To classify",
       "amount": "-",
-      "terms": "Billionaire David Tepper Piled Into a Debt-Laden Artificial Intelligence (AI) Neocloud Stock in Q2 While Also Increasing His Stake in Its Newest Rival &nbsp;&nbsp; The Globe and Mail [source link: https://news.google.com/rss/articles/CBMi0wJBVV95cUxQeGdFaEtvOTlVX0JhdzNYY0h4aGJqVzRMUHFraWlMWk5LdFBmZzUwcDg3dlRoZXpLeTF4M1JNMEVhNnRpaFJxV0ZDV1N4U25CbHdWbWNJU3JPUzNDcndwQnBxSU9kdjFtRXFERUcwekJuY0xYSEF6MWdyUFI4YTVJSDduWmxVLWk4Q25PVDN6LXRncmF5UTltRFJNQkxoekNyaHp0ZFI2dThaa2NVdEhIb21WX1hGeXZyT2VyLVVvY3BONHBjcTBHQy1UU0dnYnlzUHhfZzdfTWY3VElqaXNQU3hzWDNHczM2UHJLXzlNYmdYM0RrVWJhQThoNUxQdy1aRk80RFdOTE5JUFVDNzJSa3Q3MTNMa2FhUVlLYWxsZFpIbThBLXhzUGN5ZWw1c0s2NnVCeW55blhCWHM0ZGFMcGlDelJNSUt5eE9OWXVzYVdkb1U?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-21"
-    },
-    {
-      "date": "2026-08-21",
-      "name": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Pl… - StartupHub.ai",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Broadcom's $60B AI Debt Deal, Nvidia's Ecosystem Pl… &nbsp;&nbsp; StartupHub.ai [source link: https://news.google.com/rss/articles/CBMilgFBVV95cUxNaHU4WWdPLWxCdzZ2bmphU0pvN2NLLTBlOTF5SjBFRHhhU2pKRnFxVlhlWmljRVBKT2RDM2M4dG42eTVBc1RkbjBFYnBTSnAwX2tCYzBvTF9CY01MQTN4T09qUDY3dFBqaDhKNEJrNzhWN0prN1h1SUZLdDdTWXJXV1NyQzRJVkU1cDZqV3RZdTZsSy14RkE?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"Nvidia SPV lease financing\" - Google News, 2026-08-21"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-08-21",
+      "id": "d90f935aa5d",
+      "url": "https://news.google.com/rss/articles/CBMi0wJBVV95cUxQeGdFaEtvOTlVX0JhdzNYY0h4aGJqVzRMUHFraWlMWk5LdFBmZzUwcDg3dlRoZXpLeTF4M1JNMEVhNnRpaFJxV0ZDV1N4U25CbHdWbWNJU3JPUzNDcndwQnBxSU9kdjFtRXFERUcwekJuY0xYSEF6MWdyUFI4YTVJSDduWmxVLWk4Q25PVDN6LXRncmF5UTltRFJNQkxoekNyaHp0ZFI2dThaa2NVdEhIb21WX1hGeXZyT2VyLVVvY3BONHBjcTBHQy1UU0dnYnlzUHhfZzdfTWY3VElqaXNQU3hzWDNHczM2UHJLXzlNYmdYM0RrVWJhQThoNUxQdy1aRk80RFdOTE5JUFVDNzJSa3Q3MTNMa2FhUVlLYWxsZFpIbThBLXhzUGN5ZWw1c0s2NnVCeW55blhCWHM0ZGFMcGlDelJNSUt5eE9OWXVzYVdkb1U?oc=5",
+      "outlet": "The Globe and Mail",
+      "sources": [
+        {
+          "outlet": "MSN",
+          "url": "https://news.google.com/rss/articles/CBMiygJBVV95cUxNcE5PMjc3N19Ja0tyR2w1QmV3RWQ4WEhPY0FVUktyaGhDbVNXa3NUNFFvRkU3cnpubUpnNlY4ZkJaQnVxZVpqNmdZRW4td1hiZUpQQ25fTG5yR09XMDh1emhtSGhWOUg5MjI5cVhTS2o3OEp6SUs4VUxwRDNTUWNQSUdEa3VHQ2h1amw4ZG1VUDNIZFlwcU9zcnR6a21xcF9udmJRQ05mNlRGN3V4REhxZWFmTnlmbnBmdXZSN0ktZmZPRHc3OF9UTUQ3aGJhYjZfckRvOVVrcVo4MVBOdm9ZQ0o4OEgyVHdoZEZPWnFOc2QxdUpRZnJ2bm9WOFlkOG5sVlhSSkl5VmM2Z0pyb1lObjV2UjhrdnpDNHVxUEhnYlBQVjVHT0NKZk5iWjJ0cVd2OW9oanFPaVNXdWlsSDg3MHZSOGFBVHpjLVE?oc=5",
+          "date": "2026-08-22",
+          "title": "Billionaire David Tepper piled into a debt-laden artificial intelligence (AI) Neocloud stock in Q2 while also increasing his stake in its newest rival"
+        }
+      ]
     },
     {
       "date": "2026-08-22",
       "name": "GPU Infrastructure Financing reshapes AI data centers - AI CERTs",
       "type": "To classify",
       "amount": "-",
-      "terms": "GPU Infrastructure Financing reshapes AI data centers &nbsp;&nbsp; AI CERTs [source link: https://news.google.com/rss/articles/CBMiigFBVV95cUxPUWdJbGlZbnVWQ21lYzY1eUVhLWx4QWlFMXRIZlI3MXduN2dEa3dPRW84UDQwS3RkOVowVG9UOXlxQWJTYWY1M3JzR1hmaXRVMXBqOWxSY2lMZVpFeWNkNFRfaEstM0pZUzg5N1ZvT2F5ZlA4eFN3SnUxMnAxTkl6T3V2cTJURGUyU1E?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-22"
+      "src": "\"GPU collateral lending\" - Google News, 2026-08-22",
+      "id": "d0a97090ec6",
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPUWdJbGlZbnVWQ21lYzY1eUVhLWx4QWlFMXRIZlI3MXduN2dEa3dPRW84UDQwS3RkOVowVG9UOXlxQWJTYWY1M3JzR1hmaXRVMXBqOWxSY2lMZVpFeWNkNFRfaEstM0pZUzg5N1ZvT2F5ZlA4eFN3SnUxMnAxTkl6T3V2cTJURGUyU1E?oc=5",
+      "outlet": "AI CERTs"
     },
     {
       "date": "2026-08-22",
       "name": "\"I'll Back the Debt for AI\" ... NVIDIA's Big Promise Sends Korean Retail Investors to Bet 100 Billion Won on DRAM - 매일경제",
       "type": "To classify",
       "amount": "-",
-      "terms": "\"I'll Back the Debt for AI\" ... NVIDIA's Big Promise Sends Korean Retail Investors to Bet 100 Billion Won on DRAM &nbsp;&nbsp; 매일경제 [source link: https://news.google.com/rss/articles/CBMiU0FVX3lxTFBGRklHWUFPVkhGTWNBT0hXNzlUSHZKNnBkNWh4ajFDR3JwNTJQVWhrT05hYTQzRm9oLWUyMFpCWUpMREVtVTVmNUV4aG1mYlRkemVV?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-22"
-    },
-    {
-      "date": "2026-08-22",
-      "name": "Billionaire David Tepper piled into a debt-laden artificial intelligence (AI) Neocloud stock in Q2 while also increasing his stake in its newest rival - MSN",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Billionaire David Tepper piled into a debt-laden artificial intelligence (AI) Neocloud stock in Q2 while also increasing his stake in its newest rival &nbsp;&nbsp; MSN [source link: https://news.google.com/rss/articles/CBMiygJBVV95cUxNcE5PMjc3N19Ja0tyR2w1QmV3RWQ4WEhPY0FVUktyaGhDbVNXa3NUNFFvRkU3cnpubUpnNlY4ZkJaQnVxZVpqNmdZRW4td1hiZUpQQ25fTG5yR09XMDh1emhtSGhWOUg5MjI5cVhTS2o3OEp6SUs4VUxwRDNTUWNQSUdEa3VHQ2h1amw4ZG1VUDNIZFlwcU9zcnR6a21xcF9udmJRQ05mNlRGN3V4REhxZWFmTnlmbnBmdXZSN0ktZmZPRHc3OF9UTUQ3aGJhYjZfckRvOVVrcVo4MVBOdm9ZQ0o4OEgyVHdoZEZPWnFOc2QxdUpRZnJ2bm9WOFlkOG5sVlhSSkl5VmM2Z0pyb1lObjV2UjhrdnpDNHVxUEhnYlBQVjVHT0NKZk5iWjJ0cVd2OW9oanFPaVNXdWlsSDg3MHZSOGFBVHpjLVE?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-22"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-08-22",
+      "id": "d072f3a2173",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBGRklHWUFPVkhGTWNBT0hXNzlUSHZKNnBkNWh4ajFDR3JwNTJQVWhrT05hYTQzRm9oLWUyMFpCWUpMREVtVTVmNUV4aG1mYlRkemVV?oc=5",
+      "outlet": "매일경제"
     },
     {
       "date": "2026-08-25",
       "name": "GSAM eyes $6.6bn GPU-backed private financing for OpenAI - 9fin",
       "type": "To classify",
       "amount": "-",
-      "terms": "GSAM eyes $6.6bn GPU-backed private financing for OpenAI &nbsp;&nbsp; 9fin [source link: https://news.google.com/rss/articles/CBMiX0FVX3lxTE9jUk1VQXpYenh3NDB0b2RLMFY4ZUZiZnpIZUQ1WnhlelVVUFdqTTJJQThXZmZ4cDg2QmdfU21YZGRxMk13ZThkOHdXWW9CUHhsbS1xc3M2NnNYZ0lNQ0Fn?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-25"
+      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-25",
+      "id": "d96ca8ebb2b",
+      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9jUk1VQXpYenh3NDB0b2RLMFY4ZUZiZnpIZUQ1WnhlelVVUFdqTTJJQThXZmZ4cDg2QmdfU21YZGRxMk13ZThkOHdXWW9CUHhsbS1xc3M2NnNYZ0lNQ0Fn?oc=5",
+      "outlet": "9fin"
     },
     {
       "date": "2026-08-27",
       "name": "Nvidia forecasts 70% sales growth fuelled by relentless AI boom",
       "type": "To classify",
       "amount": "-",
-      "terms": "Chip giant rebuts criticism of ‘circular financing’ deals as it beats Wall Street expectations [source link: https://www.ft.com/content/72908915-5e4a-457c-8c3a-aee8917a664a?syn-25a6b1a6=1]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "Financial Times, 2026-08-27"
-    },
-    {
-      "date": "2026-08-27",
-      "name": "NVIDIA's $500B AI Financing Gamble Explained - Memeburn",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "NVIDIA's $500B AI Financing Gamble Explained &nbsp;&nbsp; Memeburn [source link: https://news.google.com/rss/articles/CBMiakFVX3lxTE1iWllRa0pVT1FFck0wR2U1eU9jWFhHeVdRT2NkSFIzUXNyNjlZeFk2bDNvSzFwWlF1REVGVUlheTF5WFpKeUpfM3NvV2szNjJWOW5DNTRmOFJNVlJpTkZPbm5XdXJ5T3RyOGc?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-27"
+      "src": "Financial Times, 2026-08-27",
+      "id": "d92ae3b2485",
+      "url": "https://www.ft.com/content/72908915-5e4a-457c-8c3a-aee8917a664a?syn-25a6b1a6=1",
+      "outlet": "Financial Times"
     },
     {
       "date": "2026-08-28",
       "name": "Bullish Provides USD.AI $100 Million Facility for GPU-Backed Loans - The Defiant",
       "type": "To classify",
       "amount": "-",
-      "terms": "Bullish Provides USD.AI $100 Million Facility for GPU-Backed Loans &nbsp;&nbsp; The Defiant [source link: https://news.google.com/rss/articles/CBMingFBVV95cUxOQjZIM296NU5oTXRlNkFMeFBRX0Qtc2F5NDlhSlloUmgxcFRBb1c0QTRoZHh6UmNrN2ZESHNIdmNnUGRoamtEYnB4LW1pSnh6SnNNeW5TQVFMWTJkdUgzTXAyY1MzczJfbFpfY2RCR0NwRWc4Z3p0dnh6OHNDVThock5hLW1mUE9xUmxEUGk0UXRzR01Nd2c5Z20zeUJsQQ?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish provides USD.AI $100M stablecoin facility for GPU-backed lending - TradingView",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish provides USD.AI $100M stablecoin facility for GPU-backed lending &nbsp;&nbsp; TradingView [source link: https://news.google.com/rss/articles/CBMi0AFBVV95cUxNbUxzZkIydUt4MzFxWHRKY1lKXzBpNHZuTl9xWUIzNXpxVE91U0s2STlwanZQaC1fTHp4RXVGSG5IMWZFNVhJaUNUdXJ3bmpFaWloVS0wNkRwYndVcUp3TFRHU0NIVGdYa1dtMmdOWkxOSE9MUDRMMl9KZkJlcGN4SnJGN19iZXlTRVJNM1ZVcThkSjZDWWl4WFdVNzJpSVFKNzFva2t4blNKeFU2THJWTE1WWHBPcVNQTlZVNXY0ZjR4QkE0N1VMN2JUV2dJTlZ5?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish backs USD.AI with $100M in GPU-backed loan financing - Crypto Briefing",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish backs USD.AI with $100M in GPU-backed loan financing &nbsp;&nbsp; Crypto Briefing [source link: https://news.google.com/rss/articles/CBMidkFVX3lxTFBaQXRnRFBGcVhTVDk3MExIZjh1RDY2cXJfS0FZQ1J4bWp5YUhDazFDcy1BdmF4d1RscTZGdldsQWIwaVNTTVRkeU1QajdobGRwc3FqOGJRUlhkZ2xSZFBLbXlaYW1CMFhhajdlWVlmSHJHOTJyOGc?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish provides USD.AI with $100 million for AI chip-backed loans - Traders Union",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish provides USD.AI with $100 million for AI chip-backed loans &nbsp;&nbsp; Traders Union [source link: https://news.google.com/rss/articles/CBMijAFBVV95cUxOV1JYTnhLV1Vsdy1fUWRZamhkQzUyQ0ctbkhhZmVMdHh3cVp1S0pIdy1SenVjTTNrLW9iekFvNGd4aEVleWxhU09LVXFscnlxaDl2THMwTWxaVnRpdmROTV9uMHltZC03M1NTdUNvaXRDQUhZb2RFRktZd0hDd0tFcWtyOWdjaHNNb1R3Rg?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"\"chip-backed\" debt OR lease\" - Google News, 2026-08-28"
+      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-28",
+      "id": "d3c159ed291",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOQjZIM296NU5oTXRlNkFMeFBRX0Qtc2F5NDlhSlloUmgxcFRBb1c0QTRoZHh6UmNrN2ZESHNIdmNnUGRoamtEYnB4LW1pSnh6SnNNeW5TQVFMWTJkdUgzTXAyY1MzczJfbFpfY2RCR0NwRWc4Z3p0dnh6OHNDVThock5hLW1mUE9xUmxEUGk0UXRzR01Nd2c5Z20zeUJsQQ?oc=5",
+      "outlet": "The Defiant",
+      "sources": [
+        {
+          "outlet": "TradingView",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNbUxzZkIydUt4MzFxWHRKY1lKXzBpNHZuTl9xWUIzNXpxVE91U0s2STlwanZQaC1fTHp4RXVGSG5IMWZFNVhJaUNUdXJ3bmpFaWloVS0wNkRwYndVcUp3TFRHU0NIVGdYa1dtMmdOWkxOSE9MUDRMMl9KZkJlcGN4SnJGN19iZXlTRVJNM1ZVcThkSjZDWWl4WFdVNzJpSVFKNzFva2t4blNKeFU2THJWTE1WWHBPcVNQTlZVNXY0ZjR4QkE0N1VMN2JUV2dJTlZ5?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish provides USD.AI $100M stablecoin facility for GPU-backed lending"
+        },
+        {
+          "outlet": "Crypto Briefing",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBaQXRnRFBGcVhTVDk3MExIZjh1RDY2cXJfS0FZQ1J4bWp5YUhDazFDcy1BdmF4d1RscTZGdldsQWIwaVNTTVRkeU1QajdobGRwc3FqOGJRUlhkZ2xSZFBLbXlaYW1CMFhhajdlWVlmSHJHOTJyOGc?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish backs USD.AI with $100M in GPU-backed loan financing"
+        },
+        {
+          "outlet": "Traders Union",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOV1JYTnhLV1Vsdy1fUWRZamhkQzUyQ0ctbkhhZmVMdHh3cVp1S0pIdy1SenVjTTNrLW9iekFvNGd4aEVleWxhU09LVXFscnlxaDl2THMwTWxaVnRpdmROTV9uMHltZC03M1NTdUNvaXRDQUhZb2RFRktZd0hDd0tFcWtyOWdjaHNNb1R3Rg?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish provides USD.AI with $100 million for AI chip-backed loans"
+        },
+        {
+          "outlet": "Pluang",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQS0hQNFY3bWR1bFhMTFZYeGZtNWdCZ3NQekd0bjZCSmpNWjl2YU90amU0UkRYTXpsalplbk5tNmpld0I1YzVORWd6RnFTNW9mYms4LVFVMkdvLUxmMkFfck41Mkp1R2dTRjJxSlZTVUlOeGVwWXVEZmt5YkhtaFVMVDBDdGFWUTN3U1I3V0ZjRGRCdG03UWVz?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish backs USD.AI with $100M loan financing using NVIDIA GPUs as collateral"
+        },
+        {
+          "outlet": "Bitcoin World",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE95TFlwMF9pbmNTNDFlOFRFS2RHSXFkNnYxNGZscndQMzZOSFRnYjhILVJCTmlESXI1bzdjek41MUdGUUlGUzNRd3NoVlNMU2tUTXgwdzVWbjFUZzFNelZZTDNJWGJUQ1pac1kyX2hGdDhXVi1KeHc?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish Commits $100M To USD.AI For GPU-Backed Lending In AI Infrastructure Push"
+        },
+        {
+          "outlet": "Cryptonews.net",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1tb0poNFRwckdDUTVfWU52V1FaWTNKMV9Cb1dudTUtZG5aZ0F5VmYzVU1NOHF6MmZGUVlYNjVNak03UmY2cExFaFJqbTRDbDJRYU1GUGlSeE0?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish provides USD.AI $100M facility for GPU loans"
+        },
+        {
+          "outlet": "crypto.news",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE0tSDE3dmYyYm9IR2FHdTd6aDhiNGt3YmZqQWdOMXJWZWctU2hpdzNHZEFFdVYwYlBCV1N5OGxBNFl2c3hnX293eUdFaDZuWm9FZGJES3V3dmNDemZsbDNMZHYxRzdxU2dEcTJwU2ZtV2VqcnRLV0tRc21XRUU?oc=5",
+          "date": "2026-08-28",
+          "title": "Bullish provides USD.AI $100M facility for GPU loans"
+        },
+        {
+          "outlet": "CryptoRank",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUGR4dlhBVkZmd3ltaGpIYWlQcmQ5YnBZb0RNMjhrN2doQ0RtcTlRSmhWc09tUVdIOWRFdGlndTF1a0xoLUU3eVo4SmZnOHJ3WWJwMlQ2bDJxWXZBcTI5NURQM012Q2VFSTdVdXVHdmlzQTlOajljeHU1dVpRODE2dklQeWs0bE5x?oc=5",
+          "date": "2026-08-29",
+          "title": "Bullish Backs USD.AI With $100M GPU Financing"
+        },
+        {
+          "outlet": "forkast.news",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQZ3hjckpZRVFBXzlabjJYeTF0UWMwcEpMVzBGNUFCWFVDSVFIb2Y2S3JYRFpldzViT2FyRTBWdWlCb1lyTmdnQWlEYWpDT2U4SUxPdGJNM3ZIOXF2X2ZJWi1QV0R0TzNLalc4Ukw2djBpbXBYTjhpb0tnY3Y1REZjNmZ6SHNSN2RDaC1KWm1KUS1PbUZfTVFCMmE0WG9IOE4tTk1pUUctMzBpWUx3bHMwUEt3?oc=5",
+          "date": "2026-08-29",
+          "title": "Bullish Is Backing $100M in Stablecoin Loans Collateralized by GPUs. That’s a New Kind of RWA."
+        },
+        {
+          "outlet": "Cryptonews.net",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9ZNFhtdUdXek9kRzI3a3VGeFRwVEJxT0JfMi1EUnpxWGZCRmxITVJON2RybGhLSThtbHJYM3pUa08tUS1HcFZ4SGRsZ1U1YjBHQXdhdXZHYjU?oc=5",
+          "date": "2026-08-30",
+          "title": "Bullish Makes $100M AI Credit Bet With GPUs Serving as Collateral"
+        },
+        {
+          "outlet": "Crowdfund Insider",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPblZoTWtvZFFhTGJpeTZtMXQ3RXdmYlJBT3JwemMybTJlWUZ3Y3d0aEYxN18xeW1fWDNBaW83VVBCM1JOMElOakJ3emdXOVBJbng0dEJQdzlkYURsaUdWMVNmbG1GZlhDMllwRlNBT0d6OU1ZN2x0czRWRmxKYV9sNVk5VGluSUpNMGdzUFdOQjM5M3VOUVVLeDhfcUJUVVlJVExRNkRhUklVZTNRQlJR?oc=5",
+          "date": "2026-09-01",
+          "title": "Bullish Commits $100 Million To GPU-Backed AI Loans Via USD.AI"
+        }
+      ]
     },
     {
       "date": "2026-08-28",
       "name": "Wall Street backs Nvidia-led GPU loans to reshape global AI finance - CHOSUNBIZ - Chosunbiz",
       "type": "To classify",
       "amount": "-",
-      "terms": "Wall Street backs Nvidia-led GPU loans to reshape global AI finance - CHOSUNBIZ &nbsp;&nbsp; Chosunbiz [source link: https://news.google.com/rss/articles/CBMiekFVX3lxTE5XYTQ1ZEFEYTVQREZtYlVrVzJobk5seGthSnFqYnZ2Y2ZXdi1jVlBJSjgzTE9xalZNN1hZRXlBVzJucFJtZjZwazYwaHQ5dnAwMG5Bc3FZVGUyZ2M5bUs5RWc2MWY0dnpoLXpRQ25DdVZDUlNOdVlRVDFR0gGOAUFVX3lxTFBxZVcwc0tFeFFSNnZ6V3FFNGRrdHJpNWl4T1B0bXlHVEdSTElqeTh0UzZyNHVObUZ5bHVFeXFsZzdzT0pIcTZGbTAwejZoWHN6RVVXMkFJZFp4NExGV2psZldmOEFyTVlJb0wyQU9RcEZ4T1RjT1lmQWhCYWxFU0VuRG5xNFJjUlFTcGZfTVE?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"Nvidia SPV lease financing\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Lambda raises $1B in private debt for Nvidia chip collaboration with Microsoft - Crypto Briefing",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Lambda raises $1B in private debt for Nvidia chip collaboration with Microsoft &nbsp;&nbsp; Crypto Briefing [source link: https://news.google.com/rss/articles/CBMif0FVX3lxTE5MN1NGel9Va1k4cG1TYXpuVGNkbWl1V0RUbk1LcElxeU1sN1VESDVCZ2RoU3JhUm93Q1dMMTFUb0I3ZXdIakN3ZG42UEpSQ0poNVNfd1FFMnpwOVpUdVlhNkNKRGlPemh4ZktvdjF3Vzkzb2lmN2pBc2V5YWFEbFU?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"Nvidia SPV lease financing\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish backs USD.AI with $100M loan financing using NVIDIA GPUs as collateral - Pluang",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish backs USD.AI with $100M loan financing using NVIDIA GPUs as collateral &nbsp;&nbsp; Pluang [source link: https://news.google.com/rss/articles/CBMilwFBVV95cUxQS0hQNFY3bWR1bFhMTFZYeGZtNWdCZ3NQekd0bjZCSmpNWjl2YU90amU0UkRYTXpsalplbk5tNmpld0I1YzVORWd6RnFTNW9mYms4LVFVMkdvLUxmMkFfck41Mkp1R2dTRjJxSlZTVUlOeGVwWXVEZmt5YkhtaFVMVDBDdGFWUTN3U1I3V0ZjRGRCdG03UWVz?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish Commits $100M To USD.AI For GPU-Backed Lending In AI Infrastructure Push - Bitcoin World",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish Commits $100M To USD.AI For GPU-Backed Lending In AI Infrastructure Push &nbsp;&nbsp; Bitcoin World [source link: https://news.google.com/rss/articles/CBMidkFVX3lxTE95TFlwMF9pbmNTNDFlOFRFS2RHSXFkNnYxNGZscndQMzZOSFRnYjhILVJCTmlESXI1bzdjek41MUdGUUlGUzNRd3NoVlNMU2tUTXgwdzVWbjFUZzFNelZZTDNJWGJUQ1pac1kyX2hGdDhXVi1KeHc?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-28"
+      "src": "\"Nvidia SPV lease financing\" - Google News, 2026-08-28",
+      "id": "d5413f8be70",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5XYTQ1ZEFEYTVQREZtYlVrVzJobk5seGthSnFqYnZ2Y2ZXdi1jVlBJSjgzTE9xalZNN1hZRXlBVzJucFJtZjZwazYwaHQ5dnAwMG5Bc3FZVGUyZ2M5bUs5RWc2MWY0dnpoLXpRQ25DdVZDUlNOdVlRVDFR0gGOAUFVX3lxTFBxZVcwc0tFeFFSNnZ6V3FFNGRrdHJpNWl4T1B0bXlHVEdSTElqeTh0UzZyNHVObUZ5bHVFeXFsZzdzT0pIcTZGbTAwejZoWHN6RVVXMkFJZFp4NExGV2psZldmOEFyTVlJb0wyQU9RcEZ4T1RjT1lmQWhCYWxFU0VuRG5xNFJjUlFTcGZfTVE?oc=5",
+      "outlet": "Chosunbiz"
     },
     {
       "date": "2026-08-28",
       "name": "Neocloud Lambda secures $1B in debt to buy more chips - TechCrunch",
       "type": "To classify",
       "amount": "-",
-      "terms": "Neocloud Lambda secures $1B in debt to buy more chips &nbsp;&nbsp; TechCrunch [source link: https://news.google.com/rss/articles/CBMikAFBVV95cUxNQ3pkdlFoS3NjTFd3SWZ6Z0d4eXdhSl9VQ1hGekl0NnNNbEZYZk5PQWp4QW1BUjJxd0g4SzFqRmd6SFFkRGU5dWZ3VXQta1I2dUpKek9CN2N6TzNESjAzU1hpWVdqMFp6YmxHVlV5SGRna0lFZzFFUzBJQ1ZUR1ZFOWhYRmFLRXdYQ3V4dHRHeUI?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Lambda inks $1B private debt for Nvidia chip deal - The Next Web",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Lambda inks $1B private debt for Nvidia chip deal &nbsp;&nbsp; The Next Web [source link: https://news.google.com/rss/articles/CBMilwFBVV95cUxPeU92ZVF2TlRsV3h0a0phZGVOZUdfQkRWVHRienkzdjhUVWg4RDVXOGh5ZTEzeGtvcmwxXzJxVURwNjE1V3p2XzRvYnU4UjRxYUN4TnpESXF4MFFQMXM5Y01sMlVvOGZ3LUxkWWZhWVY4WWdSeFRBaDdWUXY0TEw0WGhGcFlORGV0UVFUTmlMd005TnVQeVR3?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Lambda Raises $1B In Private Debt To Fund Nvidia Chips For Microsoft - Bitcoin World",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Lambda Raises $1B In Private Debt To Fund Nvidia Chips For Microsoft &nbsp;&nbsp; Bitcoin World [source link: https://news.google.com/rss/articles/CBMifEFVX3lxTFBwSEJtYm1KYlJoN2dhaTU5MUp1YTRuTHhWcVozTkplNEJNUG9nOG5rUzdjd0d6M3dhT3ktcE1JUTdGekZWSE1ET1RCbmVnTEVKblZmQ04yajBkcFd2bzRXbkgtSWUzb09acWJhZFE1TWlVY0ZmWUxHM0k4RWM?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Lambda raises $1B debt to buy Nvidia AI chips f... - Pluang",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Lambda raises $1B debt to buy Nvidia AI chips f... &nbsp;&nbsp; Pluang [source link: https://news.google.com/rss/articles/CBMinAFBVV95cUxPeVpsWWhPcWpyVlVkR01OVHB6blBfRWlDcVZTb1JGblRiVUtidC1JSEVrSlV5NEZDY0FibmhNU0EwdEZLVGtiZ1doN3dyYlJpNmI5RmtucjgxaVByV2F0TVdjNXhWVnhQdkxXaHFHVS14eDFfTlNWelhCRU05TlFKYko5MnUyUHJKY0lfeEt1WVdXN0c0Z1NLX0NFamI?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish provides USD.AI $100M facility for GPU loans - Cryptonews.net",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish provides USD.AI $100M facility for GPU loans &nbsp;&nbsp; Cryptonews.net [source link: https://news.google.com/rss/articles/CBMiWEFVX3lxTE1tb0poNFRwckdDUTVfWU52V1FaWTNKMV9Cb1dudTUtZG5aZ0F5VmYzVU1NOHF6MmZGUVlYNjVNak03UmY2cExFaFJqbTRDbDJRYU1GUGlSeE0?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-28",
-      "name": "Bullish provides USD.AI $100M facility for GPU loans - crypto.news",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish provides USD.AI $100M facility for GPU loans &nbsp;&nbsp; crypto.news [source link: https://news.google.com/rss/articles/CBMifEFVX3lxTE0tSDE3dmYyYm9IR2FHdTd6aDhiNGt3YmZqQWdOMXJWZWctU2hpdzNHZEFFdVYwYlBCV1N5OGxBNFl2c3hnX293eUdFaDZuWm9FZGJES3V3dmNDemZsbDNMZHYxRzdxU2dEcTJwU2ZtV2VqcnRLV0tRc21XRUU?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-28"
-    },
-    {
-      "date": "2026-08-29",
-      "name": "Bullish Backs USD.AI With $100M GPU Financing - CryptoRank",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish Backs USD.AI With $100M GPU Financing &nbsp;&nbsp; CryptoRank [source link: https://news.google.com/rss/articles/CBMiiAFBVV95cUxOUGR4dlhBVkZmd3ltaGpIYWlQcmQ5YnBZb0RNMjhrN2doQ0RtcTlRSmhWc09tUVdIOWRFdGlndTF1a0xoLUU3eVo4SmZnOHJ3WWJwMlQ2bDJxWXZBcTI5NURQM012Q2VFSTdVdXVHdmlzQTlOajljeHU1dVpRODE2dklQeWs0bE5x?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-29"
-    },
-    {
-      "date": "2026-08-29",
-      "name": "Bullish Is Backing $100M in Stablecoin Loans Collateralized by GPUs. That’s a New Kind of RWA. - forkast.news",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish Is Backing $100M in Stablecoin Loans Collateralized by GPUs. That’s a New Kind of RWA. &nbsp;&nbsp; forkast.news [source link: https://news.google.com/rss/articles/CBMisgFBVV95cUxQZ3hjckpZRVFBXzlabjJYeTF0UWMwcEpMVzBGNUFCWFVDSVFIb2Y2S3JYRFpldzViT2FyRTBWdWlCb1lyTmdnQWlEYWpDT2U4SUxPdGJNM3ZIOXF2X2ZJWi1QV0R0TzNLalc4Ukw2djBpbXBYTjhpb0tnY3Y1REZjNmZ6SHNSN2RDaC1KWm1KUS1PbUZfTVFCMmE0WG9IOE4tTk1pUUctMzBpWUx3bHMwUEt3?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-29"
-    },
-    {
-      "date": "2026-08-29",
-      "name": "Lambda Raises $1 Billion in Private Debt to Fund Nvidia Chips for Microsoft Deal - finance.biggo.com",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Lambda Raises $1 Billion in Private Debt to Fund Nvidia Chips for Microsoft Deal &nbsp;&nbsp; finance.biggo.com [source link: https://news.google.com/rss/articles/CBMidkFVX3lxTFBqOGx6dG96YUFFTnJwazFlTzlSMVpIM2ZHX1poOVVsT1BaQjRnZzE1ZmlQYVBQY1Fnakl2TzBmaWljTTVuV2dNOUswRWtsY250T29sd1lMaXBURHUxQWg0U20weDRUWmoyOGEwekkxcG9FWm5vYkE?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-08-29"
-    },
-    {
-      "date": "2026-08-30",
-      "name": "Bullish Makes $100M AI Credit Bet With GPUs Serving as Collateral - Cryptonews.net",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish Makes $100M AI Credit Bet With GPUs Serving as Collateral &nbsp;&nbsp; Cryptonews.net [source link: https://news.google.com/rss/articles/CBMiWEFVX3lxTE9ZNFhtdUdXek9kRzI3a3VGeFRwVEJxT0JfMi1EUnpxWGZCRmxITVJON2RybGhLSThtbHJYM3pUa08tUS1HcFZ4SGRsZ1U1YjBHQXdhdXZHYjU?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-30"
-    },
-    {
-      "date": "2026-08-30",
-      "name": "Jeff Gundlach Says Nvidia’s $500 Billion AI Financing Plan Won’t Age Well - thewealthadvisor.com",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Jeff Gundlach Says Nvidia’s $500 Billion AI Financing Plan Won’t Age Well &nbsp;&nbsp; thewealthadvisor.com [source link: https://news.google.com/rss/articles/CBMisAFBVV95cUxORHVkTERBOWNCZTlyak1STW5nQU42ZnFDdGg5Zm1kc3dpRHoyRnhMaUZndkdVXzAxVzg1X0lJejR6M2NNcWtyT3dzOFp2eG5WX0w3WkdDLWpKRmdQT0g5bFRYS282UGl0cjRBYVQ1SDZCUGpveU96QWxCcl9LOXBPb0VWNjRYT3ZBRGJVNEx3VG9vNHozRnctNUt4bDAyaU81XzJQRHEtMGpaWTl0RFVRYQ?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-08-30"
-    },
-    {
-      "date": "2026-09-01",
-      "name": "Bullish Commits $100 Million To GPU-Backed AI Loans Via USD.AI - Crowdfund Insider",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Bullish Commits $100 Million To GPU-Backed AI Loans Via USD.AI &nbsp;&nbsp; Crowdfund Insider [source link: https://news.google.com/rss/articles/CBMirwFBVV95cUxPblZoTWtvZFFhTGJpeTZtMXQ3RXdmYlJBT3JwemMybTJlWUZ3Y3d0aEYxN18xeW1fWDNBaW83VVBCM1JOMElOakJ3emdXOVBJbng0dEJQdzlkYURsaUdWMVNmbG1GZlhDMllwRlNBT0d6OU1ZN2x0czRWRmxKYV9sNVk5VGluSUpNMGdzUFdOQjM5M3VOUVVLeDhfcUJUVVlJVExRNkRhUklVZTNRQlJR?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-01"
-    },
-    {
-      "date": "2026-09-01",
-      "name": "Lambda secures $1bn private debt to purchase Nvidia GPUs - report - datacenterdynamics.com",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Lambda secures $1bn private debt to purchase Nvidia GPUs - report &nbsp;&nbsp; datacenterdynamics.com [source link: https://news.google.com/rss/articles/CBMiqgFBVV95cUxNaUR6N3FaZFJBbEg3Y01PU0JyLTF2bDNkcXhubW80bzVLY3lCVFJaeVF5aGdmelRwSXVSeUN4M2RXYzAtUm5QMzU2UnlleFRNaXo1Sk5jaklqRHZmN0t2WEpMQ0ZQa1YtS1d5VHJyX3FMQllGdFFyRS1JSWdpNWRRYjNHM0dJQmFMOXllaWw2ZDg5Z2ctaEtzZXd1QlVsV3dydVFVdFdNb0tGdw?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-09-01"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-08-28",
+      "id": "d17cf891b73",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNQ3pkdlFoS3NjTFd3SWZ6Z0d4eXdhSl9VQ1hGekl0NnNNbEZYZk5PQWp4QW1BUjJxd0g4SzFqRmd6SFFkRGU5dWZ3VXQta1I2dUpKek9CN2N6TzNESjAzU1hpWVdqMFp6YmxHVlV5SGRna0lFZzFFUzBJQ1ZUR1ZFOWhYRmFLRXdYQ3V4dHRHeUI?oc=5",
+      "outlet": "TechCrunch",
+      "sources": [
+        {
+          "outlet": "Crypto Briefing",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5MN1NGel9Va1k4cG1TYXpuVGNkbWl1V0RUbk1LcElxeU1sN1VESDVCZ2RoU3JhUm93Q1dMMTFUb0I3ZXdIakN3ZG42UEpSQ0poNVNfd1FFMnpwOVpUdVlhNkNKRGlPemh4ZktvdjF3Vzkzb2lmN2pBc2V5YWFEbFU?oc=5",
+          "date": "2026-08-28",
+          "title": "Lambda raises $1B in private debt for Nvidia chip collaboration with Microsoft"
+        },
+        {
+          "outlet": "The Next Web",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPeU92ZVF2TlRsV3h0a0phZGVOZUdfQkRWVHRienkzdjhUVWg4RDVXOGh5ZTEzeGtvcmwxXzJxVURwNjE1V3p2XzRvYnU4UjRxYUN4TnpESXF4MFFQMXM5Y01sMlVvOGZ3LUxkWWZhWVY4WWdSeFRBaDdWUXY0TEw0WGhGcFlORGV0UVFUTmlMd005TnVQeVR3?oc=5",
+          "date": "2026-08-28",
+          "title": "Lambda inks $1B private debt for Nvidia chip deal"
+        },
+        {
+          "outlet": "Bitcoin World",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBwSEJtYm1KYlJoN2dhaTU5MUp1YTRuTHhWcVozTkplNEJNUG9nOG5rUzdjd0d6M3dhT3ktcE1JUTdGekZWSE1ET1RCbmVnTEVKblZmQ04yajBkcFd2bzRXbkgtSWUzb09acWJhZFE1TWlVY0ZmWUxHM0k4RWM?oc=5",
+          "date": "2026-08-28",
+          "title": "Lambda Raises $1B In Private Debt To Fund Nvidia Chips For Microsoft"
+        },
+        {
+          "outlet": "Pluang",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPeVpsWWhPcWpyVlVkR01OVHB6blBfRWlDcVZTb1JGblRiVUtidC1JSEVrSlV5NEZDY0FibmhNU0EwdEZLVGtiZ1doN3dyYlJpNmI5RmtucjgxaVByV2F0TVdjNXhWVnhQdkxXaHFHVS14eDFfTlNWelhCRU05TlFKYko5MnUyUHJKY0lfeEt1WVdXN0c0Z1NLX0NFamI?oc=5",
+          "date": "2026-08-28",
+          "title": "Lambda raises $1B debt to buy Nvidia AI chips f..."
+        },
+        {
+          "outlet": "finance.biggo.com",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBqOGx6dG96YUFFTnJwazFlTzlSMVpIM2ZHX1poOVVsT1BaQjRnZzE1ZmlQYVBQY1Fnakl2TzBmaWljTTVuV2dNOUswRWtsY250T29sd1lMaXBURHUxQWg0U20weDRUWmoyOGEwekkxcG9FWm5vYkE?oc=5",
+          "date": "2026-08-29",
+          "title": "Lambda Raises $1 Billion in Private Debt to Fund Nvidia Chips for Microsoft Deal"
+        },
+        {
+          "outlet": "datacenterdynamics.com",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNaUR6N3FaZFJBbEg3Y01PU0JyLTF2bDNkcXhubW80bzVLY3lCVFJaeVF5aGdmelRwSXVSeUN4M2RXYzAtUm5QMzU2UnlleFRNaXo1Sk5jaklqRHZmN0t2WEpMQ0ZQa1YtS1d5VHJyX3FMQllGdFFyRS1JSWdpNWRRYjNHM0dJQmFMOXllaWw2ZDg5Z2ctaEtzZXd1QlVsV3dydVFVdFdNb0tGdw?oc=5",
+          "date": "2026-09-01",
+          "title": "Lambda secures $1bn private debt to purchase Nvidia GPUs - report"
+        }
+      ]
     },
     {
       "date": "2026-09-04",
       "name": "IREN Climbs 4% on $2.4B Blue Owl-Led GPU Financing; Cipher Digital Gains 2% - 24/7 Wall St.",
       "type": "To classify",
       "amount": "-",
-      "terms": "IREN Climbs 4% on $2.4B Blue Owl-Led GPU Financing; Cipher Digital Gains 2% &nbsp;&nbsp; 24/7 Wall St. [source link: https://news.google.com/rss/articles/CBMitgFBVV95cUxOSmxZY25LalZNRDVUcW1VNGV5VGFYLWxQU09odjVBZndvX1RaU204empYUmxncFdRaUF6ZE11YmNLMTRoeW9lRXhXSFBOdTVFSm9NMTgxZFJXVTdfUU1DRTE5N0M3alVZRmhEVmpDdnFHVUhqWFZrazUzdDR4UXlSSElzQ0IxUjVIemZwYXUtSWd0dlAyc2Y3UG9Ja3QwNDRsU1hNbldDbjc2cE5ob0NPak1Zclp1dw?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-04"
+      "src": "\"GPU collateral lending\" - Google News, 2026-09-04",
+      "id": "d17b578bcae",
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOSmxZY25LalZNRDVUcW1VNGV5VGFYLWxQU09odjVBZndvX1RaU204empYUmxncFdRaUF6ZE11YmNLMTRoeW9lRXhXSFBOdTVFSm9NMTgxZFJXVTdfUU1DRTE5N0M3alVZRmhEVmpDdnFHVUhqWFZrazUzdDR4UXlSSElzQ0IxUjVIemZwYXUtSWd0dlAyc2Y3UG9Ja3QwNDRsU1hNbldDbjc2cE5ob0NPak1Zclp1dw?oc=5",
+      "outlet": "24/7 Wall St."
     },
     {
       "date": "2026-09-07",
       "name": "Nvidia is the central bank of AI. But will its loans prove sound? - AFR",
       "type": "To classify",
       "amount": "-",
-      "terms": "Nvidia is the central bank of AI. But will its loans prove sound? &nbsp;&nbsp; AFR [source link: https://news.google.com/rss/articles/CBMirwFBVV95cUxNT09ORzZTQnR4R0Z4NjlBNVR0OWdBc2JhWDNPR3FjU1BQd3BMVWZRM3lkbUE0WGdpcXRMOXVRRG03ekRpNEpuWENEdUpjWERocWJuUU5QUmlnaEpNY1JSWXhzX25VMVUtMm5WRGlmZ29FUTNIc3I4M1FUMXVOcFFUNmR2VTZ5T1R0eHRRbDFZNVBzNVVkenNSc1RUS0N1NzFsQksxX2pTNFVudFliNzl3?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-09-07"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-09-07",
+      "id": "d3bd8b70154",
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNT09ORzZTQnR4R0Z4NjlBNVR0OWdBc2JhWDNPR3FjU1BQd3BMVWZRM3lkbUE0WGdpcXRMOXVRRG03ekRpNEpuWENEdUpjWERocWJuUU5QUmlnaEpNY1JSWXhzX25VMVUtMm5WRGlmZ29FUTNIc3I4M1FUMXVOcFFUNmR2VTZ5T1R0eHRRbDFZNVBzNVVkenNSc1RUS0N1NzFsQksxX2pTNFVudFliNzl3?oc=5",
+      "outlet": "AFR"
     },
     {
       "date": "2026-09-10",
       "name": "Rising rates spotlight debt risks as CoreWeave and Nebius race to expand GPU capacity. - Pluang",
       "type": "To classify",
       "amount": "-",
-      "terms": "Rising rates spotlight debt risks as CoreWeave and Nebius race to expand GPU capacity. &nbsp;&nbsp; Pluang [source link: https://news.google.com/rss/articles/CBMiqAFBVV95cUxPaEg1QlJXVExTMGJOcDY0UHhmZ1ZabVFYcDFYbGVHdWhxb052LUZPa1hzeElLeDNPSkhzcE1GcFRUcHBfYzJQa0FPWVVBbS1fNEx1ajNSOU02cXA5d2J3NVRZNVhvNXB1SDVVNmtIMkVOQXg2MlEtOEFCS201TDNlV1dIUHlCa0dzOWtnUEpWTEpsdWJFQV9RMW5kR2tRWUZFRUVKTnFZWjM?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-09-10"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-09-10",
+      "id": "dbebe90da29",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPaEg1QlJXVExTMGJOcDY0UHhmZ1ZabVFYcDFYbGVHdWhxb052LUZPa1hzeElLeDNPSkhzcE1GcFRUcHBfYzJQa0FPWVVBbS1fNEx1ajNSOU02cXA5d2J3NVRZNVhvNXB1SDVVNmtIMkVOQXg2MlEtOEFCS201TDNlV1dIUHlCa0dzOWtnUEpWTEpsdWJFQV9RMW5kR2tRWUZFRUVKTnFZWjM?oc=5",
+      "outlet": "Pluang"
     },
     {
       "date": "2026-09-18",
       "name": "Nvidia B200’s 58% Premium Fuels GPU Loan Boom [2026] - tech-insider.org",
       "type": "To classify",
       "amount": "-",
-      "terms": "Nvidia B200’s 58% Premium Fuels GPU Loan Boom [2026] &nbsp;&nbsp; tech-insider.org [source link: https://news.google.com/rss/articles/CBMie0FVX3lxTFBZYXU5R19IVUYzX3QxUkg3WFZLMG1jcm9zaWdVakJ4bTNvV29rNVRHb0d4WjhrcDdxc1FHZHYtMm5HWVFmaUVpd05MQ1FiYWNqRl85YVBGODhpNGZzN1hGbkFfODJWcG4tdVp6MEJpR21yQXcyMjlmQVJTaw?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-09-18"
+      "src": "\"\"GPU-backed\" loan OR securitization\" - Google News, 2026-09-18",
+      "id": "de0f94246e3",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBZYXU5R19IVUYzX3QxUkg3WFZLMG1jcm9zaWdVakJ4bTNvV29rNVRHb0d4WjhrcDdxc1FHZHYtMm5HWVFmaUVpd05MQ1FiYWNqRl85YVBGODhpNGZzN1hGbkFfODJWcG4tdVp6MEJpR21yQXcyMjlmQVJTaw?oc=5",
+      "outlet": "tech-insider.org"
     },
     {
       "date": "2026-09-20",
       "name": "Morpho Turns Tokenized Apple and Nvidia Stock Into DeFi Loan Collateral - Startup Fortune",
       "type": "To classify",
       "amount": "-",
-      "terms": "Morpho Turns Tokenized Apple and Nvidia Stock Into DeFi Loan Collateral &nbsp;&nbsp; Startup Fortune [source link: https://news.google.com/rss/articles/CBMioAFBVV95cUxPaWtUUXRwQ1RmbVJ1VkQ1WEFvNk9nSU9meWtGTll6Y0NYRXVtTThXM1NhTm5mUVdqS1NSQ25xem0xSEZaek5BYTMwb3NaSWtkUmRnY0RSZE5BbWFBMzZUbzBBVlFzdWZiWlRqVUp3WnNPZFpRVzljYklKd0ZPWmNlamRJVTlsVzE2Tmw5T0htVHB3dUdveDZEdk1ZMWl5MEtn?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-20"
+      "src": "\"GPU collateral lending\" - Google News, 2026-09-20",
+      "id": "df57e3a0f44",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPaWtUUXRwQ1RmbVJ1VkQ1WEFvNk9nSU9meWtGTll6Y0NYRXVtTThXM1NhTm5mUVdqS1NSQ25xem0xSEZaek5BYTMwb3NaSWtkUmRnY0RSZE5BbWFBMzZUbzBBVlFzdWZiWlRqVUp3WnNPZFpRVzljYklKd0ZPWmNlamRJVTlsVzE2Tmw5T0htVHB3dUdveDZEdk1ZMWl5MEtn?oc=5",
+      "outlet": "Startup Fortune"
     },
     {
       "date": "2026-09-24",
       "name": "Kamino Opens GPU-loan-linked sUSDai Collateral Market on Solana - The Defiant",
       "type": "To classify",
       "amount": "-",
-      "terms": "Kamino Opens GPU-loan-linked sUSDai Collateral Market on Solana &nbsp;&nbsp; The Defiant [source link: https://news.google.com/rss/articles/CBMimwFBVV95cUxOS0JpajBkdndtX3hVc3JLbk5qT0pRa3hHX0pMb2lYOWE5Z0lzZk5meE5QTUkzOFhJNHByeXhsQzBDWGpRNS00M1lEeTlvY0RqTUlHQVV0ZW5VOUgyaXpMbko4NkZSSkZsQlRLemNsT1NveExoUUFkTXR4akFMYUtWWWc3cnlYd21rYkdXTzlkVExXMmtHZGpwLUxDaw?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-24"
-    },
-    {
-      "date": "2026-09-24",
-      "name": "Kamino Opens GPU-Loan-Linked sUSDai Market on Solana - tokenpost.com",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Kamino Opens GPU-Loan-Linked sUSDai Market on Solana &nbsp;&nbsp; tokenpost.com [source link: https://news.google.com/rss/articles/CBMiW0FVX3lxTE5PcUlaandoVGVxMnBkdG1CZXR4YjhFUHlSc0RQQ09relNhbU94WEtQUnl1QVZicDBUUm1oZFJvczc1S19yTUtvVlRJN3lQa3U5cWFmWTBrM3luRVk?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-24"
+      "src": "\"GPU collateral lending\" - Google News, 2026-09-24",
+      "id": "dbea681484b",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOS0JpajBkdndtX3hVc3JLbk5qT0pRa3hHX0pMb2lYOWE5Z0lzZk5meE5QTUkzOFhJNHByeXhsQzBDWGpRNS00M1lEeTlvY0RqTUlHQVV0ZW5VOUgyaXpMbko4NkZSSkZsQlRLemNsT1NveExoUUFkTXR4akFMYUtWWWc3cnlYd21rYkdXTzlkVExXMmtHZGpwLUxDaw?oc=5",
+      "outlet": "The Defiant",
+      "sources": [
+        {
+          "outlet": "tokenpost.com",
+          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5PcUlaandoVGVxMnBkdG1CZXR4YjhFUHlSc0RQQ09relNhbU94WEtQUnl1QVZicDBUUm1oZFJvczc1S19yTUtvVlRJN3lQa3U5cWFmWTBrM3luRVk?oc=5",
+          "date": "2026-09-24",
+          "title": "Kamino Opens GPU-Loan-Linked sUSDai Market on Solana"
+        },
+        {
+          "outlet": "Altcoin Buzz",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQcGZmVkVNcEtnY0JmSHpxWVAzNjF0SHdsa2gyUmxUbHFWWjFUbGI2YjJ3XzNsUU9MaG5xakFFRWJvVURZV2p5S292Umw4QmJHenhaYW9VUDYwckFiTS1KNm5VcG9HRkFKMC1GeVNCb05meEt5WHN1cXVEZm5jdEhuWnh0TU5PSHJwWVVqTmdXRFZkUQ?oc=5",
+          "date": "2026-09-25",
+          "title": "Kamino opens USDC Borrowing against GPU loan Yields on Solana"
+        }
+      ]
     },
     {
       "date": "2026-09-25",
       "name": "AI data centers increasingly built on GPU collateral, other novel financing - Nikkei Asia",
       "type": "To classify",
       "amount": "-",
-      "terms": "AI data centers increasingly built on GPU collateral, other novel financing &nbsp;&nbsp; Nikkei Asia [source link: https://news.google.com/rss/articles/CBMi2gFBVV95cUxNSG9MbFVkZER3ZE92cjU0MmJESDFFSUxOWHRab3dnRUZVUVVkSGhibEtsYmNSWFVTNE5JLURNYnFpSWlkM1loSDFaTUg3Yy00OFMwengxUFRaS1NEMnoyYWV5dnl1QllkV2g3a0JxbjFubzQxQTFOM3RTT1AwU0JncmdWeFFjT2dWUy1zZTVSQ256anFjQzU0NWJYX3d3R3lyQzl4bVlxVklWbXlLemtnOURReUUtdVlkdEwxSjRlUGQwZl9ZRUtNUjFobTRMX00zUnNIWTlVaTA0dw?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-25"
-    },
-    {
-      "date": "2026-09-25",
-      "name": "Kamino opens USDC Borrowing against GPU loan Yields on Solana - Altcoin Buzz",
-      "type": "To classify",
-      "amount": "-",
-      "terms": "Kamino opens USDC Borrowing against GPU loan Yields on Solana &nbsp;&nbsp; Altcoin Buzz [source link: https://news.google.com/rss/articles/CBMikgFBVV95cUxQcGZmVkVNcEtnY0JmSHpxWVAzNjF0SHdsa2gyUmxUbHFWWjFUbGI2YjJ3XzNsUU9MaG5xakFFRWJvVURZV2p5S292Umw4QmJHenhaYW9VUDYwckFiTS1KNm5VcG9HRkFKMC1GeVNCb05meEt5WHN1cXVEZm5jdEhuWnh0TU5PSHJwWVVqTmdXRFZkUQ?oc=5]",
-      "status": "Auto-added - awaiting human verification",
-      "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-25"
+      "src": "\"GPU collateral lending\" - Google News, 2026-09-25",
+      "id": "deab0bf4246",
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNSG9MbFVkZER3ZE92cjU0MmJESDFFSUxOWHRab3dnRUZVUVVkSGhibEtsYmNSWFVTNE5JLURNYnFpSWlkM1loSDFaTUg3Yy00OFMwengxUFRaS1NEMnoyYWV5dnl1QllkV2g3a0JxbjFubzQxQTFOM3RTT1AwU0JncmdWeFFjT2dWUy1zZTVSQ256anFjQzU0NWJYX3d3R3lyQzl4bVlxVklWbXlLemtnOURReUUtdVlkdEwxSjRlUGQwZl9ZRUtNUjFobTRMX00zUnNIWTlVaTA0dw?oc=5",
+      "outlet": "Nikkei Asia"
     },
     {
       "date": "2026-09-28",
       "name": "Aave Just Turned Tokenized Apple, Nvidia and Tesla Stocks Into USDC Loan Collateral - finance.yahoo.com",
       "type": "To classify",
       "amount": "-",
-      "terms": "Aave Just Turned Tokenized Apple, Nvidia and Tesla Stocks Into USDC Loan Collateral &nbsp;&nbsp; finance.yahoo.com [source link: https://news.google.com/rss/articles/CBMingFBVV95cUxOQ3lVNXN5eTlPaU9SSGRwZ2FrcDM1bFpBZ185ZXBaaUV0dEdtUHhlU2VTaWtHcEhFT3hPUlM5QklKb2d4cDJtUVl0YkZ5eFp5aWYyUGxsWWZTUHpyU3JzUTZFNEIySHFDT1JwVWt5RDNMNTVaXzAyR0tLYWFJdkxDN0tBdER4V2ExN3RfZUNJTHpMY0Q4endJRWdFRU1SQQ?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-28"
+      "src": "\"GPU collateral lending\" - Google News, 2026-09-28",
+      "id": "d7f0851ec5b",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOQ3lVNXN5eTlPaU9SSGRwZ2FrcDM1bFpBZ185ZXBaaUV0dEdtUHhlU2VTaWtHcEhFT3hPUlM5QklKb2d4cDJtUVl0YkZ5eFp5aWYyUGxsWWZTUHpyU3JzUTZFNEIySHFDT1JwVWt5RDNMNTVaXzAyR0tLYWFJdkxDN0tBdER4V2ExN3RfZUNJTHpMY0Q4endJRWdFRU1SQQ?oc=5",
+      "outlet": "finance.yahoo.com"
     },
     {
       "date": "2026-09-29",
       "name": "Nvidia Reportedly Turns To Insurers To De-Risk AI Chip Loans As Jensen Huang Pushes Beyond Big Tech — Could This Unlock Billions For Smaller Cloud Players? - TradingView",
       "type": "To classify",
       "amount": "-",
-      "terms": "Nvidia Reportedly Turns To Insurers To De-Risk AI Chip Loans As Jensen Huang Pushes Beyond Big Tech — Could This Unlock Billions For Smaller Cloud Players? &nbsp;&nbsp; TradingView [source link: https://news.google.com/rss/articles/CBMitgJBVV95cUxPMjFsNDdvVlpVMk5IQmVMYzdIZFRHNXplaUJzaWY0YnBOazY0cVVYR0RzSW5la2tvUGpPNG1XWHd1am9xYW5udW1mMzdmYUxlbjhCWVNCQlh4cm1nRl9qRkladmdzcGQ3NlliVmZXaWladm16RU5ld0dwM252NjVIWWdtZi02SzJueUtjVDhmTG9rbTgzbDlHaUZNbkVSeW5SMmRuZVZOSFdBSkFLN0VWd2Z3TE5mQmszemhGNjROcFNvRzVRdy0zQ3pLeC1YODhsMUctZTJ4TURvQ2MybGpqQmttbGJFamREak1PZ3o2ZXVLblpkdlJGeGdlZllfZngyaVZGYlNIZVNwZEoxbi1jSFVXNWdTQmpfOGwzVVVKUkxwWV9jQ1dLNE1yeGVtV1l1V29ZVmlR?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"GPU collateral lending\" - Google News, 2026-09-29"
+      "src": "\"GPU collateral lending\" - Google News, 2026-09-29",
+      "id": "d9a66b85fb5",
+      "url": "https://news.google.com/rss/articles/CBMitgJBVV95cUxPMjFsNDdvVlpVMk5IQmVMYzdIZFRHNXplaUJzaWY0YnBOazY0cVVYR0RzSW5la2tvUGpPNG1XWHd1am9xYW5udW1mMzdmYUxlbjhCWVNCQlh4cm1nRl9qRkladmdzcGQ3NlliVmZXaWladm16RU5ld0dwM252NjVIWWdtZi02SzJueUtjVDhmTG9rbTgzbDlHaUZNbkVSeW5SMmRuZVZOSFdBSkFLN0VWd2Z3TE5mQmszemhGNjROcFNvRzVRdy0zQ3pLeC1YODhsMUctZTJ4TURvQ2MybGpqQmttbGJFamREak1PZ3o2ZXVLblpkdlJGeGdlZllfZngyaVZGYlNIZVNwZEoxbi1jSFVXNWdTQmpfOGwzVVVKUkxwWV9jQ1dLNE1yeGVtV1l1V29ZVmlR?oc=5",
+      "outlet": "TradingView"
     },
     {
       "date": "2026-10-01",
       "name": "Tencent leases 100,000 chips from Oracle to accelerate AI push",
       "type": "To classify",
       "amount": "-",
-      "terms": "WeChat owner strikes deal to access US group’s south-east Asia data centres amid race with ByteDance and Alibaba [source link: https://www.ft.com/content/8799b33d-f07c-4a03-82f0-bf5d3d1d29e9?syn-25a6b1a6=1]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "Financial Times, 2026-10-01"
+      "src": "Financial Times, 2026-10-01",
+      "id": "daa12b6d5ce",
+      "url": "https://www.ft.com/content/8799b33d-f07c-4a03-82f0-bf5d3d1d29e9?syn-25a6b1a6=1",
+      "outlet": "Financial Times"
     },
     {
       "date": "2026-10-01",
       "name": "Sharon AI Enters Into GPU-Backed Debt Facility, Expanding Funding Flexibility for AI Factory Deployments - The Malaysian Reserve",
       "type": "To classify",
       "amount": "-",
-      "terms": "Sharon AI Enters Into GPU-Backed Debt Facility, Expanding Funding Flexibility for AI Factory Deployments &nbsp;&nbsp; The Malaysian Reserve [source link: https://news.google.com/rss/articles/CBMi4AFBVV95cUxPTGdXb19ydXc5MERfU3RacHNRVndBdzhDYVhpUEliM1FXQk5PS1dlR1R2YThadGhBdkJYWjBRUVdpLVRzUWRzbTltUVNyQTFDeGZMaExpdUotdEFCR1RiRTlZY1lSamVBM3dzM2UySG5xcmh4U0xVS3NEdm1qVUVPSFBrSHZqdE1BaFZPWWZocGpIUlhjTF9meHREQVkwWUNMYWVJTWR1NGNHdzZleHRjcjZXRm1wWmc1eFFtd09hNF9YNzUyMGlmZklScS1hSDVjMHBvZXE2YUtqRUM5TzJHOQ?oc=5]",
+      "terms": "Auto-detected; details to be completed after reading the source",
       "status": "Auto-added - awaiting human verification",
       "ver": "PENDING REVIEW",
-      "src": "\"neocloud debt GPU\" - Google News, 2026-10-01"
+      "src": "\"neocloud debt GPU\" - Google News, 2026-10-01",
+      "id": "ddf16062047",
+      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxPTGdXb19ydXc5MERfU3RacHNRVndBdzhDYVhpUEliM1FXQk5PS1dlR1R2YThadGhBdkJYWjBRUVdpLVRzUWRzbTltUVNyQTFDeGZMaExpdUotdEFCR1RiRTlZY1lSamVBM3dzM2UySG5xcmh4U0xVS3NEdm1qVUVPSFBrSHZqdE1BaFZPWWZocGpIUlhjTF9meHREQVkwWUNMYWVJTWR1NGNHdzZleHRjcjZXRm1wWmc1eFFtd09hNF9YNzUyMGlmZklScS1hSDVjMHBvZXE2YUtqRUM5TzJHOQ?oc=5",
+      "outlet": "The Malaysian Reserve"
     }
   ],
   "resale": [
