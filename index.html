@@ -5,99 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chip-Backed Finance Observatory — AI Transparency Institute</title>
 <meta name="description" content="The first open research database of chip-backed finance: deal terms, GPU collateral price index, announcement-event calendar, and holdings map.">
-<style>
-:root{
-  --navy:#12263A; --navy-2:#1B3A57; --paper:#F7F8F7; --card:#FFFFFF;
-  --ink:#1C2530; --muted:#5C6B7A; --line:#E1E6EA;
-  --teal:#177E89; --amber:#C97B1D; --amber-soft:#FBF1E3; --teal-soft:#E7F2F3;
-  --serif:Georgia,'Times New Roman',serif; --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
-  --mono:'SF Mono',Consolas,'Courier New',monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6}
-a{color:var(--teal)}
-.wrap{max-width:1100px;margin:0 auto;padding:0 20px}
-
-/* Header */
-header{background:var(--navy);color:#fff}
-.head-in{max-width:1100px;margin:0 auto;padding:34px 20px 26px}
-.inst{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#9FB3C4;margin-bottom:10px}
-h1{font-family:var(--serif);font-size:34px;font-weight:400;line-height:1.15;letter-spacing:-.01em}
-.tagline{color:#C7D3DD;margin-top:10px;max-width:70ch;font-size:15.5px}
-.beta{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--amber);border:1px solid var(--amber);border-radius:3px;padding:3px 9px}
-
-/* Nav */
-nav{background:var(--navy-2);position:sticky;top:0;z-index:10}
-.nav-in{max-width:1100px;margin:0 auto;padding:0 12px;display:flex;flex-wrap:wrap}
-.tab{background:none;border:0;color:#B9C8D4;font-family:var(--sans);font-size:13.5px;padding:13px 14px;cursor:pointer;border-bottom:3px solid transparent}
-.tab:hover{color:#fff}
-.tab.on{color:#fff;border-bottom-color:var(--amber);font-weight:600}
-
-section{display:none;padding:34px 0 20px}
-section.on{display:block}
-h2{font-family:var(--serif);font-size:24px;font-weight:400;margin-bottom:6px}
-.sub{color:var(--muted);margin-bottom:22px;max-width:80ch}
-h3{font-size:15px;font-weight:700;margin:22px 0 8px}
-
-.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin-bottom:18px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
-.stat b{display:block;font-family:var(--serif);font-size:26px;font-weight:400;color:var(--navy)}
-.stat span{font-size:12.5px;color:var(--muted)}
-.stat .src{display:block;font-family:var(--mono);font-size:10.5px;color:#8A97A3;margin-top:6px}
-
-/* Tables */
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;font-size:13.5px}
-th{background:#F0F3F5;text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--line)}
-td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:0}
-.tag{display:inline-block;font-family:var(--mono);font-size:10.5px;border-radius:3px;padding:2px 7px;white-space:nowrap}
-.tag.ver{color:#1E7F4F;background:#EAF5EF;border:1px solid #BFE0CE}
-.tag.rep{color:var(--amber);background:var(--amber-soft);border:1px solid #E8CD9F}
-.tag.type{color:var(--teal);background:var(--teal-soft);border:1px solid #BBD9DC}
-.tag.pend{color:#B3261E;background:#FCEBE9;border:1px solid #F1B3AD}
-.data-notice{margin-top:18px;background:var(--amber-soft);border:1px solid #E8CD9F;border-radius:6px;padding:10px 14px;font-size:13px;color:#6B5313}
-.srcline{font-size:11.5px;color:var(--muted)}
-.srclink{font-size:11.5px;white-space:nowrap}
-details.more{font-size:11.5px;color:var(--muted);margin-top:2px}
-details.more summary{cursor:pointer}
-details.more ul{list-style:none;margin-top:4px}
-details.more li{margin:2px 0}
-.pending-wrap{margin-top:22px}
-.pending-wrap summary{cursor:pointer;font-size:13px;color:var(--muted);padding:8px 0}
-.pending-wrap table{opacity:.85}
-.pending-banner{background:#FCEBE9;border:1px solid #F1B3AD;border-radius:6px;padding:12px 16px;font-size:13px;color:#7A1C15;margin-bottom:14px}
-.amount{font-family:var(--mono);white-space:nowrap}
-.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.fbtn{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:6px 14px;font-size:12.5px;color:var(--muted);cursor:pointer;font-family:var(--sans)}
-.fbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
-
-/* Charts */
-.chart-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 18px 8px;margin-bottom:18px}
-.chart-title{font-size:14px;font-weight:700}
-.chart-sub{font-size:12px;color:var(--muted);margin-bottom:8px}
-svg text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
-.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);padding:6px 0 8px}
-.dotl{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
-
-/* Timeline */
-.tl{border-left:2px solid var(--line);margin-left:8px;padding-left:22px}
-.ev{position:relative;padding-bottom:20px}
-.ev::before{content:"";position:absolute;left:-28.5px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--card);border:2.5px solid var(--teal)}
-.ev.vendor::before{border-color:var(--amber)}
-.ev.future::before{border-style:dashed;border-color:#98A6B3}
-.ev-date{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-.ev-t{font-weight:600;font-size:14px}
-.ev-x{font-size:13px;color:var(--muted);max-width:75ch}
-
-.note{background:var(--amber-soft);border:1px solid #E8CD9F;border-radius:6px;padding:12px 16px;font-size:13px;color:#6B5313;margin-bottom:18px}
-.cta{display:inline-block;background:var(--navy);color:#fff;text-decoration:none;border-radius:5px;padding:10px 18px;font-size:14px;font-weight:600;margin-top:8px}
-.cta:hover{background:var(--navy-2)}
-
-footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
-.foot-in{max-width:1100px;margin:0 auto;padding:20px;font-size:12px;color:var(--muted);line-height:1.7}
-@media(max-width:640px){h1{font-size:26px}.tab{padding:12px 10px;font-size:12.5px}}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -108,8 +16,8 @@ footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
     <h1>Chip-Backed Finance Observatory</h1>
     <p class="tagline">The first open research database of debt secured by AI chips: hand-collected deal terms, a GPU collateral price index, the vendor announcement-event calendar, and a map of who ultimately holds the risk.</p>
     <span class="beta">BETA · v1.0 · Data compiled from public sources</span>
-    <span class="beta" id="updated" style="border-color:#5C7A93;color:#9FB3C4">Data as of: loading…</span>
-    <button class="beta" id="refresh-btn" style="cursor:pointer;background:none;border-color:#5C7A93;color:#C7D3DD">↻ Check for updates</button>
+    <span class="beta meta" id="updated">Data as of: loading…</span>
+    <button class="beta btn" id="refresh-btn">↻ Check for updates</button>
   </div>
 </header>
 
@@ -135,13 +43,13 @@ footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
     <div class="stat"><b>~50%</b><span>Residual value after 3 years reportedly assumed in early GPU-backed securitizations</span><span class="src">as reported, 2024–2026</span></div>
     <div class="stat"><b id="st-events">–</b><span>Dated events in the announcement calendar</span><span class="src">vendor product cycle + deals</span></div>
   </div>
-  <div class="card" style="margin-top:18px">
-    <h3 style="margin-top:0">The four components</h3>
+  <div class="card mt18">
+    <h3>The four components</h3>
     <p><b>1 · Deal Tracker.</b> Hand-collected terms of chip-backed loans, leases, bonds and securitizations, each entry carrying its source and a verification flag.</p>
     <p><b>2 · GPU Collateral Price Index.</b> Resale and rental-rate series for major accelerator generations: the observable value of the collateral behind the loans.</p>
     <p><b>3 · Announcement-Event Calendar.</b> Dated vendor architecture events, past and announced. These scheduled, public events are what reprice the entire collateral base, and the backbone of event-study research.</p>
     <p><b>4 · Holdings Map.</b> Who ultimately holds the risk, mapped from insurance statutory filings and fund disclosures. In active collection.</p>
-    <p style="margin-top:10px;color:var(--muted);font-size:13px">Companion research: <i>Silicon as Collateral: Vendor-Supported Chip-Backed Debt and the Financing of the AI Buildout</i> (Thelisson, working paper, 2026).</p>
+    <p class="aside">Companion research: <i>Silicon as Collateral: Vendor-Supported Chip-Backed Debt and the Financing of the AI Buildout</i> (Thelisson, working paper, 2026).</p>
   </div>
 </section>
 
@@ -150,14 +58,14 @@ footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
   <h2>Deal Tracker</h2>
   <p class="sub">Every entry lists its public source. <span class="tag ver">VERIFIED</span> = confirmed by a primary source (e.g., issuer press release). <span class="tag rep">REPORTED</span> = financial-press reporting, not independently verifiable. Amounts in USD.</p>
   <div class="filters" id="deal-filters"></div>
-  <div style="overflow-x:auto"><table>
+  <div class="scroll-x"><table>
     <thead><tr><th>Date</th><th>Transaction</th><th>Type</th><th>Amount</th><th>Key terms</th><th>Status</th><th>Source</th></tr></thead>
     <tbody id="deal-rows"></tbody>
   </table></div>
   <details class="pending-wrap" id="pending-wrap">
     <summary>Unreviewed leads from the automated source watch (<span id="pending-count">0</span>), not verified and not counted</summary>
     <div class="pending-banner"><b>&#9888; Not verified.</b> These headlines were collected automatically and have <b>not been checked by a human curator</b>. Many are duplicates, commentary or unrelated news. They are not part of the deal registry and are excluded from every figure on this site. Each is verified and moved into the registry, or removed, at the next curation pass.</div>
-    <div style="overflow-x:auto"><table>
+    <div class="scroll-x"><table>
       <thead><tr><th>Date</th><th>Headline</th><th>Type</th><th>Amount</th><th>Notes</th><th>Status</th><th>Source</th></tr></thead>
       <tbody id="pending-rows"></tbody>
     </table></div>
@@ -184,7 +92,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
 <!-- EVENTS -->
 <section id="events">
   <h2>Announcement-Event Calendar</h2>
-  <p class="sub"><span class="dotl" style="background:var(--amber)"></span>Vendor product-cycle events reprice the collateral base. <span class="dotl" style="background:var(--teal)"></span>Financing events build the exposure. Dashed = announced or expected. This calendar is the backbone for event-study research: the dates are scheduled and public before they move prices.</p>
+  <p class="sub"><span class="dotl amber"></span>Vendor product-cycle events reprice the collateral base. <span class="dotl teal"></span>Financing events build the exposure. Dashed = announced or expected. This calendar is the backbone for event-study research: the dates are scheduled and public before they move prices.</p>
   <div class="tl" id="timeline"></div>
 </section>
 
@@ -193,11 +101,11 @@ footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
   <h2>Holdings Map</h2>
   <p class="sub">Who ultimately holds chip-backed risk? Once loans are syndicated and securitized, the exposure migrates to regulated balance sheets. No one currently publishes this aggregate. We are building it.</p>
   <div class="card">
-    <h3 style="margin-top:0">Status: in active collection</h3>
+    <h3>Status: in active collection</h3>
     <p><b>Source 1 — U.S. insurance statutory filings.</b> Schedule D and Schedule BA disclosures identify structured securities and fund interests held by insurers, the first regulated window on distribution. Collection of 2025–26 filings in progress.</p>
     <p><b>Source 2 — Fund disclosures.</b> Private credit fund reports and listed-fund holdings referencing chip-lease and GPU-backed exposures.</p>
     <p><b>Source 3 — Syndication reporting.</b> Press-documented participations in the tracked deals.</p>
-    <p style="margin-top:10px">First release target: an aggregate exposure estimate and a concentration measure on the single-vendor obsolescence factor, the one number no market participant can compute alone.</p>
+    <p class="mt10">First release target: an aggregate exposure estimate and a concentration measure on the single-vendor obsolescence factor, the one number no market participant can compute alone.</p>
     <a class="cta" href="mailto:contact@aitransparencyinstitute.com?subject=Chip-Backed%20Finance%20Observatory%20—%20holdings%20data">Hold relevant data? Contact us</a>
   </div>
 </section>
@@ -206,7 +114,7 @@ footer{border-top:1px solid var(--line);margin-top:30px;background:var(--card)}
 <section id="method">
   <h2>Methodology &amp; Contribute</h2>
   <div class="card">
-    <h3 style="margin-top:0">Method</h3>
+    <h3>Method</h3>
     <p>Entries are compiled exclusively from public sources: issuer press releases, offering materials, regulatory filings, published market trackers, and the financial press. Every entry carries its source. Primary-source confirmation earns a <span class="tag ver">VERIFIED</span> flag; press-only items remain <span class="tag rep">REPORTED</span>. Only a human curator assigns these flags. Nothing on this page is investment advice, and inclusion of a transaction implies no judgment about any named party. Corrections are welcome and acknowledged.</p>
     <h3>How the data are updated</h3>
     <p>The deal registry is curated by hand, entry by entry: verification is the product. To find candidates, an automated source watch scans SEC filings, press-release wires and the financial press twice a week and sends what it finds to the curator for review. It does not publish anything to the registry. Leads it collected earlier, before this rule was adopted, are listed below the deal table as <span class="tag pend">PENDING REVIEW</span>. They are excluded from every figure until the curator verifies or removes them. Technically, the page loads its data at every visit from a separate file (observatory-data.json) published alongside it, so updates appear to all visitors the moment the file is replaced, and the "Data as of" date in the header shows the release you are viewing. You can also press "Check for updates" at any time.</p>

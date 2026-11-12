@@ -4,15 +4,24 @@
 # watch outputs. With auto_publish_mode "off" (config.json) it never touches
 # observatory-data.json. The machine never sets ver to VERIFIED or REPORTED.
 # The site deploys from git on Vercel; there is no separate upload step.
+#
+# Security layout: two jobs.
+#   watch   - read-only token. Installs third-party packages (hash-pinned) and
+#             processes untrusted feed content. Hands its output files over as an
+#             artifact.
+#   publish - may write to the repo and open issues, but runs no third-party
+#             code: it copies only the expected data files from the artifact,
+#             regenerates app.js's snapshot itself (stdlib script from the repo),
+#             and pushes. A compromised dependency or feed parser in "watch"
+#             therefore never sees a write token and cannot ship JavaScript.
+# Actions are pinned to commit SHAs (Dependabot keeps them current).
 name: Observatory source watch
 on:
   schedule:
     - cron: "0 7 * * 1,4"   # Monday and Thursday 07:00 UTC
   workflow_dispatch: {}
 
-permissions:
-  contents: write   # commit state/seen.json and the digest
-  issues: write     # open the review issue
+permissions: {}   # each job asks for what it needs
 
 concurrency:
   group: observatory-watch
@@ -22,13 +31,18 @@ jobs:
   watch:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with: { python-version: "3.12" }
-      - run: pip install -r requirements-watch.txt
+      - run: pip install --require-hashes -r requirements-watch.txt
 
-      # Keep the page's fallback snapshot in step with curator edits to the data.
+      # Keep the page's fallback snapshot in step with curator edits to the data,
+      # so the seed-freshness test below passes. (publish regenerates it again.)
       - name: Refresh the embedded seed snapshot
         run: python update_seed.py
 
@@ -43,12 +57,59 @@ jobs:
       - name: Pre-validate (suggestions only, never touches ver)
         run: python prevalidate.py --hints primary_hints.json
 
-      # Issue BEFORE commit and without "|| true": if the issue fails, the job fails
-      # and state/seen.json is not committed, so the items come back next run.
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: watch-output
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            state/seen.json
+            state/stories.json
+            candidates.json
+            DIGEST.md
+            prevalidation.json
+            PREVALIDATION.md
+            observatory-data.json
+
+  publish:
+    needs: watch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write   # commit state/seen.json and the digest
+      issues: write     # open the review issue
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false   # the token is passed to the one push below only
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: watch-output
+          path: ${{ runner.temp }}/watch-output
+
+      # Take only the expected files, each of which must be valid JSON or plain
+      # text. Nothing else from the artifact reaches the repository.
+      - name: Copy watch outputs
+        env: { OUT: "${{ runner.temp }}/watch-output" }
+        run: |
+          set -euo pipefail
+          for f in state/seen.json state/stories.json candidates.json prevalidation.json observatory-data.json; do
+            jq -e . "$OUT/$f" > /dev/null
+            install -D -m 644 "$OUT/$f" "$f"
+          done
+          for f in DIGEST.md PREVALIDATION.md; do
+            install -D -m 644 "$OUT/$f" "$f"
+          done
+          python3 update_seed.py   # app.js is rebuilt here, never taken from the artifact
+
+      # Issue BEFORE commit: if the issue fails, the job fails and state/seen.json
+      # is not committed, so the items come back next run.
       - name: Open a review issue for the curator
         env: { GH_TOKEN: "${{ github.token }}" }
         run: |
-          COUNT=$(python -c "import json;print(len(json.load(open('candidates.json'))))")
+          set -euo pipefail
+          COUNT=$(jq length candidates.json)
           echo "candidates=$COUNT"
           if [ "$COUNT" -gt 0 ]; then
             {
@@ -66,9 +127,13 @@ jobs:
           fi
 
       - name: Commit results
+        env: { GH_TOKEN: "${{ github.token }}" }
         run: |
+          set -euo pipefail
           git config user.name "observatory-watch"
           git config user.email "contact@aitransparencyinstitute.com"
           git add state/seen.json state/stories.json candidates.json DIGEST.md prevalidation.json PREVALIDATION.md observatory-data.json app.js
-          git diff --cached --quiet || git commit -m "watch: $(date -u +%F)"
-          git push
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "watch: $(date -u +%F)"
+          git -c core.hooksPath=/dev/null push \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"

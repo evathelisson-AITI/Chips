@@ -78,6 +78,21 @@ class Matching(unittest.TestCase):
     def test_md_safe(self):
         self.assertNotIn("@octocat", stories.md_safe("ping @octocat\nnow"))
         self.assertNotIn("\n", stories.md_safe("a\nb"))
+        # Headlines must not inject links, images, HTML or issue cross-references.
+        out = stories.md_safe("[Verify here](https://phish.example) ![x](https://t.example/p.png) <img src=x> owner/repo#12")
+        self.assertNotIn("](", out.replace("\\]\\(", ""))
+        self.assertNotRegex(out, r"(?<!\\)<", "unescaped < would open an HTML tag")
+        self.assertNotIn("#12", out)
+
+    def test_urls(self):
+        self.assertEqual(stories.safe_http_url(" https://a.example/x "), "https://a.example/x")
+        for bad in ["javascript:alert(1)", "data:text/html,x", "//a.example", "https://a.example/x y",
+                    "https://a.example/\nx", "", None]:
+            self.assertEqual(stories.safe_http_url(bad), "", bad)
+        u = stories.md_url("https://a.example/x)<b>@me")
+        self.assertTrue(u.startswith("https://a.example/x"))
+        self.assertFalse(set(u) & set(")<> "), u)
+        self.assertEqual(stories.md_url("javascript:alert(1)"), "")
 
 
 class StoryGrouping(unittest.TestCase):
@@ -177,6 +192,26 @@ class FeedProcessing(unittest.TestCase):
         c = w.candidates[0]
         self.assertEqual(c["url"], "https://www.sec.gov/Archives/edgar/data/12345/000126000001/0001-26-000001-index.htm")
         self.assertIn('"GPU" "collateral" + "GPU-backed"', c["name"])
+
+    def test_hostile_links(self):
+        w = watch.Watch(seen=[])
+        w.add(2, "Acme GPU-backed loan", "javascript:alert(1)", "GN", days_ago(1), outlet="X")
+        w.add(2, "Beta GPU-backed loan", "https://b.example/a) @octocat [x](https://evil.example", "GN",
+              days_ago(1), outlet="Y")
+        self.assertEqual(w.candidates[0]["url"], "", "non-http(s) links are dropped")
+        digest = "\n".join(watch.digest_lines(w.candidates))
+        self.assertNotIn("javascript:", digest)
+        self.assertNotIn("@octocat", digest)
+        self.assertNotIn("](https://evil", digest)
+
+    def test_edgar_rejects_malformed_ids(self):
+        w = watch.Watch(seen=[])
+        w.process_edgar({"q": [{"_source": {"adsh": "../../x", "ciks": ["1"], "form": "8-K",
+                                            "file_date": days_ago(1)}},
+                               {"_source": {"adsh": "0001234567-26-000001", "ciks": ["1/../2"], "form": "8-K",
+                                            "file_date": days_ago(1)}}]})
+        self.assertEqual(len(w.candidates), 1)
+        self.assertNotIn("..", w.candidates[0]["url"])
 
     def test_grouping_and_followups(self):
         w = watch.Watch(seen=[])

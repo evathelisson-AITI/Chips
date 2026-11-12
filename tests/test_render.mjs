@@ -12,6 +12,12 @@ const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 // CSP (vercel.json) allows only same-origin scripts: no inline code in the page.
 assert.ok(!/<script(?![^>]*\bsrc=)[^>]*>/i.test(html), 'index.html must not contain inline <script>');
 assert.ok(!/\son[a-z]+\s*=/i.test(html), 'index.html must not contain on*= handlers');
+// The CSP allows no inline style either: styles live in styles.css.
+assert.ok(!/<style/i.test(html) && !/\sstyle\s*=/i.test(html), 'index.html must not contain inline styles');
+const vercel = JSON.parse(readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
+const csp = vercel.headers[0].headers.find(h => h.key === 'Content-Security-Policy').value;
+assert.ok(!/unsafe-|\*|data:/.test(csp), 'CSP must not allow unsafe-*, wildcards or data:');
+assert.match(csp, /script-src 'self'(;|$)/);
 
 const XSS = `<img src=x onerror="alert(1)">`;
 const QUOTE_BREAK = `x');alert(1);('`;
@@ -73,6 +79,14 @@ assert.ok(!els['deal-rows'].innerHTML.includes('PENDING REVIEW'), 'pending entri
 assert.ok(els['pending-rows'].innerHTML.includes('PENDING REVIEW'), 'pending entries listed separately');
 assert.equal(els['pending-count'].textContent, 1);
 assert.equal(els['data-notice'].hidden, true, 'no fallback notice when data loads');
+assert.ok(!/\sstyle\s*=/i.test(all), 'rendered markup must not use inline styles (CSP)');
+
+// ---- malformed data file: bad parts are ignored, the page still renders
+const bad = await run(async () => ({ ok: true, json: async () => ({
+  deals: 'not a list', resale: [null, ['x', 'NaN'], ['2026', 5]], events: [null, 42], updated: { x: 1 } }) }));
+assert.ok(bad['deal-rows'].innerHTML.includes('VERIFIED'), 'non-array deals fall back to the snapshot');
+assert.equal(bad['st-events'].textContent, 0, 'non-object events dropped');
+assert.match(bad['updated'].textContent, /embedded snapshot/, 'non-string updated ignored');
 
 // ---- data file unreachable: seed snapshot plus a visible notice
 const off = await run(async () => { throw new Error('offline'); });

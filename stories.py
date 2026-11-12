@@ -193,6 +193,29 @@ def merge_group(g, blocked=()):
     return head, dropped
 
 
+_MD_SPECIAL = re.compile(r"([\\`*_{}\[\]<>()!|~])")
+
+
 def md_safe(s):
-    """Text for GitHub markdown (issue bodies): no @mentions, no line breaks."""
-    return re.sub(r"\s+", " ", str(s)).replace("@", "@​")
+    """Text for GitHub markdown (issue bodies). Feed headlines are untrusted, so:
+    no line breaks, markdown and HTML characters backslash-escaped (no injected
+    links, images or tags), and a zero-width space after "@" and "#" so a
+    headline cannot @mention people or cross-reference other issues."""
+    s = _MD_SPECIAL.sub(r"\\\1", re.sub(r"\s+", " ", str(s)))
+    return s.replace("@", "@\u200b").replace("#", "#\u200b")
+
+
+def safe_http_url(u):
+    """The URL if it is an absolute http(s) URL without whitespace or control
+    characters, else "". Applied to every link taken from a feed."""
+    u = str(u or "").strip()
+    if not re.match(r"https?://[^/\s]", u, re.I) or re.search(r"[\x00-\x20\x7f]", u):
+        return ""
+    return u
+
+
+def md_url(u):
+    """A link destination for GitHub markdown, or "" if the URL is not http(s).
+    Characters that could end the destination or start markup are percent-encoded."""
+    u = safe_http_url(u)
+    return urllib.parse.quote(u, safe="/:?&=#%~+,;$'*@![]-._") if u else ""

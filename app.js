@@ -279,11 +279,16 @@ async function loadData(manual){
     clearTimeout(timer);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
-    if (d.deals)  DEALS  = d.deals;
-    if (d.resale) RESALE = d.resale;
-    if (d.rental) RENTAL = d.rental;
-    if (d.events) EVENTS = d.events;
-    if (d.updated) META.updated = d.updated;
+    if (!d || typeof d !== 'object') throw new Error('bad data file');
+    /* Take only well-formed parts: rows must be objects, series rows pairs. */
+    const rows = (v, ok) => Array.isArray(v) ? v.filter(ok) : null;
+    const isObj = x => x !== null && typeof x === 'object' && !Array.isArray(x);
+    const isPair = x => Array.isArray(x) && x.length >= 2 && Number.isFinite(+x[1]);
+    DEALS  = rows(d.deals, isObj)   ?? DEALS;
+    RESALE = rows(d.resale, isPair) ?? RESALE;
+    RENTAL = rows(d.rental, isPair) ?? RENTAL;
+    EVENTS = rows(d.events, isObj)  ?? EVENTS;
+    if (typeof d.updated === 'string') META.updated = d.updated;
     if (notice) notice.hidden = true;
     renderAll();
     if (manual && btn) btn.textContent = '✓ Up to date';
@@ -370,7 +375,7 @@ function lineChart(el, data, opts){
   let dots='',labels='';
   data.forEach((d,i)=>{dots+=`<circle cx="${X(i)}" cy="${Y(d[1])}" r="3.5" fill="${opts.color}"/>`;
     labels+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle">${esc(d[0])}</text>`;});
-  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto" role="img" aria-label="${opts.aria}">
+  el.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${opts.aria}">
     ${g}<path d="${path}" fill="none" stroke="${opts.color}" stroke-width="2.5"/>${dots}${labels}</svg>`;
 }
 function renderAll(){
