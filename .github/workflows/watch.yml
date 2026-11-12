@@ -19,7 +19,12 @@ name: Observatory source watch
 on:
   schedule:
     - cron: "0 7 * * 1"   # Monday 07:00 UTC, weekly
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      max_age_days:
+        description: "Look-back window in days for a one-off backfill (empty = config max_age_days)"
+        required: false
+        default: ""
 
 permissions: {}   # each job asks for what it needs
 
@@ -52,6 +57,8 @@ jobs:
           node tests/test_render.mjs
 
       - name: Run source watch
+        env:
+          OBS_MAX_AGE_DAYS: ${{ inputs.max_age_days }}   # passed as data; watch.py validates it
         run: python watch.py
 
       - name: Pre-validate (suggestions only, never touches ver)

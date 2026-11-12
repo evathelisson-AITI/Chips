@@ -28,12 +28,18 @@ const DATA = {
       ver: 'VERIFIED', src: 'src', url: 'javascript:alert(1)' },
     { id: 'b', date: '2026-02-05', name: 'Reported deal', type: 'Loan', amount: '2 M', terms: 't', status: 's',
       ver: 'REPORTED', src: 'src', url: 'https://example.com/a?x=1&y="2"' },
+    { id: 'd', date: '2026-03', name: 'Lien deal', type: 'Loan', amount: '1,500 M', terms: 't', status: 's',
+      ver: 'VERIFIED', src: 'src', url: 'https://example.com/d', collateral: 'gpu-lien', amount_musd: 1500,
+      lenders: XSS, events: [{ date: '2026-09', kind: 'rating', note: XSS, url: 'javascript:alert(3)' }] },
+    { id: 'e', date: '2026-04', name: 'Vendor LOI', type: 'Vendor commitment', amount: 'up to 100,000 M', terms: 't',
+      status: 's', ver: 'VERIFIED', src: 'src', url: 'https://example.com/e', collateral: 'none-or-unclear',
+      amount_musd: 100000 },
     { id: 'c', date: XSS, name: XSS, type: XSS, amount: XSS, terms: XSS, status: XSS, ver: 'PENDING REVIEW', src: XSS,
       url: 'https://news.example/1',
       sources: [{ outlet: XSS, url: 'https://news.example/2', date: '2026-08-28' },
                 { outlet: 'Evil', url: 'javascript:alert(2)', date: '2026-08-28' }] },
   ],
-  resale: [[XSS, 100], ['2026', 200]],
+  resale: [['2023-Q1', 300], ['2023-Q4', 280, { src: XSS, url: 'https://example.com/p' }], ['2024-Q2', 260], ['2026-Q2', 75]],
   rental: [['a', 1], ['b', 2]],
   events: [{ d: XSS, t: XSS, x: XSS, k: 'fin' }, { d: '2022-10', t: 't', x: 'x', k: 'vendor' }],
 };
@@ -73,8 +79,22 @@ assert.ok(els['deal-rows'].innerHTML.includes('>Jan 2026<'), 'month date formatt
 assert.ok(els['deal-rows'].innerHTML.includes('>5 Feb 2026<'), 'day date formatted');
 assert.ok(els['timeline'].innerHTML.includes('Oct 2022'), 'event date formatted');
 
-assert.equal(els['st-deals'].textContent, 2, 'stat counts curated deals only');
-assert.match(els['st-vol'].textContent, /1 verified · 1 reported · 1 unreviewed/);
+assert.equal(els['st-deals'].textContent, 3, 'stat counts curated chip-backed deals only');
+assert.match(els['st-vol'].textContent, /2 verified · 1 reported · 2 collateral not yet classified · 1 related, not counted · 1 unreviewed/);
+assert.match(els['st-sum'].textContent, /USD 1\.5bn stated across 1 of 3 deals/, 'only numeric amounts of counted deals are summed');
+assert.ok(els['related-rows'].innerHTML.includes('Vendor LOI'), 'vendor commitment listed as related');
+assert.ok(!els['deal-rows'].innerHTML.includes('Vendor LOI'), 'related financing kept out of the registry table');
+assert.equal(els['related-count'].textContent, 1);
+assert.ok(els['deal-rows'].innerHTML.includes('Secured by GPUs'), 'collateral class shown');
+assert.ok(els['deal-rows'].innerHTML.includes('1 later event'), 'later events listed');
+assert.match(els['st-resale'].textContent, /≈ −75%/, 'resale stat computed from the series');
+assert.match(els['st-resale-src'].textContent, /1 of 4 points sourced/);
+assert.ok(els['src-resale'].innerHTML.includes('href="https://example.com/p"'), 'point source linked');
+assert.match(els['src-rental'].textContent, /not recorded yet/, 'missing point sources stated');
+// Time axis: 2023-Q1 → Q4 is three quarters, Q4 → 2024-Q2 two, so the first gap is wider.
+const cx = [...els['chart-resale'].innerHTML.matchAll(/<circle[^>]*cx="([\d.]+)"/g)].map(m => +m[1]);
+assert.equal(cx.length, 4);
+assert.ok(Math.abs((cx[1] - cx[0]) / (cx[2] - cx[1]) - 1.5) < 1e-6, 'points spaced by time, not by index');
 assert.ok(!els['deal-rows'].innerHTML.includes('PENDING REVIEW'), 'pending entries stay out of the registry table');
 assert.ok(els['pending-rows'].innerHTML.includes('PENDING REVIEW'), 'pending entries listed separately');
 assert.equal(els['pending-count'].textContent, 1);

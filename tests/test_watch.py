@@ -18,7 +18,9 @@ import stories  # noqa: E402
 import watch  # noqa: E402
 
 with open(os.path.join(ROOT, "tests", "relevance_sample.json"), encoding="utf-8") as _f:
-    SAMPLE = json.load(_f)["items"]
+    _SAMPLE_FILE = json.load(_f)
+SAMPLE = _SAMPLE_FILE["items"]
+RECALL = _SAMPLE_FILE.get("recall_items", [])
 
 
 def accepted(title, summary=""):
@@ -138,6 +140,13 @@ class StoryGrouping(unittest.TestCase):
         n2 = {"name": "Nvidia chip loans face scrutiny from banks", "date": "2026-11-11"}
         self.assertFalse(stories.same_story(n1, n2), "generic Nvidia is not enough")
 
+    def test_near_equal_amounts(self):
+        a = {"name": "Lambda Closes $1 Billion Senior Secured Financing - Business Wire", "date": "2026-10-01"}
+        b = {"name": "Lambda Closes $1.008 Billion Senior Secured Financing - Pulse 2.0", "date": "2026-10-11"}
+        self.assertTrue(stories.same_story(a, b))
+        c = {"name": "Lambda raises $1.5 Billion in debt", "date": "2026-10-02"}
+        self.assertFalse(stories.same_story(a, c))
+
     def test_date_window(self):
         a = {"name": "Lambda raises $1B in debt", "date": "2026-01-01"}
         b = {"name": "Lambda raises $1B in debt", "date": "2026-03-01"}
@@ -218,6 +227,17 @@ class FeedProcessing(unittest.TestCase):
         self.assertNotIn("@octocat", digest)
         self.assertNotIn("](https://evil", digest)
 
+    def test_edgar_fulltext_form_allowlist(self):
+        def hit(adsh, form):
+            return {"_source": {"adsh": adsh, "ciks": ["1"], "form": form, "display_names": ["X"],
+                                "file_date": days_ago(1)}}
+        w = watch.Watch(seen=[])
+        w.process_edgar({"q1": [hit("0001-26-000001", "424B2"), hit("0001-26-000002", "S-1"),
+                                hit("0001-26-000003", "10-Q")],
+                         "q2": [hit("0001-26-000002", "S-1")]})
+        forms = sorted(c["name"].split(" - ")[1].split(" ")[0] for c in w.candidates)
+        self.assertEqual(forms, ["10-Q", "S-1"], "a prospectus needs two query matches; a 10-Q one")
+
     def test_edgar_rejects_malformed_ids(self):
         w = watch.Watch(seen=[])
         w.process_edgar({"q": [{"_source": {"adsh": "../../x", "ciks": ["1"], "form": "8-K",
@@ -295,6 +315,145 @@ class MergePending(unittest.TestCase):
         self.assertEqual(json.dumps(db, sort_keys=True), before, "idempotent")
 
 
+class Recall(unittest.TestCase):
+    """recall_items: headlines from outside the watcher's own output. The precision
+    tests above can't see misses; these can."""
+
+    def test_external_deals_pass(self):
+        deals = [i["title"] for i in RECALL if i["label"] == "deal"]
+        self.assertGreaterEqual(len(deals), 10)
+        missed = [t for t in deals if not accepted(t)]
+        self.assertEqual(missed, [], "real deal headlines rejected by the filter")
+
+    def test_stress_signals_flagged(self):
+        items = [i["title"] for i in RECALL if i["label"] == "stress"]
+        self.assertTrue(items)
+        self.assertEqual([t for t in items if watch.relevant(t) != "stress"], [])
+
+    def test_issuer_names(self):
+        self.assertEqual(watch.relevant("CoreWeave closes $2.6bn delayed draw term loan facility"), "combo")
+        self.assertIsNone(watch.relevant("Iren prices EUR 500m green bond"), "IREN matches case-sensitively")
+        self.assertIsNone(watch.relevant("Nvidia stock falls on debt worries"), "generic Nvidia is not an issuer match")
+        self.assertIsNone(watch.relevant("CoreWeave shares rise after earnings"), "an issuer alone is not enough")
+
+    def test_market_chatter_rejected(self):
+        self.assertIsNone(watch.relevant("CoreWeave Leads Tech Stocks In Rally After Earnings Eased AI Debt Fears"))
+        self.assertIsNone(watch.relevant("Argus cuts CoreWeave stock price target on debt concerns"))
+        self.assertEqual(watch.relevant("CoreWeave stock falls after lender seizes GPUs in loan default"), "stress",
+                         "market terms never hide a stress signal")
+
+    def test_stress_needs_context(self):
+        self.assertIsNone(watch.relevant("Retailer defaults on $300 million loan"), "no chip or issuer term")
+        self.assertIsNone(watch.relevant("GPU prices default to list on launch day"), "no finance term")
+
+    def test_amounts_in_other_currencies(self):
+        for t in ["Sakura borrows 50 billion yen", "Yotta gets Rs 4,000 crore", "Firm raises ¥50bn", "USD 2.4bn loan"]:
+            self.assertTrue(watch.has_deal_signal(t), t)
+        self.assertEqual(stories.amount_musd("USD 2.4bn GPU loan"), 2400)
+
+
+class IssuerFilings(unittest.TestCase):
+    """The per-issuer EDGAR scan (data.sec.gov submissions JSON)."""
+
+    def data(self, rows, name="CoreWeave, Inc."):
+        cols = {"accessionNumber": [], "filingDate": [], "form": [], "items": []}
+        for adsh, days, form, items in rows:
+            for k, v in zip(cols, (adsh, days_ago(days), form, items)):
+                cols[k].append(v)
+        return {"cik": "0001769628", "name": name, "filings": {"recent": cols}}
+
+    def test_filters_forms_items_and_window(self):
+        w = watch.Watch(seen=[])
+        w.process_issuer_filings({"name": "CoreWeave", "cik": 1769628}, self.data([
+            ("0001769628-26-000001", 1, "8-K", "1.01,2.03,9.01"),   # financing: kept
+            ("0001769628-26-000002", 1, "8-K", "2.02,9.01"),        # earnings: skipped
+            ("0001769628-26-000003", 2, "10-Q", ""),                # periodic: kept
+            ("0001769628-26-000004", 1, "4", ""),                   # insider form: skipped
+            ("0001769628-26-000005", 400, "8-K", "2.03"),           # too old
+            ("0001769628-26-000006", 1, "8-K", "2.04"),             # acceleration: stress
+            ("../../etc", 1, "8-K", "1.01"),                        # malformed accession
+            ("0001769628-26-000007", 1, "S-1", ""),                 # IPO prospectus: kept
+        ]))
+        names = [c["name"] for c in w.candidates]
+        self.assertEqual(len(names), 4, names)
+        self.assertIn("registration statement", names[3])
+        self.assertIn("2.03 new financial obligation", names[0])
+        self.assertIn("check the debt note", names[1])
+        self.assertEqual(w.candidates[2].get("_signal"), "stress")
+        self.assertEqual(w.candidates[0]["url"], "https://www.sec.gov/Archives/edgar/data/1769628/"
+                                                  "000176962826000001/0001769628-26-000001-index.htm")
+        self.assertTrue(all(c["ver"] == "PENDING REVIEW" and c["outlet"] == "sec.gov" for c in w.candidates))
+        self.assertEqual(w.stats["EDGAR filings: CoreWeave"], [4, 4, None])
+
+    def test_wrong_cik_is_skipped(self):
+        w = watch.Watch(seen=[])
+        w.process_issuer_filings({"name": "CoreWeave", "cik": 1}, self.data(
+            [("0000000001-26-000001", 1, "8-K", "1.01")], name="Some Other Co"))
+        self.assertEqual(w.candidates, [])
+        self.assertIn("mismatch", w.stats["EDGAR filings: CoreWeave"][2])
+
+    def test_full_text_hit_on_same_filing_is_folded_in(self):
+        w = watch.Watch(seen=[])
+        w.process_issuer_filings({"name": "CoreWeave", "cik": 1769628},
+                                 self.data([("0001769628-26-000001", 1, "8-K", "1.01")]))
+        w.process_edgar({'"GPU" "collateral"': [{"_source": {
+            "adsh": "0001769628-26-000001", "ciks": ["0001769628"], "form": "8-K",
+            "display_names": ["CoreWeave"], "file_date": days_ago(1)}}]})
+        self.assertEqual(len(w.candidates), 1)
+        self.assertIn('full text matches "GPU" "collateral"', w.candidates[0]["name"])
+
+    def test_config_ciks_are_well_formed(self):
+        ciks = [i["cik"] for i in watch.ISSUERS if "cik" in i]
+        self.assertTrue(ciks)
+        self.assertTrue(all(isinstance(c, int) and c > 0 for c in ciks))
+        self.assertEqual(len(ciks), len(set(ciks)), "duplicate cik")
+
+
+class Sources(unittest.TestCase):
+    def test_google_news_url_and_editions(self):
+        u = watch.google_news_url('"GPU-backed" loan & more', {"hl": "en-IN", "gl": "IN", "ceid": "IN:en"})
+        self.assertTrue(u.startswith("https://news.google.com/rss/search?q="))
+        self.assertIn("hl=en-IN", u)
+        self.assertNotIn(" ", u)
+        self.assertNotIn("&more", u, "the query must be encoded")
+        saved = watch.CONFIG.get("google_news_editions")
+        try:
+            watch.CONFIG["google_news_editions"] = [{"hl": "en&x=1", "gl": "US", "ceid": "US:en"}]
+            self.assertEqual(watch.google_news_editions(), [watch.US_EDITION], "malformed editions dropped")
+        finally:
+            watch.CONFIG["google_news_editions"] = saved
+
+    def test_backfill_override(self):
+        saved = os.environ.get("OBS_MAX_AGE_DAYS")
+        try:
+            for raw, want in (("60", 60), ("0", 1), ("9999", 365), ("abc", watch.CONFIG.get("max_age_days", 10))):
+                os.environ["OBS_MAX_AGE_DAYS"] = raw
+                self.assertEqual(watch._max_age_days(), want, raw)
+        finally:
+            if saved is None:
+                os.environ.pop("OBS_MAX_AGE_DAYS", None)
+            else:
+                os.environ["OBS_MAX_AGE_DAYS"] = saved
+
+    def test_issuers_drive_grouping(self):
+        self.assertEqual(stories.entity_of("Nscale lands GPU facility"), "Nscale")
+        self.assertEqual(stories.ENTITIES[-1][0], "Nvidia", "generic Nvidia stays last")
+
+    def test_digest_lists_stress_apart(self):
+        w = watch.Watch(seen=[])
+        feed = FakeFeed([
+            {"title": "Neocloud defaults on $300 million GPU loan", "link": "https://s.example/1",
+             "published_parsed": tm(1)},
+            {"title": "Acme secures $1bn GPU-backed loan", "link": "https://s.example/2", "published_parsed": tm(1)},
+        ])
+        w.process_feed(feed, "https://feed.example/rss", 2)
+        digest = "\n".join(watch.digest_lines(watch.group_candidates(w.candidates)))
+        self.assertIn("1 new story, 0 follow-up(s), 1 stress signal(s)", digest)
+        head, rest = digest.split("## Stress signals", 1)
+        self.assertIn("defaults on", rest.split("## Tier")[0])
+        self.assertNotIn("defaults on", rest.split("## Tier", 1)[1])
+
+
 class SiteData(unittest.TestCase):
     """Shape of observatory-data.json, which app.js renders."""
 
@@ -319,13 +478,54 @@ class SiteData(unittest.TestCase):
                 self.assertIsInstance(s.get("outlet"), str)
         ids = [d["id"] for d in self.db["deals"]]
         self.assertEqual(len(ids), len(set(ids)), "deal ids must be unique")
+        self.check_optional_fields(set(ids))
+
+    def check_optional_fields(self, ids):
+        """Optional structured fields: right type and vocabulary when present."""
+        date_rx = r"^\d{4}-\d{2}(-\d{2})?$"
+        for d in self.db["deals"]:
+            n = d.get("name")
+            if "collateral" in d:
+                self.assertIn(d["collateral"], {"gpu-lien", "spv-owned-leased", "contract-cashflows", "none-or-unclear"}, n)
+            if "amount_musd" in d:
+                self.assertIsInstance(d["amount_musd"], (int, float), n)
+                self.assertGreater(d["amount_musd"], 0, n)
+            if "amount_kind" in d:
+                self.assertIn(d["amount_kind"], {"committed", "drawn", "outstanding", "up-to"}, n)
+            for k in ("lenders", "rate", "maturity", "rating", "gpu_generation", "vendor_role"):
+                if k in d:
+                    self.assertIsInstance(d[k], str, f"{k} in {n}")
+            for k in ("announced", "closed"):
+                if k in d:
+                    self.assertRegex(d[k], date_rx, f"{k} in {n}")
+            if "parent_id" in d:
+                self.assertIn(d["parent_id"], ids, f"parent_id in {n}")
+            for e in d.get("events", []):
+                self.assertRegex(e.get("date", ""), date_rx, n)
+                self.assertIn(e.get("kind"), {"rating", "amendment", "drawdown", "upsize", "repayment",
+                                              "refinancing", "default", "restructuring", "other"}, n)
+                self.assertIsInstance(e.get("note"), str, n)
+                if "url" in e:
+                    self.assertRegex(e["url"], r"^https?://", n)
+
+    def test_curated_rows_without_links(self):
+        """Reported, not failed: the curator is backfilling links (README, TODO).
+        New VERIFIED rows can't be saved without one (curate.py)."""
+        missing = [d["name"] for d in self.db["deals"] if d["ver"] in ("VERIFIED", "REPORTED") and not d.get("url")]
+        if missing:
+            print(f"\n[note] {len(missing)} curated deal(s) have no source link yet", file=sys.stderr)
         for e in self.db["events"]:
             for k in "dtxk":
                 self.assertIsInstance(e.get(k), str)
         for series in ("resale", "rental"):
-            for label, value in self.db[series]:
+            for row in self.db[series]:
+                label, value = row[0], row[1]
                 self.assertIsInstance(label, str)
                 self.assertIsInstance(value, (int, float))
+                if len(row) > 2:   # optional point source {src, url, sku}
+                    self.assertIsInstance(row[2].get("src"), str, f"{series} {label}")
+                    if "url" in row[2]:
+                        self.assertRegex(row[2]["url"], r"^https?://")
 
     def test_seed_snapshot_current(self):
         import update_seed

@@ -1,44 +1,82 @@
 {
   "_comment": "Chip-Backed Finance Observatory - monitoring configuration. Edit keywords, feeds and publication mode here; never edit watch.py. After changing terms, run: python3 -m unittest discover tests",
-
   "auto_publish_mode": "off",
   "_auto_publish_mode_options": "off = candidates only; the workflow opens a GitHub issue and the curator adds real deals by hand (recommended) | direct = also append entries to observatory-data.json as PENDING REVIEW (listed apart on the site, never counted). Any other value is treated as off.",
   "auto_publish_tiers": [1],
   "observatory_json_path": "observatory-data.json",
 
-  "_terms_comment": "Matching is whole-word and case-insensitive; a plural s/es is allowed automatically; a trailing * makes a prefix. strong_phrases match in title or summary. The other rules look at the TITLE only: tech_terms + finance_terms, or context_terms + strong_finance_terms. exclude_terms in the title always reject. Every match must also carry a deal signal: an amount ($2.4B, 100 million) or one of deal_verbs, in the title (for a strong phrase, title or summary). This drops commentary and explainers about GPU financing.",
+  "_terms_comment": "Matching is whole-word and case-insensitive; a plural s/es is allowed automatically; a trailing * makes a prefix. strong_phrases match in title or summary. The other rules look at the TITLE only: tech_terms + finance_terms, or context_terms + strong_finance_terms. exclude_terms in the title always reject. A watched issuer name (config 'issuers') counts like a tech term. Every match must also carry a deal signal: an amount ($2.4B, 100 million) or one of deal_verbs, in the title (for a strong phrase, title or summary). This drops commentary and explainers about GPU financing. Exception: a title with a stress_term plus a chip/issuer term plus a finance term is kept without a deal signal.",
+
+  "_issuers_comment": "Companies whose financings we track. A watched name in a headline counts like a chip term (issuers write 'CoreWeave closes $2.6bn loan', not 'GPU'). Names also drive story grouping. With a cik, the watcher reads the company's EDGAR filing list (8-K items in edgar_8k_items, periodic reports, and IPO registration statements, whose debt sections list every facility). match_case: true matches the name case-sensitively (IREN, not the Italian utility Iren). Check a new cik at https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=<cik>; the watcher skips a cik whose EDGAR name does not match.",
+  "issuers": [
+    {"name": "CoreWeave", "cik": 1769628},
+    {"name": "Nebius", "cik": 1513845},
+    {"name": "IREN", "cik": 1878848, "match_case": true},
+    {"name": "Applied Digital", "cik": 1144879},
+    {"name": "TeraWulf", "cik": 1083301},
+    {"name": "Cipher", "aliases": ["Cipher Mining", "Cipher Digital"], "cik": 1819989},
+    {"name": "Core Scientific", "cik": 1839341},
+    {"name": "Hut 8", "cik": 1964789},
+    {"name": "Galaxy Digital", "cik": 1859392},
+    {"name": "WhiteFiber", "cik": 2042022},
+    {"name": "Bit Digital", "cik": 1710350},
+    {"name": "Sharon AI", "aliases": ["SharonAI"], "cik": 2068385},
+    {"name": "Nvidia", "cik": 1045810, "generic": true},
+    {"name": "Lambda", "aliases": ["Lambda Labs"]},
+    {"name": "Crusoe"},
+    {"name": "Fluidstack"},
+    {"name": "Nscale", "cik": 2110365},
+    {"name": "Together AI"},
+    {"name": "Voltage Park"},
+    {"name": "TensorWave"},
+    {"name": "Vultr"},
+    {"name": "Firmus"},
+    {"name": "Yotta", "aliases": ["Yotta Data Services"]},
+    {"name": "Sakura Internet"},
+    {"name": "xAI", "match_case": true},
+    {"name": "SpaceX", "aliases": ["Space Exploration Technologies"], "cik": 1181412},
+    {"name": "Bullish/USD.AI", "aliases": ["USD.AI"]},
+    {"name": "Valor Compute Infrastructure", "aliases": ["Valor Compute"]}
+  ],
+  "_edgar_8k_items_comment": "1.01 material agreement, 1.02 its termination, 2.03 new financial obligation, 2.04 acceleration (default), 2.06 impairment.",
+  "edgar_8k_items": ["1.01", "1.02", "2.03", "2.04", "2.06"],
+  "edgar_periodic_forms": ["10-K", "10-Q", "20-F", "40-F", "6-K"],
+  "edgar_registration_forms": ["S-1", "S-1/A", "F-1", "F-1/A"],
   "strong_phrases": ["gpu-backed", "chip-backed", "gpu collateral", "chip collateral", "gpus as collateral", "chips as collateral", "chip lease", "gpu lease", "compute infrastructure financing", "gpu securitization", "gpu financing", "gpu-collateralized", "ai infrastructure debt"],
-  "tech_terms": ["gpu", "chip", "ai chip", "h100", "h200", "b200", "gb200", "gb300", "blackwell", "hopper", "rubin", "accelerator", "neocloud"],
+  "tech_terms": ["gpu", "chip", "ai chip", "h100", "h200", "b200", "gb200", "gb300", "blackwell", "hopper", "rubin", "accelerator", "neocloud", "server", "processor", "ai factory", "ai cloud", "dgx", "hgx", "b300", "mi300x", "mi325x", "mi355x", "instinct", "tpu"],
   "context_terms": ["nvidia", "compute", "data center", "data-center", "datacenter", "ai infrastructure"],
-  "finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "loan", "debt", "financing", "credit facility", "debt facility", "term loan", "secured notes", "bond", "syndicat*", "private credit", "vendor financing", "residual value", "haircut"],
-  "strong_finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "vendor financing", "residual value"],
-  "deal_verbs": ["secure*", "close*", "closing", "raise*", "raising", "provide*", "enter* into", "price*", "pricing", "leases", "ink*", "sign*", "land*", "obtain*", "arrange*", "commit*", "back*", "anchor*", "upsize*", "refinanc*", "borrow*", "tap*", "issue*", "complete*", "syndicat*", "led", "lead*", "fund*", "extend*", "agree*", "launch*"],
+  "finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "loan", "debt", "financing", "credit facility", "debt facility", "term loan", "secured notes", "bond", "syndicat*", "private credit", "vendor financing", "residual value", "haircut", "facility", "notes", "delayed draw", "ddtl", "abs", "equipment financing", "credit line", "revolver", "lender", "borrows", "borrowed"],
+  "strong_finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "vendor financing", "residual value", "abs", "delayed draw", "ddtl", "equipment financing"],
+  "deal_verbs": ["secure*", "close*", "closing", "raise*", "raising", "provide*", "enter* into", "price*", "pricing", "leases", "ink*", "sign*", "land*", "obtain*", "arrange*", "commit*", "back*", "anchor*", "upsize*", "refinanc*", "borrow*", "tap*", "issue*", "complete*", "syndicat*", "led", "lead*", "fund*", "extend*", "agree*", "launch*", "assign*", "upgrade*", "downgrade*", "affirm*", "amend*", "rated"],
+  "_market_terms_comment": "Stock-market chatter about a watched company (\"CoreWeave leads tech stocks in rally after earnings eased debt fears\") passes the loose combo rule. market_terms reject combo matches only, never strong phrases or stress signals.",
+  "market_terms": ["stock", "shares", "price target", "earnings", "rally", "pre-market", "premarket", "investors weigh", "is it a buy"],
+  "_known_lenders_comment": "Used by the curator page to prefill the Lenders field (autofill.py). Add names as you meet them.",
+  "known_lenders": ["Blackstone", "Magnetar", "Blue Owl", "Apollo", "Macquarie", "Goldman Sachs", "GSAM", "JPMorgan", "J.P. Morgan", "Morgan Stanley", "MUFG", "Brookfield", "KKR", "BlackRock", "Carlyle", "Ares", "PIMCO", "Citi", "Citigroup", "Bank of America", "Wells Fargo", "Deutsche Bank", "Barclays", "BNP Paribas", "Mizuho", "SMBC", "HSBC", "Natixis", "Fortress", "Upper90", "Hercules", "TFC", "Bullish", "Oaktree", "Sixth Street", "HPS", "Antares", "Golub", "MidCap", "Silver Point", "PGIM", "Athene", "Valor", "NBSF"],
   "exclude_terms": ["tokenized", "tokenised", "blue-chip", "blue chip"],
   "blocked_sources": ["vinanet"],
+  "_stress_comment": "Stress signals (defaults, seizures, downgrades) are what the observatory exists to catch, so they skip the deal-signal rule. A headline with a stress term plus a chip/issuer term plus a finance term is kept and listed in its own digest section.",
+  "stress_terms": ["default", "defaulted", "seize*", "seizure", "repossess*", "foreclos*", "impairment", "impaired", "writedown", "write-down", "markdown", "downgrade*", "covenant", "waiver", "forbearance", "restructur*", "bankrupt*", "chapter 11", "insolven*", "liquidat*", "distress*", "margin call", "loan-to-value", "ltv", "missed payment", "misses payment"],
 
-  "tier1_edgar_queries": ["\"GPU\" \"collateral\"", "\"GPU-backed\"", "\"GPU financing\"", "\"compute infrastructure\" \"securitization\""],
+  "tier1_edgar_queries": ["\"GPU\" \"collateral\"", "\"GPU-backed\"", "\"GPU financing\"", "\"compute infrastructure\" \"securitization\"", "\"delayed draw term loan\" \"GPU\""],
   "_edgar_comment": "One candidate per filing. Forms below are skipped (fund prospectuses, proxy and merger filings, ownership reports). edgar_max_hits caps paging per query; the digest says TRUNCATED when it is reached.",
   "edgar_exclude_forms": ["485BPOS", "485APOS", "497", "497K", "N-CSR", "N-CSRS", "NPORT-P", "N-2", "425", "ARS", "DEF 14A", "DEFA14A", "PRE 14A", "SC 13D", "SC 13G", "S-8", "11-K"],
+  "edgar_fulltext_forms": ["8-K", "8-K/A", "6-K", "10-Q", "10-K", "10-K/A", "20-F", "40-F"],
+  "_edgar_fulltext_forms_comment": "Full-text hits on other forms (prospectuses, registration statements, structured notes) are mostly risk-factor boilerplate. They are kept only when they match at least edgar_min_queries_other_forms different queries (e.g. a neocloud IPO prospectus).",
+  "edgar_min_queries_other_forms": 2,
   "edgar_max_hits": 200,
-  "_press_release_comment": "GlobeNewswire's RSS refuses automated clients (HTTP 403), so press-release wires are searched through Google News instead.",
-  "tier1_press_release_feeds": [],
-  "tier1_google_news_queries": [
-    "GPU financing site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com",
-    "GPU-backed OR \"secured by GPUs\" site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com"
-  ],
-  "tier2_ft_feeds": [
-    "https://www.ft.com/markets?format=rss",
-    "https://www.ft.com/technology?format=rss"
-  ],
-  "tier2_google_news_queries": [
-    "\"GPU-backed\" loan OR securitization",
-    "\"chip-backed\" debt OR lease",
-    "Nvidia SPV lease financing",
-    "GPU collateral lending",
-    "neocloud debt GPU"
-  ],
+
+  "_press_release_comment": "GlobeNewswire's RSS refuses automated clients (HTTP 403), so press-release wires are searched through Google News instead. CoreWeave and Blue Owl IR feeds sit behind a bot challenge (we do not work around it). PR Newswire's financing feed only holds about a day of items, too shallow for a weekly run. The Nvidia newsroom holds about a week.",
+  "tier1_press_release_feeds": ["https://nvidianews.nvidia.com/releases.xml"],
+  "tier1_google_news_queries": ["GPU financing site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com", "GPU-backed OR \"secured by GPUs\" site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com", "GPU OR \"AI infrastructure\" OR \"data center\" rating site:moodys.com OR site:spglobal.com OR site:fitchratings.com OR site:kbra.com OR site:dbrsmorningstar.com"],
+  "tier2_ft_feeds": ["https://www.ft.com/markets?format=rss", "https://www.ft.com/technology?format=rss"],
+  "tier2_google_news_queries": ["\"GPU-backed\" loan OR securitization", "\"chip-backed\" debt OR lease", "Nvidia SPV lease financing", "GPU collateral lending", "neocloud debt GPU", "CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility", "GPU lender default OR seized OR restructuring", "\"delayed draw term loan\" GPU OR \"AI infrastructure\""],
   "tier3_extra_rss": [],
 
   "max_age_days": 14,
-  "user_agent": "AITransparencyInstitute-Observatory-Watch/1.0 (contact@aitransparencyinstitute.com)"
+  "user_agent": "AITransparencyInstitute-Observatory-Watch/1.0 (contact@aitransparencyinstitute.com)",
+  "_google_news_editions_comment": "Editions for the tier-2 queries (the default is en-US). In a 60-day test run (2026-11-13) en-IN added a few new items; en-GB and en-SG added almost none, so they are left out. Non-English editions would need translated terms in the relevance filter, which it does not have yet.",
+  "google_news_editions": [
+    {"hl": "en-US", "gl": "US", "ceid": "US:en"},
+    {"hl": "en-IN", "gl": "IN", "ceid": "IN:en"}
+  ]
 }

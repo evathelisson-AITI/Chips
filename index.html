@@ -40,8 +40,8 @@
   <h2>Why this observatory exists</h2>
   <p class="sub">A new collateral class is forming: loans secured by GPUs, leased to AI companies, syndicated, securitized, and resold to insurers and pension funds. Its defining feature has no precedent: the collateral's depreciation clock is controlled by the vendor that sells the chips and invests in the financing vehicles. No systematic public dataset existed. This observatory builds it, openly, before the asset class is first tested.</p>
   <div class="grid">
-    <div class="stat"><b id="st-deals">–</b><span>Transactions tracked in the deal registry</span><span class="src" id="st-vol"></span></div>
-    <div class="stat"><b>≈ −73%</b><span>H100 resale value decline, 2023 → mid-2026</span><span class="src">USD ~30,000 → ~8,000 · press-compiled</span></div>
+    <div class="stat"><b id="st-deals">–</b><span>Chip-backed transactions in the deal registry</span><span class="src" id="st-sum"></span><span class="src" id="st-vol"></span></div>
+    <div class="stat"><b id="st-resale">–</b><span id="st-resale-label">H100 resale value change</span><span class="src" id="st-resale-src"></span></div>
     <div class="stat"><b>~50%</b><span>Residual value after 3 years reportedly assumed in early GPU-backed securitizations</span><span class="src">as reported, 2024–2026</span></div>
     <div class="stat"><b id="st-events">–</b><span>Dated events in the announcement calendar</span><span class="src">vendor product cycle + deals</span></div>
   </div>
@@ -64,6 +64,14 @@
     <thead><tr><th>Date</th><th>Transaction</th><th>Type</th><th>Amount</th><th>Key terms</th><th>Status</th><th>Source</th></tr></thead>
     <tbody id="deal-rows"></tbody>
   </table></div>
+  <details class="pending-wrap" id="related-wrap">
+    <summary>Related financings not secured by chips (<span id="related-count">0</span>), listed for context and not counted</summary>
+    <p class="pending-note">Vendor commitments, financings backed by compute contracts rather than by the chips themselves, and corporate debt without stated chip collateral. They matter for the vendor-support picture but are not chip-backed debt, so they are kept out of the registry count.</p>
+    <div class="scroll-x"><table>
+      <thead><tr><th>Date</th><th>Transaction</th><th>Type</th><th>Amount</th><th>Key terms</th><th>Status</th><th>Source</th></tr></thead>
+      <tbody id="related-rows"></tbody>
+    </table></div>
+  </details>
   <details class="pending-wrap" id="pending-wrap">
     <summary>Unreviewed leads from the automated source watch (<span id="pending-count">0</span>), not verified and not counted</summary>
     <div class="pending-banner"><b>&#9888; Not verified.</b> These headlines were collected automatically and have <b>not been checked by a human curator</b>. Many are duplicates, commentary or unrelated news. They are not part of the deal registry and are excluded from every figure on this site. Each is verified and moved into the registry, or removed, at the next curation pass.</div>
@@ -82,11 +90,13 @@
     <div class="chart-title">H100 resale value (USD per unit, secondary market)</div>
     <div class="chart-sub">Peak scarcity to mid-2026. Note the step behavior around new-generation availability, not smooth drift.</div>
     <div id="chart-resale"></div>
+    <p class="chart-src" id="src-resale"></p>
   </div>
   <div class="chart-card">
     <div class="chart-title">H100 rental rate (USD per GPU-hour, market range midpoint)</div>
     <div class="chart-sub">Rental rates are the collateral's cash-flow engine: they service the leases that service the debt.</div>
     <div id="chart-rental"></div>
+    <p class="chart-src" id="src-rental"></p>
   </div>
   <div class="note">Reading the two charts together: early securitizations reportedly assumed ~50% residual value after three years. The observed resale path fell to ~27% in that window, while the rental rates underpinning lease payments fell by 70–80% from peak before partially recovering.</div>
 </section>
@@ -118,8 +128,10 @@
   <div class="card">
     <h3>Method</h3>
     <p>Entries are compiled exclusively from public sources: issuer press releases, offering materials, regulatory filings, published market trackers, and the financial press. Every entry carries its source. Primary-source confirmation earns a <span class="tag ver">VERIFIED</span> flag; press-only items remain <span class="tag rep">REPORTED</span>. Only a human curator assigns these flags. Nothing on this page is investment advice, and inclusion of a transaction implies no judgment about any named party. Corrections are welcome and acknowledged.</p>
+    <h3>What is counted</h3>
+    <p>The registry counts debt for which AI chips are the collateral: loans and notes with a lien on GPUs or GPU servers, and vehicles that own chips and lease them to a user (chip-lease SPVs, sale-leasebacks). Vendor commitments, financings backed only by compute contracts, and corporate debt with no stated chip collateral are listed apart as related financings and are not counted. Entries whose collateral has not been classified yet are counted and reported as unclassified in the overview. Amounts are headline commitments as announced, not outstanding balances, and are added up only where the curator has recorded a numeric amount.</p>
     <h3>How the data are updated</h3>
-    <p>The deal registry is curated by hand, entry by entry: verification is the product. To find candidates, an automated source watch scans SEC filings, press-release wires and the financial press once a week and sends what it finds to the curator for review. It does not publish anything to the registry. Leads it collected earlier, before this rule was adopted, are listed below the deal table as <span class="tag pend">PENDING REVIEW</span>. They are excluded from every figure until the curator verifies or removes them. Technically, the page loads its data at every visit from a separate file (observatory-data.json) published alongside it, so updates appear to all visitors the moment the file is replaced, and the "Data as of" date in the header shows the release you are viewing. You can also press "Check for updates" at any time.</p>
+    <p>The deal registry is curated by hand, entry by entry: verification is the product. To find candidates, an automated source watch scans the SEC filings of a list of chip-financing companies, a full-text search of all SEC filings, press-release wires and the financial press once a week and sends what it finds to the curator for review. It does not publish anything to the registry. Leads it collected earlier, before this rule was adopted, are listed below the deal table as <span class="tag pend">PENDING REVIEW</span>. They are excluded from every figure until the curator verifies or removes them. Technically, the page loads its data at every visit from a separate file (observatory-data.json) published alongside it, so updates appear to all visitors the moment the file is replaced, and the "Data as of" date in the header shows the release you are viewing. You can also press "Check for updates" at any time.</p>
     <h3>Openness</h3>
     <p>The database is released under CC BY 4.0. Quarterly snapshots will be archived with a citable reference. Researchers may reuse the data with attribution to the AI Transparency Institute.</p>
     <h3>Contribute</h3>

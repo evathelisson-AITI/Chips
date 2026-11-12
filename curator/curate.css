@@ -114,3 +114,12 @@ main{padding-top:20px;padding-bottom:40px}
   .card-actions{flex-direction:row}
   .grid,.ver{grid-template-columns:1fr}
 }
+
+/* Optional structured fields */
+details.extra{margin-top:14px;border-top:1px solid var(--line);padding-top:10px}
+details.extra summary{cursor:pointer;font-size:13px;color:var(--muted);margin-bottom:10px}
+.f select{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);color:inherit;width:100%}
+
+/* Auto-filled guesses: highlighted until the curator edits them */
+.auto-note{font-size:13px;color:var(--ink);background:color-mix(in srgb,var(--amber) 10%,transparent);border-radius:8px;padding:10px 12px;margin-bottom:14px}
+.f input.auto,.f textarea.auto,.f select.auto{border-color:color-mix(in srgb,var(--amber) 60%,var(--line));background:color-mix(in srgb,var(--amber) 6%,var(--bg))}
