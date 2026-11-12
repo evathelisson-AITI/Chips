@@ -22,6 +22,21 @@ ENTITIES = [
 ]
 ENTITY_RX = dict(ENTITIES)
 
+
+def add_entities(issuers):
+    """Add watched issuers from config.json ("issuers": [{name, aliases}]) that are
+    not in ENTITIES yet, ahead of the generic "Nvidia". Idempotent."""
+    known = {n.lower() for n, _ in ENTITIES}
+    for i in issuers or []:
+        name = str((i or {}).get("name", "")).strip()
+        if not name or name.lower() in known:
+            continue
+        alts = [name] + [str(a) for a in (i.get("aliases") or []) if str(a).strip()]
+        rx = r"(?<!\w)(?:" + "|".join(re.escape(a.lower()) for a in alts) + r")(?!\w)"
+        ENTITIES.insert(len(ENTITIES) - 1 if ENTITIES[-1][0] == "Nvidia" else len(ENTITIES), (name, rx))
+        ENTITY_RX[name] = rx
+        known.add(name.lower())
+
 SPAM = ["vinanet"]
 PRIMARY = ["sec.gov", "sec edgar", "prnewswire", "pr newswire", "businesswire", "business wire",
            "globenewswire", "nvidianews", "blueowl.com", "coreweave.com", "apollo.com", "iren.com"]
@@ -45,7 +60,7 @@ def amount_musd(text):
     mult = {"trillion": 1e6, "t": 1e6, "billion": 1e3, "bn": 1e3, "b": 1e3,
             "million": 1, "mm": 1, "mn": 1, "m": 1}
     vals = [float(m.group(1).replace(",", "")) * mult[m.group(2).lower()]
-            for m in re.finditer(r"\$\s?(\d[\d,]*\.?\d*)\s?(trillion|billion|million|bn|mm|mn|b|m|t)\b",
+            for m in re.finditer(r"(?:\$\s?|\busd\s?)(\d[\d,]*\.?\d*)\s?(trillion|billion|million|bn|mm|mn|b|m|t)\b",
                                  text, re.I)]
     return max(vals) if vals else None
 
@@ -129,7 +144,7 @@ def _date(s):
 
 def same_story(a, b, window_days=WINDOW_DAYS):
     """Dated within the window of each other, and one of:
-    - same company and same USD amount;
+    - same company and same USD amount (within 2%; not for the generic "Nvidia");
     - titles sharing at least half their words;
     - same named company (not the generic "Nvidia"), dated within 3 days,
       and titles sharing at least 30% of their words (reworded headlines)."""
@@ -139,6 +154,8 @@ def same_story(a, b, window_days=WINDOW_DAYS):
     ka, kb = story_key(a), story_key(b)
     if ka and ka == kb:
         return True
+    if ka and kb and ka[0] == kb[0] and ka[0] != "Nvidia" and abs(ka[1] - kb[1]) <= 0.02 * max(ka[1], kb[1]):
+        return True   # "$1 billion" and "$1.008 billion" from the same company
     ta, tb = tokens(a.get("name", "")), tokens(b.get("name", ""))
     if not ta or not tb:
         return False

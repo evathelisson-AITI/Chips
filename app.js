@@ -327,28 +327,75 @@ function sourceCell(d){
   return h;
 }
 
-/* Deals: only curator-flagged entries are part of the registry and its counts. */
+/* Deals: only curator-flagged entries are part of the registry and its counts.
+   The optional `collateral` field (set by the curator) says whether chips secure
+   the debt. gpu-lien / spv-owned-leased are counted; contract-cashflows /
+   none-or-unclear (vendor commitments, cloud contracts, corporate debt) are
+   listed apart as related financings. Rows not yet classified are counted and
+   reported as unclassified. */
 const isCurated = d => d.ver === 'VERIFIED' || d.ver === 'REPORTED';
+const COLLATERAL = {
+  'gpu-lien': 'Secured by GPUs',
+  'spv-owned-leased': 'Chips owned by SPV, leased out',
+  'contract-cashflows': 'Backed by compute contracts, not chips',
+  'none-or-unclear': 'No chip collateral shown',
+};
+const RELATED = new Set(['contract-cashflows', 'none-or-unclear']);
+const isRelated = d => RELATED.has(d.collateral);
+const isUnclassified = d => !Object.hasOwn(COLLATERAL, d.collateral ?? '');
+const DETAIL_FIELDS = [['lenders', 'Lenders'], ['rate', 'Rate'], ['maturity', 'Maturity'], ['rating', 'Rating'],
+  ['gpu_generation', 'Collateral GPUs'], ['vendor_role', 'Vendor role'], ['amount_kind', 'Amount is']];
+function termsCell(d){
+  let h = esc(d.terms);
+  const kv = [];
+  if (Object.hasOwn(COLLATERAL, d.collateral ?? '')) kv.push(['Collateral', COLLATERAL[d.collateral]]);
+  for (const [k, label] of DETAIL_FIELDS) if (typeof d[k] === 'string' && d[k]) kv.push([label, d[k]]);
+  if (kv.length) h += `<dl class="kv">${kv.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
+  const evs = Array.isArray(d.events) ? d.events.filter(e => e && typeof e === 'object') : [];
+  if (evs.length) {
+    h += `<details class="more"><summary>${evs.length} later event${evs.length > 1 ? 's' : ''}</summary><ul>`
+      + evs.map(e => `<li>${fmtDate(e.date)} · ${esc(e.kind)}: ${esc(e.note)}${safeUrl(e.url) ? ' ' + link(e.url, '↗') : ''}</li>`).join('')
+      + `</ul></details>`;
+  }
+  return h;
+}
 const dealRow = d => `
     <tr><td class="amount">${fmtDate(d.date)}</td><td><b>${esc(d.name)}</b></td>
     <td><span class="tag type">${esc(d.type)}</span></td>
-    <td class="amount">${esc(d.amount)}</td><td>${esc(d.terms)}</td><td>${esc(d.status)}</td>
+    <td class="amount">${esc(d.amount)}</td><td>${termsCell(d)}</td><td>${esc(d.status)}</td>
     <td>${sourceCell(d)}</td></tr>`;
+const fmtBn = musd => musd >= 1000 ? `USD ${(musd / 1000).toLocaleString('en-US', {maximumFractionDigits: 1})}bn`
+                                   : `USD ${Math.round(musd).toLocaleString('en-US')}m`;
 let filter = "All";
 function renderDeals(){
   const curated = DEALS.filter(isCurated);
+  const counted = curated.filter(d => !isRelated(d));
+  const related = curated.filter(isRelated);
   const pending = DEALS.filter(d => !isCurated(d));
-  const types = ["All", ...new Set(curated.map(d => d.type))];
+  const types = ["All", ...new Set(counted.map(d => d.type))];
   if (!types.includes(filter)) filter = "All";
   $('deal-filters').innerHTML = types.map(t => `<button class="fbtn ${t===filter?'on':''}" data-type="${esc(t)}">${esc(t)}</button>`).join('');
-  $('deal-rows').innerHTML = curated.filter(d => filter==="All" || d.type===filter).map(dealRow).join('');
+  $('deal-rows').innerHTML = counted.filter(d => filter==="All" || d.type===filter).map(dealRow).join('');
+  $('related-rows').innerHTML = related.map(dealRow).join('');
+  $('related-count').textContent = related.length;
+  $('related-wrap').style.display = related.length ? 'block' : 'none';
   $('pending-rows').innerHTML = pending.map(dealRow).join('');
   $('pending-count').textContent = pending.length;
   $('pending-wrap').style.display = pending.length ? 'block' : 'none';
-  const nVer = curated.filter(d => d.ver === 'VERIFIED').length;
-  $('st-deals').textContent = curated.length;
-  $('st-vol').textContent = `${nVer} verified · ${curated.length - nVer} reported`
+  const nVer = counted.filter(d => d.ver === 'VERIFIED').length;
+  const nUncl = counted.filter(isUnclassified).length;
+  $('st-deals').textContent = counted.length;
+  $('st-vol').textContent = `${nVer} verified · ${counted.length - nVer} reported`
+    + (nUncl ? ` · ${nUncl} collateral not yet classified` : '')
+    + (related.length ? ` · ${related.length} related, not counted` : '')
     + (pending.length ? ` · ${pending.length} unreviewed leads not counted` : '');
+  /* Volume only from the numeric amount_musd field: display strings ("~500 M",
+     "up to …") are not added up. */
+  const sized = counted.filter(d => typeof d.amount_musd === 'number' && Number.isFinite(d.amount_musd) && d.amount_musd > 0);
+  const total = sized.reduce((s, d) => s + d.amount_musd, 0);
+  $('st-sum').textContent = sized.length
+    ? `${fmtBn(total)} stated across ${sized.length} of ${counted.length} deals (headline amounts, not outstanding balances)`
+    : '';
   $('st-events').textContent = EVENTS.length;
 }
 $('deal-filters').addEventListener('click', e => {
@@ -358,12 +405,27 @@ $('deal-filters').addEventListener('click', e => {
   renderDeals();
 });
 
-/* Charts (plain SVG) */
+/* Charts (plain SVG). Points sit on a real time axis when every label is a
+   period ("2024-Q2", "2025-H1", "2026-03", "2026"); otherwise they are spaced
+   evenly. Even spacing of irregular quarters bends the slopes. */
+function periodYears(label){
+  const s = String(label ?? '');
+  let m;
+  if ((m = /^(\d{4})-Q([1-4])$/.exec(s))) return +m[1] + (+m[2] - 1) / 4;
+  if ((m = /^(\d{4})-H([12])$/.exec(s))) return +m[1] + (+m[2] - 1) / 2;
+  if ((m = /^(\d{4})-(\d{2})$/.exec(s)) && +m[2] >= 1 && +m[2] <= 12) return +m[1] + (+m[2] - 1) / 12;
+  if ((m = /^(\d{4})$/.exec(s))) return +m[1];
+  return null;
+}
+const pointSource = d => (d[2] && typeof d[2] === 'object' && typeof d[2].src === 'string') ? d[2] : null;
 function lineChart(el, data, opts){
   const W=760,H=250,P={l:56,r:16,t:14,b:30};
   const ys=data.map(d=>+d[1]);
   const ymax=opts.ymax||Math.max(...ys)*1.1, ymin=0;
-  const X=i=>P.l+(W-P.l-P.r)*i/(data.length-1);
+  const ts=data.map(d=>periodYears(d[0]));
+  const timed=ts.every(t=>t!==null) && Math.max(...ts) > Math.min(...ts);
+  const t0=Math.min(...ts), t1=Math.max(...ts);
+  const X=i=>P.l+(W-P.l-P.r)*(timed ? (ts[i]-t0)/(t1-t0) : (data.length>1 ? i/(data.length-1) : 0));
   const Y=v=>P.t+(H-P.t-P.b)*(1-(+v-ymin)/(ymax-ymin));
   let g='';
   const steps=opts.gridSteps||5;
@@ -373,15 +435,50 @@ function lineChart(el, data, opts){
   let path='';
   data.forEach((d,i)=>{path+=(i?'L':'M')+X(i)+' '+Y(d[1])+' ';});
   let dots='',labels='';
-  data.forEach((d,i)=>{dots+=`<circle class="dot ${opts.cls}" cx="${X(i)}" cy="${Y(d[1])}" r="3.5"/>`;
+  data.forEach((d,i)=>{const ps=pointSource(d);
+    dots+=`<circle class="dot ${opts.cls}" cx="${X(i)}" cy="${Y(d[1])}" r="3.5">`
+      +`<title>${esc(d[0])}: ${esc(d[1])}${ps ? ' · ' + esc(ps.src) : ''}</title></circle>`;
     labels+=`<text x="${X(i)}" y="${H-8}" text-anchor="${i===data.length-1?'end':'middle'}">${esc(d[0])}</text>`;});
   el.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${opts.aria}">
     ${g}<path class="series ${opts.cls}" d="${path}"/>${dots}${labels}</svg>`;
 }
+/* Under each chart: the sources of its points, or a plain statement that they
+   are not recorded yet. Series rows may be [label, value, {src, url, sku}]. */
+function seriesSources(el, data){
+  if (!el) return;
+  const srcs = data.map(pointSource).filter(Boolean);
+  if (!srcs.length) {
+    el.textContent = 'Sources for individual points are not recorded yet: the series is compiled from published trackers and press analyses.';
+    return;
+  }
+  const seen = new Set(), items = [];
+  for (const s of srcs) {
+    const k = s.src + '|' + (s.url || '');
+    if (seen.has(k)) continue;
+    seen.add(k);
+    items.push(safeUrl(s.url) ? link(s.url, s.src) : esc(s.src));
+  }
+  el.innerHTML = `Sources (${srcs.length} of ${data.length} points): ${items.join(' · ')}`;
+}
+/* Overview stat computed from the resale series, so it can't drift from the data. */
+function resaleStat(){
+  const pts = RESALE.filter(d => Number.isFinite(+d[1]) && +d[1] > 0);
+  if (pts.length < 2) { $('st-resale').textContent = '–'; return; }
+  const a = pts[0], b = pts[pts.length - 1];
+  const pct = Math.round((+b[1] / +a[1] - 1) * 100);
+  $('st-resale').textContent = `≈ ${pct < 0 ? '−' : '+'}${Math.abs(pct)}%`;
+  $('st-resale-label').textContent = `H100 resale value change, ${a[0]} → ${b[0]}`;
+  const n = pts.filter(pointSource).length;
+  $('st-resale-src').textContent = `USD ~${(+a[1]).toLocaleString('en-US')} → ~${(+b[1]).toLocaleString('en-US')} · `
+    + (n ? `${n} of ${pts.length} points sourced` : 'press-compiled, point sources not yet recorded');
+}
 function renderAll(){
   renderDeals();
+  resaleStat();
   lineChart($('chart-resale'), RESALE, {cls:'s-teal', ymax:32000, fmt:v=>(v/1000)+'k', gridSteps:4, aria:'H100 resale value series'});
   lineChart($('chart-rental'), RENTAL, {cls:'s-amber', ymax:9, fmt:v=>'$'+v.toFixed(0), gridSteps:3, aria:'H100 rental rate series'});
+  seriesSources($('src-resale'), RESALE);
+  seriesSources($('src-rental'), RENTAL);
   $('timeline').innerHTML = EVENTS.map(e => { const k = String(e.k ?? ''); return `
   <div class="ev ${k.includes('vendor')?'vendor':''} ${k.includes('future')?'future':''}">
     <div class="ev-date">${fmtDate(e.d)}${k.includes('future')?' · announced / expected':''}</div>

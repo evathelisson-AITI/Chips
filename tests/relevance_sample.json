@@ -448,5 +448,98 @@
    "label": "deal",
    "from": "synthetic"
   }
+ ],
+ "_recall_comment": "recall_items: headlines the filter MUST accept, collected from outside the watcher's own output so that the tests can see misses (the items above all came from past watcher runs). Wording is a close paraphrase of each event's headline; curator, replace with verbatim headlines when you have them. label deal = must be kept; stress = must be kept and flagged as a stress signal.",
+ "recall_items": [
+  {
+   "title": "CoreWeave Secures $2.3 Billion Debt Financing Facility Led by Magnetar Capital and Blackstone",
+   "label": "deal",
+   "from": "CoreWeave press release, Aug 2023"
+  },
+  {
+   "title": "CoreWeave Secures $7.5 Billion Debt Financing Facility Led by Blackstone and Magnetar",
+   "label": "deal",
+   "from": "CoreWeave press release, May 2024"
+  },
+  {
+   "title": "CoreWeave Closes $2.6 Billion Delayed Draw Term Loan Facility",
+   "label": "deal",
+   "from": "CoreWeave DDTL 3.0, Jul 2025"
+  },
+  {
+   "title": "Lambda Secures $500 Million Loan From Macquarie Using Nvidia Chips as Collateral",
+   "label": "deal",
+   "from": "Lambda / Macquarie, Apr 2024"
+  },
+  {
+   "title": "Crusoe closes $750 million credit facility from Brookfield",
+   "label": "deal",
+   "from": "Crusoe, 2025"
+  },
+  {
+   "title": "xAI raises $12.5 billion in debt for Colossus 2 data centre",
+   "label": "deal",
+   "from": "xAI / Valor SPV reporting, Oct 2025"
+  },
+  {
+   "title": "IREN secures $3.6 billion financing for Microsoft AI cloud contract",
+   "label": "deal",
+   "from": "IREN 10-K FY2026 (primary_hints.json)"
+  },
+  {
+   "title": "Blue Owl Managed Funds Lead $2.4 Billion AI Factory Financing for IREN",
+   "label": "deal",
+   "from": "Blue Owl press release (primary_hints.json)"
+  },
+  {
+   "title": "Nscale secures $1.4 billion facility to fund GPU deployment",
+   "label": "deal",
+   "from": "paraphrase: neocloud facility headline"
+  },
+  {
+   "title": "Sakura Internet borrows 50 billion yen to buy Nvidia servers",
+   "label": "deal",
+   "from": "paraphrase: non-USD amount"
+  },
+  {
+   "title": "Yotta secures Rs 4,000 crore loan against Nvidia GPUs",
+   "label": "deal",
+   "from": "paraphrase: INR amount"
+  },
+  {
+   "title": "Moody's assigns A3 rating to CoreWeave's DDTL 4.0",
+   "label": "deal",
+   "from": "rating action, CoreWeave DDTL 4.0 row"
+  },
+  {
+   "title": "KBRA assigns preliminary ratings to Compute ABS 2026-1",
+   "label": "deal",
+   "from": "paraphrase: rating-agency presale"
+  },
+  {
+   "title": "TeraWulf prices $3.2 billion senior secured notes",
+   "label": "deal",
+   "from": "TeraWulf notes offering, 2025"
+  },
+  {
+   "title": "GPU lender seizes servers after AI startup misses payments",
+   "label": "stress",
+   "from": "paraphrase: repossession"
+  },
+  {
+   "title": "Moody's downgrades CoreWeave's GPU-backed term loan on weaker collateral values",
+   "label": "stress",
+   "from": "paraphrase: downgrade"
+  },
+  {
+   "title": "Neocloud defaults on $300 million GPU loan",
+   "label": "stress",
+   "from": "paraphrase: default"
+  },
+  {
+   "title": "Lender waives covenant breach on Fluidstack chip-backed facility",
+   "label": "stress",
+   "from": "paraphrase: covenant waiver"
+  }
  ]
 }

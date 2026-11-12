@@ -100,6 +100,14 @@ function toast(msg, isErr) {
 }
 
 // ------------------------------------------------------------ form
+const EXTRA = ['collateral', 'amount_musd', 'amount_kind', 'lenders', 'rate', 'maturity', 'rating',
+  'gpu_generation', 'vendor_role', 'announced', 'closed', 'parent_id'];
+const COLLATERAL_OPTS = [
+  ['gpu-lien', 'Lien on GPUs / GPU servers'],
+  ['spv-owned-leased', 'Chips owned by an SPV and leased out'],
+  ['contract-cashflows', 'Backed by compute contracts, not chips (related, not counted)'],
+  ['none-or-unclear', 'No chip collateral shown (related, not counted)'],
+];
 function field(label, input, hint, wide) {
   return h('label', { class: 'f' + (wide ? ' wide' : '') },
     h('span', { class: 'fl', text: label }), input, hint ? h('span', { class: 'fh', text: hint }) : null);
@@ -116,7 +124,12 @@ function dealForm(item) {
   const err = h('p', { class: 'form-err', role: 'alert' });
   const isEdit = item.kind === 'published';
 
+  const auto = Array.isArray(item.auto) ? item.auto : [];
+  const autoNote = auto.length ? h('p', { class: 'auto-note', text: item.kind === 'published'
+      ? `${auto.length} empty detail field${auto.length > 1 ? 's were' : ' was'} suggested from the stored text (highlighted). Check before saving.`
+      : `Filled in automatically from the headlines and known sources (highlighted fields). Open the source, correct anything that differs, then choose VERIFIED or REPORTED.` }) : null;
   const form = h('form', { class: 'deal-form', novalidate: true },
+    autoNote,
     h('div', { class: 'grid' },
       field('Deal name', inp('name', { placeholder: 'Who borrowed what from whom, e.g. "IREN $2.4bn GPU financing (Blue Owl-led)"' }), null, true),
       field('Date', inp('date', { placeholder: 'YYYY-MM or YYYY-MM-DD', inputmode: 'numeric' }), 'Month is enough'),
@@ -126,8 +139,26 @@ function dealForm(item) {
       field('Terms', h('textarea', { name: 'terms', rows: 3,
         placeholder: 'Lenders, rate, tenor, collateral, anything notable. Your own words, not copied text.' }, d.terms || ''), null, true),
       field('Source (as shown on the site)', inp('src', { placeholder: 'e.g. IREN press release, 09/2026' })),
-      field('Link to the source', inp('url', { type: 'url', placeholder: 'https://…' }), 'Best: the filing or the issuer’s press release'),
+      field('Link to the source', inp('url', { type: 'url', placeholder: 'https://…' }), 'Required for VERIFIED. Best: the filing or the issuer’s press release'),
     ),
+    h('details', { class: 'extra', open: EXTRA.some(k => d[k]) },
+      h('summary', { text: 'Structured details (optional, used for counts and totals)' }),
+      h('div', { class: 'grid' },
+        field('Collateral', h('select', { name: 'collateral' },
+          h('option', { value: '', text: 'Not classified yet' }),
+          COLLATERAL_OPTS.map(([v, label]) => h('option', { value: v, text: label, selected: d.collateral === v }))),
+          'Only the first two count as chip-backed debt'),
+        field('Amount in USD millions', inp('amount_musd', { placeholder: 'e.g. 2400', inputmode: 'decimal' }), 'A number; used for the total'),
+        field('Amount is', inp('amount_kind', { list: listId('amount-kinds'), placeholder: 'committed, drawn, outstanding, up-to' })),
+        field('Lenders', inp('lenders', { placeholder: 'e.g. Blackstone, Magnetar (lead)' })),
+        field('Rate', inp('rate', { placeholder: 'e.g. SOFR+4.00%' })),
+        field('Maturity', inp('maturity', { placeholder: 'e.g. 2031 or 5y' })),
+        field('Rating', inp('rating', { placeholder: 'e.g. A3 (Moody’s)' })),
+        field('Collateral GPUs', inp('gpu_generation', { placeholder: 'e.g. H100, GB200' })),
+        field('Vendor role', inp('vendor_role', { placeholder: 'e.g. Nvidia anchor LP, backstop' })),
+        field('Announced', inp('announced', { placeholder: 'YYYY-MM-DD' }), 'Day precision helps event studies'),
+        field('Closed', inp('closed', { placeholder: 'YYYY-MM-DD' })),
+        field('Related deal id', inp('parent_id', { placeholder: 'e.g. d86783e0f42' }), 'Upsize, refinancing or second tranche of'))),
     h('fieldset', { class: 'ver' },
       h('legend', { text: 'How did you check it?' }),
       verChoice('VERIFIED', 'VERIFIED', 'I read the primary source: a filing or the issuer’s own press release'),
@@ -141,9 +172,10 @@ function dealForm(item) {
     ev.preventDefault();
     const fd = new FormData(form);
     const values = {};
-    for (const k of ['date', 'name', 'type', 'amount', 'terms', 'status', 'src', 'url']) values[k] = String(fd.get(k) || '');
+    for (const k of ['date', 'name', 'type', 'amount', 'terms', 'status', 'src', 'url', ...EXTRA]) values[k] = String(fd.get(k) || '');
     values.ver = String(fd.get('ver-' + key) || '');
     if (!values.ver) { err.textContent = 'Choose VERIFIED or REPORTED.'; return; }
+    if (values.ver === 'VERIFIED' && !values.url) { err.textContent = 'VERIFIED needs a link to the primary source.'; return; }
     err.textContent = '';
     const btn = form.querySelector('button[type=submit]');
     btn.disabled = true;
@@ -155,6 +187,16 @@ function dealForm(item) {
       err.textContent = e.message;
     } finally { btn.disabled = false; }
   });
+  // Highlight guessed fields until the curator touches them.
+  for (const k of auto) {
+    const el = form.querySelector(`[name="${k}"]`);
+    if (!el) continue;
+    el.classList.add('auto');
+    el.title = 'Auto-filled: check against the source';
+    const clear = () => el.classList.remove('auto');
+    el.addEventListener('input', clear, { once: true });
+    el.addEventListener('change', clear, { once: true });
+  }
   return form;
 }
 
@@ -226,6 +268,7 @@ function focusForm(key) {
 
 function newCard() {
   const item = { kind: 'new', ref: '', draft: { date: '', name: '', type: '', amount: '', terms: '', status: '', src: '', url: '', ver: '' } };
+  for (const k of EXTRA) item.draft[k] = '';
   return h('article', { class: 'card open new-card', 'data-key': 'new:' },
     h('div', { class: 'card-row' }, h('div', { class: 'card-main' }, h('h3', { text: 'New deal' }),
       h('p', { class: 'muted', text: 'For a deal you found yourself. It goes straight into the published registry.' }))),
@@ -237,6 +280,7 @@ function datalists() {
   return [
     h('datalist', { id: 'dl-types' }, S.types.map(t => h('option', { value: t }))),
     h('datalist', { id: 'dl-statuses' }, S.statuses.map(t => h('option', { value: t }))),
+    h('datalist', { id: 'dl-amount-kinds' }, (S.amount_kinds || []).map(t => h('option', { value: t }))),
   ];
 }
 

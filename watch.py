@@ -37,7 +37,21 @@ CONFIG_PATH = os.environ.get("OBS_CONFIG", "config.json")
 with open(CONFIG_PATH, encoding="utf-8") as _f:
     CONFIG = json.load(_f)
 TODAY = datetime.date.today()
-MAX_AGE = datetime.timedelta(days=CONFIG.get("max_age_days", 10))
+
+
+def _max_age_days():
+    """config max_age_days, or OBS_MAX_AGE_DAYS for a one-off backfill run
+    (e.g. after the watch was paused). Clamped to 1..365."""
+    raw = os.environ.get("OBS_MAX_AGE_DAYS", "").strip()
+    try:
+        days = int(raw) if raw else int(CONFIG.get("max_age_days", 10))
+    except ValueError:
+        print(f"[warn] OBS_MAX_AGE_DAYS={raw!r} is not a number; using config", file=sys.stderr)
+        days = int(CONFIG.get("max_age_days", 10))
+    return max(1, min(days, 365))
+
+
+MAX_AGE = datetime.timedelta(days=_max_age_days())
 STORY_MEMORY_DAYS = 60
 # Feeds are untrusted: cap what one response may cost (bytes after decompression,
 # and total seconds; requests' own timeout applies per read, not per response).
@@ -68,9 +82,35 @@ CONTEXT = _term_rx(CONFIG.get("context_terms", []))
 FIN = _term_rx(CONFIG.get("finance_terms", []))
 FIN_STRONG = _term_rx(CONFIG.get("strong_finance_terms", []))
 EXCLUDE = _term_rx(CONFIG.get("exclude_terms", []))
+MARKET = _term_rx(CONFIG.get("market_terms", []))
 DEAL_VERB = _term_rx(CONFIG.get("deal_verbs", []))
-# A money amount: "$2.4B", "EUR 500m", "100 million". (Not "100,000 chips" or "58%".)
-AMOUNT = re.compile(r"[$€£]\s?\d|\b(?:usd|eur|gbp)\s?\d|\d[\d,.]*\s?(?:bn|billion|million|mn)\b", re.I)
+STRESS = _term_rx(CONFIG.get("stress_terms", []))
+
+
+def _issuer_rx(issuers, case_sensitive):
+    """Names and aliases of watched issuers ("generic" ones such as Nvidia excluded:
+    Nvidia headlines go through the narrower context-term rule)."""
+    names = [n for i in issuers if not i.get("generic") and bool(i.get("match_case")) == case_sensitive
+             for n in [i.get("name", "")] + list(i.get("aliases") or []) if n and "/" not in n]
+    if not names:
+        return re.compile(r"(?!x)x")
+    alt = "|".join(re.escape(n) for n in sorted(names, key=len, reverse=True))
+    return re.compile(r"(?<!\w)(?:" + alt + r")(?:'s|’s)?(?!\w)", 0 if case_sensitive else re.I)
+
+
+ISSUERS = [i for i in CONFIG.get("issuers", []) if isinstance(i, dict)]
+_ISSUER_I, _ISSUER_CS = _issuer_rx(ISSUERS, False), _issuer_rx(ISSUERS, True)
+stories.add_entities(ISSUERS)
+
+
+def issuer_in(text):
+    return bool(_ISSUER_I.search(text) or _ISSUER_CS.search(text))
+
+
+# A money amount: "$2.4B", "EUR 500m", "¥50bn", "Rs 4,000 crore", "100 million".
+# (Not "100,000 chips" or "58%".)
+AMOUNT = re.compile(r"[$€£¥₹]\s?\d|\b(?:usd|us\$|eur|gbp|jpy|inr|rs\.?)\s?\d"
+                    r"|\d[\d,.]*\s?(?:bn|billion|million|mn|trillion|crore)\b", re.I)
 BLOCK = [b.lower() for b in CONFIG.get("blocked_sources", ["vinanet"])]
 
 
@@ -80,27 +120,43 @@ def has_deal_signal(text):
     return bool(AMOUNT.search(text) or DEAL_VERB.search(text))
 
 
-def relevant(title, summary=""):
-    """Return "strong", "combo" or None.
+def is_stress(title):
+    """A stress term (default, seized, downgrade, covenant, ...) next to a chip or
+    watched-issuer term and a finance term, all in the title."""
+    chipish = TECH.search(title) or issuer_in(title) or STRONG.search(title)
+    finance = FIN.search(title) or STRONG.search(title)
+    return bool(STRESS.search(title) and chipish and finance)
 
+
+def relevant(title, summary=""):
+    """Return "stress", "strong", "combo" or None.
+
+    stress: see is_stress(). Kept without a deal signal: defaults, seizures and
+            downgrades are what the observatory exists to catch.
     strong: a strong phrase (e.g. "gpu-backed") in the title or summary.
     combo:  judged on the TITLE only, because feed summaries are long and noisy:
-            a chip/GPU term plus any finance term, or a context term
-            (nvidia, data center, ...) plus a collateral-type finance term.
-    Either way the title must also carry a deal signal (has_deal_signal); for a
-    strong match the summary may carry it instead.
-    Titles matching an exclude term (e.g. "tokenized") are always dropped.
+            a chip/GPU term or a watched issuer (config "issuers") plus any finance
+            term, or a context term (nvidia, data center, ...) plus a
+            collateral-type finance term.
+    strong and combo also need a deal signal in the title (has_deal_signal); for
+    a strong match the summary may carry it instead.
+    Titles matching an exclude term (e.g. "tokenized") are always dropped;
+    combo titles matching a market term (stock, shares, earnings, ...) too.
     """
     if EXCLUDE.search(title):
         return None
+    if is_stress(title):
+        return "stress"
     if STRONG.search(title) or STRONG.search(summary):
         kind = "strong"
-    elif TECH.search(title) and FIN.search(title):
+    elif (TECH.search(title) or issuer_in(title)) and FIN.search(title):
         kind = "combo"
     elif CONTEXT.search(title) and FIN_STRONG.search(title):
         kind = "combo"
     else:
         return None
+    if kind == "combo" and MARKET.search(title):
+        return None   # stock-market chatter, not a financing
     if has_deal_signal(title) or (kind == "strong" and has_deal_signal(summary)):
         return kind
     return None
@@ -160,8 +216,9 @@ class Watch:
         self.seen = set(seen)
         self.candidates = []
         self.stats = {}  # source -> [fetched, new, error]
+        self.filings = {}  # accession number -> candidate added this run
 
-    def add(self, tier, title, url, source, date, summary="", outlet=None):
+    def add(self, tier, title, url, source, date, summary="", outlet=None, signal=None):
         url = stories.safe_http_url(url)   # feed links are untrusted
         k = key(url, title)
         if k in self.seen:
@@ -182,6 +239,8 @@ class Watch:
             "url": url,
             "outlet": outlet or source,
         })
+        if signal == "stress":
+            self.candidates[-1]["_signal"] = "stress"
         return True
 
     def process_feed(self, feed, url, tier, source_label=None):
@@ -197,12 +256,13 @@ class Watch:
             outlet = (e.get("source") or {}).get("title") or source_label or src
             if blocked(title, link, outlet):
                 continue
-            if not relevant(title, summary):
+            kind = relevant(title, summary)
+            if not kind:
                 continue
             ok, d = entry_date(e)
             if not ok:
                 continue
-            if self.add(tier, title, link, src, d, summary, outlet):
+            if self.add(tier, title, link, src, d, summary, outlet, signal=kind):
                 new += 1
         self.stats[url] = [min(len(feed.entries), 60), new, None]
 
@@ -222,6 +282,8 @@ class Watch:
         whichever queries and documents matched it. Forms in
         config "edgar_exclude_forms" (fund prospectuses, merger filings, ...) are skipped."""
         exclude = {f.upper() for f in CONFIG.get("edgar_exclude_forms", [])}
+        allow = {f.upper() for f in CONFIG.get("edgar_fulltext_forms", [])}
+        min_other = int(CONFIG.get("edgar_min_queries_other_forms", 1))
         filings = {}
         for q, hits in results.items():
             for h in hits:
@@ -235,9 +297,16 @@ class Watch:
                 f = filings.setdefault(adsh, {"s": s, "queries": []})
                 if q not in f["queries"]:
                     f["queries"].append(q)
+        if allow:   # other forms need several distinct query matches
+            filings = {a: f for a, f in filings.items()
+                       if str(f["s"].get("form", "")).upper() in allow or len(f["queries"]) >= min_other}
         new = 0
         for adsh, f in sorted(filings.items(), key=lambda kv: kv[1]["s"].get("file_date", "")):
             s = f["s"]
+            if adsh in self.filings:   # already listed by the issuer scan: note the match
+                c = self.filings[adsh]
+                c["name"] = (c["name"] + " - full text matches " + " + ".join(f["queries"]))[:180]
+                continue
             cik = str((s.get("ciks") or [""])[0]).lstrip("0")
             cik = cik if cik.isdigit() else ""
             url = (f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{adsh}-index.htm"
@@ -246,8 +315,80 @@ class Watch:
             name = f"{filer} - {s.get('form', '')} matching {' + '.join(f['queries'])}"
             if self.add(1, name, url, "SEC EDGAR", s.get("file_date"),
                         "EDGAR full-text match", outlet="sec.gov"):
+                self.filings[adsh] = self.candidates[-1]
                 new += 1
         self.stats["EDGAR filings (after form filter, one per filing)"] = [len(filings), new, None]
+
+    # ---- EDGAR, per watched issuer
+    ITEM_NAMES = {"1.01": "material agreement", "1.02": "agreement terminated",
+                  "2.03": "new financial obligation", "2.04": "acceleration / default",
+                  "2.06": "impairment"}
+    STRESS_ITEMS = {"2.04", "2.06"}
+
+    def process_issuer_filings(self, issuer, data):
+        """data: the company's https://data.sec.gov/submissions/CIK##########.json.
+        Adds one candidate per filing in the window that is an 8-K with an item in
+        config "edgar_8k_items" (financing agreements, defaults, impairments) or a
+        periodic report (its debt note lists every facility). Skips the company if
+        EDGAR's name for the CIK does not match the configured name (a wrong cik)."""
+        label = "EDGAR filings: " + issuer.get("name", "?")
+        flat = lambda s: re.sub(r"[^a-z0-9]", "", str(s).lower())
+        names = [issuer.get("name", "")] + list(issuer.get("aliases") or [])
+        edgar_name = str(data.get("name", ""))
+        if not any(flat(n) and flat(n) in flat(edgar_name) for n in names):
+            self.stats[label] = [0, 0, f"cik name mismatch: EDGAR says {edgar_name[:40]!r}; check config"]
+            return
+        cik = str(data.get("cik") or issuer.get("cik") or "").lstrip("0")
+        if not cik.isdigit():
+            self.stats[label] = [0, 0, "bad cik"]
+            return
+        items_wanted = set(CONFIG.get("edgar_8k_items", ["1.01", "2.03", "2.04"]))
+        periodic = {f.upper() for f in CONFIG.get("edgar_periodic_forms", ["10-K", "10-Q"])}
+        registration = {f.upper() for f in CONFIG.get("edgar_registration_forms", [])}
+        recent = (data.get("filings") or {}).get("recent") or {}
+        col = lambda k: list(recent.get(k) or [])
+        rows = zip(col("accessionNumber"), col("filingDate"), col("form"),
+                   col("items") or [""] * len(col("form")))
+        cutoff = str(TODAY - MAX_AGE)
+        n_window = new = 0
+        for adsh, fdate, form, items in rows:
+            adsh, fdate, form = str(adsh), str(fdate)[:10], str(form).upper()
+            if fdate < cutoff or not EDGAR_ADSH.match(adsh):
+                continue
+            item_set = {i.strip() for i in str(items or "").split(",") if i.strip()}
+            if form in ("8-K", "8-K/A"):
+                hit = sorted(item_set & items_wanted)
+                if not hit:
+                    continue
+                what = ", ".join(f"{i} {self.ITEM_NAMES.get(i, '')}".strip() for i in hit)
+            elif form in periodic:
+                what = "periodic report: check the debt note" if form != "6-K" else "foreign issuer report"
+            elif form in registration:
+                what = "registration statement: check the debt section"
+            else:
+                continue
+            n_window += 1
+            url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{adsh}-index.htm"
+            name = f"{edgar_name} - {form} ({what})"
+            signal = "stress" if item_set & self.STRESS_ITEMS else None
+            if self.add(1, name, url, "SEC EDGAR", fdate, "EDGAR filing list", outlet="sec.gov", signal=signal):
+                self.filings[adsh] = self.candidates[-1]
+                new += 1
+        self.stats[label] = [n_window, new, None]
+
+    def scan_edgar_issuers(self):
+        for issuer in ISSUERS:
+            cik = issuer.get("cik")
+            if not isinstance(cik, int) or cik <= 0:
+                continue
+            try:
+                data = json.loads(http_get(f"https://data.sec.gov/submissions/CIK{cik:010d}.json"))
+            except Exception as e:
+                print(f"[warn] EDGAR filing list failed: {issuer.get('name')} ({e})", file=sys.stderr)
+                self.stats["EDGAR filings: " + str(issuer.get("name"))] = [0, 0, str(e)[:80]]
+                continue
+            self.process_issuer_filings(issuer, data)
+            time.sleep(0.2)   # SEC fair access: well under 10 requests per second
 
     def scan_edgar(self):
         max_hits = CONFIG.get("edgar_max_hits", 200)
@@ -276,18 +417,36 @@ class Watch:
         self.process_edgar(results)
 
     def run_sources(self):
+        self.scan_edgar_issuers()   # first, so its clearer titles lead for shared filings
         self.scan_edgar()
-        gn = "https://news.google.com/rss/search?q={}&hl=en-US&gl=US&ceid=US:en"
         for u in CONFIG.get("tier1_press_release_feeds", []):
             self.scan_feed(u, 1)
         for q in CONFIG.get("tier1_google_news_queries", []):
-            self.scan_feed(gn.format(urllib.parse.quote(q)), 1)
+            self.scan_feed(google_news_url(q), 1)
         for u in CONFIG.get("tier2_ft_feeds", []):
             self.scan_feed(u, 2, "Financial Times")
-        for q in CONFIG.get("tier2_google_news_queries", []):
-            self.scan_feed(gn.format(urllib.parse.quote(q)), 2)
+        for ed in google_news_editions():
+            for q in CONFIG.get("tier2_google_news_queries", []):
+                self.scan_feed(google_news_url(q, ed), 2)
+                time.sleep(1)   # be gentle with Google News
         for u in CONFIG.get("tier3_extra_rss", []):
             self.scan_feed(u, 3)
+
+
+US_EDITION = {"hl": "en-US", "gl": "US", "ceid": "US:en"}
+_EDITION_OK = re.compile(r"^[A-Za-z]{2,3}(?:-[A-Za-z]{2,4})?(?::[A-Za-z-]{2,8})?$")
+
+
+def google_news_editions():
+    """Editions from config "google_news_editions" (well-formed ones only), else en-US."""
+    eds = [e for e in CONFIG.get("google_news_editions") or [] if isinstance(e, dict)
+           and all(_EDITION_OK.match(str(e.get(k, ""))) for k in ("hl", "gl", "ceid"))]
+    return eds or [US_EDITION]
+
+
+def google_news_url(query, edition=US_EDITION):
+    return ("https://news.google.com/rss/search?" + urllib.parse.urlencode(
+        {"q": query, "hl": edition["hl"], "gl": edition["gl"], "ceid": edition["ceid"]}))
 
 
 # ---------------------------------------------------------------- story grouping
@@ -304,6 +463,8 @@ def group_candidates(candidates):
     for g in stories.group([c for c in candidates if not _is_filing(c)]):
         head, _ = stories.merge_group(g)
         head["_tier"] = min(c["_tier"] for c in g)
+        if any(c.get("_signal") == "stress" for c in g):
+            head["_signal"] = "stress"
         out.append(head)
     return sorted(out, key=lambda c: (c["_tier"], c["date"]))
 
@@ -337,12 +498,16 @@ def _line(c):
 
 
 def digest_lines(candidates):
-    fresh = [c for c in candidates if "_followup_of" not in c]
-    follow = [c for c in candidates if "_followup_of" in c]
+    stress = [c for c in candidates if c.get("_signal") == "stress"]
+    fresh = [c for c in candidates if "_followup_of" not in c and c.get("_signal") != "stress"]
+    follow = [c for c in candidates if "_followup_of" in c and c.get("_signal") != "stress"]
     n_articles = sum(1 + len(c.get("sources") or []) for c in candidates)
     lines = [f"# Observatory watch digest - {TODAY}",
-             f"{len(fresh)} new stor{'y' if len(fresh) == 1 else 'ies'}, {len(follow)} follow-up(s) "
-             f"({n_articles} article(s)).", ""]
+             f"{len(fresh)} new stor{'y' if len(fresh) == 1 else 'ies'}, {len(follow)} follow-up(s), "
+             f"{len(stress)} stress signal(s) ({n_articles} article(s)). Window: {MAX_AGE.days} days.", ""]
+    if stress:
+        lines += ["## Stress signals (defaults, seizures, downgrades, impairments)", ""]
+        lines += [_line(c) for c in stress] + [""]
     names = {1: "Tier 1 - primary sources", 2: "Tier 2 - quality press", 3: "Tier 3 - alerts"}
     cur = None
     for c in fresh:

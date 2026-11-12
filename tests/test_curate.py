@@ -50,6 +50,30 @@ class Curate(unittest.TestCase):
             with self.assertRaisesRegex(curate.Invalid, msg):
                 curate.clean({**FORM, **bad})
 
+    def test_verified_needs_a_link(self):
+        with self.assertRaisesRegex(curate.Invalid, "primary source"):
+            curate.clean({**FORM, "ver": "VERIFIED", "url": ""})
+        self.assertEqual(curate.clean({**FORM, "ver": "REPORTED", "url": ""})["url"], "")
+
+    def test_structured_fields(self):
+        for bad, msg in ((dict(collateral="chips"), "Collateral"), (dict(amount_kind="maybe"), "Amount is"),
+                         (dict(amount_musd="lots"), "number"), (dict(amount_musd="-5"), "wrong"),
+                         (dict(closed="soon"), "Closed")):
+            with self.assertRaisesRegex(curate.Invalid, msg):
+                curate.clean({**FORM, **bad})
+        form = curate.clean({**FORM, "collateral": "gpu-lien", "amount_musd": "2,400", "lenders": "Blue Owl"})
+        curate.act("approve", {"kind": "new", "ref": "", "form": {**FORM, "collateral": "gpu-lien",
+                                                                  "amount_musd": "2,400", "lenders": "Blue Owl"}})
+        row = next(d for d in self.db()["deals"] if d["name"] == "Test deal")
+        self.assertEqual((row["collateral"], row["amount_musd"], row["lenders"]), ("gpu-lien", 2400, "Blue Owl"))
+        self.assertNotIn("rate", row, "empty optional fields are not stored")
+        self.assertEqual(form["amount_musd"], 2400.0)
+        pub = next(v for v in curate.state()["published"] if v["ref"] == row["id"])
+        self.assertEqual(pub["draft"]["amount_musd"], "2400")
+        curate.act("approve", {"kind": "published", "ref": row["id"], "form": {**pub["draft"], "lenders": ""}})
+        row = next(d for d in self.db()["deals"] if d["id"] == row["id"])
+        self.assertNotIn("lenders", row, "clearing a field removes it")
+
     def test_approve_pending_keeps_sources_and_refreshes_seed(self):
         pending = [d for d in self.db()["deals"] if d["ver"] == "PENDING REVIEW" and d.get("sources")][0]
         curate.act("approve", {"kind": "pending", "ref": pending["id"], "form": FORM})

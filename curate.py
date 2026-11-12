@@ -17,7 +17,8 @@ Every change also refreshes the fallback snapshot in app.js (update_seed.py), so
 afterwards you only run the checks and commit. "Undo" reverts the last change.
 
 The page is for the human curator: code never picks VERIFIED/REPORTED on its own;
-the server only writes the ver you clicked. It listens on 127.0.0.1 only.
+the server only writes the ver you clicked. Lead forms open prefilled with guesses
+(autofill.py) that the page marks for checking; nothing is stored until you save. It listens on 127.0.0.1 only.
 Standard library only.
 """
 import argparse
@@ -31,6 +32,7 @@ import urllib.parse
 import webbrowser
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
+import autofill
 import stories
 import update_seed
 
@@ -38,6 +40,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(ROOT, "observatory-data.json")
 CANDIDATES = os.path.join(ROOT, "candidates.json")
 PREVALIDATION = os.path.join(ROOT, "prevalidation.json")
+HINTS = os.path.join(ROOT, "primary_hints.json")
 REVIEWED = os.path.join(ROOT, "state", "reviewed.json")
 APP = os.path.join(ROOT, "app.js")
 STATIC = os.path.join(ROOT, "curator")
@@ -47,6 +50,12 @@ FILES = {"/": ("index.html", "text/html"), "/curate.js": ("curate.js", "text/jav
 PENDING = "PENDING REVIEW"
 CURATED = ("VERIFIED", "REPORTED")
 FIELDS = ("date", "name", "type", "amount", "terms", "status", "src")
+# Optional structured fields (empty = not stored). See README "Deal fields".
+EXTRA = ("collateral", "amount_musd", "amount_kind", "lenders", "rate", "maturity", "rating",
+         "gpu_generation", "vendor_role", "announced", "closed", "parent_id")
+COLLATERAL = ("gpu-lien", "spv-owned-leased", "contract-cashflows", "none-or-unclear")
+AMOUNT_KINDS = ("committed", "drawn", "outstanding", "up-to")
+DATE_RX = r"\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?"
 DEFAULT_TYPES = ["GPU-backed loan", "Chip-lease SPV", "Securitization", "Bond / Loan", "Vendor commitment"]
 DEFAULT_STATUSES = ["Announced", "Reported", "Closed", "Outstanding", "Repaid"]
 CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; "
@@ -164,7 +173,9 @@ def draft(d):
     """Prefilled form values. A published deal opens with its stored values; a lead
     gets a first guess from its headline, which the curator edits before saving."""
     if d.get("ver") in CURATED:
-        return {k: d.get(k, "") for k in FIELDS + ("url", "ver")}
+        out = {k: d.get(k, "") for k in FIELDS + ("url", "ver")}
+        out.update({k: _extra_text(d.get(k)) for k in EXTRA})
+        return out
     name = stories.headline(d.get("name", ""))
     musd = stories.amount_musd(d.get("name", ""))
     date = d.get("date", "")
@@ -180,14 +191,25 @@ def draft(d):
         "src": f"{outlet}, {m.group(2)}/{m.group(1)}" if outlet and m else d.get("src", ""),
         "url": d.get("url", ""),
         "ver": d.get("ver") if d.get("ver") in CURATED else "",
+        **{k: "" for k in EXTRA},
+        "amount_musd": f"{musd:g}" if musd else "",
     }
 
 
-def view(d, kind, ref, items, clusters):
+def _extra_text(v):
+    if isinstance(v, bool) or v is None:
+        return ""
+    if isinstance(v, (int, float)):
+        return f"{v:g}"
+    return str(v)
+
+
+def view(d, kind, ref, items, clusters, hints=(), lenders=None):
     h = hint(d, items, clusters)
-    form = draft(d)
-    if kind != "published" and h["primary_links"]:
-        form["url"] = h["primary_links"][0]   # a known issuer release / filing beats a news link
+    # Prefilled from the headlines and known sources (autofill.py); the page marks
+    # the guessed fields. ver is never guessed: the curator picks it.
+    # It also swaps in a better-ranked known source (primary_hints.json) for the link.
+    form, auto = autofill.fill(draft(d), d, hints, published=(kind == "published"), lenders=lenders)
     srcs = [s for s in (d.get("sources") or []) if isinstance(s, dict) and stories.safe_http_url(s.get("url", ""))]
     return {
         "kind": kind, "ref": ref, "date": d.get("date", ""), "name": d.get("name", ""),
@@ -197,7 +219,7 @@ def view(d, kind, ref, items, clusters):
         "excerpt": d.get("_summary", ""), "followup": bool(d.get("_followup_of")),
         "sources": [{"outlet": s.get("outlet", ""), "url": s["url"], "date": s.get("date", ""),
                      "title": s.get("title", "")} for s in srcs],
-        "hint": h, "draft": form,
+        "hint": h, "draft": form, "auto": auto,
     }
 
 
@@ -206,6 +228,8 @@ def state():
     deals = db.get("deals", [])
     reviewed = set(_read(REVIEWED, []))
     items, clusters = suggestions()
+    hints = [x for x in _read(HINTS, []) if isinstance(x, dict)] if isinstance(_read(HINTS, []), list) else []
+    lenders = autofill.known_lenders()
     known_urls = {d.get("url") for d in deals if d.get("url")}
     known_urls |= {s.get("url") for d in deals for s in d.get("sources") or [] if isinstance(s, dict)}
     known_names = {(d.get("name"), d.get("date")) for d in deals}
@@ -216,23 +240,25 @@ def state():
         k = lead_key(c)
         if k in reviewed or c.get("url") in known_urls or (c.get("name"), c.get("date")) in known_names:
             continue
-        leads.append(view(c, "candidate", k, items, clusters))
-    leads += [view(d, "pending", d["id"], items, clusters) for d in deals if d.get("ver") == PENDING]
+        leads.append(view(c, "candidate", k, items, clusters, hints, lenders))
+    leads += [view(d, "pending", d["id"], items, clusters, hints, lenders) for d in deals if d.get("ver") == PENDING]
     leads.sort(key=lambda v: v["date"], reverse=True)
-    published = [view(d, "published", d["id"], items, clusters) for d in deals if d.get("ver") in CURATED]
+    published = [view(d, "published", d["id"], items, clusters, hints, lenders)
+                 for d in deals if d.get("ver") in CURATED]
     published.sort(key=lambda v: v["date"], reverse=True)
     types = list(dict.fromkeys(DEFAULT_TYPES + [d["type"] for d in deals
                                                 if d.get("ver") in CURATED and d.get("type")]))
     statuses = list(dict.fromkeys(DEFAULT_STATUSES + [d["status"] for d in deals
                                                       if d.get("ver") in CURATED and d.get("status")]))
     return {"leads": leads, "published": published, "types": types, "statuses": statuses,
+            "collateral": list(COLLATERAL), "amount_kinds": list(AMOUNT_KINDS),
             "undo": UNDO[-1][2] if UNDO else None, "updated": db.get("updated", "")}
 
 
 # ------------------------------------------------------------ actions
 def clean(form):
     out = {}
-    for k in FIELDS + ("url", "ver"):
+    for k in FIELDS + ("url", "ver") + EXTRA:
         v = form.get(k, "")
         if not isinstance(v, str):
             raise Invalid(f"{k} must be text")
@@ -242,10 +268,29 @@ def clean(form):
         raise Invalid("Please fill in: " + ", ".join(missing))
     if out["ver"] not in CURATED:
         raise Invalid("Choose VERIFIED (primary source) or REPORTED (press only).")
-    if not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])(-(0[1-9]|[12]\d|3[01]))?", out["date"]):
+    if not re.fullmatch(DATE_RX, out["date"]):
         raise Invalid("Date must be YYYY-MM or YYYY-MM-DD.")
     if out["url"] and not stories.safe_http_url(out["url"]):
         raise Invalid("Link must start with http:// or https://")
+    if out["ver"] == "VERIFIED" and not out["url"]:
+        raise Invalid("VERIFIED needs a link to the primary source (the filing or the issuer's release).")
+    if out["collateral"] and out["collateral"] not in COLLATERAL:
+        raise Invalid("Collateral must be one of: " + ", ".join(COLLATERAL))
+    if out["amount_kind"] and out["amount_kind"] not in AMOUNT_KINDS:
+        raise Invalid("'Amount is' must be one of: " + ", ".join(AMOUNT_KINDS))
+    for k in ("announced", "closed"):
+        if out[k] and not re.fullmatch(DATE_RX, out[k]):
+            raise Invalid(f"{k.capitalize()} date must be YYYY-MM or YYYY-MM-DD.")
+    if out["amount_musd"]:
+        try:
+            n = float(out["amount_musd"].replace(",", ""))
+        except ValueError:
+            raise Invalid("Amount in USD millions must be a number, e.g. 2400.")
+        if not 0 < n < 1e7:
+            raise Invalid("Amount in USD millions looks wrong.")
+        out["amount_musd"] = n
+    if any(len(str(out[k])) > 300 for k in EXTRA):
+        raise Invalid("A field is too long.")
     if out["type"] == "To classify":
         raise Invalid("Pick a deal type.")
     if out["terms"] == stories.NEUTRAL_TERMS:
@@ -258,6 +303,11 @@ def clean(form):
 def apply_form(deal, form):
     for k in FIELDS + ("ver",):
         deal[k] = form[k]
+    for k in EXTRA:
+        if form.get(k) not in ("", None):
+            deal[k] = int(form[k]) if k == "amount_musd" and float(form[k]).is_integer() else form[k]
+        else:
+            deal.pop(k, None)
     if form["url"]:
         deal["url"] = form["url"]
         if "news.google.com" not in form["url"]:
