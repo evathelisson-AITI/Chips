@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 <title>Chip-Backed Finance Observatory — AI Transparency Institute</title>
 <meta name="description" content="The first open research database of chip-backed finance: deal terms, GPU collateral price index, announcement-event calendar, and holdings map.">
 <link rel="stylesheet" href="styles.css">
@@ -12,12 +13,13 @@
 
 <header>
   <div class="head-in">
-    <div class="inst">AI Transparency Institute · Research Tools</div>
+    <p class="inst">AI Transparency Institute <span class="sep">/</span> Research Tools <span class="beta">Beta · v1.0</span></p>
     <h1>Chip-Backed Finance Observatory</h1>
     <p class="tagline">The first open research database of debt secured by AI chips: hand-collected deal terms, a GPU collateral price index, the vendor announcement-event calendar, and a map of who ultimately holds the risk.</p>
-    <span class="beta">BETA · v1.0 · Data compiled from public sources</span>
-    <span class="beta meta" id="updated">Data as of: loading…</span>
-    <button class="beta btn" id="refresh-btn">↻ Check for updates</button>
+    <div class="meta-row">
+      <span class="meta" id="updated">Data as of: loading…</span>
+      <button class="link-btn" id="refresh-btn">↻ Check for updates</button>
+    </div>
   </div>
 </header>
 
@@ -43,14 +45,14 @@
     <div class="stat"><b>~50%</b><span>Residual value after 3 years reportedly assumed in early GPU-backed securitizations</span><span class="src">as reported, 2024–2026</span></div>
     <div class="stat"><b id="st-events">–</b><span>Dated events in the announcement calendar</span><span class="src">vendor product cycle + deals</span></div>
   </div>
-  <div class="card mt18">
-    <h3>The four components</h3>
-    <p><b>1 · Deal Tracker.</b> Hand-collected terms of chip-backed loans, leases, bonds and securitizations, each entry carrying its source and a verification flag.</p>
-    <p><b>2 · GPU Collateral Price Index.</b> Resale and rental-rate series for major accelerator generations: the observable value of the collateral behind the loans.</p>
-    <p><b>3 · Announcement-Event Calendar.</b> Dated vendor architecture events, past and announced. These scheduled, public events are what reprice the entire collateral base, and the backbone of event-study research.</p>
-    <p><b>4 · Holdings Map.</b> Who ultimately holds the risk, mapped from insurance statutory filings and fund disclosures. In active collection.</p>
-    <p class="aside">Companion research: <i>Silicon as Collateral: Vendor-Supported Chip-Backed Debt and the Financing of the AI Buildout</i> (Thelisson, working paper, 2026).</p>
-  </div>
+  <h3 class="eyebrow">The four components</h3>
+  <ol class="components">
+    <li><span class="num">01</span><h4>Deal Tracker</h4><p>Hand-collected terms of chip-backed loans, leases, bonds and securitizations, each entry carrying its source and a verification flag.</p></li>
+    <li><span class="num">02</span><h4>GPU Collateral Price Index</h4><p>Resale and rental-rate series for major accelerator generations: the observable value of the collateral behind the loans.</p></li>
+    <li><span class="num">03</span><h4>Announcement-Event Calendar</h4><p>Dated vendor architecture events, past and announced. These scheduled, public events are what reprice the entire collateral base, and the backbone of event-study research.</p></li>
+    <li><span class="num">04</span><h4>Holdings Map</h4><p>Who ultimately holds the risk, mapped from insurance statutory filings and fund disclosures. In active collection.</p></li>
+  </ol>
+  <p class="aside">Companion research: <i>Silicon as Collateral: Vendor-Supported Chip-Backed Debt and the Financing of the AI Buildout</i> (Thelisson, working paper, 2026).</p>
 </section>
 
 <!-- DEALS -->

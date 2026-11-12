@@ -368,20 +368,20 @@ function lineChart(el, data, opts){
   let g='';
   const steps=opts.gridSteps||5;
   for(let s=0;s<=steps;s++){const v=ymin+(ymax-ymin)*s/steps,y=Y(v);
-    g+=`<line x1="${P.l}" y1="${y}" x2="${W-P.r}" y2="${y}" stroke="#EDF0F2"/>`+
+    g+=`<line x1="${P.l}" y1="${y}" x2="${W-P.r}" y2="${y}" class="grid-line"/>`+
        `<text x="${P.l-8}" y="${y+3}" text-anchor="end">${opts.fmt(v)}</text>`;}
   let path='';
   data.forEach((d,i)=>{path+=(i?'L':'M')+X(i)+' '+Y(d[1])+' ';});
   let dots='',labels='';
-  data.forEach((d,i)=>{dots+=`<circle cx="${X(i)}" cy="${Y(d[1])}" r="3.5" fill="${opts.color}"/>`;
-    labels+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle">${esc(d[0])}</text>`;});
+  data.forEach((d,i)=>{dots+=`<circle class="dot ${opts.cls}" cx="${X(i)}" cy="${Y(d[1])}" r="3.5"/>`;
+    labels+=`<text x="${X(i)}" y="${H-8}" text-anchor="${i===data.length-1?'end':'middle'}">${esc(d[0])}</text>`;});
   el.innerHTML=`<svg class="chart-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${opts.aria}">
-    ${g}<path d="${path}" fill="none" stroke="${opts.color}" stroke-width="2.5"/>${dots}${labels}</svg>`;
+    ${g}<path class="series ${opts.cls}" d="${path}"/>${dots}${labels}</svg>`;
 }
 function renderAll(){
   renderDeals();
-  lineChart($('chart-resale'), RESALE, {color:'#177E89', ymax:32000, fmt:v=>(v/1000)+'k', gridSteps:4, aria:'H100 resale value series'});
-  lineChart($('chart-rental'), RENTAL, {color:'#C97B1D', ymax:9, fmt:v=>'$'+v.toFixed(0), gridSteps:3, aria:'H100 rental rate series'});
+  lineChart($('chart-resale'), RESALE, {cls:'s-teal', ymax:32000, fmt:v=>(v/1000)+'k', gridSteps:4, aria:'H100 resale value series'});
+  lineChart($('chart-rental'), RENTAL, {cls:'s-amber', ymax:9, fmt:v=>'$'+v.toFixed(0), gridSteps:3, aria:'H100 rental rate series'});
   $('timeline').innerHTML = EVENTS.map(e => { const k = String(e.k ?? ''); return `
   <div class="ev ${k.includes('vendor')?'vendor':''} ${k.includes('future')?'future':''}">
     <div class="ev-date">${fmtDate(e.d)}${k.includes('future')?' · announced / expected':''}</div>
