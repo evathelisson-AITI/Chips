@@ -129,90 +129,9 @@
       "outlets": [
         "TradingView"
       ]
-    },
-    {
-      "entity": "Nvidia",
-      "amount_musd": 500000,
-      "members": 3,
-      "best_tier": "primary",
-      "suggestion": "VERIFIED-candidate (curator confirms issuer/filing in the source)",
-      "tags": [],
-      "possible_duplicate_of": [
-        "Nvidia — reported support for up to USD 500bn of AI data-centre financing"
-      ],
-      "known_primary": [
-        "https://nvidianews.nvidia.com/news/nvidia-partners-with-apollo-blackrock-blackstone-brookfield-goldman-sachs-and-kkr-to-establish-ai-compute-infrastructure-financing-platforms-to-mobilize-over-500-billion-of-third-party-capital",
-        "https://www.bloomberg.com/news/articles/2026-08-11/nvidia-s-show-of-financial-force-soothes-jittery-credit-markets"
-      ],
-      "member_ids": [
-        "d61e0e586bcc"
-      ],
-      "find_primary": [
-        "https://www.sec.gov/edgar/search/#/q=%22Nvidia%22",
-        "https://www.google.com/search?q=Nvidia%20500%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
-      ],
-      "outlets": [
-        "Forbes"
-      ]
     }
   ],
   "items": {
-    "d61e0e586bcc": {
-      "id": "d61e0e586bcc",
-      "date": "2026-08-16",
-      "name": "Nvidia AI Financing Is The $500 Billion Risk Investors Aren’t Watching - Forbes",
-      "outlet": "Forbes",
-      "tier": "press2",
-      "entity": "Nvidia",
-      "amount_musd": 500000.0,
-      "kind": "deal-signal",
-      "suggestion": "SEE-CLUSTER"
-    },
-    "c6c8d76f3f87": {
-      "id": "c6c8d76f3f87",
-      "date": "2026-08-17",
-      "name": "The AI Harvest: When Compute Becomes Collateral | by The Long Game ♟️ | Aug, 2026 - DataDrivenInvestor",
-      "outlet": "DataDrivenInvestor",
-      "tier": "other",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "commentary",
-      "suggestion": "REVIEW-manually"
-    },
-    "ca205c714b63": {
-      "id": "ca205c714b63",
-      "date": "2026-08-17",
-      "name": "AI chip financing: can a leasing model solve the GPU supply problem? - Pinsent Masons",
-      "outlet": "Pinsent Masons",
-      "tier": "other",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "commentary",
-      "suggestion": "REVIEW-manually"
-    },
-    "cd4f1cd26251": {
-      "id": "cd4f1cd26251",
-      "date": "2026-08-18",
-      "name": "US chip stocks slide as government borrowing costs hit multiyear highs",
-      "outlet": "Financial Times",
-      "tier": "press1",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "reject",
-      "reason": "macro / earnings news, not a financing",
-      "suggestion": "REJECT-suggested (macro / earnings news, not a financing)"
-    },
-    "a6f0f931ed91": {
-      "id": "a6f0f931ed91",
-      "date": "2026-08-20",
-      "name": "When GPUs Become Collateral: The Reality and Blind Spots of the AI Capital Cycle Built by Nvidia and Wall Street - finance.biggo.com",
-      "outlet": "finance.biggo.com",
-      "tier": "other",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "commentary",
-      "suggestion": "REVIEW-manually"
-    },
     "97c6bede7ce8": {
       "id": "97c6bede7ce8",
       "date": "2026-08-20",
@@ -223,28 +142,6 @@
       "amount_musd": 5000.0,
       "kind": "other",
       "suggestion": "SEE-CLUSTER"
-    },
-    "948468a6c4ff": {
-      "id": "948468a6c4ff",
-      "date": "2026-08-20",
-      "name": "Wall Street decided that GPUs can be used as collateral | by Austin Liu | Aug, 2026 - Medium",
-      "outlet": "Medium",
-      "tier": "other",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "commentary",
-      "suggestion": "REVIEW-manually"
-    },
-    "9ade030a5b48": {
-      "id": "9ade030a5b48",
-      "date": "2026-08-20",
-      "name": "4 Top Neocloud Stocks: How CoreWeave, Nebius, TeraWulf, and IREN Are Financing the AI Boom - MarketWise",
-      "outlet": "MarketWise",
-      "tier": "other",
-      "entity": "IREN",
-      "amount_musd": null,
-      "kind": "commentary",
-      "suggestion": "REVIEW-manually"
     },
     "d2adcb4b686b": {
       "id": "d2adcb4b686b",
@@ -257,39 +154,6 @@
       "kind": "deal-signal",
       "suggestion": "SEE-CLUSTER"
     },
-    "90f935aa5d73": {
-      "id": "90f935aa5d73",
-      "date": "2026-08-21",
-      "name": "Billionaire David Tepper Piled Into a Debt-Laden Artificial Intelligence (AI) Neocloud Stock in Q2 While Also Increasing His Stake in Its Newest Rival - The Globe and Mail",
-      "outlet": "The Globe and Mail",
-      "tier": "other",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
-    },
-    "0a97090ec6da": {
-      "id": "0a97090ec6da",
-      "date": "2026-08-22",
-      "name": "GPU Infrastructure Financing reshapes AI data centers - AI CERTs",
-      "outlet": "AI CERTs",
-      "tier": "other",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
-    },
-    "072f3a21731a": {
-      "id": "072f3a21731a",
-      "date": "2026-08-22",
-      "name": "\"I'll Back the Debt for AI\" ... NVIDIA's Big Promise Sends Korean Retail Investors to Bet 100 Billion Won on DRAM - 매일경제",
-      "outlet": "매일경제",
-      "tier": "other",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
-    },
     "96ca8ebb2b23": {
       "id": "96ca8ebb2b23",
       "date": "2026-08-25",
@@ -301,18 +165,6 @@
       "kind": "deal-signal",
       "suggestion": "SEE-CLUSTER"
     },
-    "92ae3b24854b": {
-      "id": "92ae3b24854b",
-      "date": "2026-08-27",
-      "name": "Nvidia forecasts 70% sales growth fuelled by relentless AI boom",
-      "outlet": "Financial Times",
-      "tier": "press1",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "reject",
-      "reason": "macro / earnings news, not a financing",
-      "suggestion": "REJECT-suggested (macro / earnings news, not a financing)"
-    },
     "3c159ed291b2": {
       "id": "3c159ed291b2",
       "date": "2026-08-28",
@@ -323,17 +175,6 @@
       "amount_musd": 100.0,
       "kind": "deal-signal",
       "suggestion": "SEE-CLUSTER"
-    },
-    "5413f8be703d": {
-      "id": "5413f8be703d",
-      "date": "2026-08-28",
-      "name": "Wall Street backs Nvidia-led GPU loans to reshape global AI finance - CHOSUNBIZ - Chosunbiz",
-      "outlet": "Chosunbiz",
-      "tier": "other",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
     },
     "17cf891b7382": {
       "id": "17cf891b7382",
@@ -356,85 +197,6 @@
       "amount_musd": 2400.0,
       "kind": "deal-signal",
       "suggestion": "SEE-CLUSTER"
-    },
-    "3bd8b701542a": {
-      "id": "3bd8b701542a",
-      "date": "2026-09-07",
-      "name": "Nvidia is the central bank of AI. But will its loans prove sound? - AFR",
-      "outlet": "AFR",
-      "tier": "press2",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "commentary",
-      "suggestion": "REVIEW-manually"
-    },
-    "bebe90da29db": {
-      "id": "bebe90da29db",
-      "date": "2026-09-10",
-      "name": "Rising rates spotlight debt risks as CoreWeave and Nebius race to expand GPU capacity. - Pluang",
-      "outlet": "Pluang",
-      "tier": "other",
-      "entity": "CoreWeave",
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
-    },
-    "e0f94246e353": {
-      "id": "e0f94246e353",
-      "date": "2026-09-18",
-      "name": "Nvidia B200’s 58% Premium Fuels GPU Loan Boom [2026] - tech-insider.org",
-      "outlet": "tech-insider.org",
-      "tier": "other",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
-    },
-    "f57e3a0f4483": {
-      "id": "f57e3a0f4483",
-      "date": "2026-09-20",
-      "name": "Morpho Turns Tokenized Apple and Nvidia Stock Into DeFi Loan Collateral - Startup Fortune",
-      "outlet": "Startup Fortune",
-      "tier": "other",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "reject",
-      "reason": "crypto lending against equities, not chip collateral",
-      "suggestion": "REJECT-suggested (crypto lending against equities, not chip collateral)"
-    },
-    "bea681484b02": {
-      "id": "bea681484b02",
-      "date": "2026-09-24",
-      "name": "Kamino Opens GPU-loan-linked sUSDai Collateral Market on Solana - The Defiant",
-      "outlet": "The Defiant",
-      "tier": "other",
-      "entity": "Kamino/sUSDai",
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "LINK-TO Bullish/USD.AI (derivative, not a primary financing)"
-    },
-    "eab0bf4246fe": {
-      "id": "eab0bf4246fe",
-      "date": "2026-09-25",
-      "name": "AI data centers increasingly built on GPU collateral, other novel financing - Nikkei Asia",
-      "outlet": "Nikkei Asia",
-      "tier": "press2",
-      "entity": null,
-      "amount_musd": null,
-      "kind": "other",
-      "suggestion": "REVIEW-manually"
-    },
-    "7f0851ec5bd0": {
-      "id": "7f0851ec5bd0",
-      "date": "2026-09-28",
-      "name": "Aave Just Turned Tokenized Apple, Nvidia and Tesla Stocks Into USDC Loan Collateral - finance.yahoo.com",
-      "outlet": "finance.yahoo.com",
-      "tier": "other",
-      "entity": "Nvidia",
-      "amount_musd": null,
-      "kind": "reject",
-      "reason": "crypto lending against equities, not chip collateral",
-      "suggestion": "REJECT-suggested (crypto lending against equities, not chip collateral)"
     },
     "9a66b85fb5ec": {
       "id": "9a66b85fb5ec",

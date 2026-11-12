@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deal Review</title>
+<link rel="stylesheet" href="/curate.css">
+<script src="/curate.js" defer></script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-in">
+    <div>
+      <div class="kicker">Chip-Backed Finance Observatory · local curator tool</div>
+      <h1>Deal review</h1>
+    </div>
+    <button type="button" class="btn" id="add">+ Add a deal by hand</button>
+  </div>
+  <div class="wrap">
+    <nav class="tabs" role="tablist">
+      <button type="button" role="tab" class="tab on" data-tab="leads">To review <span class="count" id="n-leads">–</span></button>
+      <button type="button" role="tab" class="tab" data-tab="published">Published <span class="count" id="n-published">–</span></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="help" id="help-leads">Open the source, then <b>Approve</b> to publish it on the site (you fill in the details) or <b>Reject</b> to drop it. Nothing here edits files until you click a button, and every change can be undone.</p>
+  <p class="help hidden" id="help-published">Deals shown on the site. Edit fixes a typo or adds details; Remove takes the deal off the site.</p>
+  <div id="list" aria-live="polite"><p class="empty">Loading…</p></div>
+</main>
+
+<footer class="wrap foot">
+  <p>When you're done: stop this tool (Ctrl+C in the terminal), run the checks, and commit <code>observatory-data.json</code>, <code>app.js</code> and <code>state/reviewed.json</code>. The site updates once that reaches <code>main</code>.</p>
+  <p class="meta" id="updated"></p>
+</footer>
+
+<div class="toast hidden" id="toast" role="status">
+  <span id="toast-msg"></span>
+  <button type="button" class="link" id="toast-undo">Undo</button>
+</div>
+</body>
+</html>

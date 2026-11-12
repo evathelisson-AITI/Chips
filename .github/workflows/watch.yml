@@ -18,7 +18,7 @@
 name: Observatory source watch
 on:
   schedule:
-    - cron: "0 7 * * 1,4"   # Monday and Thursday 07:00 UTC
+    - cron: "0 7 * * 1"   # Monday 07:00 UTC, weekly
   workflow_dispatch: {}
 
 permissions: {}   # each job asks for what it needs

@@ -6,12 +6,13 @@
   "auto_publish_tiers": [1],
   "observatory_json_path": "observatory-data.json",
 
-  "_terms_comment": "Matching is whole-word and case-insensitive; a plural s/es is allowed automatically; a trailing * makes a prefix. strong_phrases match in title or summary. The other rules look at the TITLE only: tech_terms + finance_terms, or context_terms + strong_finance_terms. exclude_terms in the title always reject.",
+  "_terms_comment": "Matching is whole-word and case-insensitive; a plural s/es is allowed automatically; a trailing * makes a prefix. strong_phrases match in title or summary. The other rules look at the TITLE only: tech_terms + finance_terms, or context_terms + strong_finance_terms. exclude_terms in the title always reject. Every match must also carry a deal signal: an amount ($2.4B, 100 million) or one of deal_verbs, in the title (for a strong phrase, title or summary). This drops commentary and explainers about GPU financing.",
   "strong_phrases": ["gpu-backed", "chip-backed", "gpu collateral", "chip collateral", "gpus as collateral", "chips as collateral", "chip lease", "gpu lease", "compute infrastructure financing", "gpu securitization", "gpu financing", "gpu-collateralized", "ai infrastructure debt"],
   "tech_terms": ["gpu", "chip", "ai chip", "h100", "h200", "b200", "gb200", "gb300", "blackwell", "hopper", "rubin", "accelerator", "neocloud"],
   "context_terms": ["nvidia", "compute", "data center", "data-center", "datacenter", "ai infrastructure"],
   "finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "loan", "debt", "financing", "credit facility", "debt facility", "term loan", "secured notes", "bond", "syndicat*", "private credit", "vendor financing", "residual value", "haircut"],
   "strong_finance_terms": ["collateral", "collateralized", "collateralised", "lease", "leased", "leasing", "spv", "securitization", "securitisation", "securitized", "asset-backed", "vendor financing", "residual value"],
+  "deal_verbs": ["secure*", "close*", "closing", "raise*", "raising", "provide*", "enter* into", "price*", "pricing", "leases", "ink*", "sign*", "land*", "obtain*", "arrange*", "commit*", "back*", "anchor*", "upsize*", "refinanc*", "borrow*", "tap*", "issue*", "complete*", "syndicat*", "led", "lead*", "fund*", "extend*", "agree*", "launch*"],
   "exclude_terms": ["tokenized", "tokenised", "blue-chip", "blue chip"],
   "blocked_sources": ["vinanet"],
 
@@ -38,6 +39,6 @@
   ],
   "tier3_extra_rss": [],
 
-  "max_age_days": 10,
+  "max_age_days": 14,
   "user_agent": "AITransparencyInstitute-Observatory-Watch/1.0 (contact@aitransparencyinstitute.com)"
 }
