@@ -68,7 +68,16 @@ CONTEXT = _term_rx(CONFIG.get("context_terms", []))
 FIN = _term_rx(CONFIG.get("finance_terms", []))
 FIN_STRONG = _term_rx(CONFIG.get("strong_finance_terms", []))
 EXCLUDE = _term_rx(CONFIG.get("exclude_terms", []))
+DEAL_VERB = _term_rx(CONFIG.get("deal_verbs", []))
+# A money amount: "$2.4B", "EUR 500m", "100 million". (Not "100,000 chips" or "58%".)
+AMOUNT = re.compile(r"[$€£]\s?\d|\b(?:usd|eur|gbp)\s?\d|\d[\d,.]*\s?(?:bn|billion|million|mn)\b", re.I)
 BLOCK = [b.lower() for b in CONFIG.get("blocked_sources", ["vinanet"])]
+
+
+def has_deal_signal(text):
+    """An amount or a deal verb (secures, closes, provides, leases, ...): what a
+    report of a transaction has and an essay about GPU financing usually lacks."""
+    return bool(AMOUNT.search(text) or DEAL_VERB.search(text))
 
 
 def relevant(title, summary=""):
@@ -78,16 +87,22 @@ def relevant(title, summary=""):
     combo:  judged on the TITLE only, because feed summaries are long and noisy:
             a chip/GPU term plus any finance term, or a context term
             (nvidia, data center, ...) plus a collateral-type finance term.
+    Either way the title must also carry a deal signal (has_deal_signal); for a
+    strong match the summary may carry it instead.
     Titles matching an exclude term (e.g. "tokenized") are always dropped.
     """
     if EXCLUDE.search(title):
         return None
     if STRONG.search(title) or STRONG.search(summary):
-        return "strong"
-    if TECH.search(title) and FIN.search(title):
-        return "combo"
-    if CONTEXT.search(title) and FIN_STRONG.search(title):
-        return "combo"
+        kind = "strong"
+    elif TECH.search(title) and FIN.search(title):
+        kind = "combo"
+    elif CONTEXT.search(title) and FIN_STRONG.search(title):
+        kind = "combo"
+    else:
+        return None
+    if has_deal_signal(title) or (kind == "strong" and has_deal_signal(summary)):
+        return kind
     return None
 
 

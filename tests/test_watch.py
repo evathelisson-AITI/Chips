@@ -49,6 +49,13 @@ class RelevanceSample(unittest.TestCase):
         rate = 1 - len(leaked) / len(noise)
         self.assertGreaterEqual(rate, 0.8, f"noise rejection {rate:.0%}; leaked: {leaked}")
 
+    def test_most_commentary_rejected(self):
+        # Essays and market pieces about GPU financing are not deals.
+        items = self.by("commentary")
+        leaked = [t for t in items if accepted(t)]
+        rate = 1 - len(leaked) / len(items)
+        self.assertGreaterEqual(rate, 0.8, f"commentary rejection {rate:.0%}; leaked: {leaked}")
+
 
 class Matching(unittest.TestCase):
     def test_word_boundaries(self):
@@ -63,6 +70,13 @@ class Matching(unittest.TestCase):
 
     def test_strong_phrase_in_summary(self):
         self.assertEqual(watch.relevant("Market wrap", "a new GPU-backed facility closed"), "strong")
+
+    def test_deal_signal(self):
+        self.assertIsNone(watch.relevant("AI data centers increasingly built on GPU collateral"))
+        self.assertIsNone(watch.relevant("Rising rates spotlight debt risks as neoclouds race to expand GPU capacity"))
+        self.assertEqual(watch.relevant("Sharon AI Enters Into GPU-Backed Debt Facility"), "strong")
+        self.assertEqual(watch.relevant("Tencent leases 100,000 chips from Oracle"), "combo")
+        self.assertEqual(watch.relevant("Neocloud gets $1B GPU loan"), "combo")
 
     def test_exclude_beats_strong(self):
         self.assertIsNone(watch.relevant("Tokenized Nvidia stock as GPU collateral"))

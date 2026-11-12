@@ -3,10 +3,10 @@
 Reviewed and reprioritized on 2026-11-12. Everything that code can do was implemented the same day. What remains needs a human: **(curator)** marks data decisions that code must not make (see AGENTS.md), and **(owner)** marks repo or organisation decisions.
 
 ## Open
-- [ ] **(curator) Triage the 28 pending rows.** Duplicates are already merged (69 headlines → 28 rows, each with its other sources listed). `PREVALIDATION.md` has suggestions: 7 deal clusters (IREN $2.4bn, Lambda $1bn, Bullish/USD.AI $100M, GSAM $6.6bn, …) and 4 suggested rejects. Promote real deals to `VERIFIED`/`REPORTED` entries and delete the rest.
+- [ ] **(curator) Triage the 9 pending rows.** 19 clear non-deals (commentary, explainers, stock and earnings news, tokenized-stock DeFi) were removed on 2026-11-12. Left: 5 likely deals (GSAM $6.6bn for OpenAI, Bullish/USD.AI $100M, Lambda $1bn, IREN $2.4bn, Sharon AI) and 4 borderline (Nebius $5bn debt raise, Broadcom "$60B" from an aggregator, Tencent leasing Oracle capacity, Nvidia insuring chip loans). `PREVALIDATION.md` has suggestions. Promote real deals to `VERIFIED`/`REPORTED` and delete the rest.
 - [ ] **(curator) Check the draft labels** in `tests/relevance_sample.json` (`label` and `story`). The filter and grouping tests rely on them.
 - [ ] **(curator) New lead from the 2026-11-12 test run:** the FT reported on 2026-11-11 that CoreWeave plans a multibillion-dollar chip-backed debt deal. CoreWeave's 10-Q, filed the same day, is also in that run's EDGAR results.
-- [ ] **(owner) Push to `main`.** That starts the twice-weekly schedule and redeploys the site with the new headers. Make sure the repo's Actions setting "Workflow permissions" allows read and write, or the commit step fails.
+- [ ] **(owner) Push to `main`.** That starts the weekly schedule and redeploys the site with the new headers. Make sure the repo's Actions setting "Workflow permissions" allows read and write, or the commit step fails.
 - [ ] **(owner) Choose a code license.** `LICENSE` covers data and content (CC BY 4.0). The code license is undecided.
 - [ ] **(owner) Confirm the response times in `SECURITY.md`** (acknowledge within 5 business days, plan within 30 days).
 - [ ] **(owner) Decide whether EDGAR should include 10-Q/10-K.** In the test run, the `"GPU" "collateral"` query alone returned 49 filings, mostly quarterly reports. Some are relevant (IREN, CoreWeave, TeraWulf, WhiteFiber), many are not. To cut noise, add `"10-Q"` and `"10-K"` to `edgar_exclude_forms`, at the cost of missing financings disclosed only in periodic reports.

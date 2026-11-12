@@ -14,7 +14,7 @@ Live site: https://chips-sigma.vercel.app/
 
 - **Site**: `index.html` + `app.js`, static, no build step. Vercel deploys from `main`. The page loads `observatory-data.json` at every visit. If that fails, it shows an embedded snapshot with a notice.
 - **Registry**: only entries a curator marked `VERIFIED` (primary source) or `REPORTED` (press only) are counted and shown in the deal table. Older machine-collected `PENDING REVIEW` leads are listed apart, uncounted, until the curator reviews them.
-- **Source watch**: `.github/workflows/watch.yml` runs Monday and Thursday at 07:00 UTC, or by hand from the Actions tab. It does not change the site data (`auto_publish_mode: "off"` in `config.json`). It opens an issue that lists one line per story, with duplicates folded in.
+- **Source watch**: `.github/workflows/watch.yml` runs every Monday at 07:00 UTC, or by hand from the Actions tab. It does not change the site data (`auto_publish_mode: "off"` in `config.json`). It opens an issue that lists one line per story, with duplicates folded in.
 
 ## Curation routine
 1. Pull the latest `main` (the watch run commits new leads to `candidates.json`).
@@ -41,7 +41,7 @@ To edit by hand instead, add an entry to `deals` in `observatory-data.json`:
 Each `id` must be unique. Then run `python3 update_seed.py` and the checks.
 
 ## Configuration (`config.json`)
-- Terms: `strong_phrases`, `tech_terms`, `context_terms`, `finance_terms`, `strong_finance_terms`, `exclude_terms`. Matching is whole-word, plurals are automatic, and a trailing `*` makes a prefix. After changing terms, run the tests: every real deal in `tests/relevance_sample.json` must still pass.
+- Terms: `strong_phrases`, `tech_terms`, `context_terms`, `finance_terms`, `strong_finance_terms`, `exclude_terms`. A headline must also show a deal signal, either an amount or one of `deal_verbs` (secures, closes, provides, leases, …), so commentary about GPU financing is dropped. Matching is whole-word, plurals are automatic, and a trailing `*` makes a prefix. After changing terms, run the tests: every real deal in `tests/relevance_sample.json` must still pass.
 - Sources: `tier1_edgar_queries` (+ `edgar_exclude_forms`, `edgar_max_hits`), `tier1_google_news_queries` (press-release wires), `tier2_ft_feeds`, `tier2_google_news_queries`, `tier3_extra_rss`. Outlets in `blocked_sources` are skipped.
 - `auto_publish_mode`: `off` (recommended) or `direct` (adds `PENDING REVIEW` rows to the site data, attaching duplicates to existing rows).
 
