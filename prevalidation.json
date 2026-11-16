@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-12",
+  "generated": "2026-11-16",
   "note": "suggestions only; ver is never modified",
   "clusters": [
     {
@@ -42,6 +42,86 @@
       ],
       "outlets": [
         "The Defiant"
+      ]
+    },
+    {
+      "entity": "CoreWeave",
+      "amount_musd": 4000,
+      "members": 7,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "afa22f2d2173"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%204%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "BigGo Finance"
+      ]
+    },
+    {
+      "entity": "CoreWeave",
+      "amount_musd": 35000,
+      "members": 1,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "95a4e6111dcd"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%2035%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "TradingView"
+      ]
+    },
+    {
+      "entity": "CoreWeave",
+      "amount_musd": 41600,
+      "members": 2,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "a1e3a8223b0b"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%2041.6%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "24/7 Wall St."
+      ]
+    },
+    {
+      "entity": "CoreWeave",
+      "amount_musd": 133000,
+      "members": 1,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "9bea034467e2"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%20133%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "Yahoo Finance"
       ]
     },
     {
@@ -128,6 +208,26 @@
       ],
       "outlets": [
         "TradingView"
+      ]
+    },
+    {
+      "entity": "Nvidia",
+      "amount_musd": 5500,
+      "members": 3,
+      "best_tier": "press1",
+      "suggestion": "REPORTED-candidate (Reuters/Bloomberg/FT)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "dade17912678"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22Nvidia%22",
+        "https://www.google.com/search?q=Nvidia%205.5%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "Bloomberg"
       ]
     }
   ],
@@ -227,6 +327,655 @@
       "outlet": "The Malaysian Reserve",
       "tier": "other",
       "entity": "Sharon AI",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "cab6caa57a30": {
+      "id": "cab6caa57a30",
+      "date": "2026-11-02",
+      "name": "Cipher Digital Inc. - 10-Q (periodic report: check the debt note)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Cipher",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "acb905d75cdb": {
+      "id": "acb905d75cdb",
+      "date": "2026-11-02",
+      "name": "Backblaze, Inc. (BLZE) (CIK 0001462056) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "0409285c1bd3": {
+      "id": "0409285c1bd3",
+      "date": "2026-11-02",
+      "name": "VivoPower PLC (VIVO) (CIK 0001681348) - 20-F matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "20255e6ff893": {
+      "id": "20255e6ff893",
+      "date": "2026-11-03",
+      "name": "WhiteFiber, Inc. - 8-K (1.01 material agreement)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "WhiteFiber",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "1e0a0fdfb700": {
+      "id": "1e0a0fdfb700",
+      "date": "2026-11-03",
+      "name": "DigitalOcean Holdings, Inc. (DOCN) (CIK 0001582961) - 10-Q matching \"GPU\" \"collateral\" + \"delayed draw term loan\" \"GPU\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "b41a650a5da6": {
+      "id": "b41a650a5da6",
+      "date": "2026-11-04",
+      "name": "TERAWULF INC. - 8-K (1.01 material agreement)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "TeraWulf",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "765184dfcc30": {
+      "id": "765184dfcc30",
+      "date": "2026-11-04",
+      "name": "Hut 8 Corp. - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Hut 8",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "ec7cc45337fa": {
+      "id": "ec7cc45337fa",
+      "date": "2026-11-04",
+      "name": "Blue Owl Capital Corp (OBDC) (CIK 0001655888) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Blue Owl",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "4cb193d1edc6": {
+      "id": "4cb193d1edc6",
+      "date": "2026-11-04",
+      "name": "Blue Owl Technology Finance Corp. (OTF) (CIK 0001747777) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Blue Owl",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "df1bddce14c0": {
+      "id": "df1bddce14c0",
+      "date": "2026-11-05",
+      "name": "IREN Ltd - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\" + \"GPU financing\" + \"delayed draw term loan\" \"GPU\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "IREN",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "8383b55f0217": {
+      "id": "8383b55f0217",
+      "date": "2026-11-05",
+      "name": "Core Scientific, Inc./tx - 10-Q (periodic report: check the debt note)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "f144ba72ae93": {
+      "id": "f144ba72ae93",
+      "date": "2026-11-05",
+      "name": "Stark Focus Group, Inc. (SKFG) (CIK 0001794942) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "6b22bd7b1c03": {
+      "id": "6b22bd7b1c03",
+      "date": "2026-11-05",
+      "name": "IREN Ltd (IREN) (CIK 0001878848) - 8-K matching \"GPU financing\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "IREN",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "37142f0e5959": {
+      "id": "37142f0e5959",
+      "date": "2026-11-05",
+      "name": "Vertical Data Inc. (VDTA) (CIK 0002033264) - 8-K matching \"GPU financing\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "b57735569df1": {
+      "id": "b57735569df1",
+      "date": "2026-11-05",
+      "name": "Athene Holding Ltd. (ATHS, ATH-PA, ATH-PB, ATH-PD, ATH-PE) (CIK 0001527469) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "73847f584651": {
+      "id": "73847f584651",
+      "date": "2026-11-05",
+      "name": "Blue Owl Technology Income Corp. (CIK 0001869453) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Blue Owl",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "1180fb4c9596": {
+      "id": "1180fb4c9596",
+      "date": "2026-11-05",
+      "name": "Blue Owl Credit Income Corp. (CIK 0001812554) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Blue Owl",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "ba0527ee83e6": {
+      "id": "ba0527ee83e6",
+      "date": "2026-11-05",
+      "name": "Apollo Global Management, Inc. (APO, APOS) (CIK 0001858681) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Apollo",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "8bb5d07ac06e": {
+      "id": "8bb5d07ac06e",
+      "date": "2026-11-06",
+      "name": "TERAWULF INC. - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "TeraWulf",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "2c60a8349629": {
+      "id": "2c60a8349629",
+      "date": "2026-11-06",
+      "name": "Super Micro Computer, Inc. (SMCI, SMCIP) (CIK 0001375365) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "c2e98731caef": {
+      "id": "c2e98731caef",
+      "date": "2026-11-06",
+      "name": "GSI TECHNOLOGY INC (GSIT) (CIK 0001126741) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "77567d094257": {
+      "id": "77567d094257",
+      "date": "2026-11-06",
+      "name": "Blue Owl Capital Corp II (CIK 0001655887) - 10-Q matching \"compute infrastructure\" \"securitization\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Blue Owl",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "f6e3b86e5b27": {
+      "id": "f6e3b86e5b27",
+      "date": "2026-11-09",
+      "name": "Galaxy Digital Inc. - 10-Q (periodic report: check the debt note)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "d22e3428da6d": {
+      "id": "d22e3428da6d",
+      "date": "2026-11-09",
+      "name": "MARA Holdings, Inc. (MARA) (CIK 0001507605) - 8-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "75284d012887": {
+      "id": "75284d012887",
+      "date": "2026-11-09",
+      "name": "Rackspace Technology, Inc. (RXT) (CIK 0001810019) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "97280ac36b64": {
+      "id": "97280ac36b64",
+      "date": "2026-11-09",
+      "name": "Exascale Labs Holdings Inc. (XLAB, XLABW) (CIK 0002109869) - 8-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "46e4d0512baa": {
+      "id": "46e4d0512baa",
+      "date": "2026-11-09",
+      "name": "HIVE Digital Technologies Ltd. (HIVE) (CIK 0001720424) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "1602f9bd85f7": {
+      "id": "1602f9bd85f7",
+      "date": "2026-11-09",
+      "name": "MARA Holdings, Inc. (MARA) (CIK 0001507605) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "39a03aff2f65": {
+      "id": "39a03aff2f65",
+      "date": "2026-11-09",
+      "name": "Vertical Data Inc. (VDTA) (CIK 0002033264) - 8-K/A matching \"GPU financing\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "083d03b13540": {
+      "id": "083d03b13540",
+      "date": "2026-11-10",
+      "name": "WhiteFiber, Inc. - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\" + \"delayed draw term loan\" \"GPU\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "WhiteFiber",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "03487241dc4f": {
+      "id": "03487241dc4f",
+      "date": "2026-11-10",
+      "name": "WhiteFiber, Inc. - 8-K (1.01 material agreement, 2.03 new financial obligation)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "WhiteFiber",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "b828af8e7847": {
+      "id": "b828af8e7847",
+      "date": "2026-11-10",
+      "name": "Bitdeer Technologies Group (BTDR) (CIK 0001899123) - 6-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "fdd5997f2179": {
+      "id": "fdd5997f2179",
+      "date": "2026-11-12",
+      "name": "CoreWeave, Inc. - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\" + \"delayed draw term loan\" \"GPU\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "b9dcbfe75cb2": {
+      "id": "b9dcbfe75cb2",
+      "date": "2026-11-12",
+      "name": "Nebius Group N.V. - 6-K (foreign issuer report) - full text matches \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Nebius",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "722e96c983f4": {
+      "id": "722e96c983f4",
+      "date": "2026-11-12",
+      "name": "Nebius Group N.V. - 6-K (foreign issuer report)",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": "Nebius",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "2c85aa700108": {
+      "id": "2c85aa700108",
+      "date": "2026-11-12",
+      "name": "Bit Digital, Inc - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\" + \"delayed draw term loan\" \"GPU\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "551b277139e0": {
+      "id": "551b277139e0",
+      "date": "2026-11-12",
+      "name": "Nscale plc - S-1/A (registration statement: check the debt section) - full text matches \"GPU\" \"collateral\" + \"GPU financing\" + \"delayed draw term loan\" \"GPU\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "373f91dd34fa": {
+      "id": "373f91dd34fa",
+      "date": "2026-11-12",
+      "name": "FORUM MARKETS Inc (FRMM) (CIK 0001690080) - 8-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "9ce2be813cdb": {
+      "id": "9ce2be813cdb",
+      "date": "2026-11-12",
+      "name": "Boost Run Inc. (BRUN) (CIK 0002090646) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "f02def1848d8": {
+      "id": "f02def1848d8",
+      "date": "2026-11-12",
+      "name": "RUM Group Inc. (RUM, RUMBW) (CIK 0001830081) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "68c3729319ef": {
+      "id": "68c3729319ef",
+      "date": "2026-11-12",
+      "name": "Cerebras Systems Inc. (CBRS) (CIK 0002021728) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "d396d2621772": {
+      "id": "d396d2621772",
+      "date": "2026-11-12",
+      "name": "SES AI Corp (SES, SESCW) (CIK 0001819142) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "4a8514f4ec76": {
+      "id": "4a8514f4ec76",
+      "date": "2026-11-12",
+      "name": "TRIO-TECH INTERNATIONAL (TRT) (CIK 0000732026) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "702c4157a825": {
+      "id": "702c4157a825",
+      "date": "2026-11-13",
+      "name": "POWERCOMPUTE, INC. (PWCM) (CIK 0001640384) - 8-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "201a781bd0c7": {
+      "id": "201a781bd0c7",
+      "date": "2026-11-13",
+      "name": "FORUM MARKETS Inc (FRMM) (CIK 0001690080) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "5ce702eb00c2": {
+      "id": "5ce702eb00c2",
+      "date": "2026-11-13",
+      "name": "Big Digital Energy, Inc. (BGDE) (CIK 0001218683) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "0416a7c67b5c": {
+      "id": "0416a7c67b5c",
+      "date": "2026-11-13",
+      "name": "Smartbird, Inc. (BIRD) (CIK 0001653909) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "ed0fde5b6eb0": {
+      "id": "ed0fde5b6eb0",
+      "date": "2026-11-13",
+      "name": "XMax Inc. (XMAX) (CIK 0001473334) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "1abff5a51a4b": {
+      "id": "1abff5a51a4b",
+      "date": "2026-11-16",
+      "name": "Professional Diversity Network, Inc. (IPDN) (CIK 0001546296) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "88da5782f5bd": {
+      "id": "88da5782f5bd",
+      "date": "2026-11-16",
+      "name": "SK hynix Inc. (SKHY, HXSCL) (CIK 0002120882) - 6-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "5d247a1bdbd2": {
+      "id": "5d247a1bdbd2",
+      "date": "2026-11-11",
+      "name": "CoreWeave plans multibillion-dollar chip-backed debt deal - Financial Times",
+      "outlet": "Financial Times",
+      "tier": "press1",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "afa22f2d2173": {
+      "id": "afa22f2d2173",
+      "date": "2026-11-11",
+      "name": "CoreWeave Launches $4 Billion Investment-Grade Syndicated Loan After Raising Full-Year Revenue Guidance - BigGo Finance",
+      "outlet": "BigGo Finance",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 4000.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "95a4e6111dcd": {
+      "id": "95a4e6111dcd",
+      "date": "2026-11-11",
+      "name": "CoreWeave's $35 billion debt raises a major AI warning - TradingView",
+      "outlet": "TradingView",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 35000.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "433a430d34a6": {
+      "id": "433a430d34a6",
+      "date": "2026-11-12",
+      "name": "CoreWeave’s Bonds Signal Cooling Investor Angst On Elevated Debt Load - Yahoo Finance",
+      "outlet": "Yahoo Finance",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "9bea034467e2": {
+      "id": "9bea034467e2",
+      "date": "2026-11-12",
+      "name": "A $133B backlog vs. a $47B debt mountain: Is CoreWeave a buy? - Yahoo Finance",
+      "outlet": "Yahoo Finance",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 133000.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "dade17912678": {
+      "id": "dade17912678",
+      "date": "2026-11-13",
+      "name": "Neocloud Nscale Reveals $5.5 Billion Debt and Closer Nvidia Ties Ahead of IPO - Bloomberg",
+      "outlet": "Bloomberg",
+      "tier": "press1",
+      "entity": "Nvidia",
+      "amount_musd": 5500.0,
+      "kind": "deal-signal",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "a1e3a8223b0b": {
+      "id": "a1e3a8223b0b",
+      "date": "2026-11-13",
+      "name": "CoreWeave's Demand is There, $41.6B of Corporate Debt Remains: What This Means for Nebius and CoreWeave - 24/7 Wall St.",
+      "outlet": "24/7 Wall St.",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 41600.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "2601fda4aa34": {
+      "id": "2601fda4aa34",
+      "date": "2026-11-13",
+      "name": "AI Cloud Provider Nscale Sees Debt Surge Ahead of IPO; Deepens Reliance on NVIDIA (NVDA.US) for Funding and Chip Supply - Moomoo",
+      "outlet": "Moomoo",
+      "tier": "other",
+      "entity": "Nvidia",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "9840bb6ebe40": {
+      "id": "9840bb6ebe40",
+      "date": "2026-11-16",
+      "name": "AI Data Center Debt Tracker: CoreWeave’s Notes and Loans, Plus 6 More Borrowers - FourWeekMBA",
+      "outlet": "FourWeekMBA",
+      "tier": "other",
+      "entity": "CoreWeave",
       "amount_musd": null,
       "kind": "other",
       "suggestion": "REVIEW-manually"
