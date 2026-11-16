@@ -58,6 +58,7 @@ STORY_MEMORY_DAYS = 60
 MAX_RESPONSE_BYTES = CONFIG.get("max_response_bytes", 5_000_000)
 MAX_RESPONSE_SECONDS = 60
 EDGAR_ADSH = re.compile(r"^\d{1,10}-\d{2}-\d{1,6}$")
+EDGAR_DOC = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,150}$")   # a document file name in a filing
 
 
 # ---------------------------------------------------------------- relevance
@@ -186,21 +187,59 @@ def entry_date(entry):
     return False, None
 
 
+# ---------------------------------------------------------------- EDGAR nearby-words check
+_WORD = re.compile(r"[A-Za-z0-9]+")
+
+
+def nearby_match(text, a_terms, b_terms, window):
+    """Find the closest pair of an a-term and a b-term in text (whole words, any
+    case; "GPU-backed" counts as "gpu"). If they are at most `window` words apart,
+    return a short passage around them, else None. Linear in the text length."""
+    a_terms = {t.lower() for t in a_terms}
+    b_terms = {t.lower() for t in b_terms}
+    words = list(_WORD.finditer(text))
+    last_a = last_b = None
+    best = None   # (distance, first index, second index)
+    for i, m in enumerate(words):
+        w = m.group().lower()
+        is_a, is_b = w in a_terms, w in b_terms
+        if is_a:
+            if last_b is not None and (best is None or i - last_b < best[0]):
+                best = (i - last_b, last_b, i)
+            last_a = i
+        if is_b:
+            if last_a is not None and (best is None or i - last_a < best[0]):
+                best = (i - last_a, last_a, i)
+            last_b = i
+    if best is None or best[0] > window:
+        return None
+    lo, hi = max(0, best[1] - 12), min(len(words) - 1, best[2] + 12)
+    return clean_text(text[words[lo].start():words[hi].end()])
+
+
+def filing_text(raw):
+    """Plain text of an EDGAR document (HTML or text)."""
+    raw = re.sub(r"(?is)<(script|style)\b.*?</\1>", " ", raw)
+    return clean_text(raw)
+
+
 # ---------------------------------------------------------------- collection
-def http_get(url, params=None):
+def http_get(url, params=None, max_bytes=None):
     """GET with the watcher's User-Agent, refusing responses larger than
-    MAX_RESPONSE_BYTES or slower than MAX_RESPONSE_SECONDS. Returns bytes."""
+    max_bytes (default MAX_RESPONSE_BYTES) or slower than MAX_RESPONSE_SECONDS.
+    Returns bytes."""
     import requests
+    max_bytes = max_bytes or MAX_RESPONSE_BYTES
     deadline = time.monotonic() + MAX_RESPONSE_SECONDS
     with requests.get(url, params=params, headers={"User-Agent": CONFIG["user_agent"]},
                       timeout=30, stream=True) as r:
         r.raise_for_status()
-        if int(r.headers.get("Content-Length") or 0) > MAX_RESPONSE_BYTES:
+        if int(r.headers.get("Content-Length") or 0) > max_bytes:
             raise ValueError("response too large")
         buf = bytearray()
         for chunk in r.iter_content(64 * 1024):
             buf += chunk
-            if len(buf) > MAX_RESPONSE_BYTES:
+            if len(buf) > max_bytes:
                 raise ValueError("response too large")
             if time.monotonic() > deadline:
                 raise TimeoutError("response too slow")
@@ -212,11 +251,14 @@ def key(url, title):
 
 
 class Watch:
-    def __init__(self, seen):
+    def __init__(self, seen, fetch=None):
         self.seen = set(seen)
         self.candidates = []
         self.stats = {}  # source -> [fetched, new, error]
         self.filings = {}  # accession number -> candidate added this run
+        self.fetch = fetch or http_get   # tests pass a stub
+        self.fetch_delay = 0 if fetch else 0.15   # SEC fair access: well under 10 requests per second
+        self.doc_fetches = 0   # EDGAR documents opened for the nearby-words check
 
     def add(self, tier, title, url, source, date, summary="", outlet=None, signal=None):
         url = stories.safe_http_url(url)   # feed links are untrusted
@@ -284,6 +326,9 @@ class Watch:
         exclude = {f.upper() for f in CONFIG.get("edgar_exclude_forms", [])}
         allow = {f.upper() for f in CONFIG.get("edgar_fulltext_forms", [])}
         min_other = int(CONFIG.get("edgar_min_queries_other_forms", 1))
+        ignore = {str(c).lstrip("0") for c in CONFIG.get("edgar_fulltext_ignore_ciks", [])}
+        nearby_q = set(CONFIG.get("edgar_nearby_queries", []))
+        tracked = {str(i["cik"]) for i in ISSUERS if isinstance(i.get("cik"), int)}
         filings = {}
         for q, hits in results.items():
             for h in hits:
@@ -294,13 +339,17 @@ class Watch:
                 adsh = str(s.get("adsh", ""))
                 if not EDGAR_ADSH.match(adsh):   # it becomes part of a URL
                     continue
-                f = filings.setdefault(adsh, {"s": s, "queries": []})
+                f = filings.setdefault(adsh, {"s": s, "queries": [], "docs": []})
                 if q not in f["queries"]:
                     f["queries"].append(q)
+                doc = str(h.get("_id", "")).partition(":")[2]
+                if EDGAR_DOC.match(doc) and doc not in f["docs"]:
+                    f["docs"].append(doc)
         if allow:   # other forms need several distinct query matches
             filings = {a: f for a, f in filings.items()
                        if str(f["s"].get("form", "")).upper() in allow or len(f["queries"]) >= min_other}
-        new = 0
+        new = ignored = 0
+        nearby = {"kept": 0, "dropped": 0, "unchecked": 0}
         for adsh, f in sorted(filings.items(), key=lambda kv: kv[1]["s"].get("file_date", "")):
             s = f["s"]
             if adsh in self.filings:   # already listed by the issuer scan: note the match
@@ -309,15 +358,61 @@ class Watch:
                 continue
             cik = str((s.get("ciks") or [""])[0]).lstrip("0")
             cik = cik if cik.isdigit() else ""
+            if cik and cik in ignore:
+                ignored += 1
+                continue
+            summary = "EDGAR full-text match"
+            if cik not in tracked and set(f["queries"]) <= nearby_q:
+                verdict, passage = self.nearby_check(cik, adsh, f["docs"])
+                nearby[verdict] += 1
+                if verdict == "dropped":
+                    continue
+                summary = (f"Nearby: {passage}" if passage else
+                           "EDGAR full-text match (nearby-words check not run)")
             url = (f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{adsh}-index.htm"
                    if cik else "https://www.sec.gov/edgar/search/#/q=" + urllib.parse.quote(adsh))
             filer = (s.get("display_names") or ["Unknown filer"])[0]
             name = f"{filer} - {s.get('form', '')} matching {' + '.join(f['queries'])}"
-            if self.add(1, name, url, "SEC EDGAR", s.get("file_date"),
-                        "EDGAR full-text match", outlet="sec.gov"):
+            if self.add(1, name, url, "SEC EDGAR", s.get("file_date"), summary, outlet="sec.gov"):
+                self.candidates[-1]["_edgar"] = "fulltext"
                 self.filings[adsh] = self.candidates[-1]
                 new += 1
-        self.stats["EDGAR filings (after form filter, one per filing)"] = [len(filings), new, None]
+        self.stats["EDGAR filings (after form filter, one per filing)"] = [
+            len(filings), new, f"{ignored} on the ignore list" if ignored else None]
+        if any(nearby.values()):
+            self.stats["EDGAR nearby-words check (checked / kept)"] = [
+                nearby["kept"] + nearby["dropped"], nearby["kept"],
+                f"{nearby['dropped']} dropped, {nearby['unchecked']} kept unchecked"]
+
+    def nearby_check(self, cik, adsh, docs):
+        """Open up to three matched documents of a filing and look for a GPU term
+        near a security term (config edgar_nearby_*). Returns (verdict, passage):
+        "kept" with the passage, "dropped", or "unchecked" (no document, fetch
+        limit reached, or every fetch failed; such filings are kept)."""
+        if not cik or not docs:
+            return "unchecked", None
+        limit = int(CONFIG.get("edgar_nearby_max_documents", 300))
+        max_bytes = int(CONFIG.get("edgar_document_max_bytes", MAX_RESPONSE_BYTES))
+        read_any = False
+        for doc in docs[:3]:
+            if self.doc_fetches >= limit:
+                break
+            self.doc_fetches += 1
+            url = f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{doc}"
+            try:
+                raw = self.fetch(url, max_bytes=max_bytes).decode("utf-8", "replace")
+            except Exception as e:
+                print(f"[warn] EDGAR document unreadable: {url} ({e})", file=sys.stderr)
+                continue
+            finally:
+                time.sleep(self.fetch_delay)
+            read_any = True
+            passage = nearby_match(filing_text(raw), CONFIG.get("edgar_nearby_gpu_terms", ["gpu", "gpus"]),
+                                   CONFIG.get("edgar_nearby_security_terms", ["collateral"]),
+                                   int(CONFIG.get("edgar_nearby_words", 25)))
+            if passage:
+                return "kept", passage
+        return ("dropped", None) if read_any else ("unchecked", None)
 
     # ---- EDGAR, per watched issuer
     ITEM_NAMES = {"1.01": "material agreement", "1.02": "agreement terminated",
@@ -372,6 +467,7 @@ class Watch:
             name = f"{edgar_name} - {form} ({what})"
             signal = "stress" if item_set & self.STRESS_ITEMS else None
             if self.add(1, name, url, "SEC EDGAR", fdate, "EDGAR filing list", outlet="sec.gov", signal=signal):
+                self.candidates[-1]["_edgar"] = "issuer"
                 self.filings[adsh] = self.candidates[-1]
                 new += 1
         self.stats[label] = [n_window, new, None]
@@ -509,12 +605,17 @@ def digest_lines(candidates):
         lines += ["## Stress signals (defaults, seizures, downgrades, impairments)", ""]
         lines += [_line(c) for c in stress] + [""]
     names = {1: "Tier 1 - primary sources", 2: "Tier 2 - quality press", 3: "Tier 3 - alerts"}
-    cur = None
-    for c in fresh:
-        if c["_tier"] != cur:
-            cur = c["_tier"]
-            lines += [f"## {names[cur]}", ""]
-        lines += [_line(c)]
+    for tier, title in names.items():
+        group = [c for c in fresh if c["_tier"] == tier]
+        if not group:
+            continue
+        lines += [f"## {title}", ""]
+        lines += [_line(c) for c in group if c.get("_edgar") != "fulltext"]
+        fulltext = [c for c in group if c.get("_edgar") == "fulltext"]
+        if fulltext:
+            lines += ["", "### EDGAR full-text search (filings the per-company scan did not list)", ""]
+            lines += [_line(c) for c in fulltext]
+        lines += [""]
     if follow:
         lines += ["", "## Follow-ups to stories from earlier runs", ""]
         lines += [_line(c) + f" - continues: {stories.md_safe(c['_followup_of']['name'][:90])}" for c in follow]

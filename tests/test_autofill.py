@@ -114,17 +114,22 @@ class Fill(unittest.TestCase):
 
     def test_real_leads_validate_once_a_flag_is_picked(self):
         """The prefilled drafts for the leads in the repo pass the curator's checks
-        (where a type and status could be guessed) after only choosing REPORTED."""
+        (where a type and status could be guessed) after only choosing REPORTED.
+        SEC filing leads are left out: their amount is deliberately blank until
+        the curator reads the filing (autofill.guess_filing)."""
         state = curate.state()
         self.assertTrue(state["leads"])
-        ok = 0
         for v in state["leads"]:
+            self.assertTrue(v["auto"], v["name"])
+        news = [v for v in state["leads"] if v.get("outlet") != "sec.gov"]
+        ok = 0
+        for v in news:
             f = v["draft"]
             if f.get("type") and f.get("status"):
                 curate.clean({**f, "ver": "REPORTED"})
                 ok += 1
-            self.assertTrue(v["auto"], v["name"])
-        self.assertGreaterEqual(ok / len(state["leads"]), 0.6, "most leads should need no typing")
+        if news:
+            self.assertGreaterEqual(ok / len(news), 0.6, "most leads should need no typing")
 
 
 if __name__ == "__main__":
