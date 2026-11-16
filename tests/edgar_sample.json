@@ -1,0 +1,455 @@
+{
+ "_comment": "Full-text EDGAR hits for edgar_nearby_queries from companies not in issuers, 2026-09-27 to 2026-11-16, one per filing. label: deal = the passage is about GPU-secured financing (curator judgment); noise = everything else. distance = words between the closest GPU term and security term in the matched document(s), measured with the config terms of 2026-11-16. text = that passage (12 words either side), kept when distance <= 200; farther pairs are judged by distance alone. If you change edgar_nearby_gpu_terms or edgar_nearby_security_terms, re-measure: closer pairs for new terms may lie outside these passages.",
+ "items": [
+  {
+   "filer": "Zone Frontier Inc.",
+   "form": "10-K",
+   "adsh": "0001213900-26-104157",
+   "date": "2026-09-28",
+   "label": "noise",
+   "distance": 20114,
+   "text": null
+  },
+  {
+   "filer": "Bitdeer Technologies Group",
+   "form": "6-K",
+   "adsh": "0001213900-26-104638",
+   "date": "2026-09-29",
+   "label": "noise",
+   "distance": 203,
+   "text": null
+  },
+  {
+   "filer": "SAIHEAT Ltd",
+   "form": "6-K",
+   "adsh": "0001213900-26-104816",
+   "date": "2026-09-30",
+   "label": "noise",
+   "distance": 44,
+   "text": "performs ongoing credit evaluations of its customers and generally does not require collateral. The Company monitors economic and market conditions and identifies significant customers as those representing 10% or more of total revenue or accounts receivable. Additionally, the Company relies on a limited number of third-party suppliers for critical hardware components, such as high-performance GPUs, networking equipment, and data center infrastructure. The inability of these key suppliers"
+  },
+  {
+   "filer": "POWERCOMPUTE, INC.",
+   "form": "8-K",
+   "adsh": "0001193125-26-408391",
+   "date": "2026-09-30",
+   "label": "noise",
+   "distance": 160,
+   "text": "minimum bid price requirement; the Company’s ability to apply the returned collateral as intended; the availability, cost and timely delivery and installation of mining equipment and related infrastructure, including the effect of tariffs on imported equipment; the Company’s ability to increase active mining hash rate or realize anticipated improvements in fleet efficiency; the Company’s ability to energize remaining power capacity on anticipated timelines or at anticipated cost; the Company’s ability to repay or refinance its remaining indebtedness at or before maturity; changes in Bitcoin prices, Bitcoin network difficulty and total network hash rate; the availability and pricing of energy sales and curtailment revenue; the Company’s ability to convert owned power capacity to HPC and AI use on anticipated timelines or at anticipated cost; the Company’s ability to acquire additional electrical capacity on acceptable terms; the Company’s ability to secure customers for HPC and AI capacity; the anticipated reduction in interest and collar-related expense following repayment of the Arch facility; the availability and cost of GPU and related infrastructure equipment; competition in the HPC and AI compute market"
+  },
+  {
+   "filer": "Hall Chadwick Acquisition Corp",
+   "form": "10-K/A",
+   "adsh": "0001829126-26-010620",
+   "date": "2026-09-30",
+   "label": "noise",
+   "distance": 1966,
+   "text": null
+  },
+  {
+   "filer": "La Rosa Holdings Corp.",
+   "form": "8-K",
+   "adsh": "0001213900-26-105473",
+   "date": "2026-10-01",
+   "label": "noise",
+   "distance": 2133,
+   "text": null
+  },
+  {
+   "filer": "FORUM MARKETS Inc",
+   "form": "8-K",
+   "adsh": "0001213900-26-106655",
+   "date": "2026-10-05",
+   "label": "noise",
+   "distance": 2,
+   "text": "Site: ~1.4 MW Measured available power at the executed site 13 GPU Supply Secured Installed cost per GPU, annual revenue per GPU, and residual value against"
+  },
+  {
+   "filer": "Boost Run Inc.",
+   "form": "8-K",
+   "adsh": "0001493152-26-045861",
+   "date": "2026-10-06",
+   "label": "noise",
+   "distance": 1237,
+   "text": null
+  },
+  {
+   "filer": "POWERCOMPUTE, INC.",
+   "form": "8-K",
+   "adsh": "0001193125-26-417469",
+   "date": "2026-10-08",
+   "label": "noise",
+   "distance": 693,
+   "text": null
+  },
+  {
+   "filer": "TREASURE GLOBAL INC",
+   "form": "10-K",
+   "adsh": "0001213900-26-109073",
+   "date": "2026-10-13",
+   "label": "noise",
+   "distance": 3192,
+   "text": null
+  },
+  {
+   "filer": "ChronoScale Holdings Corp",
+   "form": "10-Q",
+   "adsh": "0001628280-26-065876",
+   "date": "2026-10-14",
+   "label": "noise",
+   "distance": 69,
+   "text": "For example, our agreement with Microsoft requires us to procure large-scale GPU capacity and complete a dedicated data center facility on a fixed delivery schedule, obligations that will require financing beyond our existing cash resources. There can be no assurance that any contemplated financing will be completed, that it will provide sufficient proceeds, or that funds will be available when required under our customer agreements. Our ability to obtain financing may depend on market conditions, the availability and value of collateral, prospective lenders’ and investors’ assessment of our business and customer arrangements, and"
+  },
+  {
+   "filer": "FingerMotion, Inc.",
+   "form": "10-Q",
+   "adsh": "0001493152-26-047254",
+   "date": "2026-10-15",
+   "label": "noise",
+   "distance": 207,
+   "text": null
+  },
+  {
+   "filer": "Bitdeer Technologies Group",
+   "form": "6-K",
+   "adsh": "0001213900-26-110703",
+   "date": "2026-10-19",
+   "label": "noise",
+   "distance": 22,
+   "text": "Bitcoins from customer deposits but does include Bitcoins that are pledged as collateral by us. 8 Utilization Rate as of the last day of the respective month is calculated as the total number of GPUs under internal and external orders divided by the total number of deployed"
+  },
+  {
+   "filer": "Penguin Solutions, Inc.",
+   "form": "10-K",
+   "adsh": "0001616533-26-000050",
+   "date": "2026-10-20",
+   "label": "noise",
+   "distance": 27306,
+   "text": null
+  },
+  {
+   "filer": "FORUM MARKETS Inc",
+   "form": "8-K",
+   "adsh": "0001213900-26-112303",
+   "date": "2026-10-26",
+   "label": "noise",
+   "distance": 895,
+   "text": null
+  },
+  {
+   "filer": "Maase Inc.",
+   "form": "20-F",
+   "adsh": "0001213900-26-112498",
+   "date": "2026-10-26",
+   "label": "noise",
+   "distance": 1840,
+   "text": null
+  },
+  {
+   "filer": "INNIO N.V.",
+   "form": "10-Q",
+   "adsh": "0001628280-26-067448",
+   "date": "2026-10-27",
+   "label": "noise",
+   "distance": 9301,
+   "text": null
+  },
+  {
+   "filer": "CARVANA CO.",
+   "form": "8-K",
+   "adsh": "0001690820-26-000066",
+   "date": "2026-10-28",
+   "label": "noise",
+   "distance": 112,
+   "text": "Loss on debt extinguishment associated with the early redemption of our Senior Secured Notes due 2030. Net income in Q3 2025 was negatively impacted by $120 million associated with changes in the fair value of warrants. 1 Outlook Our results through Q3 position us well for a strong finish to 2026. Looking toward the fourth quarter, we expect the following as long as the environment remains stable: • A sequential increase in retail units sold, and • Adjusted EBITDA 2 in the higher end of our previously communicated range of $2.7 to $3.0 billion for the full year 2026. A Note on 2027 Reporting Over the past several years, we have focused our reporting and targets on non-GAAP financial metrics, including Non-GAAP GPU, Non-GAAP SG&A expense, and Adjusted EBITDA, which we believe have"
+  },
+  {
+   "filer": "MICROSOFT CORP",
+   "form": "8-K",
+   "adsh": "0001193125-26-436149",
+   "date": "2026-10-28",
+   "label": "noise",
+   "distance": 6207,
+   "text": null
+  },
+  {
+   "filer": "MICROSOFT CORP",
+   "form": "10-Q",
+   "adsh": "0001193125-26-436133",
+   "date": "2026-10-28",
+   "label": "noise",
+   "distance": 3129,
+   "text": null
+  },
+  {
+   "filer": "TOP Financial Group Ltd",
+   "form": "10-Q",
+   "adsh": "0001213900-26-113336",
+   "date": "2026-10-28",
+   "label": "noise",
+   "distance": 4576,
+   "text": null
+  },
+  {
+   "filer": "Ingram Micro Holding Corp",
+   "form": "10-Q",
+   "adsh": "0001628280-26-068236",
+   "date": "2026-10-29",
+   "label": "noise",
+   "distance": 2000,
+   "text": null
+  },
+  {
+   "filer": "SuperX AI Technology Ltd",
+   "form": "20-F",
+   "adsh": "0001213900-26-113814",
+   "date": "2026-10-29",
+   "label": "noise",
+   "distance": 94,
+   "text": "for AI-server assembly at our Japan Global Supply Center and the GPU servers and related infrastructure that we own and operate under hosting arrangements at third-party data center facilities in Singapore (our AI Innovation Centre) and in Denver, Colorado (our AI Inference Cloud Hub), and our property and equipment, net, was US$4,425,544 as of June 30, 2026. We do not currently have any plans to materially expand or improve these facilities. We are not aware of any environmental issue that may affect our utilization of these assets. None of our properties or material tangible fixed assets is subject to any mortgage, pledge or other encumbrance. 60 Intellectual Properties We safeguard our intellectual property through"
+  },
+  {
+   "filer": "PINTEREST, INC.",
+   "form": "10-Q",
+   "adsh": "0001506293-26-000153",
+   "date": "2026-10-29",
+   "label": "noise",
+   "distance": 1291,
+   "text": null
+  },
+  {
+   "filer": "Silicon Valley Acquisition Corp.",
+   "form": "8-K",
+   "adsh": "0001213900-26-114385",
+   "date": "2026-10-30",
+   "label": "noise",
+   "distance": 1330,
+   "text": null
+  },
+  {
+   "filer": "Backblaze, Inc.",
+   "form": "10-Q",
+   "adsh": "0001628280-26-068869",
+   "date": "2026-11-02",
+   "label": "noise",
+   "distance": 4554,
+   "text": null
+  },
+  {
+   "filer": "VivoPower PLC",
+   "form": "20-F",
+   "adsh": "0001493152-26-049646",
+   "date": "2026-11-02",
+   "label": "noise",
+   "distance": 773,
+   "text": null
+  },
+  {
+   "filer": "DigitalOcean Holdings, Inc.",
+   "form": "10-Q",
+   "adsh": "0001628280-26-069141",
+   "date": "2026-11-03",
+   "label": "deal",
+   "distance": 23,
+   "text": "Threshold up to an amount equal to the Insured Value for such GPU Equipment Pool for any loss or damage thereto not constituting an Event of Loss with respect thereto, shall be paid to the Collateral Agent as sole loss payee (the “ Loss Payee ”) and that all other"
+  },
+  {
+   "filer": "Stark Focus Group, Inc.",
+   "form": "10-Q",
+   "adsh": "0001640334-26-001752",
+   "date": "2026-11-05",
+   "label": "noise",
+   "distance": 1320,
+   "text": null
+  },
+  {
+   "filer": "Super Micro Computer, Inc.",
+   "form": "10-Q",
+   "adsh": "0001375365-26-000027",
+   "date": "2026-11-06",
+   "label": "noise",
+   "distance": 9810,
+   "text": null
+  },
+  {
+   "filer": "GSI TECHNOLOGY INC",
+   "form": "10-Q",
+   "adsh": "0001104659-26-123856",
+   "date": "2026-11-06",
+   "label": "noise",
+   "distance": 2968,
+   "text": null
+  },
+  {
+   "filer": "MARA Holdings, Inc.",
+   "form": "8-K",
+   "adsh": "0001507605-26-000026",
+   "date": "2026-11-09",
+   "label": "noise",
+   "distance": 317,
+   "text": null
+  },
+  {
+   "filer": "Rackspace Technology, Inc.",
+   "form": "10-Q",
+   "adsh": "0001810019-26-000115",
+   "date": "2026-11-09",
+   "label": "noise",
+   "distance": 1,
+   "text": "rate fluctuations and refinancing risk. Certain financing arrangements may require us to pledge GPUs or other assets as collateral, which could limit our financial flexibility. Our"
+  },
+  {
+   "filer": "Exascale Labs Holdings Inc.",
+   "form": "8-K",
+   "adsh": "0001829126-26-012120",
+   "date": "2026-11-09",
+   "label": "noise",
+   "distance": 1003,
+   "text": null
+  },
+  {
+   "filer": "HIVE Digital Technologies Ltd.",
+   "form": "10-Q",
+   "adsh": "0001062993-26-005842",
+   "date": "2026-11-09",
+   "label": "deal",
+   "distance": 3,
+   "text": "will own the GPUs outright with no residual payment. The Facility is secured by the GPUs and related assets of BUZZ Alpha Cloud Inc. BUZZ High Performance Computing"
+  },
+  {
+   "filer": "MARA Holdings, Inc.",
+   "form": "10-Q",
+   "adsh": "0001507605-26-000028",
+   "date": "2026-11-09",
+   "label": "noise",
+   "distance": 61,
+   "text": "repaid in full all $750.0 million of borrowings under the bitcoin-collateralized loans. • During the quarter, we initiated a new restructuring plan (“Project Align”) to further streamline our operations and eliminate redundant functions, which included a workforce reduction, contract terminations and the write-off of certain long-lived assets no longer needed to support our strategic objectives. • During the quarter, our majority-owned subsidiary, Exaion, entered into an agreement to provide dedicated GPU capacity to customers, marking its entry into the GPU-as-a-service"
+  },
+  {
+   "filer": "Bitdeer Technologies Group",
+   "form": "6-K",
+   "adsh": "0001213900-26-117797",
+   "date": "2026-11-10",
+   "label": "noise",
+   "distance": 87,
+   "text": "and amount of which depend on, among other things, data center energization, GPU deployment and customer performance. 4 Other Proprietary Hash Rate includes the hashrate from Bitdeer’s cloud hashrate business, mining rigs delivered in the crypto mining datacenters but not deployed and the mining rigs temporarily offline due to limited economic benefit. 5 Total Proprietary Hash Rate includes Self-Mining Hash Rate and Other Proprietary Hash Rate. 6 Bitcoins mined includes BTC from self-mining operations and BTC from co-mining operations. 7 Bitcoins held does not include Bitcoins from customer deposits but does include Bitcoins that are pledged as collateral by us. 8 All sites listed by MW capacity, except"
+  },
+  {
+   "filer": "FORUM MARKETS Inc",
+   "form": "8-K",
+   "adsh": "0001213900-26-118449",
+   "date": "2026-11-12",
+   "label": "noise",
+   "distance": 1054,
+   "text": null
+  },
+  {
+   "filer": "Boost Run Inc.",
+   "form": "10-Q",
+   "adsh": "0001493152-26-051227",
+   "date": "2026-11-12",
+   "label": "noise",
+   "distance": 357,
+   "text": null
+  },
+  {
+   "filer": "RUM Group Inc.",
+   "form": "10-Q",
+   "adsh": "0001213900-26-118479",
+   "date": "2026-11-12",
+   "label": "noise",
+   "distance": 885,
+   "text": null
+  },
+  {
+   "filer": "Cerebras Systems Inc.",
+   "form": "10-Q",
+   "adsh": "0001628280-26-073494",
+   "date": "2026-11-12",
+   "label": "noise",
+   "distance": 1860,
+   "text": null
+  },
+  {
+   "filer": "SES AI Corp",
+   "form": "10-Q",
+   "adsh": "0001819142-26-000070",
+   "date": "2026-11-12",
+   "label": "noise",
+   "distance": 5277,
+   "text": null
+  },
+  {
+   "filer": "TRIO-TECH INTERNATIONAL",
+   "form": "10-Q",
+   "adsh": "0001437749-26-036465",
+   "date": "2026-11-12",
+   "label": "noise",
+   "distance": 7286,
+   "text": null
+  },
+  {
+   "filer": "POWERCOMPUTE, INC.",
+   "form": "8-K",
+   "adsh": "0001193125-26-459251",
+   "date": "2026-11-13",
+   "label": "noise",
+   "distance": 33,
+   "text": "without adding power capacity. • HPC: Operating a professional-grade graphics processing unit (“GPU”) at the Oklahoma site that has Verified status on the Vast.ai compute marketplace, which allows the Company to evaluate HPC and AI workloads on power the Company already owns. • Columbus power: Secured 11 megawatts at the Columbus, Mississippi site under the Tennessee Valley Authority"
+  },
+  {
+   "filer": "FORUM MARKETS Inc",
+   "form": "10-Q",
+   "adsh": "0001213900-26-119911",
+   "date": "2026-11-13",
+   "label": "noise",
+   "distance": 26,
+   "text": "loans, which are secured by a security interest in project assets and pledged membership interests. On October 26, 2026, the Joint Venture entered a definitive agreement with a third party for a 36-month reservation of Nvidia B300 GPU capacity at its existing, powered data center facility in Dallas, Texas. The"
+  },
+  {
+   "filer": "Big Digital Energy, Inc.",
+   "form": "10-Q",
+   "adsh": "0001213900-26-119616",
+   "date": "2026-11-13",
+   "label": "noise",
+   "distance": 1927,
+   "text": null
+  },
+  {
+   "filer": "Smartbird, Inc.",
+   "form": "10-Q",
+   "adsh": "0001437749-26-036625",
+   "date": "2026-11-13",
+   "label": "noise",
+   "distance": 156,
+   "text": "third-party suppliers, including the procurement, maintenance, and hosting of high-performance GPU hardware, fees paid to third-party data center and other service providers for space, power, cooling, connectivity, and related services, recurring payroll and benefits for the teams responsible for the ongoing engineering, security, and management of these infrastructure environments, and general corporate activities. Payments to data center providers are funded at the project level, and may include financing or customer advances that we receive and remit to those providers. The timing of cash receipts and payments, as well as any refunds or credits, may affect our liquidity. We expect to fund our operations through debt or equity financings, as well as expected future operating cash flow. The Company's principal capital resources consist of the following: Convertible Notes On April 14, 2026, the Company entered into a Securities Purchase Agreement (as subsequently amended, the \"Amended Purchase Agreement\"), pursuant to which the Company agreed to issue and sell to the holder of the Convertible Notes senior secured convertible notes in an aggregate original principal amount of up to $50"
+  },
+  {
+   "filer": "XMax Inc.",
+   "form": "10-Q",
+   "adsh": "0001493152-26-051765",
+   "date": "2026-11-13",
+   "label": "noise",
+   "distance": 345,
+   "text": null
+  },
+  {
+   "filer": "Professional Diversity Network, Inc.",
+   "form": "10-Q",
+   "adsh": "0001437749-26-037029",
+   "date": "2026-11-16",
+   "label": "deal",
+   "distance": 20,
+   "text": "Revenue Sharing Agreement with Goodwill and HashForest Technology LLC (“HashForest”), and a Secured Term Loan and Security Agreement with Goodwill in connection with the expansion of the Company’s graphics processing unit (“GPU”) infrastructure business. Under these agreements, PDN Intelligence committed approximately $ 1.177 million"
+  },
+  {
+   "filer": "SK hynix Inc.",
+   "form": "6-K",
+   "adsh": "0001193125-26-461909",
+   "date": "2026-11-16",
+   "label": "noise",
+   "distance": 2908,
+   "text": null
+  }
+ ]
+}

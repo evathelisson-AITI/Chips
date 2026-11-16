@@ -454,6 +454,152 @@ class Sources(unittest.TestCase):
         self.assertNotIn("defaults on", rest.split("## Tier", 1)[1])
 
 
+class EdgarNearby(unittest.TestCase):
+    """The nearby-words check on full-text EDGAR hits (config edgar_nearby_*)."""
+
+    GPU_Q = '"GPU" "collateral"'
+    UNTRACKED = "0000099999"
+
+    @classmethod
+    def setUpClass(cls):
+        with open(os.path.join(ROOT, "tests", "edgar_sample.json"), encoding="utf-8") as f:
+            cls.sample = json.load(f)["items"]
+
+    def kept(self, item):
+        """Would the check keep this labelled filing with the current config?"""
+        window = watch.CONFIG["edgar_nearby_words"]
+        if item["text"] is None:   # pair farther apart than the stored passages
+            return item["distance"] is not None and item["distance"] <= window
+        return watch.nearby_match(item["text"], watch.CONFIG["edgar_nearby_gpu_terms"],
+                                  watch.CONFIG["edgar_nearby_security_terms"], window) is not None
+
+    def test_sample_every_deal_passes(self):
+        deals = [i for i in self.sample if i["label"] == "deal"]
+        self.assertTrue(deals)
+        for i in deals:
+            self.assertTrue(self.kept(i), i["filer"])
+
+    def test_sample_most_noise_dropped(self):
+        noise = [i for i in self.sample if i["label"] == "noise"]
+        dropped = sum(1 for i in noise if not self.kept(i))
+        self.assertGreaterEqual(dropped / len(noise), 0.85, f"{dropped} of {len(noise)} noise filings dropped")
+
+    def test_nearby_match(self):
+        a, b = ["gpu", "gpus"], ["collateral", "secured"]
+        self.assertIn("secured by the GPUs", watch.nearby_match(
+            "Intro. The facility is secured by the GPUs and related assets. More.", a, b, 25))
+        self.assertIsNotNone(watch.nearby_match("a GPU-backed loan with collateral", a, b, 25), "hyphenated")
+        far = "GPUs are in use. " + "word " * 40 + "Collateral is cash."
+        self.assertIsNone(watch.nearby_match(far, a, b, 25))
+        self.assertIsNotNone(watch.nearby_match(far, a, b, 50))
+        self.assertIsNone(watch.nearby_match("GPUs only, nothing else", a, b, 25))
+        self.assertIsNone(watch.nearby_match("graphics processing units as collateral", a, b, 25), "whole words")
+
+    def test_filing_text(self):
+        raw = "<html><style>p{x:1}</style><p>GPU&nbsp;loan</p><script>var collateral=1</script></html>"
+        self.assertEqual(watch.filing_text(raw), "GPU loan")
+
+    def hit(self, adsh, doc, cik=UNTRACKED, form="10-Q"):
+        return {"_id": f"{adsh}:{doc}", "_source": {"adsh": adsh, "ciks": [cik], "form": form,
+                                                    "display_names": ["Smallco Inc. (SMCO)"],
+                                                    "file_date": days_ago(1)}}
+
+    def run_edgar(self, results, pages):
+        """pages: URL -> HTML (or an Exception to raise). Returns (watch, fetched URLs)."""
+        fetched = []
+
+        def fetch(url, max_bytes=None):
+            fetched.append(url)
+            page = pages.get(url, "")
+            if isinstance(page, Exception):
+                raise page
+            return page.encode()
+        w = watch.Watch(seen=[], fetch=fetch)
+        w.process_edgar(results)
+        return w, fetched
+
+    def doc_url(self, adsh, doc, cik="99999"):
+        return f"https://www.sec.gov/Archives/edgar/data/{cik}/{adsh.replace('-', '')}/{doc}"
+
+    def test_keeps_close_and_drops_far(self):
+        near, far = "0000099999-26-000001", "0000099999-26-000002"
+        w, fetched = self.run_edgar({self.GPU_Q: [self.hit(near, "q.htm"), self.hit(far, "q.htm")]}, {
+            self.doc_url(near, "q.htm"): "<p>The term loan is secured by 2,000 Nvidia GPUs.</p>",
+            self.doc_url(far, "q.htm"): "<p>We buy GPUs.</p>" + "<p>filler text</p>" * 30 + "<p>No collateral.</p>",
+        })
+        self.assertEqual(fetched, [self.doc_url(near, "q.htm"), self.doc_url(far, "q.htm")])
+        self.assertEqual(len(w.candidates), 1)
+        c = w.candidates[0]
+        self.assertIn(near.replace("-", ""), c["url"])
+        self.assertEqual(c["_edgar"], "fulltext")
+        self.assertTrue(c["_summary"].startswith("Nearby: "), c["_summary"])
+        self.assertIn("secured by 2,000 Nvidia GPUs", c["_summary"])
+        self.assertEqual(c["terms"], stories.NEUTRAL_TERMS, "filing text must not reach the site fields")
+        self.assertEqual(w.stats["EDGAR nearby-words check (checked / kept)"],
+                         [2, 1, "1 dropped, 0 kept unchecked"])
+
+    def test_unreadable_document_keeps_the_filing(self):
+        adsh = "0000099999-26-000003"
+        w, _ = self.run_edgar({self.GPU_Q: [self.hit(adsh, "q.htm")]},
+                              {self.doc_url(adsh, "q.htm"): ValueError("response too large")})
+        self.assertEqual(len(w.candidates), 1)
+        self.assertIn("not run", w.candidates[0]["_summary"])
+
+    def test_second_document_can_match(self):
+        adsh = "0000099999-26-000004"
+        w, fetched = self.run_edgar({self.GPU_Q: [self.hit(adsh, "main.htm"), self.hit(adsh, "ex10-1.htm")]}, {
+            self.doc_url(adsh, "main.htm"): "GPUs. " + "x " * 60 + "collateral",
+            self.doc_url(adsh, "ex10-1.htm"): "Collateral: all GPUs of the Borrower.",
+        })
+        self.assertEqual(len(fetched), 2)
+        self.assertEqual(len(w.candidates), 1)
+
+    def test_skipped_for_tracked_issuers_and_exact_phrases(self):
+        tracked = str(next(i["cik"] for i in watch.ISSUERS if isinstance(i.get("cik"), int))).zfill(10)
+        w, fetched = self.run_edgar({
+            self.GPU_Q: [self.hit("0000000001-26-000001", "a.htm", cik=tracked),
+                         self.hit("0000099999-26-000005", "b.htm")],
+            '"GPU-backed"': [self.hit("0000099999-26-000005", "b.htm")],
+        }, {})
+        self.assertEqual(fetched, [], "tracked issuer, or a filing that also matched an exact phrase")
+        self.assertEqual(len(w.candidates), 2)
+
+    def test_malformed_document_names_are_not_fetched(self):
+        w, fetched = self.run_edgar({self.GPU_Q: [self.hit("0000099999-26-000006", "../../x.htm"),
+                                                  self.hit("0000099999-26-000006", "a.htm?x=1")]}, {})
+        self.assertEqual(fetched, [])
+        self.assertEqual(len(w.candidates), 1, "kept unchecked")
+
+    def test_fetch_limit_and_ignore_list(self):
+        saved = {k: watch.CONFIG.get(k) for k in ("edgar_nearby_max_documents", "edgar_fulltext_ignore_ciks")}
+        try:
+            watch.CONFIG["edgar_nearby_max_documents"] = 1
+            watch.CONFIG["edgar_fulltext_ignore_ciks"] = [77777]
+            far = "GPUs. " + "x " * 60 + "collateral"
+            a, b = "0000099999-26-000007", "0000099999-26-000008"
+            w, fetched = self.run_edgar({self.GPU_Q: [
+                self.hit(a, "a.htm"), self.hit(b, "b.htm"),
+                self.hit("0000077777-26-000001", "c.htm", cik="0000077777"),
+            ]}, {self.doc_url(a, "a.htm"): far, self.doc_url(b, "b.htm"): far})
+            self.assertEqual(fetched, [self.doc_url(a, "a.htm")])
+            self.assertEqual([c["url"].split("/")[-2] for c in w.candidates], [b.replace("-", "")],
+                             "a dropped, b kept unchecked past the limit, the ignored CIK skipped")
+            self.assertIn("1 on the ignore list", w.stats["EDGAR filings (after form filter, one per filing)"][2])
+        finally:
+            watch.CONFIG.update(saved)
+
+    def test_digest_lists_fulltext_matches_apart(self):
+        w = watch.Watch(seen=[])
+        w.process_issuer_filings({"name": "CoreWeave", "cik": 1769628}, IssuerFilings.data(
+            None, [("0001769628-26-000001", 1, "8-K", "1.01")]))
+        w.process_edgar({'"GPU-backed"': [self.hit("0000099999-26-000009", "a.htm")]})
+        digest = "\n".join(watch.digest_lines(watch.group_candidates(w.candidates)))
+        tier1, fulltext = digest.split("### EDGAR full-text search", 1)
+        self.assertIn("CoreWeave", tier1)
+        self.assertNotIn("Smallco", tier1)
+        self.assertIn("Smallco", fulltext.split("## Source")[0])
+
+
 class SiteData(unittest.TestCase):
     """Shape of observatory-data.json, which app.js renders."""
 
