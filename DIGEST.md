@@ -1,111 +1,57 @@
 # Observatory watch digest - 2026-11-16
-59 new stories, 0 follow-up(s), 0 stress signal(s) (72 article(s)). Window: 14 days.
+1 new story, 0 follow-up(s), 0 stress signal(s) (1 article(s)). Window: 14 days.
 
 ## Tier 1 - primary sources
 
-- **2026-11-02** [Cipher Digital Inc. - 10-Q \(periodic report: check the debt note\)](https://www.sec.gov/Archives/edgar/data/1819989/000181998926000050/0001819989-26-000050-index.htm) - sec.gov
-- **2026-11-02** [Backblaze, Inc. \(BLZE\) \(CIK 0001462056\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1462056/000162828026068869/0001628280-26-068869-index.htm) - sec.gov
-- **2026-11-02** [VivoPower PLC \(VIVO\) \(CIK 0001681348\) - 20-F matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1681348/000149315226049646/0001493152-26-049646-index.htm) - sec.gov
-- **2026-11-03** [WhiteFiber, Inc. - 8-K \(1.01 material agreement\)](https://www.sec.gov/Archives/edgar/data/2042022/000121390026115575/0001213900-26-115575-index.htm) - sec.gov
-- **2026-11-03** [DigitalOcean Holdings, Inc. \(DOCN\) \(CIK 0001582961\) - 10-Q matching "GPU" "collateral" + "delayed draw term loan" "GPU"](https://www.sec.gov/Archives/edgar/data/1582961/000162828026069141/0001628280-26-069141-index.htm) - sec.gov
-- **2026-11-04** [TERAWULF INC. - 8-K \(1.01 material agreement\)](https://www.sec.gov/Archives/edgar/data/1083301/000162828026069810/0001628280-26-069810-index.htm) - sec.gov
-- **2026-11-04** [Hut 8 Corp. - 10-Q \(periodic report: check the debt note\) - full text matches "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1964789/000119312526446146/0001193125-26-446146-index.htm) - sec.gov
-- **2026-11-04** [Blue Owl Capital Corp \(OBDC\) \(CIK 0001655888\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1655888/000165588826000069/0001655888-26-000069-index.htm) - sec.gov
-- **2026-11-04** [Blue Owl Technology Finance Corp. \(OTF\) \(CIK 0001747777\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1747777/000174777726000036/0001747777-26-000036-index.htm) - sec.gov
-- **2026-11-05** [IREN Ltd - 10-Q \(periodic report: check the debt note\) - full text matches "GPU" "collateral" + "GPU financing" + "delayed draw term loan" "GPU"](https://www.sec.gov/Archives/edgar/data/1878848/000187884826000066/0001878848-26-000066-index.htm) - sec.gov
-- **2026-11-05** [Core Scientific, Inc./tx - 10-Q \(periodic report: check the debt note\)](https://www.sec.gov/Archives/edgar/data/1839341/000183934126000030/0001839341-26-000030-index.htm) - sec.gov
-- **2026-11-05** [Stark Focus Group, Inc. \(SKFG\) \(CIK 0001794942\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1794942/000164033426001752/0001640334-26-001752-index.htm) - sec.gov
-- **2026-11-05** [IREN Ltd \(IREN\) \(CIK 0001878848\) - 8-K matching "GPU financing"](https://www.sec.gov/Archives/edgar/data/1878848/000187884826000065/0001878848-26-000065-index.htm) - sec.gov
-- **2026-11-05** [Vertical Data Inc. \(VDTA\) \(CIK 0002033264\) - 8-K matching "GPU financing"](https://www.sec.gov/Archives/edgar/data/2033264/000149315226050250/0001493152-26-050250-index.htm) - sec.gov
-- **2026-11-05** [Athene Holding Ltd. \(ATHS, ATH-PA, ATH-PB, ATH-PD, ATH-PE\) \(CIK 0001527469\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1527469/000152746926000085/0001527469-26-000085-index.htm) - sec.gov
-- **2026-11-05** [Blue Owl Technology Income Corp. \(CIK 0001869453\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1869453/000186945326000066/0001869453-26-000066-index.htm) - sec.gov
-- **2026-11-05** [Blue Owl Credit Income Corp. \(CIK 0001812554\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1812554/000181255426000060/0001812554-26-000060-index.htm) - sec.gov
-- **2026-11-05** [Apollo Global Management, Inc. \(APO, APOS\) \(CIK 0001858681\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1858681/000185868126000067/0001858681-26-000067-index.htm) - sec.gov
-- **2026-11-06** [TERAWULF INC. - 10-Q \(periodic report: check the debt note\) - full text matches "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1083301/000162828026071671/0001628280-26-071671-index.htm) - sec.gov
-- **2026-11-06** [Super Micro Computer, Inc. \(SMCI, SMCIP\) \(CIK 0001375365\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1375365/000137536526000027/0001375365-26-000027-index.htm) - sec.gov
-- **2026-11-06** [GSI TECHNOLOGY INC \(GSIT\) \(CIK 0001126741\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1126741/000110465926123856/0001104659-26-123856-index.htm) - sec.gov
-- **2026-11-06** [Blue Owl Capital Corp II \(CIK 0001655887\) - 10-Q matching "compute infrastructure" "securitization"](https://www.sec.gov/Archives/edgar/data/1655887/000165588726000025/0001655887-26-000025-index.htm) - sec.gov
-- **2026-11-09** [Galaxy Digital Inc. - 10-Q \(periodic report: check the debt note\)](https://www.sec.gov/Archives/edgar/data/1859392/000185939226000112/0001859392-26-000112-index.htm) - sec.gov
-- **2026-11-09** [MARA Holdings, Inc. \(MARA\) \(CIK 0001507605\) - 8-K matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1507605/000150760526000026/0001507605-26-000026-index.htm) - sec.gov
-- **2026-11-09** [Rackspace Technology, Inc. \(RXT\) \(CIK 0001810019\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1810019/000181001926000115/0001810019-26-000115-index.htm) - sec.gov
-- **2026-11-09** [Exascale Labs Holdings Inc. \(XLAB, XLABW\) \(CIK 0002109869\) - 8-K matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/2109869/000182912626012120/0001829126-26-012120-index.htm) - sec.gov
-- **2026-11-09** [HIVE Digital Technologies Ltd. \(HIVE\) \(CIK 0001720424\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1720424/000106299326005842/0001062993-26-005842-index.htm) - sec.gov
-- **2026-11-09** [MARA Holdings, Inc. \(MARA\) \(CIK 0001507605\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1507605/000150760526000028/0001507605-26-000028-index.htm) - sec.gov
-- **2026-11-09** [Vertical Data Inc. \(VDTA\) \(CIK 0002033264\) - 8-K/A matching "GPU financing"](https://www.sec.gov/Archives/edgar/data/2033264/000149315226050816/0001493152-26-050816-index.htm) - sec.gov
-- **2026-11-10** [WhiteFiber, Inc. - 10-Q \(periodic report: check the debt note\) - full text matches "GPU" "collateral" + "delayed draw term loan" "GPU"](https://www.sec.gov/Archives/edgar/data/2042022/000121390026117728/0001213900-26-117728-index.htm) - sec.gov
-- **2026-11-10** [WhiteFiber, Inc. - 8-K \(1.01 material agreement, 2.03 new financial obligation\)](https://www.sec.gov/Archives/edgar/data/2042022/000121390026117723/0001213900-26-117723-index.htm) - sec.gov
-- **2026-11-10** [Bitdeer Technologies Group \(BTDR\) \(CIK 0001899123\) - 6-K matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1899123/000121390026117797/0001213900-26-117797-index.htm) - sec.gov
-- **2026-11-12** [CoreWeave, Inc. - 10-Q \(periodic report: check the debt note\) - full text matches "GPU" "collateral" + "delayed draw term loan" "GPU"](https://www.sec.gov/Archives/edgar/data/1769628/000176962826000465/0001769628-26-000465-index.htm) - sec.gov
-- **2026-11-12** [Nebius Group N.V. - 6-K \(foreign issuer report\) - full text matches "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1513845/000110465926126238/0001104659-26-126238-index.htm) - sec.gov
-- **2026-11-12** [Nebius Group N.V. - 6-K \(foreign issuer report\)](https://www.sec.gov/Archives/edgar/data/1513845/000110465926126008/0001104659-26-126008-index.htm) - sec.gov
-- **2026-11-12** [Bit Digital, Inc - 10-Q \(periodic report: check the debt note\) - full text matches "GPU" "collateral" + "delayed draw term loan" "GPU"](https://www.sec.gov/Archives/edgar/data/1710350/000121390026118350/0001213900-26-118350-index.htm) - sec.gov
-- **2026-11-12** [Nscale plc - S-1/A \(registration statement: check the debt section\) - full text matches "GPU" "collateral" + "GPU financing" + "delayed draw term loan" "GPU"](https://www.sec.gov/Archives/edgar/data/2110365/000119312526458722/0001193125-26-458722-index.htm) - sec.gov
-- **2026-11-12** [FORUM MARKETS Inc \(FRMM\) \(CIK 0001690080\) - 8-K matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1690080/000121390026118449/0001213900-26-118449-index.htm) - sec.gov
-- **2026-11-12** [Boost Run Inc. \(BRUN\) \(CIK 0002090646\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/2090646/000149315226051227/0001493152-26-051227-index.htm) - sec.gov
-- **2026-11-12** [RUM Group Inc. \(RUM, RUMBW\) \(CIK 0001830081\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1830081/000121390026118479/0001213900-26-118479-index.htm) - sec.gov
-- **2026-11-12** [Cerebras Systems Inc. \(CBRS\) \(CIK 0002021728\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/2021728/000162828026073494/0001628280-26-073494-index.htm) - sec.gov
-- **2026-11-12** [SES AI Corp \(SES, SESCW\) \(CIK 0001819142\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1819142/000181914226000070/0001819142-26-000070-index.htm) - sec.gov
-- **2026-11-12** [TRIO-TECH INTERNATIONAL \(TRT\) \(CIK 0000732026\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/732026/000143774926036465/0001437749-26-036465-index.htm) - sec.gov
-- **2026-11-13** [POWERCOMPUTE, INC. \(PWCM\) \(CIK 0001640384\) - 8-K matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1640384/000119312526459251/0001193125-26-459251-index.htm) - sec.gov
-- **2026-11-13** [FORUM MARKETS Inc \(FRMM\) \(CIK 0001690080\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1690080/000121390026119911/0001213900-26-119911-index.htm) - sec.gov
-- **2026-11-13** [Big Digital Energy, Inc. \(BGDE\) \(CIK 0001218683\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1218683/000121390026119616/0001213900-26-119616-index.htm) - sec.gov
-- **2026-11-13** [Smartbird, Inc. \(BIRD\) \(CIK 0001653909\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1653909/000143774926036625/0001437749-26-036625-index.htm) - sec.gov
-- **2026-11-13** [XMax Inc. \(XMAX\) \(CIK 0001473334\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1473334/000149315226051765/0001493152-26-051765-index.htm) - sec.gov
-- **2026-11-16** [Professional Diversity Network, Inc. \(IPDN\) \(CIK 0001546296\) - 10-Q matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/1546296/000143774926037029/0001437749-26-037029-index.htm) - sec.gov
-- **2026-11-16** [SK hynix Inc. \(SKHY, HXSCL\) \(CIK 0002120882\) - 6-K matching "GPU" "collateral"](https://www.sec.gov/Archives/edgar/data/2120882/000119312526461909/0001193125-26-461909-index.htm) - sec.gov
-## Tier 2 - quality press
 
-- **2026-11-11** [CoreWeave plans multibillion-dollar chip-backed debt deal - Financial Times](https://news.google.com/rss/articles/CBMihAFBVV95cUxQeUtFVXNORGFmX1lybml6VWc5Si04NlVaWUNaRDJWUXFTRk9VbW9CYmZEVGtNc3VEVFVZLXNZYU92LWpIbmphV3RkeWE5aTQzUGd4UXdQOUVSMW9oTzJyZ1plaDRvOUtFVVQ1LUFqLVhLV3RmTnBBMTFBRXpDZktDSzZOVmw?oc=5) - Financial Times (+4 more: Traders Union, Cryptopolitan, Crypto Briefing, CryptoRank)
-- **2026-11-11** [CoreWeave Launches $4 Billion Investment-Grade Syndicated Loan After Raising Full-Year Revenue Guidance - BigGo Finance](https://news.google.com/rss/articles/CBMidkFVX3lxTFBIVHpPYUl6MXJYQVI3bzBrRVhaUkNOV2lvVkl0aVpGNm9iZV9ULXNGcHZEMGgtVGF1NVlrX0VwbF85dXhsZGdGRk55SkEyVnUxSDFDci1MNS1HTUdlSkY0akhsWUsySmxQbWs1UTdwckJOS2ZraWc?oc=5) - BigGo Finance (+6 more: Crypto Briefing, TradingView, Seeking Alpha, TradingView, TradingView, MLQ.ai)
-- **2026-11-11** [CoreWeave's $35 billion debt raises a major AI warning - TradingView](https://news.google.com/rss/articles/CBMiswFBVV95cUxQbDg2VUVDamhJR00tQWp2aGZYZkM4dVNBNE5wVFRKSE9oQXVDQTlMTW1OLVFyN2RrVnE3WGlkY2dpd0RfRTZBU1k1OU9obm8yQngyS0JDVWVLT19DazhGcDZuMGxyNlI4SFU5Ykk5UEdCdHZhcjZjbWI4U1hVQzJhYkI2WXR2ZG9sZ1NMWm5vZHNUbFJ6T0JWbWJnTjFjQ2FXVnVCSnBGVDMxNWFzYUxXUlpNRQ?oc=5) - TradingView
-- **2026-11-12** [CoreWeave’s Bonds Signal Cooling Investor Angst On Elevated Debt Load - Yahoo Finance](https://news.google.com/rss/articles/CBMipwFBVV95cUxPRTIxaTktZ1RGQUVmOVpCbVpqYzJvSkJzNUZVTnpUUnBJY0dWcjhmNngzcjRRQ2VYQ0xNMHlUMVNTX21ZTnlJQjFJMWd1c1duandhSGN4X21EWU1WSm1uTjE4aFlsbHA4ZWF3Zm1qTFRpY25nYnBnSVZIbHpQYWhPcGIydGhsS2ZoQWdvVUlNRmdxdW01TXZ2ckdmajE5N3BWNk92emJqZw?oc=5) - Yahoo Finance
-- **2026-11-12** [A $133B backlog vs. a $47B debt mountain: Is CoreWeave a buy? - Yahoo Finance](https://news.google.com/rss/articles/CBMikgFBVV95cUxNRm9vVVRjQ2dGMm05dlBGNzFoZ05hbTc1a2JMZml0Y3FJQ05uMmhWRlQ0Rk1OaXNCQTRQcnpyUUNHVHg2SlM4aVdfc2hneUFueDdZVGphTm0taVcwc1cxaGU5NmdBejZMeXR5QWhZQ3dZUlZMdUhyZlUtWU94MzdEWHpYREVmMEZCVWh4d3o3RUtSZw?oc=5) - Yahoo Finance
-- **2026-11-13** [Neocloud Nscale Reveals $5.5 Billion Debt and Closer Nvidia Ties Ahead of IPO - Bloomberg](https://news.google.com/rss/articles/CBMixgFBVV95cUxNVFVjSW9xSzVCYWpzWHpsVWhKMW0ySUU0MkpLenE4WjVndWZPeGVtcVVDeW5hYXcxN05WdnNnRmtzck5ZVUZjTW04a3NmbDB2RWNzdjc4ZC10NEw5VGZkWFBqSzJicFhQQy1lX1ZzUGNydHhPR2RtQkM1c2t5MzZ0WlNLYVJwV3M5TS1ZRzQtVVpjTmZZczJUd2tMWENMQkkxZGhhclZFMGFPRU9YRjQ3LUl3QnNqcEpTRXpvRzhNM1lud0VtSlE?oc=5) - Bloomberg (+2 more: The Next Web, Electronics Weekly)
-- **2026-11-13** [CoreWeave's Demand is There, $41.6B of Corporate Debt Remains: What This Means for Nebius and CoreWeave - 24/7 Wall St.](https://news.google.com/rss/articles/CBMi2wFBVV95cUxOSDNsXzBmbmp4Vlp0clJ3YndJZU5iRmNWSGJSZDRmcTFTNmcwMUl1SWRDZmxvMnhTRWxjR3V3T2tIdnJyRE5rSFNEM0ZmVXlmcjZtNHJ0d0U2SjdpNk5SbXdNYi1MX2tXRlFtUUlwX1ZDSnFRYWNvTTFNM2F6UVZUYlUtaTdmX1VpMGVFNkFXUU5XN1drOEdCcnVvUmpGQnNUU2NiNlFNS0xEdDJZS2V3Z29maGVRejBHVWJhN3pjSkp0ZTltRjZINzVpbHhwOTg4cXN5MVdSeTZ1ZGs?oc=5) - 24/7 Wall St. (+1 more: Yahoo Finance)
-- **2026-11-13** [AI Cloud Provider Nscale Sees Debt Surge Ahead of IPO; Deepens Reliance on NVIDIA \(NVDA.US\) for Funding and Chip Supply - Moomoo](https://news.google.com/rss/articles/CBMingFBVV95cUxQRGlwcERZLWgwYTVETTFnVjlBa0QtSkM0S3h4RmpMdXNrMUdXZFZ5WXh0LWtPVHJJT1pZSkk4QTh1SlBSY3RxV3R5Y181VmRmVURFVjRMbW9wSGZyQ1RkQmhLSHdva1JiQVZ1WG5WTTBkeDJLSGJIS0kxT3N6YUsxa2lzSXN0dVVJZ1FfWThXUmxUR1k2Y3JPQTdhNGVxZw?oc=5) - Moomoo
-- **2026-11-16** [AI Data Center Debt Tracker: CoreWeave’s Notes and Loans, Plus 6 More Borrowers - FourWeekMBA](https://news.google.com/rss/articles/CBMiYkFVX3lxTFBWTXhLRWhlQ3A4TXdWbVZud3A4S0Z1cVYxR3k2Q1habEdtVW80X25wbmhqMENqVy1oS2NySy0yLWtFZGQ3azZLdmU2TVliNi1oMWZyR09fU25tNUtkNFowR2FR?oc=5) - FourWeekMBA
+### EDGAR full-text search (filings the per-company scan did not list)
+
+- **2026-11-12** [Corvex, Inc. \(MOVE\) \(CIK 0001734750\) - 10-Q matching "GPU loan"](https://www.sec.gov/Archives/edgar/data/1734750/000121390026118794/0001213900-26-118794-index.htm) - sec.gov
+
 
 ## Source health (fetched / new / note)
-- EDGAR filings: CoreWeave: 1 / 1
-- EDGAR filings: Nebius: 2 / 2
-- EDGAR filings: IREN: 1 / 1
+- EDGAR filings: CoreWeave: 1 / 0
+- EDGAR filings: Nebius: 2 / 0
+- EDGAR filings: IREN: 1 / 0
 - EDGAR filings: Applied Digital: 0 / 0
-- EDGAR filings: TeraWulf: 2 / 2
-- EDGAR filings: Cipher: 1 / 1
-- EDGAR filings: Core Scientific: 1 / 1
-- EDGAR filings: Hut 8: 1 / 1
-- EDGAR filings: Galaxy Digital: 1 / 1
-- EDGAR filings: WhiteFiber: 3 / 3
-- EDGAR filings: Bit Digital: 1 / 1
+- EDGAR filings: TeraWulf: 2 / 0
+- EDGAR filings: Cipher: 1 / 0
+- EDGAR filings: Core Scientific: 1 / 0
+- EDGAR filings: Hut 8: 1 / 0
+- EDGAR filings: Galaxy Digital: 1 / 0
+- EDGAR filings: WhiteFiber: 3 / 0
+- EDGAR filings: Bit Digital: 1 / 0
 - EDGAR filings: Sharon AI: 0 / 0
 - EDGAR filings: Nvidia: 0 / 0
-- EDGAR filings: Nscale: 1 / 1
+- EDGAR filings: Nscale: 1 / 0
 - EDGAR filings: SpaceX: 0 / 0
-- EDGAR: "GPU" "collateral": 63 / -
+- EDGAR: "GPU" "collateral": 64 / -
 - EDGAR: "GPU-backed": 0 / -
 - EDGAR: "GPU financing": 6 / -
-- EDGAR: "compute infrastructure" "securitization": 9 / -
+- EDGAR: "GPU loan": 1 / -
+- EDGAR: "GPU equipment financing": 0 / -
 - EDGAR: "delayed draw term loan" "GPU": 8 / -
-- EDGAR filings \(after form filter, one per filing\): 43 / 35
+- EDGAR filings \(after form filter, one per filing\): 37 / 1
+- EDGAR nearby-words check \(checked / kept\): 25 / 4 / 21 dropped, 0 kept unchecked
 - https://nvidianews.nvidia.com/releases.xml: 20 / 0
-- https://news.google.com/rss/search?q=GPU+financing+site%3Aprnewswire.com+OR+site%3Abusines: 60 / 0
-- https://news.google.com/rss/search?q=GPU-backed+OR+%22secured+by+GPUs%22+site%3Aprnewswire: 26 / 0
-- https://news.google.com/rss/search?q=GPU+OR+%22AI+infrastructure%22+OR+%22data+center%22+r: 60 / 0
+- https://news.google.com/rss/search?q=GPU+financing+site%3Aprnewswire.com+OR+site%3Abusines: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=GPU-backed+OR+%22secured+by+GPUs%22+site%3Aprnewswire: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=GPU+OR+%22AI+infrastructure%22+OR+%22data+center%22+r: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
 - https://www.ft.com/markets?format=rss: 25 / 0
 - https://www.ft.com/technology?format=rss: 25 / 0
-- https://news.google.com/rss/search?q=%22GPU-backed%22+loan+OR+securitization&hl=en-US&gl=U: 38 / 0
-- https://news.google.com/rss/search?q=%22chip-backed%22+debt+OR+lease&hl=en-US&gl=US&ceid=U: 20 / 4
-- https://news.google.com/rss/search?q=Nvidia+SPV+lease+financing&hl=en-US&gl=US&ceid=US%3Ae: 9 / 0
-- https://news.google.com/rss/search?q=GPU+collateral+lending&hl=en-US&gl=US&ceid=US%3Aen: 36 / 0
-- https://news.google.com/rss/search?q=neocloud+debt+GPU&hl=en-US&gl=US&ceid=US%3Aen: 31 / 1
-- https://news.google.com/rss/search?q=CoreWeave+OR+Lambda+OR+Crusoe+OR+Fluidstack+OR+Nscale: 60 / 12
-- https://news.google.com/rss/search?q=GPU+lender+default+OR+seized+OR+restructuring&hl=en-U: 31 / 0
-- https://news.google.com/rss/search?q=%22delayed+draw+term+loan%22+GPU+OR+%22AI+infrastruct: 28 / 0
-- https://news.google.com/rss/search?q=%22GPU-backed%22+loan+OR+securitization&hl=en-IN&gl=I: 35 / 0
-- https://news.google.com/rss/search?q=%22chip-backed%22+debt+OR+lease&hl=en-IN&gl=IN&ceid=I: 19 / 1
-- https://news.google.com/rss/search?q=Nvidia+SPV+lease+financing&hl=en-IN&gl=IN&ceid=IN%3Ae: 10 / 0
-- https://news.google.com/rss/search?q=GPU+collateral+lending&hl=en-IN&gl=IN&ceid=IN%3Aen: 34 / 0
-- https://news.google.com/rss/search?q=neocloud+debt+GPU&hl=en-IN&gl=IN&ceid=IN%3Aen: 31 / 0
-- https://news.google.com/rss/search?q=CoreWeave+OR+Lambda+OR+Crusoe+OR+Fluidstack+OR+Nscale: 60 / 4
-- https://news.google.com/rss/search?q=GPU+lender+default+OR+seized+OR+restructuring&hl=en-I: 28 / 0
-- https://news.google.com/rss/search?q=%22delayed+draw+term+loan%22+GPU+OR+%22AI+infrastruct: 26 / 0
+- https://news.google.com/rss/search?q=%22GPU-backed%22+loan+OR+securitization&hl=en-US&gl=U: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=%22chip-backed%22+debt+OR+lease&hl=en-US&gl=US&ceid=U: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=Nvidia+SPV+lease+financing&hl=en-US&gl=US&ceid=US%3Ae: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=GPU+collateral+lending&hl=en-US&gl=US&ceid=US%3Aen: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=neocloud+debt+GPU&hl=en-US&gl=US&ceid=US%3Aen: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=CoreWeave+OR+Lambda+OR+Crusoe+OR+Fluidstack+OR+Nscale: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=GPU+lender+default+OR+seized+OR+restructuring&hl=en-U: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=%22delayed+draw+term+loan%22+GPU+OR+%22AI+infrastruct: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=%22GPU-backed%22+loan+OR+securitization&hl=en-IN&gl=I: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=%22chip-backed%22+debt+OR+lease&hl=en-IN&gl=IN&ceid=I: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=Nvidia+SPV+lease+financing&hl=en-IN&gl=IN&ceid=IN%3Ae: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=GPU+collateral+lending&hl=en-IN&gl=IN&ceid=IN%3Aen: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=neocloud+debt+GPU&hl=en-IN&gl=IN&ceid=IN%3Aen: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=CoreWeave+OR+Lambda+OR+Crusoe+OR+Fluidstack+OR+Nscale: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=GPU+lender+default+OR+seized+OR+restructuring&hl=en-I: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
+- https://news.google.com/rss/search?q=%22delayed+draw+term+loan%22+GPU+OR+%22AI+infrastruct: 0 / 0 / 503 Server Error: Service Unavailable for url: https://news.google.com/rss/searc
