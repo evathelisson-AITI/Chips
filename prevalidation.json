@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-16",
+  "generated": "2026-11-23",
   "note": "suggestions only; ver is never modified",
   "clusters": [
     {
@@ -45,6 +45,66 @@
       ]
     },
     {
+      "entity": "CoreWeave",
+      "amount_musd": 30,
+      "members": 4,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "19949535014b"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%2030%20million%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "MarketWatch"
+      ]
+    },
+    {
+      "entity": "CoreWeave",
+      "amount_musd": 350,
+      "members": 1,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "6c409c92113f"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%20350%20million%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "TradingView"
+      ]
+    },
+    {
+      "entity": "CoreWeave",
+      "amount_musd": 4000,
+      "members": 2,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "d805975a4096"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22CoreWeave%22",
+        "https://www.google.com/search?q=CoreWeave%204%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "TradingView"
+      ]
+    },
+    {
       "entity": "Goldman/GSAM",
       "amount_musd": 6600,
       "members": 1,
@@ -64,6 +124,26 @@
       ],
       "outlets": [
         "9fin"
+      ]
+    },
+    {
+      "entity": "Goldman/GSAM",
+      "amount_musd": 44000,
+      "members": 2,
+      "best_tier": "primary",
+      "suggestion": "VERIFIED-candidate (curator confirms issuer/filing in the source)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "9678e97ba57e"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22Goldman/GSAM%22",
+        "https://www.google.com/search?q=Goldman%20GSAM%2044%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "GlobeNewswire"
       ]
     },
     {
@@ -128,6 +208,46 @@
       ],
       "outlets": [
         "TradingView"
+      ]
+    },
+    {
+      "entity": "Nvidia",
+      "amount_musd": 1500,
+      "members": 1,
+      "best_tier": "other",
+      "suggestion": "COMMENTARY-ONLY (no deal evidence; attach as context)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "b6ad6c431fee"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22Nvidia%22",
+        "https://www.google.com/search?q=Nvidia%201.5%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "shattered.io"
+      ]
+    },
+    {
+      "entity": "Nvidia",
+      "amount_musd": 43000,
+      "members": 3,
+      "best_tier": "other",
+      "suggestion": "NEEDS-PRIMARY-SOURCE (press/aggregator tier only)",
+      "tags": [],
+      "possible_duplicate_of": [],
+      "known_primary": [],
+      "member_ids": [
+        "13019f9fa243"
+      ],
+      "find_primary": [
+        "https://www.sec.gov/edgar/search/#/q=%22Nvidia%22",
+        "https://www.google.com/search?q=Nvidia%2043%20billion%20GPU%20financing+site:prnewswire.com+OR+site:businesswire.com"
+      ],
+      "outlets": [
+        "Tom's Hardware"
       ]
     }
   ],
@@ -231,13 +351,266 @@
       "kind": "other",
       "suggestion": "REVIEW-manually"
     },
-    "4424c30aeee6": {
-      "id": "4424c30aeee6",
-      "date": "2026-11-12",
-      "name": "Corvex, Inc. (MOVE) (CIK 0001734750) - 10-Q matching \"GPU loan\"",
+    "2a4607d13eae": {
+      "id": "2a4607d13eae",
+      "date": "2026-11-16",
+      "name": "SharonAI Holdings Inc. - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\" + \"GPU-backed\"",
       "outlet": "sec.gov",
       "tier": "primary",
       "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "301d21dbed81": {
+      "id": "301d21dbed81",
+      "date": "2026-11-16",
+      "name": "DUOS TECHNOLOGIES GROUP, INC. (DUOT) (CIK 0001396536) - 10-Q matching \"GPU\" \"collateral\" + \"GPU financing\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "af42466586ad": {
+      "id": "af42466586ad",
+      "date": "2026-11-16",
+      "name": "SharonAI Holdings Inc. (SHAZ, SHAZW) (CIK 0002068385) - 8-K matching \"GPU-backed\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "3a496a7c4799": {
+      "id": "3a496a7c4799",
+      "date": "2026-11-17",
+      "name": "AXE COMPUTE INC. (AGPU) (CIK 0001446159) - 10-Q matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "97a14b75a3cd": {
+      "id": "97a14b75a3cd",
+      "date": "2026-11-17",
+      "name": "DUOS TECHNOLOGIES GROUP, INC. (DUOT) (CIK 0001396536) - 8-K matching \"GPU financing\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "c5079afb5a04": {
+      "id": "c5079afb5a04",
+      "date": "2026-11-18",
+      "name": "ChronoScale Holdings Corp (CHRN) (CIK 0001549084) - 8-K/A matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "7a88001bed2f": {
+      "id": "7a88001bed2f",
+      "date": "2026-11-18",
+      "name": "ChronoScale Holdings Corp (CHRN) (CIK 0001549084) - 8-K matching \"GPU\" \"collateral\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "9678e97ba57e": {
+      "id": "9678e97ba57e",
+      "date": "2026-11-20",
+      "name": "Apollo and Goldman Sachs Announce Pricing of $44 Billion SpaceX GPU Financing - GlobeNewswire",
+      "outlet": "GlobeNewswire",
+      "tier": "primary",
+      "entity": "Goldman/GSAM",
+      "amount_musd": 44000.0,
+      "kind": "deal-signal",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "dd000732625a": {
+      "id": "dd000732625a",
+      "date": "2026-11-23",
+      "name": "KIDZ AI Inc. (KIDZ, KIDZW) (CIK 0002022308) - 8-K matching \"GPU financing\"",
+      "outlet": "sec.gov",
+      "tier": "primary",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "d805975a4096": {
+      "id": "d805975a4096",
+      "date": "2026-11-12",
+      "name": "CoreWeave's $4 billion debt plan faces an Nvidia-sized risk - TradingView",
+      "outlet": "TradingView",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 4000.0,
+      "kind": "commentary",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "cc9bf07e746f": {
+      "id": "cc9bf07e746f",
+      "date": "2026-11-19",
+      "name": "Why This Top Floating-Rate Fund Is Playing Footsie With CoreWeave Debt - Barron's",
+      "outlet": "Barron's",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "56a635b770ed": {
+      "id": "56a635b770ed",
+      "date": "2026-11-19",
+      "name": "CoreWeave's McBee Favors Compute Investments Over Buying Back Costly Debt - Briefs Finance",
+      "outlet": "Briefs Finance",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "19949535014b": {
+      "id": "19949535014b",
+      "date": "2026-11-19",
+      "name": "A CoreWeave co-founder just made an unconventional $30 million wager on its battered bonds - MarketWatch",
+      "outlet": "MarketWatch",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 30.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "ff423814fe04": {
+      "id": "ff423814fe04",
+      "date": "2026-11-20",
+      "name": "Lenders aim to bar SpaceX from launching $40bn of chips into orbit - Financial Times",
+      "outlet": "Financial Times",
+      "tier": "press1",
+      "entity": null,
+      "amount_musd": 40000.0,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "304a79b581d9": {
+      "id": "304a79b581d9",
+      "date": "2026-11-20",
+      "name": "CoreWeave Briefly Trades Below $40 IPO Price Amid Financing Worries - BeInCrypto",
+      "outlet": "BeInCrypto",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "dd86feac0af3": {
+      "id": "dd86feac0af3",
+      "date": "2026-11-20",
+      "name": "Junk bond stress builds at the bottom as CCC spreads widen and CoreWeave debt trades at distressed levels - CEO Economy",
+      "outlet": "CEO Economy",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "09f02395a7bd": {
+      "id": "09f02395a7bd",
+      "date": "2026-11-20",
+      "name": "Elon Musk’s Lenders Have One Request: Please Don’t Launch Our AI Chips Into Space - Gizmodo",
+      "outlet": "Gizmodo",
+      "tier": "other",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "6c409c92113f": {
+      "id": "6c409c92113f",
+      "date": "2026-11-20",
+      "name": "CoreWeave Gains $350 Million Computing Commitment as Debt Concerns Persist - TradingView",
+      "outlet": "TradingView",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": 350.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "99f3091f5808": {
+      "id": "99f3091f5808",
+      "date": "2026-11-21",
+      "name": "CoreWeave Borrowed at Under 6% Against Its GPUs. SpaceX Just Paid Above 8% for Chip-Backed Debt - TIKR.com",
+      "outlet": "TIKR.com",
+      "tier": "other",
+      "entity": "CoreWeave",
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "548c73ab9088": {
+      "id": "548c73ab9088",
+      "date": "2026-11-21",
+      "name": "Lenders Fear SpaceX Could “Shoot the Valuable Chips” Into Space. SpaceX Sinks After Its $32 Billion Debt Sale - TIKR.com",
+      "outlet": "TIKR.com",
+      "tier": "other",
+      "entity": null,
+      "amount_musd": 32000.0,
+      "kind": "deal-signal",
+      "suggestion": "REVIEW-manually"
+    },
+    "49ece2726b39": {
+      "id": "49ece2726b39",
+      "date": "2026-11-21",
+      "name": "Behind the GPU Rent Spike Lies a Financing Squeeze: Loan-to-Value Ratios Cut to 50%, Spot Market Inflated by Forced Demand - BigGo Finance",
+      "outlet": "BigGo Finance",
+      "tier": "other",
+      "entity": null,
+      "amount_musd": null,
+      "kind": "other",
+      "suggestion": "REVIEW-manually"
+    },
+    "13019f9fa243": {
+      "id": "13019f9fa243",
+      "date": "2026-11-22",
+      "name": "Lenders back SpaceX's $43 billion Nvidia GPU deal but worry the collateral could end up in orbit, making them impossible to reclaim if Musk defaults — five-year 'hell-or-high-water",
+      "outlet": "Tom's Hardware",
+      "tier": "other",
+      "entity": "Nvidia",
+      "amount_musd": 43000.0,
+      "kind": "deal-signal",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "b6ad6c431fee": {
+      "id": "b6ad6c431fee",
+      "date": "2026-11-22",
+      "name": "SpaceX Lenders Want Nvidia Chips Kept on Earth: $1.5B Risk - shattered.io",
+      "outlet": "shattered.io",
+      "tier": "other",
+      "entity": "Nvidia",
+      "amount_musd": 1500.0,
+      "kind": "other",
+      "suggestion": "SEE-CLUSTER"
+    },
+    "c5cbbd65827e": {
+      "id": "c5cbbd65827e",
+      "date": "2026-11-23",
+      "name": "Bad News for CoreWeave and IREN: GPU Lenders Now Want “50 to 60 Percent” Loan-to-Value, Down From 80% - TIKR.com",
+      "outlet": "TIKR.com",
+      "tier": "other",
+      "entity": "IREN",
       "amount_musd": null,
       "kind": "other",
       "suggestion": "REVIEW-manually"

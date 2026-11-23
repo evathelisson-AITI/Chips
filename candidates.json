@@ -1,17 +1,428 @@
 [
   {
     "_tier": 1,
-    "_summary": "EDGAR full-text match",
-    "date": "2026-11-12",
-    "name": "Corvex, Inc. (MOVE) (CIK 0001734750) - 10-Q matching \"GPU loan\"",
+    "_summary": "EDGAR filing list",
+    "date": "2026-11-16",
+    "name": "SharonAI Holdings Inc. - 10-Q (periodic report: check the debt note) - full text matches \"GPU\" \"collateral\" + \"GPU-backed\"",
     "type": "To classify",
     "amount": "-",
     "terms": "Auto-detected; details to be completed after reading the source",
     "status": "Auto-added - awaiting human verification",
     "ver": "PENDING REVIEW",
-    "src": "SEC EDGAR, 2026-11-12",
-    "url": "https://www.sec.gov/Archives/edgar/data/1734750/000121390026118794/0001213900-26-118794-index.htm",
+    "src": "SEC EDGAR, 2026-11-16",
+    "url": "https://www.sec.gov/Archives/edgar/data/2068385/000149315226052382/0001493152-26-052382-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "issuer"
+  },
+  {
+    "_tier": 1,
+    "_summary": "EDGAR full-text match",
+    "date": "2026-11-16",
+    "name": "DUOS TECHNOLOGIES GROUP, INC. (DUOT) (CIK 0001396536) - 10-Q matching \"GPU\" \"collateral\" + \"GPU financing\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-16",
+    "url": "https://www.sec.gov/Archives/edgar/data/1396536/000107997326001535/0001079973-26-001535-index.htm",
     "outlet": "sec.gov",
     "_edgar": "fulltext"
+  },
+  {
+    "_tier": 1,
+    "_summary": "EDGAR full-text match",
+    "date": "2026-11-16",
+    "name": "SharonAI Holdings Inc. (SHAZ, SHAZW) (CIK 0002068385) - 8-K matching \"GPU-backed\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-16",
+    "url": "https://www.sec.gov/Archives/edgar/data/2068385/000149315226052409/0001493152-26-052409-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "fulltext"
+  },
+  {
+    "_tier": 1,
+    "_summary": "Nearby: the collateral, the term, our credit profile and potential rates on comparable GPU-secured financings. A 100-basis point change in the rate would change the",
+    "date": "2026-11-17",
+    "name": "AXE COMPUTE INC. (AGPU) (CIK 0001446159) - 10-Q matching \"GPU\" \"collateral\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-17",
+    "url": "https://www.sec.gov/Archives/edgar/data/1446159/000117184326007507/0001171843-26-007507-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "fulltext"
+  },
+  {
+    "_tier": 1,
+    "_summary": "EDGAR full-text match",
+    "date": "2026-11-17",
+    "name": "DUOS TECHNOLOGIES GROUP, INC. (DUOT) (CIK 0001396536) - 8-K matching \"GPU financing\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-17",
+    "url": "https://www.sec.gov/Archives/edgar/data/1396536/000107997326001549/0001079973-26-001549-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "fulltext"
+  },
+  {
+    "_tier": 1,
+    "_summary": "Nearby: Loan Parties hold full legal and beneficial right, title and interest in GPU Assets free and clear of all Liens (other than Permitted Liens). (c) To the knowledge of the Borrower, the",
+    "date": "2026-11-18",
+    "name": "ChronoScale Holdings Corp (CHRN) (CIK 0001549084) - 8-K/A matching \"GPU\" \"collateral\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-18",
+    "url": "https://www.sec.gov/Archives/edgar/data/1549084/000149315226053103/0001493152-26-053103-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "fulltext"
+  },
+  {
+    "_tier": 1,
+    "_summary": "Nearby: title or interest in or to any GPU Asset (other than Permitted Liens) (the “ GPU Ownership Certification ”). Section 1.4 Third Party Consents . Notwithstanding anything to the",
+    "date": "2026-11-18",
+    "name": "ChronoScale Holdings Corp (CHRN) (CIK 0001549084) - 8-K matching \"GPU\" \"collateral\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-18",
+    "url": "https://www.sec.gov/Archives/edgar/data/1549084/000149315226052998/0001493152-26-052998-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "fulltext"
+  },
+  {
+    "_tier": 1,
+    "_summary": "Apollo and Goldman Sachs Announce Pricing of $44 Billion SpaceX GPU Financing GlobeNewswire",
+    "date": "2026-11-20",
+    "name": "Apollo and Goldman Sachs Announce Pricing of $44 Billion SpaceX GPU Financing - GlobeNewswire",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"GPU financing site:prnewswire.com OR site:businesswire.com OR site:globenewswire.com\" - Google News, 2026-11-20",
+    "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOZTAzRlZiUS1WTTlLQTQ5MlpLa3VUWi1BQmFsWGV5TFdLQUl6MXpPTVREc3BQRlhoMmU1MThsUTZ4NmtUX3o2ZHYxWFZlZVhPeFc4WTRFRnpPXzZSYWo1N1AxY2Vic29YWW0xYjRDMjR1S3NYcnFvN0lyblRHQUVnb3o4UlM2RUZ0VzY0eDBEU0RnWXAzZ0N6QnUwbVdXU1pwZDI1NnNGRXM5Zk9WdTE5TkM1dTRsS1JHWnRlaVh5cG5EUnNTUmF2WDQwUjN0SnprU1hJY1hHdUc5bFhpUllNY1Vn?oc=5",
+    "outlet": "GlobeNewswire",
+    "sources": [
+      {
+        "outlet": "BigGo Finance",
+        "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9LQnA0TWhDdElJOXQxNHh3eEZKN0wwWXV0QVliY3JTLWhZaE9wRDV0ZmtRUDFwamdqNDBXZk0zZ3VoYkdfc00xSGdHSktWSnQ3b25CQ1ZZSElWV3VKRmphTm5Qb2dELUxHMHZsSXZZbmpYZWFENFE?oc=5",
+        "date": "2026-11-20",
+        "title": "Apollo, Goldman Price $44 Billion Chip-Backed Bond Deal for SpaceX"
+      }
+    ]
+  },
+  {
+    "_tier": 1,
+    "_summary": "EDGAR full-text match",
+    "date": "2026-11-23",
+    "name": "KIDZ AI Inc. (KIDZ, KIDZW) (CIK 0002022308) - 8-K matching \"GPU financing\"",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "SEC EDGAR, 2026-11-23",
+    "url": "https://www.sec.gov/Archives/edgar/data/2022308/000147793226007222/0001477932-26-007222-index.htm",
+    "outlet": "sec.gov",
+    "_edgar": "fulltext"
+  },
+  {
+    "_tier": 2,
+    "_summary": "CoreWeave's $4 billion debt plan faces an Nvidia-sized risk TradingView",
+    "date": "2026-11-12",
+    "name": "CoreWeave's $4 billion debt plan faces an Nvidia-sized risk - TradingView",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-12",
+    "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPOUNXcHppWFNWczFIVnVOSWxYX0tLWXg1U1UxTHM0TlhqMi1IWnV6Q2k0TXFVa0hoTnNYbU50c3NOUnlhV2VmcGgxX29HRGpKbXJicjBsaVdqcWk3R1hpRm1ienlNa0RuSGhBejBZZTVodmJPQlhoWWJzMW5vb1BLbkdXQjVOc3JrOXk3V2xFVWhFdnpaUndyTFRGVG9TQ3VIZzdsQnJtaU5sdW51djdUWnBjM1BLbHNTTEE?oc=5",
+    "outlet": "TradingView",
+    "sources": [
+      {
+        "outlet": "Yahoo Finance",
+        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQUWs1VEw3clFyakZPYXFXeUV5Ukw2ejdaM3Q5My1zMzNpMmpfcGR4bU96d1FWekEyVUNjc1pvYTQwRjVPM2tuaUV6MjFxbGJVTTNZc25sckN6YUNaYzBXRWx1empkdjJvNjBsb2FZdV9sZDJZNm42QUoybFUyMHFwbEZCLVdNZEFHWlVCU3VJT3p4a3d6bjc5QmVn?oc=5",
+        "date": "2026-11-12",
+        "title": "CoreWeave's $4 Billion Loan Plan Comes With a Catch"
+      }
+    ],
+    "_followup_of": {
+      "date": "2026-11-11",
+      "name": "CoreWeave Launches $4 Billion Investment-Grade Syndicated Loan After Raising Full-Year Revenue Guidance - BigGo Finance",
+      "id": "dafa22f2d21"
+    }
+  },
+  {
+    "_tier": 2,
+    "_summary": "Why This Top Floating-Rate Fund Is Playing Footsie With CoreWeave Debt Barron's",
+    "date": "2026-11-19",
+    "name": "Why This Top Floating-Rate Fund Is Playing Footsie With CoreWeave Debt - Barron's",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-19",
+    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQNEdBOHdYNG85NERVYkp0NDh4MHd5M1A0eWRzUGFVT3RYYVVJdGtuMmE5al9PeVNHZThrR2dSSXlkRWRSWUpyY3d6a1ZfOGdvNW50WnFNd0NSTGpsdVZXZ3NhMk1JblN6T2RfT1FaaXZCWG0wV0NmZ1ZxYXJ3a0IxUzg3MnI1UQ?oc=5",
+    "outlet": "Barron's"
+  },
+  {
+    "_tier": 2,
+    "_summary": "CoreWeave's McBee Favors Compute Investments Over Buying Back Costly Debt Briefs Finance",
+    "date": "2026-11-19",
+    "name": "CoreWeave's McBee Favors Compute Investments Over Buying Back Costly Debt - Briefs Finance",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-19",
+    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQemdwMS0xN1M2OUdxemN4dVp0ZHkwaXpDemhCVk5TV3lWRGtpUFRhQjdTak52bjNTbVZ6LW5sUlhyS1IwVWVnU2R3RVNHLUkwbVdobVp6YWtLVEdZSmdYenpyTzA4WXVzSG5UZmFsMmJwbU1teGQyaWlNWlNUQ1YzRC1iclpiMlNZUTVYOGoyYjQyQQ?oc=5",
+    "outlet": "Briefs Finance"
+  },
+  {
+    "_tier": 2,
+    "_summary": "A CoreWeave co-founder just made an unconventional $30 million wager on its battered bonds MarketWatch",
+    "date": "2026-11-19",
+    "name": "A CoreWeave co-founder just made an unconventional $30 million wager on its battered bonds - MarketWatch",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-19",
+    "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNTTJ3VE0zNTdpNjgwZU1ZdnczOFlVZFBlSC0ycGdrTTc3V3piU2wxTU0tWmxmZ1J1UTlNbmVmMERHbTU1cDRNRXZ4TTdVNGFrN1czdFNiSHRNeXRPZlQ4WmlIN2ZnaVJ6SlB2V1g3SGVRUEViekRBTmlwTUpMWXNDZGFzUjVYY0pXUEUzbWRmSHNaUDRsNmlGaE1MTkFoZlNxQ09LNjE4djhuWlVIbDFDSjdGUlFId1R0WVR6OG1TX2o2V3BYNjhPajdWcVQ?oc=5",
+    "outlet": "MarketWatch",
+    "sources": [
+      {
+        "outlet": "TradingView",
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNdkhfV2EyRWJiTFY2emtHcmE1cnp4V0xmdER1ajV3ZGVOSGlCd2NUZkZqMDAzeU9IU3RuMEtybXN6b2NJRjZwbUxFV2Z5d1NzUU5qT2hmblhzdzN4VVhjZDNJbnRFRmVzdjV4OUxrSU9iQkdZTUVJSjFGSHZBMm56Qy1oSXZDOXVWbER0S3dYMzZiSWQ2NXM1NlctdXMycWt4elRVa3hIRUVQN3ZmNzJ5VFFVX2dMY2JjeTFkLUlR?oc=5",
+        "date": "2026-11-19",
+        "title": "CoreWeave's $30 Million Insider Bond Bet Comes Amid Debt Fears"
+      },
+      {
+        "outlet": "Quartz",
+        "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE82VzYxMVFXX0ZlaEI4eTl6N25aSkIxbV9KeFFqNEwwMVk2ZWJRM0R1eWhlZGRMM01lY0JqUGVPOU1GY1F0OVJzZDJ4RUozbllmSTNzRHpVVFpqLXFGd3NEd2ZnaGJzcVVraWcyYVh2c3Q?oc=5",
+        "date": "2026-11-19",
+        "title": "CoreWeave co-founder bought $30 million of the company's bonds to hold"
+      },
+      {
+        "outlet": "KuCoin",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPSjdGR3FaRXM4ZGxTTGNmaVBfVWZVaWF6bTNvMU5sTDgtM1d5c2NBRjJhYXhLWHdYdGlLUmpvOUw1NGNDQzhaaVBJVFMtUExLcmpWUl9TdVVYdUJ3Y0xFTHp2UFVzZTZ5czcyVjNvcFNtQ3p6aFlFME5NN0Nqa25XM2QzTmVwY3ZvUjJUdG1zZktWVFhNZ2Z5UUdlS0VJeG5EWFFLR09hU0FxX1d4X3BvbW81Y01xeGpm?oc=5",
+        "date": "2026-11-21",
+        "title": "CoreWeave co-founder buys $30 million in company bonds as debt trades at 81 cents per dollar"
+      }
+    ]
+  },
+  {
+    "_tier": 2,
+    "_summary": "Lenders aim to bar SpaceX from launching $40bn of chips into orbit Financial Times",
+    "date": "2026-11-20",
+    "name": "Lenders aim to bar SpaceX from launching $40bn of chips into orbit - Financial Times",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"GPU lender default OR seized OR restructuring\" - Google News, 2026-11-20",
+    "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPOXdESDhWTHF3Y0Z1ZVo2dzgtTEM2QnI1cm5pdk1nQ21zbjhpVDJONzdmcGhBU0NQUEtTSEtkVTFuUVhqRHdBa2tucUZqa1pvLXZvVkxUNUY4R1hxVFZVTEk2TWJJMHZIZ2tlbklJcXVxTzlxMFZKXzR5UTVfX0tYNGFsME0?oc=5",
+    "outlet": "Financial Times",
+    "sources": [
+      {
+        "outlet": "BigGo Finance",
+        "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5uV0FyY1IzLTVwNVhpa1BLSGZvclVkT3lDWVNkSGdSdExvX1E0OUlKR1ZJNG1xSklPeDhmb0RnX0g0U0s0Slc0VllybDlTNjQwY0IxdEh3aHRwUWpHRzFfUW85d09ydmcxeDdXTVMxdVFaQXRObnc?oc=5",
+        "date": "2026-11-18",
+        "title": "SpaceX's $40 Billion Off-Balance-Sheet Nvidia Chip Lease Financing Hits Market This Week, Sparking Default Concerns"
+      },
+      {
+        "outlet": "Dealroom",
+        "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNeFpHTjdTaTlRdnZvOVRjR0x1LWxnaGpkWjVPLUNpNlp5LUI5RE5tQy1Vay0ydEx2bnZuX0hqZWRvbk9iRU53aVB4ZjJCVzB4Q2pWMGZvUEV2aG9MYkRhU0ZnOFpQVGpabjNkb29QektMeDBSZi0teC1zV2Mwb0JIXy14Zzkxa05WQ3c3dHdkakFKVm9iNnd5OE1nc3JDRkhVak9fUGlIZ0xxSWNNREoycVB6MjhNSHp6V2ZNNTcwM2oxNlNVRXFFQ3hRcTR1YzVpTkxYWjhkYnhPckMyVktpd012ZkhfQ0pSTXlB?oc=5",
+        "date": "2026-11-20",
+        "title": "You can't repossess a GPU in orbit: SpaceX's lenders sought to bar $40bn of collateral chips from being launched into space"
+      }
+    ],
+    "_signal": "stress"
+  },
+  {
+    "_tier": 2,
+    "_summary": "CoreWeave Briefly Trades Below $40 IPO Price Amid Financing Worries BeInCrypto",
+    "date": "2026-11-20",
+    "name": "CoreWeave Briefly Trades Below $40 IPO Price Amid Financing Worries - BeInCrypto",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-20",
+    "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE90aXpVTFNlMGdST0Qybm9IQjhEMFYtSHUxTDFkQlhqampvTm1halZJM0RqMEhaalhnS2FsbGc3YThsZldVYUhiX0tlZ3VpU05OLVp0eUZoWlROaEtxWEh3RTYxckM4UQ?oc=5",
+    "outlet": "BeInCrypto",
+    "sources": [
+      {
+        "outlet": "TradingView",
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNeVg3aEowclBjcS1zT19NS1JrdEg1QzhreFNERUEtV3dWMlZVME9oMVUtS2YzVUhYcDdGbHJPLWF2RnZnLWZfSHdWNnltMGhkMk92bmV3U0hST29ZYVRsT0lwOW82RUxlbG9VQTFYOUEwVU1WOGFaa2FJVFJjeFFDajRvbW10YUVScWNxSWdodUZ4VmtvUHE4WEFOMmNFbnlxSHdRakM3bmhreWxBak5VVGdJQWItd21VdXpmLTZQaGkyV1JjS05JWDBMTHg?oc=5",
+        "date": "2026-11-20",
+        "title": "CoreWeave Briefly Falls Below $40 IPO Price as Debt Concerns Resurface"
+      }
+    ]
+  },
+  {
+    "_tier": 2,
+    "_summary": "Junk bond stress builds at the bottom as CCC spreads widen and CoreWeave debt trades at distressed levels CEO Economy",
+    "date": "2026-11-20",
+    "name": "Junk bond stress builds at the bottom as CCC spreads widen and CoreWeave debt trades at distressed levels - CEO Economy",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-20",
+    "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9uNl9ud1Y1cGViNDJ1M0lvem04X3RxSm0yNjdVa1F6d0RJRllhZHg1VUQxaTRGVnZCcHFGM3o5c3RzM3BUR2FJbHJFaFB3dy1LR0VxM3lydnpKZEQ1UTZVN2NfdnBiMWlyNnF0TlBKV1BJOEhIYW9SSWdISHF5UQ?oc=5",
+    "outlet": "CEO Economy",
+    "_signal": "stress"
+  },
+  {
+    "_tier": 2,
+    "_summary": "Elon Musk’s Lenders Have One Request: Please Don’t Launch Our AI Chips Into Space Gizmodo",
+    "date": "2026-11-20",
+    "name": "Elon Musk’s Lenders Have One Request: Please Don’t Launch Our AI Chips Into Space - Gizmodo",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"GPU lender default OR seized OR restructuring\" - Google News, 2026-11-20",
+    "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPUldVYV9kVUtEVWdfODJwTnRxNURyNGdTbVNYRGRPbDNqVVVudExyRXBsYXJtdzJNYVhaNXlzLUhrSzZUSmJfYzRLLTFaMnd6TTVXczFUNGVacHdyblBWX3BHclcwWWFGMGdTbHJOWi1xdEdJNFN2dk5mQkpBRkREM0ZoYU4teVNnTGt4djNZQmRTd1pfOXUxQjU0M29LVnRPeDFMcVRLbkdWNUdqU0E?oc=5",
+    "outlet": "Gizmodo"
+  },
+  {
+    "_tier": 2,
+    "_summary": "CoreWeave Gains $350 Million Computing Commitment as Debt Concerns Persist TradingView",
+    "date": "2026-11-20",
+    "name": "CoreWeave Gains $350 Million Computing Commitment as Debt Concerns Persist - TradingView",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-20",
+    "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQeWdBc252Z0tlYVlSWEVZZ1ZCQnFVY080dW1aenloSjFIN3d0ZVYwWG5zaS1ZcGFxbExfdVhlN2FTNkhJQ0VwWUJoR2l5dmgwTzZJVVRYVFlqcTY2RFdFN19vRVZTWjhuUkpQa054aFhUMXNDdHdwdEQ0YXNDRnJMOGNuTGF3M1ZHNEFZSzAzUmo5WERodmlzQ0FZVkFkVTVKRVlVSmVHNUdkMy1LamVDbFNEeXBlMFh1UHdPcXk0dGxTUWFzV2Jqakh6R1U0dw?oc=5",
+    "outlet": "TradingView"
+  },
+  {
+    "_tier": 2,
+    "_summary": "CoreWeave Borrowed at Under 6% Against Its GPUs. SpaceX Just Paid Above 8% for Chip-Backed Debt TIKR.com",
+    "date": "2026-11-21",
+    "name": "CoreWeave Borrowed at Under 6% Against Its GPUs. SpaceX Just Paid Above 8% for Chip-Backed Debt - TIKR.com",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"\"chip-backed\" debt OR lease\" - Google News, 2026-11-21",
+    "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOdWVNMFBUVE45QThPTFZVbkt0S01jS2U0ZWhuYlQxQ3ZkUDY2SjhxeHF2dTFYWTZicldLSG1uOWptZWRvTjJZT1h4bU5aa2ExVTR6bHJQREVuS2JDZGszNFhfU2Jxb1JQQ0JoX0x5NEFVU0w1MW9Oam1NdXRoZ1pickFZZklJa0VkcXlpQWdEUklNRl9XZlVqODBKN3REUXZEMjBDRkFBbk1HMUdsVmxKUDRoakV4aE02bDVN?oc=5",
+    "outlet": "TIKR.com"
+  },
+  {
+    "_tier": 2,
+    "_summary": "Lenders Fear SpaceX Could “Shoot the Valuable Chips” Into Space. SpaceX Sinks After Its $32 Billion Debt Sale TIKR.com",
+    "date": "2026-11-21",
+    "name": "Lenders Fear SpaceX Could “Shoot the Valuable Chips” Into Space. SpaceX Sinks After Its $32 Billion Debt Sale - TIKR.com",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"\"chip-backed\" debt OR lease\" - Google News, 2026-11-21",
+    "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQR2ZuNWh6OGsyUXlSVUI2NHd5S3dEdFJxblUzR0J6MzY3NHMzQS1YQjFTV002cFN3ajEzVkxKWUNQZWZLNVM4ZDdaU0RmR0paQXdtQXlscFRGc001Q1h1bk00a1VMTmlzZkFudDVNSlZ5OXJlRGU2VUZtajJ0elBmd3plOWJWVkxkWXVOQ3RfM1pQVmc3NWRqZkJlUmdkYkpWb3lFSnJ2VnNZWmpPemZUVUg5N2lVUzNXVkN1bDFJYjFsSkQxTHV0NVQwYw?oc=5",
+    "outlet": "TIKR.com"
+  },
+  {
+    "_tier": 2,
+    "_summary": "Behind the GPU Rent Spike Lies a Financing Squeeze: Loan-to-Value Ratios Cut to 50%, Spot Market Inflated by Forced Demand BigGo Finance",
+    "date": "2026-11-21",
+    "name": "Behind the GPU Rent Spike Lies a Financing Squeeze: Loan-to-Value Ratios Cut to 50%, Spot Market Inflated by Forced Demand - BigGo Finance",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"GPU lender default OR seized OR restructuring\" - Google News, 2026-11-21",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1ZYVJDWlhFcHBiS1J3WTY5dzh2a3c4V2hSbjhMVUlwVVdBVUJ1MnBjWHhsQ2hNQjFEV3VHMmhkOUN5LXhCcU0zeGJJNDR4ZmliOGF1M2lEQkxUVlBTYlRIeGVCTlZ2Z2l4VEF2a0dSd1ZEaHp1Tnc?oc=5",
+    "outlet": "BigGo Finance",
+    "_signal": "stress"
+  },
+  {
+    "_tier": 2,
+    "_summary": "Lenders back SpaceX's $43 billion Nvidia GPU deal but worry the collateral could end up in orbit, making them impossible to reclaim if Musk defaults — five-year 'hell-or-high-water' lease may lack a written Earth-only guarantee Tom's Hardware",
+    "date": "2026-11-22",
+    "name": "Lenders back SpaceX's $43 billion Nvidia GPU deal but worry the collateral could end up in orbit, making them impossible to reclaim if Musk defaults — five-year 'hell-or-high-water",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"GPU collateral lending\" - Google News, 2026-11-22",
+    "url": "https://news.google.com/rss/articles/CBMijgNBVV95cUxQbzd2d0p5cWMyX3ZMd19ZV0ZnYWhLSlZSMlpIbUVtM0c2UmVHS2JUNW9EeHcya3NzUEJMaVdHNkQ3VmNxeWlET3diWjBYV3Y1c1JHUkJTWjZkbVZ0ZldpSDJNYlZqVXIxSXF3c0hhb0lQOVRvWWkwSEJNWlhDODQ2R2NwTE96eHJ4dGdXd21qNHRPcjh1eXJyRTk3b2tBay1ILWlrNnFvWTdWOHV0RTNOOUpkY0ZGTHJBVXVkYUlNdGw2a1B2alNjZFZ4VWQxWk5CcWFxaXpHQU41dldOb052QTNGanhPLXVHUENXX0g1RWJLR2JFM29GV1dia2x1MDF3b213SUZzeVgzQklzZWtyUlhiRVlmeFJxV3NZbm9LQlhpVkZTN2R5dlVuT09WTjc5UUtJUFNNUk1icjU0QUZYc3Fqbmtha2VxVzNma2JBN3lxNlVpOTRFU0ZOSVhhcFVrNXFqazZ2OVJreU5CSXdWNVJHTTdJd2lnM2RsZHBvcDdkVkNrQlBVZmVZbTgtdw?oc=5",
+    "outlet": "Tom's Hardware",
+    "_signal": "stress",
+    "sources": [
+      {
+        "outlet": "Wisevoter",
+        "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPMFBaN29iWWxQYlRicWFKcTNSNHNNVy13ZjZWMUZxVUhvczhnQ1hjbFBxd3NCTnVabm4wTFJkZzVYSEtScEFjbloxX2g4d1ZWbWpVcEt6bndsdFlMYV9Rc1FNNWxwOG1CS0x1NGl3RXBXN1FBMmRKZ3pEOW5RUG9VUDVB?oc=5",
+        "date": "2026-11-22",
+        "title": "SpaceX Borrows $43 Billion Using Nvidia Chips as Collateral"
+      },
+      {
+        "outlet": "Yahoo Finance",
+        "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOZXlVbGc3bkFTMUotbXd5UGtkUk0zc1B2blR0SHo4VVRLb0NGd3g3OXRMSEN4MWhBOVFrOFNFSkdWUGlLQWhwaHJ6UlRrNTBmTkU2WXBnUU1SZWFmdklucVg4eWRIb19MeXBUU0lVOXlHVUU0ZlVTWjFWTXgzZi1YWW9McEU0a1FFRXhPN01OZzNwM2oyMEN6SV9TOA?oc=5",
+        "date": "2026-11-22",
+        "title": "Lenders back SpaceX's $43 billion Nvidia GPU deal but worry the collateral could end up in orbit, making them impossible to reclaim if Musk defaults — five-year 'hell-or-high-water"
+      }
+    ]
+  },
+  {
+    "_tier": 2,
+    "_summary": "SpaceX Lenders Want Nvidia Chips Kept on Earth: $1.5B Risk shattered.io",
+    "date": "2026-11-22",
+    "name": "SpaceX Lenders Want Nvidia Chips Kept on Earth: $1.5B Risk - shattered.io",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"GPU collateral lending\" - Google News, 2026-11-22",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxONUdzNzRjOE5DLXBxTjBPNXFpV0IxWnNhSzFBMm5yaHlFNXpTaGdlQ3QxSllGcFNkWEswd0stVi15TGhZMjNXTmVWSjhmelE5cVdVdmM4Z3pERl9WTElBdEVoNllWemxuN2xTVGVPanVxLUkzb2RqbGhUaklmVHQ2LVBuY1E0cmRKMUFzRg?oc=5",
+    "outlet": "shattered.io"
+  },
+  {
+    "_tier": 2,
+    "_summary": "Bad News for CoreWeave and IREN: GPU Lenders Now Want “50 to 60 Percent” Loan-to-Value, Down From 80% TIKR.com",
+    "date": "2026-11-23",
+    "name": "Bad News for CoreWeave and IREN: GPU Lenders Now Want “50 to 60 Percent” Loan-to-Value, Down From 80% - TIKR.com",
+    "type": "To classify",
+    "amount": "-",
+    "terms": "Auto-detected; details to be completed after reading the source",
+    "status": "Auto-added - awaiting human verification",
+    "ver": "PENDING REVIEW",
+    "src": "\"CoreWeave OR Lambda OR Crusoe OR Fluidstack OR Nscale debt OR loan OR facility\" - Google News, 2026-11-23",
+    "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOdFZKWllaX3pZekZJV3phazNTU0UyM2VSZ1ZhdVdBRl9nMjYtTk1rajhtNmFRRE4wVUlqSHVXVVMxc3dMTE5xSjhhUXNTMDB0ZGZ1QkNadkktZ05HLVZlck1JSWNwWXQyNENoMEszM2lUOFhZY2c5T3hUbkg1RHAzaS1ycHozbFRUMF9fNW1rQzVuS3VVcFA4ZGlXSXE0d2cxTlBid2hqZ1Z0YWpwdUZLWFJTVERYd29sZ3hIN0JmbWw?oc=5",
+    "outlet": "TIKR.com",
+    "_signal": "stress"
   }
 ]
