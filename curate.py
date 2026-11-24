@@ -16,6 +16,9 @@ deletes a pending row, or hides a watch lead (remembered in state/reviewed.json)
 Every change also refreshes the fallback snapshot in app.js (update_seed.py), so
 afterwards you only run the checks and commit. "Undo" reverts the last change.
 
+The same page also runs on the live site at /curator/, behind a password: see
+curator_web.py, which reuses state() and act() with a store that commits to GitHub.
+
 The page is for the human curator: code never picks VERIFIED/REPORTED on its own;
 the server only writes the ver you clicked. Lead forms open prefilled with guesses
 (autofill.py) that the page marks for checking; nothing is stored until you save. It listens on 127.0.0.1 only.
@@ -37,15 +40,20 @@ import stories
 import update_seed
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(ROOT, "observatory-data.json")
-CANDIDATES = os.path.join(ROOT, "candidates.json")
-PREVALIDATION = os.path.join(ROOT, "prevalidation.json")
-HINTS = os.path.join(ROOT, "primary_hints.json")
-REVIEWED = os.path.join(ROOT, "state", "reviewed.json")
-APP = os.path.join(ROOT, "app.js")
+# Repo files, relative to the repo root. The local tool reads them from disk
+# (DiskStore); the web version reads and commits them through GitHub (curator_web.py).
+DATA = "observatory-data.json"
+CANDIDATES = "candidates.json"
+PREVALIDATION = "prevalidation.json"
+HINTS = "primary_hints.json"
+CONFIG = "config.json"
+REVIEWED = "state/reviewed.json"
+APP = "app.js"
 STATIC = os.path.join(ROOT, "curator")
 FILES = {"/": ("index.html", "text/html"), "/curate.js": ("curate.js", "text/javascript"),
          "/curate.css": ("curate.css", "text/css")}
+FILES.update({"/curator" + k: v for k, v in FILES.items()})
+API = "/api/curator"
 
 PENDING = "PENDING REVIEW"
 CURATED = ("VERIFIED", "REPORTED")
@@ -62,7 +70,6 @@ CSP = ("default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'se
        "img-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
 
 LOCK = threading.Lock()
-UNDO = []  # snapshots (data text, reviewed text, label) taken before each change
 
 
 class Invalid(ValueError):
@@ -70,22 +77,6 @@ class Invalid(ValueError):
 
 
 # ------------------------------------------------------------ files
-def _read(path, default):
-    try:
-        with open(path, encoding="utf-8") as f:
-            return json.load(f)
-    except (OSError, ValueError):
-        return default
-
-
-def _text(path):
-    try:
-        with open(path, encoding="utf-8") as f:
-            return f.read()
-    except OSError:
-        return None
-
-
 def _write_text(path, text):
     os.makedirs(os.path.dirname(path), exist_ok=True)
     tmp = path + ".tmp"
@@ -98,43 +89,80 @@ def _dump(obj):
     return json.dumps(obj, indent=2, ensure_ascii=False) + "\n"
 
 
-def refresh_seed():
-    with open(DATA, encoding="utf-8") as f:
-        db = json.load(f)
-    js = _text(APP)
+class DiskStore:
+    """The repo files on disk (python3 curate.py). Undo keeps the last 50 changes in memory."""
+    mode = "local"
+
+    def __init__(self, root=ROOT):
+        self.root = root
+        self.undo_stack = []  # ({path: text before the change}, label)
+
+    def text(self, rel):
+        try:
+            with open(os.path.join(self.root, rel), encoding="utf-8") as f:
+                return f.read()
+        except OSError:
+            return None
+
+    def write(self, files, label):
+        """files: {path: new text, or None to delete}. Returns an undo token."""
+        self.undo_stack.append(({rel: self.text(rel) for rel in files}, label))
+        del self.undo_stack[:-50]
+        self._put(files)
+        return "local"
+
+    def _put(self, files):
+        for rel, text in files.items():
+            path = os.path.join(self.root, rel)
+            if text is not None:
+                _write_text(path, text)
+            elif os.path.exists(path):
+                os.remove(path)
+
+    def undo(self, token=None):
+        if not self.undo_stack:
+            raise Invalid("Nothing to undo.")
+        files, label = self.undo_stack.pop()
+        self._put(files)
+        return label
+
+    def undo_label(self):
+        return self.undo_stack[-1][1] if self.undo_stack else None
+
+
+STORE = DiskStore()
+
+
+def _read(store, rel, default):
+    try:
+        text = store.text(rel)
+        return default if text is None else json.loads(text)
+    except ValueError:
+        return default
+
+
+def seeded_app(store, db):
+    """app.js with a fresh fallback snapshot, or None if it is already current."""
+    js = store.text(APP)
     if js is None:
-        return
+        return None
     old = update_seed.current_payload(js) or {}
     if all(old.get(k) == v for k, v in update_seed.payload(db).items()):
-        return
-    js = update_seed.BLOCK.sub(lambda _: update_seed.build(db, str(datetime.date.today())), js, count=1)
-    _write_text(APP, js)
+        return None
+    return update_seed.BLOCK.sub(lambda _: update_seed.build(db, str(datetime.date.today())), js, count=1)
 
 
-def save(db, reviewed, label):
-    UNDO.append((_text(DATA), _text(REVIEWED), label))
-    del UNDO[:-50]
+def save(store, db, reviewed, label):
+    """Writes the data, the reviewed list and the app.js snapshot as one change."""
     n = sum(1 for d in db["deals"] if d.get("ver") == PENDING)
     db["updated"] = f"{datetime.date.today()} - reviewed by curator" + (
         f" - {n} entr{'y' if n == 1 else 'ies'} PENDING human review" if n else "")
     db["deals"].sort(key=lambda d: d.get("date", ""))
-    _write_text(DATA, _dump(db))
-    _write_text(REVIEWED, _dump(sorted(set(reviewed))))
-    refresh_seed()
-
-
-def undo():
-    if not UNDO:
-        raise Invalid("Nothing to undo.")
-    data, reviewed, label = UNDO.pop()
-    _write_text(DATA, data)
-    if reviewed is None:
-        if os.path.exists(REVIEWED):
-            os.remove(REVIEWED)
-    else:
-        _write_text(REVIEWED, reviewed)
-    refresh_seed()
-    return label
+    files = {DATA: _dump(db), REVIEWED: _dump(sorted(set(reviewed)))}
+    app = seeded_app(store, db)
+    if app is not None:
+        files[APP] = app
+    return store.write(files, label)
 
 
 # ------------------------------------------------------------ leads
@@ -142,9 +170,9 @@ def lead_key(c):
     return hashlib.sha1((c.get("url") or c.get("name", "")).encode()).hexdigest()[:16]
 
 
-def suggestions():
+def suggestions(store):
     """prevalidate.py output, keyed by its item id (sha1 of date|name)."""
-    pv = _read(PREVALIDATION, {})
+    pv = _read(store, PREVALIDATION, {})
     items = pv.get("items") if isinstance(pv.get("items"), dict) else {}
     clusters = {}
     for c in pv.get("clusters") or []:
@@ -223,18 +251,20 @@ def view(d, kind, ref, items, clusters, hints=(), lenders=None):
     }
 
 
-def state():
-    db = _read(DATA, {"deals": []})
+def state(store=None):
+    store = store or STORE
+    db = _read(store, DATA, {"deals": []})
     deals = db.get("deals", [])
-    reviewed = set(_read(REVIEWED, []))
-    items, clusters = suggestions()
-    hints = [x for x in _read(HINTS, []) if isinstance(x, dict)] if isinstance(_read(HINTS, []), list) else []
-    lenders = autofill.known_lenders()
+    reviewed = set(_read(store, REVIEWED, []))
+    items, clusters = suggestions(store)
+    hints = _read(store, HINTS, [])
+    hints = [x for x in hints if isinstance(x, dict)] if isinstance(hints, list) else []
+    lenders = autofill.known_lenders(config=_read(store, CONFIG, {}))
     known_urls = {d.get("url") for d in deals if d.get("url")}
     known_urls |= {s.get("url") for d in deals for s in d.get("sources") or [] if isinstance(s, dict)}
     known_names = {(d.get("name"), d.get("date")) for d in deals}
     leads = []
-    for c in _read(CANDIDATES, []):
+    for c in _read(store, CANDIDATES, []):
         if not isinstance(c, dict):
             continue
         k = lead_key(c)
@@ -252,7 +282,7 @@ def state():
                                                       if d.get("ver") in CURATED and d.get("status")]))
     return {"leads": leads, "published": published, "types": types, "statuses": statuses,
             "collateral": list(COLLATERAL), "amount_kinds": list(AMOUNT_KINDS),
-            "undo": UNDO[-1][2] if UNDO else None, "updated": db.get("updated", "")}
+            "undo": store.undo_label(), "updated": db.get("updated", ""), "mode": store.mode}
 
 
 # ------------------------------------------------------------ actions
@@ -323,16 +353,18 @@ def find(deals, ref):
     raise Invalid("That entry no longer exists. Reload the page.")
 
 
-def act(action, body):
-    db = _read(DATA, None)
+def act(action, body, store=None):
+    """Runs one change. Returns {"message", "undo"} where undo is the token for Undo."""
+    store = store or STORE
+    db = _read(store, DATA, None)
     if not isinstance(db, dict) or not isinstance(db.get("deals"), list):
         raise Invalid("observatory-data.json could not be read.")
     deals = db["deals"]
-    reviewed = list(_read(REVIEWED, []))
+    reviewed = list(_read(store, REVIEWED, []))
     kind, ref = body.get("kind"), body.get("ref")
 
     if action == "undo":
-        return {"message": f"Undone: {undo()}"}
+        return {"message": f"Undone: {store.undo(body.get('token'))}"}
 
     if action == "approve":
         form = clean(body.get("form") or {})
@@ -347,7 +379,7 @@ def act(action, body):
         elif kind in ("candidate", "new"):
             src = {}
             if kind == "candidate":
-                src = next((c for c in _read(CANDIDATES, []) if isinstance(c, dict) and lead_key(c) == ref), None)
+                src = next((c for c in _read(store, CANDIDATES, []) if isinstance(c, dict) and lead_key(c) == ref), None)
                 if src is None:
                     raise Invalid("That lead is no longer in candidates.json. Reload the page.")
                 reviewed.append(ref)
@@ -360,15 +392,15 @@ def act(action, body):
         else:
             raise Invalid("Unknown entry type.")
         label = f"{'saved' if kind == 'published' else 'published'} \"{form['name'][:60]}\" as {form['ver']}"
-        save(db, reviewed, label)
-        return {"message": label[0].upper() + label[1:]}
+        token = save(store, db, reviewed, label)
+        return {"message": label[0].upper() + label[1:], "undo": token}
 
     if action == "reject":
         if kind == "candidate":
-            if ref not in {lead_key(c) for c in _read(CANDIDATES, []) if isinstance(c, dict)}:
+            if ref not in {lead_key(c) for c in _read(store, CANDIDATES, []) if isinstance(c, dict)}:
                 raise Invalid("That lead is no longer in candidates.json. Reload the page.")
             reviewed.append(ref)
-            name = next(c.get("name", "") for c in _read(CANDIDATES, []) if isinstance(c, dict) and lead_key(c) == ref)
+            name = next(c.get("name", "") for c in _read(store, CANDIDATES, []) if isinstance(c, dict) and lead_key(c) == ref)
         elif kind in ("pending", "published"):
             d = find(deals, ref)
             name = d.get("name", "")
@@ -376,13 +408,18 @@ def act(action, body):
         else:
             raise Invalid("Unknown entry type.")
         label = f"removed \"{stories.headline(name)[:60]}\""
-        save(db, reviewed, label)
-        return {"message": label[0].upper() + label[1:]}
+        token = save(store, db, reviewed, label)
+        return {"message": label[0].upper() + label[1:], "undo": token}
 
     raise Invalid("Unknown action.")
 
 
 # ------------------------------------------------------------ server
+def _route(url):
+    """The action named in ?a=... (the same API shape as the web version)."""
+    return (urllib.parse.parse_qs(url.query).get("a") or [""])[0]
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "curate"
 
@@ -409,8 +446,9 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._host_ok():
             return self._send(403, {"error": "bad host"})
-        path = urllib.parse.urlparse(self.path).path
-        if path == "/api/state":
+        url = urllib.parse.urlparse(self.path)
+        path = url.path
+        if path == API and _route(url) == "state":
             with LOCK:
                 return self._send(200, state())
         if path == "/favicon.ico":
@@ -430,14 +468,14 @@ class Handler(BaseHTTPRequestHandler):
                 or origin not in (None, f"http://127.0.0.1:{port}", f"http://localhost:{port}")
                 or not self.headers.get("Content-Type", "").startswith("application/json")):
             return self._send(403, {"error": "forbidden"})
-        path = urllib.parse.urlparse(self.path).path
-        if not path.startswith("/api/"):
+        url = urllib.parse.urlparse(self.path)
+        if url.path != API:
             return self._send(404, {"error": "not found"})
         try:
             n = int(self.headers.get("Content-Length", 0))
             body = json.loads(self.rfile.read(min(n, 100_000)) or b"{}")
             with LOCK:
-                result = act(path[5:], body if isinstance(body, dict) else {})
+                result = act(_route(url), body if isinstance(body, dict) else {})
                 result["state"] = state()
             self._send(200, result)
         except Invalid as e:

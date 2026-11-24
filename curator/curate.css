@@ -123,3 +123,9 @@ details.extra summary{cursor:pointer;font-size:13px;color:var(--muted);margin-bo
 /* Auto-filled guesses: highlighted until the curator edits them */
 .auto-note{font-size:13px;color:var(--ink);background:color-mix(in srgb,var(--amber) 10%,transparent);border-radius:8px;padding:10px 12px;margin-bottom:14px}
 .f input.auto,.f textarea.auto,.f select.auto{border-color:color-mix(in srgb,var(--amber) 60%,var(--line));background:color-mix(in srgb,var(--amber) 6%,var(--bg))}
+
+/* Login (web curator page) */
+.top-actions{display:flex;align-items:center;gap:14px}
+.login{max-width:380px;margin:48px auto;display:flex;flex-direction:column;gap:12px}
+.login h2{font-size:22px;font-weight:600}
+.login input{width:100%}

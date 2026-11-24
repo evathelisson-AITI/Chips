@@ -4,17 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Deal Review</title>
-<link rel="stylesheet" href="/curate.css">
-<script src="/curate.js" defer></script>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="curate.css">
+<script src="curate.js" defer></script>
 </head>
 <body>
 <header class="top">
   <div class="wrap top-in">
     <div>
-      <div class="kicker">Chip-Backed Finance Observatory · local curator tool</div>
+      <div class="kicker">Chip-Backed Finance Observatory · <span id="mode-label">curator</span></div>
       <h1>Deal review</h1>
     </div>
-    <button type="button" class="btn" id="add">+ Add a deal by hand</button>
+    <div class="top-actions">
+      <button type="button" class="btn hidden" id="add">+ Add a deal by hand</button>
+      <button type="button" class="link hidden" id="logout">Log out</button>
+    </div>
   </div>
   <div class="wrap">
     <nav class="tabs" role="tablist">
@@ -25,13 +29,22 @@
 </header>
 
 <main class="wrap">
+  <form class="login hidden" id="login" novalidate>
+    <h2>Log in</h2>
+    <p class="muted">Type the curator password to review deals.</p>
+    <label class="f"><span class="fl">Password</span>
+      <input type="password" id="password" autocomplete="current-password" required></label>
+    <p class="form-err" id="login-err" role="alert"></p>
+    <button type="submit" class="btn primary">Log in</button>
+  </form>
   <p class="help" id="help-leads">Open the source, then <b>Approve</b> to publish it on the site (you fill in the details) or <b>Reject</b> to drop it. Nothing here edits files until you click a button, and every change can be undone.</p>
   <p class="help hidden" id="help-published">Deals shown on the site. Edit fixes a typo or adds details; Remove takes the deal off the site.</p>
   <div id="list" aria-live="polite"><p class="empty">Loading…</p></div>
 </main>
 
 <footer class="wrap foot">
-  <p>When you're done: stop this tool (Ctrl+C in the terminal), run the checks, and commit <code>observatory-data.json</code>, <code>app.js</code> and <code>state/reviewed.json</code>. The site updates once that reaches <code>main</code>.</p>
+  <p class="hidden" id="foot-web">Every button saves right away. The public site shows the change about a minute later. To take something back, use Undo in the message at the bottom, or Edit / Remove on the Published tab.</p>
+  <p class="hidden" id="foot-local">When you're done: stop this tool (Ctrl+C in the terminal), run the checks, and commit <code>observatory-data.json</code>, <code>app.js</code> and <code>state/reviewed.json</code>. The site updates once that reaches <code>main</code>.</p>
   <p class="meta" id="updated"></p>
 </footer>
 

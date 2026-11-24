@@ -1,5 +1,6 @@
-// Deal review page (served by curate.py on 127.0.0.1). Feed text is untrusted:
-// everything is inserted with textContent, and links only accept http(s).
+// Deal review page. Served by curate.py on 127.0.0.1, or on the live site at
+// /curator/ (Vercel function api/curator.py, password login). Feed text is
+// untrusted: everything is inserted with textContent, and links only accept http(s).
 'use strict';
 
 const $ = id => document.getElementById(id);
@@ -8,6 +9,7 @@ let tab = 'leads';
 let openKey = null;      // the card whose form is open
 let adding = false;
 let toastTimer = null;
+let undoToken = null;    // token of the last save, sent back to undo it
 
 function safeUrl(u) {
   try { const x = new URL(String(u || '')); return /^https?:$/.test(x.protocol) ? x.href : null; }
@@ -57,28 +59,56 @@ function suggestion(text) {
 }
 
 // ------------------------------------------------------------ network
+const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+
 async function api(path, body) {
-  const opts = body === undefined ? {} : {
-    method: 'POST', body: JSON.stringify(body),
+  const opts = body === undefined ? { credentials: 'same-origin' } : {
+    method: 'POST', body: JSON.stringify(body), credentials: 'same-origin',
     headers: { 'Content-Type': 'application/json', 'X-Curator': '1' },
   };
   let res;
-  try { res = await fetch('/api/' + path, opts); }
-  catch { throw new Error('Cannot reach curate.py. Is it still running in the terminal?'); }
+  try { res = await fetch('/api/curator?a=' + encodeURIComponent(path), opts); }
+  catch {
+    throw new Error(LOCAL ? 'Cannot reach curate.py. Is it still running in the terminal?'
+                          : 'No connection. Check your internet and try again.');
+  }
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.error || 'Request failed (' + res.status + ')');
+  if (res.status === 401 && path !== 'login') { showLogin(); throw new Error(data.error || 'Please log in.'); }
+  if (!res.ok) throw new Error(data.error || 'Something went wrong (' + res.status + '). Try again.');
   return data;
 }
 
+function showLogin() {
+  S = null;
+  $('login').classList.remove('hidden');
+  for (const id of ['add', 'logout']) $(id).classList.add('hidden');
+  document.querySelector('.tabs').classList.add('hidden');
+  for (const id of ['list', 'help-leads', 'help-published']) $(id).classList.add('hidden');
+  $('password').focus();
+}
+
 async function load() {
-  try { S = await api('state'); render(); }
-  catch (e) { $('list').replaceChildren(h('p', { class: 'empty err', text: e.message })); }
+  try {
+    S = await api('state');
+    $('login').classList.add('hidden');
+    $('list').classList.remove('hidden');
+    document.querySelector('.tabs').classList.remove('hidden');
+    render();
+  } catch (e) {
+    if (!$('login').classList.contains('hidden')) return;
+    $('list').replaceChildren(h('p', { class: 'empty err', text: e.message }));
+  }
+}
+
+function saved(r) {
+  S = r.state;
+  undoToken = r.undo || null;
 }
 
 async function send(action, body, after) {
   try {
     const r = await api(action, body);
-    S = r.state;
+    saved(r);
     if (after) after();
     render();
     toast(r.message);
@@ -93,7 +123,7 @@ function toast(msg, isErr) {
   const t = $('toast');
   $('toast-msg').textContent = msg;
   t.classList.toggle('err', !!isErr);
-  $('toast-undo').classList.toggle('hidden', !!isErr || !(S && S.undo));
+  $('toast-undo').classList.toggle('hidden', !!isErr || !(S && (S.undo || undoToken)));
   t.classList.remove('hidden');
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => t.classList.add('hidden'), isErr ? 9000 : 7000);
@@ -181,7 +211,7 @@ function dealForm(item) {
     btn.disabled = true;
     try {
       const r = await api('approve', { kind: item.kind, ref: item.ref, form: values });
-      S = r.state; openKey = null; adding = false;
+      saved(r); openKey = null; adding = false;
       render(); toast(r.message);
     } catch (e) {
       err.textContent = e.message;
@@ -286,6 +316,12 @@ function datalists() {
 
 function render() {
   if (!S) return;
+  const web = S.mode === 'web';
+  $('mode-label').textContent = web ? 'curator page' : 'local curator tool';
+  $('add').classList.remove('hidden');
+  $('logout').classList.toggle('hidden', !web);
+  $('foot-web').classList.toggle('hidden', !web);
+  $('foot-local').classList.toggle('hidden', web);
   $('n-leads').textContent = S.leads.length;
   $('n-published').textContent = S.published.length;
   $('updated').textContent = S.updated ? 'Data file: ' + S.updated : '';
@@ -302,7 +338,7 @@ function render() {
   if (adding) kids.push(newCard());
   if (!items.length) {
     kids.push(h('p', { class: 'empty', text: tab === 'leads'
-      ? 'Nothing left to review. New leads appear here after the next watch run (pull the repo first).'
+      ? 'Nothing left to review. New leads appear here after the next weekly watch run (Mondays).'
       : 'No published deals yet.' }));
   }
   kids.push(...items.map(card));
@@ -320,7 +356,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   $('toast-undo').addEventListener('click', () => {
     $('toast').classList.add('hidden');
-    send('undo', {});
+    send('undo', { token: undoToken });
+  });
+  $('login').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const btn = $('login').querySelector('button[type=submit]');
+    btn.disabled = true;
+    $('login-err').textContent = '';
+    try {
+      await api('login', { password: $('password').value });
+      $('password').value = '';
+      await load();
+    } catch (e) {
+      $('login-err').textContent = e.message;
+    } finally { btn.disabled = false; }
+  });
+  $('logout').addEventListener('click', async () => {
+    try { await api('logout', {}); } catch { /* the cookie is gone either way */ }
+    $('list').replaceChildren();
+    showLogin();
   });
   load();
 });
