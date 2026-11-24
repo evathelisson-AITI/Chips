@@ -101,7 +101,14 @@ jobs:
         env: { OUT: "${{ runner.temp }}/watch-output" }
         run: |
           set -euo pipefail
-          for f in state/seen.json state/stories.json candidates.json prevalidation.json observatory-data.json; do
+          FILES="state/seen.json state/stories.json candidates.json prevalidation.json"
+          # The site data only comes from the watch in "direct" mode. Otherwise the copy in
+          # the artifact is the one from when the run started, and copying it would undo
+          # anything the curator saved on the curator page in the meantime.
+          if [ "$(jq -r '.auto_publish_mode // "off"' config.json)" = "direct" ]; then
+            FILES="$FILES observatory-data.json"
+          fi
+          for f in $FILES; do
             jq -e . "$OUT/$f" > /dev/null
             install -D -m 644 "$OUT/$f" "$f"
           done
@@ -126,7 +133,7 @@ jobs:
               head -c 30000 PREVALIDATION.md
               echo
               echo "Full files in the repository: DIGEST.md, candidates.json (includes feed excerpts), prevalidation.json."
-              echo "To publish a deal, add it to observatory-data.json by hand with ver VERIFIED or REPORTED."
+              echo "To review these leads, open https://chips-sigma.vercel.app/curator/ (or run python3 curate.py locally)."
             } > "$RUNNER_TEMP/ISSUE_BODY.md"
             gh issue create \
               --title "Observatory watch: $COUNT new candidate(s) to review ($(date -u +%F))" \

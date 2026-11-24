@@ -67,12 +67,15 @@ TYPE_PHRASE = {"Securitization": "GPU-backed securitization", "Chip-lease SPV": 
                "Vendor commitment": "Vendor commitment"}
 
 
-def known_lenders(config_path=None):
-    """config.json "known_lenders" if set, else the default list."""
+def known_lenders(config_path=None, config=None):
+    """config.json "known_lenders" if set, else the default list. `config` is an
+    already-loaded config.json (the web curator reads it from GitHub)."""
     path = config_path or os.environ.get("OBS_CONFIG") or os.path.join(ROOT, "config.json")
     try:
-        with open(path, encoding="utf-8") as f:
-            names = json.load(f).get("known_lenders")
+        if config is None:
+            with open(path, encoding="utf-8") as f:
+                config = json.load(f)
+        names = config.get("known_lenders")
         if isinstance(names, list) and names:
             return [str(n) for n in names if str(n).strip()]
     except Exception:

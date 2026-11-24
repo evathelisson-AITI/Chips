@@ -17,6 +17,9 @@ Live site: https://chips-sigma.vercel.app/
 - **Source watch**: `.github/workflows/watch.yml` runs every Monday at 07:00 UTC, or by hand from the Actions tab. It does not change the site data (`auto_publish_mode: "off"` in `config.json`). It opens an issue that lists one line per story, with duplicates folded in.
 
 ## Curation routine
+**On the website (no install):** open https://chips-sigma.vercel.app/curator/ and log in with the curator password. It is the same page as the local tool below, but every button saves straight to `main` as one commit (`Curator: …`), and the site updates about a minute later. Undo reverts the last save as long as nothing was committed after it. One-time setup: see `CURATOR_SETUP.md`.
+
+**Locally (fallback):**
 1. Pull the latest `main` (the watch run commits new leads to `candidates.json`).
 2. Run `python3 curate.py`. It opens a review page at http://127.0.0.1:8765 that lists the new leads and the `PENDING REVIEW` rows, with the `prevalidate.py` suggestions and links to look for a primary source.
 3. For each lead, open the source. Prefer the primary source (filing or issuer press release). Then:
@@ -79,7 +82,8 @@ The watcher only looks back `max_age_days` (14). After a pause, run it once with
 | `prevalidate.py`, `primary_hints.json` | suggestions for the curator (never changes data) |
 | `merge_pending.py` | folds duplicate `PENDING REVIEW` rows into one row with a `sources` list |
 | `update_seed.py` | regenerates the fallback snapshot in `app.js` |
-| `curate.py`, `curator/` | local review page for the curator (approve, reject, edit deals); not deployed |
+| `curate.py`, `curator/` | review page for the curator (approve, reject, edit deals); `python3 curate.py` runs it locally |
+| `curator_web.py`, `api/curator.py` | the same page on the live site at `/curator/`: password login, saves by committing to GitHub (setup: `CURATOR_SETUP.md`) |
 | `state/reviewed.json` | watch leads the curator rejected or already handled |
 | `state/seen.json`, `state/stories.json` | watcher memory: articles seen, stories seen (60 days) |
 | `tests/` | offline tests (Python stdlib, Node) |

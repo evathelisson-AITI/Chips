@@ -25,22 +25,18 @@ class Curate(unittest.TestCase):
         self.dir = tempfile.mkdtemp()
         for f in ("observatory-data.json", "candidates.json", "prevalidation.json", "app.js"):
             shutil.copy(os.path.join(ROOT, f), self.dir)
-        self.saved = {k: getattr(curate, k) for k in ("DATA", "CANDIDATES", "PREVALIDATION", "REVIEWED", "APP")}
-        curate.DATA = os.path.join(self.dir, "observatory-data.json")
-        curate.CANDIDATES = os.path.join(self.dir, "candidates.json")
-        curate.PREVALIDATION = os.path.join(self.dir, "prevalidation.json")
-        curate.REVIEWED = os.path.join(self.dir, "state", "reviewed.json")
-        curate.APP = os.path.join(self.dir, "app.js")
-        curate.UNDO.clear()
+        self.saved = curate.STORE
+        curate.STORE = curate.DiskStore(self.dir)
 
     def tearDown(self):
-        for k, v in self.saved.items():
-            setattr(curate, k, v)
-        curate.UNDO.clear()
+        curate.STORE = self.saved
         shutil.rmtree(self.dir)
 
+    def path(self, rel):
+        return os.path.join(self.dir, rel)
+
     def db(self):
-        with open(curate.DATA, encoding="utf-8") as f:
+        with open(self.path(curate.DATA), encoding="utf-8") as f:
             return json.load(f)
 
     def test_form_validation(self):
@@ -80,7 +76,7 @@ class Curate(unittest.TestCase):
         row = next(d for d in self.db()["deals"] if d["id"] == pending["id"])
         self.assertEqual(row["ver"], "REPORTED")
         self.assertEqual(row["sources"], pending["sources"])
-        with open(curate.APP, encoding="utf-8") as f:
+        with open(self.path(curate.APP), encoding="utf-8") as f:
             seed = update_seed.current_payload(f.read())
         self.assertIn(pending["id"], [d["id"] for d in seed["deals"]])
 
@@ -96,7 +92,7 @@ class Curate(unittest.TestCase):
         curate.act("approve", {"kind": "new", "ref": "", "form": FORM})
         ids = [d["id"] for d in self.db()["deals"]]
         self.assertEqual(len(ids), len(set(ids)))
-        with open(curate.CANDIDATES, "w", encoding="utf-8") as f:
+        with open(self.path(curate.CANDIDATES), "w", encoding="utf-8") as f:
             json.dump([{"_tier": 1, "_summary": "x", "date": "2026-11-11", "name": "Fresh lead - FT",
                         "url": "https://example.com/fresh", "ver": "PENDING REVIEW"}], f)
         lead = next(l for l in curate.state()["leads"] if l["kind"] == "candidate")
